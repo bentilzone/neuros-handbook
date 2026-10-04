@@ -1,0 +1,41 @@
+---
+title: Requests and responses
+sidebar_position: 60
+description: Pages, filters, response shapes and request ids.
+---
+
+## Lists come in pages
+
+Every list takes `page` (from 1) and `limit` (1 to 100, default 25), and answers:
+
+```json
+{
+  "data": [ { "id": "…" } ],
+  "meta": { "page": 1, "limit": 25, "total": 47, "totalPages": 2 }
+}
+```
+
+Walk the pages until `page` reaches `totalPages`. Filters apply before paging, so `total` counts what matches.
+
+## Filters
+
+Filters are query parameters, named in the [reference](./reference/index.mdx) for each list. Stock movements, for example, filter by `productId`, `warehouseId`, `type` and a `from`/`to` date range:
+
+```bash
+curl -s "$NEUROS_API/v1/inventory/movements?warehouseId=<id>&limit=100" -H "Authorization: Bearer $TOKEN"
+```
+
+## Single records and changes
+
+- `GET /v1/<area>/<things>/{id}` returns one record.
+- `POST` creates, and actions are their own `POST`: `/offers/{id}/publish`, `/journals/{id}/submit`.
+- `PATCH` changes the fields you send and leaves the rest.
+- Creation answers `201`, other successes `200`. The body is the record as it now stands.
+
+## Request ids
+
+Every response carries an `X-Request-Id` header, and every error repeats it as `error.requestId`. Send your own `X-Request-Id` (8 to 128 of `A–Z a–z 0–9 . _ : -`) to follow a call through your logs and ours. Quote it when you contact support.
+
+## Changes are recorded
+
+Every change you make through the API is in your company's audit log, under the API client's name. People in your company see who changed what, from where.

@@ -3,15 +3,17 @@ title: Support access
 sidebar_label: Support access
 ---
 
-<PersonaBadge who={['everyone', 'operator']} />
+<PersonaBadge who={['everyone', 'operator']} permission={['support:read', 'support:approve']} />
 
-Neuros staff can't browse a company's business. When support needs to look, it happens through a **support grant**: time-limited, read-only, for a stated purpose, approved by someone else and recorded on both sides.
+Neuros staff can't browse a company's business. When support needs to look, they ask, and **your company decides**. Access is time-limited, read-only, for a stated purpose, and recorded in your audit log. Nobody at Neuros can approve it for you.
 
 ## How a grant works
-1. A support person **requests** access to one company, giving the purpose, how long they need and, optionally, the support ticket it answers.
-2. Someone else on the platform team **approves** or **rejects** it. Nobody approves their own request.
-3. While **active**, the support person can open the company read-only. A banner on every page shows they are acting under the grant and when it ends.
-4. It ends when it **expires** or is **revoked**. Everything viewed under it is in the company's audit log and the platform's.
+1. A support person **requests** access to your company, giving the purpose, how long they need and, optionally, the support ticket it answers.
+2. Your system administrator is emailed. Anyone in your company with the right to approve support (`support:approve`) opens **Settings → Support access** and **grants** or **declines** it.
+3. Once granted, the clock starts. Support can open your company **read-only** for the time asked. A banner on every page they see shows they are acting under your grant and when it ends.
+4. It ends when the time runs out, or sooner if you **end access now**. Support can also cancel or end it themselves.
 
-## What the company sees
-The company's audit log shows each grant: who asked, who approved, the purpose, the period, and what was looked at. The company never needs to share a password.
+## What you see
+**Settings → Support access** lists every request: who asked, the purpose, the duration, its state and, once used, what was looked at. Every page support opens under a grant is in your audit log.
+
+A company without a plan can still grant support access, so a locked company can always get help.

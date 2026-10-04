@@ -1,0 +1,46 @@
+---
+title: Error handling
+sidebar_label: Errors
+sidebar_position: 70
+description: The error envelope, status codes and what to do about each.
+---
+
+Every error answers with an HTTP status and the same envelope:
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "message": "Request validation failed",
+    "details": [
+      { "in": "body", "path": "lines.0.quantity", "message": "lines[0].quantity is required" }
+    ],
+    "requestId": "b0d6c1e2-…"
+  }
+}
+```
+
+- `code` is stable and machine-readable: branch on it.
+- `message` is for people and may change: show it, don't parse it.
+- `details` is there when there is more to say. For `VALIDATION_FAILED` it lists each invalid field: where it was (`body`, `query`, `params`), its path, and what is wrong.
+- `requestId` matches the `X-Request-Id` header.
+
+## Status codes
+
+| Status | Means | Retry? |
+|---|---|---|
+| `400` | The request is malformed or invalid (`VALIDATION_FAILED`, `IDEMPOTENCY_KEY_REQUIRED`) | No: fix the request |
+| `401` | No valid token (`UNAUTHENTICATED`) | After getting a new token |
+| `402` | No active plan, or an unpaid one (`SUBSCRIPTION_REQUIRED`, `SUBSCRIPTION_LAPSED`) | After the plan is fixed |
+| `403` | Not allowed (`PERMISSION_DENIED`, `CAPABILITY_REQUIRED`, `MFA_REQUIRED`) | No |
+| `404` | No such record, or your company may not see it (`NOT_FOUND`) | No |
+| `409` | Conflicts with the record's current state or another request (`DUPLICATE`, `IDEMPOTENCY_IN_PROGRESS`) | Read the record, then decide; or retry later |
+| `422` | Valid, but the business rules say no (`LIMIT_REACHED`, `IDEMPOTENCY_KEY_REUSED`, and rule-specific codes) | No: the message says why |
+| `429` | Too many requests (`RATE_LIMITED`) | Yes, after the wait in the `RateLimit` headers |
+| `5xx` | Something failed on our side | Yes, with backoff and the same `Idempotency-Key` |
+
+## Retry safely
+
+- Retry only `429`, `5xx` and network failures, with exponential backoff.
+- For a write, retry with the **same** `Idempotency-Key`. You get the first result rather than a second record. See [Idempotency](./80-idempotency.mdx).
+- A `422` names a rule, for example a closed period or a plan limit. Retrying will not change the answer.

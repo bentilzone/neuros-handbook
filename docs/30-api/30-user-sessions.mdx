@@ -1,0 +1,66 @@
+---
+title: Sign in as a person
+sidebar_position: 30
+description: Act for a signed-in person, with their roles, from your own app.
+---
+
+Use a person's session when your app acts for someone: a mobile app, an internal tool. The calls can do what that person's roles allow in the company they chose. For a system acting on its own, use an [API client](./10-get-access.mdx) instead.
+
+## 1. Sign in
+
+```bash
+curl -s "$NEUROS_API/v1/auth/login" -H "Content-Type: application/json" \
+  -d '{"email":"buyer@example.com","password":"<password>"}'
+```
+
+The response's `status` says what comes next:
+
+| `status` | Means | Next |
+|---|---|---|
+| `authenticated` | One company and no platform role: signed straight in | Use `accessToken` |
+| `mfa_required` | Two-step verification is on | Step 2 with the `mfaToken` |
+| `select_organization` | The person works for more than one company | Step 3 with the `identityToken` |
+
+Five failed attempts lock the account for 15 minutes.
+
+## 2. Two-step code
+
+```bash
+curl -s "$NEUROS_API/v1/auth/mfa/verify-login" -H "Content-Type: application/json" \
+  -d '{"mfaToken":"<mfaToken>","code":"123456"}'
+```
+
+A recovery code works in place of the 6-digit code, once. The response is the same as step 1 without `mfa_required`.
+
+## 3. Choose the company
+
+`GET /v1/auth/organizations` lists the companies the person can enter. Then enter one, with the identity token as the bearer:
+
+```bash
+curl -s "$NEUROS_API/v1/auth/select-organization" \
+  -H "Authorization: Bearer <identityToken>" -H "Content-Type: application/json" \
+  -d '{"organizationId":"<company id>"}'
+```
+
+You get an `accessToken` bound to exactly this company, and a `refreshToken`. A token for one company cannot be used in another. `POST /v1/auth/switch-organization` moves to another company and ends the previous session.
+
+## 4. Call and refresh
+
+Send `Authorization: Bearer <accessToken>` on every call. Before it expires (`accessTokenExpiresIn`, seconds), rotate:
+
+```bash
+curl -s "$NEUROS_API/v1/auth/refresh" -H "Content-Type: application/json" \
+  -d '{"refreshToken":"<refreshToken>"}'
+```
+
+Each refresh returns a new refresh token and retires the old one. Use the new one next time: a retired refresh token is refused.
+
+`GET /v1/auth/me` returns the person, the company, its currency and everything they may do there. Use it to decide what your app shows.
+
+## Actions that need two-step verification
+
+Some actions need a session that signed in with a two-step code: changing roles and members, creating API clients, changing posting rules, closing periods, approving money movements. Without it they answer `403` `MFA_REQUIRED`. The [reference](./reference/index.mdx) marks them.
+
+## Sign out
+
+`POST /v1/auth/logout` ends this session. `POST /v1/auth/logout-all` ends every session on every device.

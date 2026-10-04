@@ -1,0 +1,63 @@
+---
+title: Customers
+sidebar_position: 50
+---
+
+<PersonaBadge who={['supply', 'distribution']} permission="relationship:read" />
+
+Customers are the buyers who hold an account with you: the requests waiting for your answer, and the terms each customer trades on. An account is a [relationship](../01-glossary/40-relationships.mdx) between two companies. Your customer sees the same account under their [Suppliers](./70-suppliers.mdx).
+
+<Shot id="distributor/customers/list" />
+
+## Statuses
+
+| Status | What it means | What you can do |
+|---|---|---|
+| Waiting for approval | A buyer asked for an account | Approve, with terms, or Decline |
+| Approved | They trade with you on their terms | Edit terms, Suspend, End account |
+| Suspended | New orders are blocked; open orders, invoices and history are untouched | Reinstate, End account |
+| Declined | You said no, with a reason they see | They may ask again later |
+| Ended | Trading has ended for good; existing obligations stand | They would need to ask again |
+
+Suspend, decline and end each ask for a reason, which is kept on the account's history.
+
+## Approve a request
+
+The banner above the list counts requests waiting. **Show requests** filters to them, and the tick on a row opens the approval with terms.
+
+<Shot id="distributor/customers/approve" />
+
+### Terms
+
+The same form sets the terms when you approve, when you open an account yourself, and when you edit them later.
+
+<FieldTable fields={[
+  { name: 'Price list', meaning: 'The price list this customer buys from.', others: 'They see their prices on your offers.', implications: 'Offers not on the list sell to them at your standard price. Empty means standard prices. A contract price still beats the list.', rules: 'Your active price lists.' },
+  { name: 'Ways they may pay', meaning: 'The payment arrangements you accept from this customer: pay before dispatch, bank transfer, on credit, deposit with the balance later, milestones, escrow.', others: 'They can only choose from these when they order.', rules: 'On credit needs Credit-eligible switched on.' },
+  { name: 'Usually pays by', meaning: 'The arrangement their orders start with.', rules: 'One of the ways they may pay.' },
+  { name: 'Days to pay', meaning: 'How long after the order or delivery they have to pay.', others: 'Shown on their side as their terms.', rules: '0 means on order or delivery.' },
+  { name: 'Credit-eligible', meaning: 'Allows orders on credit, within their credit limit.', implications: 'Switching it off also removes On credit from the ways they may pay.' },
+  { name: 'Largest order', meaning: 'The most a single order may be worth.', implications: 'Orders above this need a new agreement.', rules: 'Empty means no limit.' },
+  { name: 'Trades from', meaning: 'When the account starts, and optionally when it ends.', rules: 'Empty means from now, open-ended.' },
+  { name: 'Private notes', meaning: 'Anything your team should know about this customer.', others: 'Only your company sees these. The customer keeps their own notes, which you never see.' },
+]} />
+
+## Open an account
+
+**Open an account** starts an approved account for a buyer who has not asked yet. Pick the **buyer** from the companies on Neuros that buy, then set their terms as above.
+
+## A customer's account
+
+Click a row for the account: its status, terms, contract prices, private notes and history. **Edit** changes the terms; the change applies to their next order.
+
+<Shot id="distributor/customers/detail" />
+
+## Live
+
+A new request, or a customer ending their account, appears on its own. Approving or suspending updates the customer's side at the same moment.
+
+## Common questions
+
+**A customer can't see an offer.** Offers for approved customers need the account to be **Approved**. Invite-only offers also need the customer picked on the offer.
+
+**Can a customer see my private notes or other customers' terms?** No. Each side sees only its own notes, and a customer sees only their own terms.
