@@ -1,0 +1,30 @@
+{/* Shared by every guide that has this page: <ApiClients who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} permission="api_client:read" />
+
+API clients are credentials your own systems use to call Neuros, for example an ERP that syncs stock or a shop that places orders. Each client holds only the scopes you grant it.
+
+<Shot id={`${props.who}/api-clients/list`} />
+
+## New API client
+
+Creating a client, changing its scopes or rotating its secret needs a session signed in with two-step verification.
+
+<Shot id={`${props.who}/api-clients/new`} />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'Which system uses it, for example "ERP sync".', rules: 'Fixed once created.' },
+  { name: 'Permissions (scopes)', required: true, meaning: 'What the client may do, chosen per area.', implications: 'Grant only what the system needs. A leaked secret can do exactly this much.', rules: 'Only permissions you hold yourself.' },
+]} />
+
+## The secret
+
+Neuros shows the **client ID** and **client secret** once, right after you create the client. Store the secret in your system's secret manager before pressing **I have saved it**. If it is lost, rotate to issue a new one.
+
+| Action | What happens |
+|---|---|
+| Edit scopes | The client's next call uses the new scopes |
+| Rotate secret | The current secret stops working immediately. Update your system with the new one |
+| Revoke | Every call with this client fails from now on. This cannot be undone |
+
+Each client's calls appear under **API requests** in the <PageLink who={props.who} page="audit-log">audit log</PageLink>. Your plan limits how many clients you can have.

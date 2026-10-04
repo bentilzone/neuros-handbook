@@ -3,31 +3,6 @@ title: Members
 sidebar_position: 100
 ---
 
-<PersonaBadge who={['everyone']} permission="member:read" />
+import Members from '../_partials/members.mdx';
 
-Members are the people who work in your company: what each one may do, and how much they may spend or approve. See [companies and people](../01-glossary/10-companies-and-people.mdx) and [people and access](../02-features/20-people-and-access.mdx).
-
-<Shot id="distributor/members/list" />
-
-:::note[Two-step sign-in needed]
-Inviting people, or changing their roles and limits, needs a session signed in with two-step verification. Turn it on under [Settings → Security](./140-settings.mdx#security), then sign in again with your code. Until then the banner shows and the buttons stay disabled.
-:::
-
-The **Members** tab lists everyone with access. **Invitations** lists the emails you have invited and whether each is still pending. The **Access** switch turns a member's access off without removing them, and back on.
-
-## Invite a member
-
-<FieldTable fields={[
-  { name: 'Email', required: true, meaning: 'Where the invitation goes.', others: 'They get an email with a link to join your company.', implications: 'Revoking the invitation stops the link working. You can invite them again later.' },
-  { name: 'Roles', required: true, meaning: 'What they may do, from your roles.', rules: 'Roles with permissions you do not hold yourself are disabled: you cannot give more than you have.' },
-  { name: 'Purchase limit', meaning: 'The most they may order without approval.', implications: 'Orders above this need approval.', rules: 'In your company currency. Empty means no limit.' },
-  { name: 'Approval limit', meaning: 'The most this person may approve.', rules: 'Empty means none.' },
-]} />
-
-## A member
-
-Click a row for the member: roles, limits, two-step verification, phone, when they joined and last signed in, and the history of changes to their access.
-
-<Shot id="distributor/members/detail" />
-
-**Edit** changes their title, roles and limits. It asks for a **reason for the change**, which is kept with the change in the audit log. **Remove** takes them out of the company; their past actions stay in the history.
+<Members who="distributor" />
