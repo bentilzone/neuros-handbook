@@ -1,0 +1,136 @@
+{/* Shared by every guide that has this page: <Settings who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} />
+
+Settings holds your own profile, preferences and security, and your company's details, if you manage them. Open it from the cog next to your name at the bottom of the sidebar.
+
+## Profile
+
+<Shot id={`${props.who}/settings/profile`} />
+
+<FieldTable fields={[
+  { name: 'Full name', required: true, meaning: 'Your name as colleagues see it.', others: 'Shown on members, approvals and history across your company.' },
+  { name: 'Email', meaning: 'Your sign-in.', rules: 'Changing it goes through support, so nobody can take an account by editing a field.' },
+  { name: 'Phone', meaning: 'A number colleagues can reach you on.' },
+]} />
+
+## Preferences
+
+<Shot id={`${props.who}/settings/preferences`} />
+
+Preferences apply only to you, on this browser.
+
+| Setting | What it does |
+|---|---|
+| Theme | System follows your device; or choose Light or Dark |
+| Compact sidebar | Icons only, more room for the page |
+| Footer | The strip at the bottom with links to the handbook, privacy, terms and support |
+| Side panel width | Drag a panel's left edge to change it; **Reset** puts it back |
+
+## Security
+
+<Shot id={`${props.who}/settings/security`} />
+
+### Change password
+
+<FieldTable fields={[
+  { name: 'Current password', required: true, meaning: 'Proves it is you.' },
+  { name: 'New password', required: true, meaning: 'Your new password.', rules: '10 to 72 characters.' },
+  { name: 'Confirm new password', required: true, meaning: 'The same again, to catch a typo.' },
+]} />
+
+### Two-step verification
+
+With only a password, anyone who learns it can sign in as you. Two-step verification asks for a code from your phone as well. Neuros requires it before you can approve money movements or change who may do what: invite members, edit roles, create API clients, change posting rules, close periods.
+
+1. **Turn on**, then scan the QR code with Google Authenticator, 1Password or Authy. Can't scan? Enter the key shown instead.
+2. Enter the 6-digit code it shows.
+3. Save the **recovery codes**. Each signs you in once if you lose your phone, and they are not shown again.
+4. Sign out and back in with your code. Actions that need two-step verification check that this session began with it.
+
+To turn it off, confirm with your password and a current code.
+
+### Sessions
+
+**Signed-in devices** lists where you are signed in. **Sign out everywhere** ends every session on every device, this one included. Use it if a device is lost.
+
+## Role and access
+
+<Shot id={`${props.who}/settings/access`} />
+
+The roles you hold in this company and every permission they give you, read-only. Ask a company administrator to change them under <PageLink who={props.who} page="members">Members</PageLink>. If you work for other companies too, they are listed under **Your other workspaces**.
+
+## My company
+
+Company administrators edit the company's details here. Others see them read-only.
+
+<Shot id={`${props.who}/settings/company`} />
+
+### Profile
+
+<FieldTable fields={[
+  { name: 'Legal name', required: true, meaning: 'The name as registered.', others: 'On invoices and documents your customers and suppliers receive.' },
+  { name: 'Trading name', meaning: 'The name you trade under, if different.', others: 'What people see across Neuros.' },
+  { name: 'Registration number', meaning: 'Your company registration number.' },
+  { name: 'Website', meaning: 'Your company website.' },
+  { name: 'Slug', meaning: "Your company's short web name on Neuros.", implications: 'Nothing links by it, so changing it breaks nothing.' },
+  { name: 'Functional currency', meaning: 'The currency your books are kept in. Every journal and stock value is recorded in it, and every amount you enter defaults to it.', rules: 'Fixed when Neuros approves the company.' },
+  { name: 'Jurisdiction', meaning: 'Where the company is registered.', implications: 'Decides tax rules and compliance checks.', rules: 'Verified during onboarding. Neuros support can change it.' },
+]} />
+
+### Addresses and contacts
+
+<Shot id={`${props.who}/settings/company-addresses`} />
+
+Your company's addresses (line 1, line 2, city, state, postal code, country) and its contacts. **Add** one of each as you need.
+
+### Tax
+
+<Shot id={`${props.who}/settings/company-tax`} />
+
+Your tax identifiers, such as a TIN, each with its type and number.
+
+### Operating policies
+
+<Shot id={`${props.who}/settings/company-policies`} />
+
+<FieldTable fields={[
+  { name: 'Order acceptance', meaning: 'Review each order, or accept automatically.', others: 'With automatic acceptance, customers’ orders are confirmed without waiting for you.' },
+  { name: 'Timezone', meaning: "Your company's time zone.", implications: 'Accounting periods are its calendar months.', rules: 'Locks once journals or valued stock movements exist.' },
+  { name: 'Stock valuation', meaning: 'Weighted average, or FIFO (first in, first out).', implications: 'Decides the cost of stock that leaves, and so the inventory value and cost of sales.', rules: 'Locks once journals or valued stock movements exist.' },
+  { name: 'Rounding', meaning: 'Half up (commercial) or half even (banker’s).' },
+  { name: 'Finance mode', meaning: 'Full books in Neuros, or books kept elsewhere.' },
+  { name: 'Reservation hold (minutes)', meaning: 'How long stock stays reserved for an order that is not yet confirmed.' },
+  { name: 'Default payment terms (days)', meaning: 'The days to pay new customers start with.' },
+  { name: 'Quotation validity (days)', meaning: 'How long your quotations hold their prices.' },
+  { name: 'Segregation of duties', meaning: 'Whoever prepares an adjustment, journal or approval cannot also approve it.', implications: 'You need at least two people with the right roles to post manual journals and adjustments.' },
+]} />
+
+### Capabilities
+
+<Shot id={`${props.who}/settings/company-capabilities`} />
+
+What kind of company you are: supply, distribution, purchasing. Capabilities decide which pages and actions you have. Neuros grants them when it approves your company, after checking you can trade that way. They are not switches here: ask Neuros support to add or remove one, and the change is recorded in the change log. See [capabilities](../01-glossary/10-companies-and-people.mdx).
+
+### Change log
+
+<Shot id={`${props.who}/settings/company-log`} />
+
+Every change to the company's details: who made it, when, and from what to what.
+
+## Billing
+
+<Shot id={`${props.who}/settings/billing`} />
+
+Your plan, what it includes and how much of each you use (members, warehouses, API clients, published offers, custom roles, how long history is kept), your balance and your invoices. See [plans and billing](../02-features/90-plans-and-billing.mdx).
+
+<FieldTable fields={[
+  { name: 'Billing contact: Name, Email, Phone', meaning: 'Who receives invoices.', others: 'Invoices, receipts and reminders go to the email.' },
+  { name: 'Purchase order reference', meaning: 'Your PO number for Neuros.', others: 'Printed on your invoices.' },
+]} />
+
+## Support access
+
+<Shot id={`${props.who}/settings/support`} />
+
+Neuros support can see your company only when you grant a request: read-only, for the time they asked. Each request says why support is asking and for how long. **Grant access** or **Decline** it. **End access now** stops a grant early. Every page support opens is in your <PageLink who={props.who} page="audit-log">audit log</PageLink>. See [support access](../02-features/95-support-access.mdx).

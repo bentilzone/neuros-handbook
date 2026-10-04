@@ -1,0 +1,99 @@
+{/* Shared by every guide that has this page: <Pricing who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="pricelist:read" />
+
+Pricing is where you give customers their own prices: **price lists** for groups of customers, **contract prices** for one customer and one offer, and **promotions** for a while. The **price check** shows which one a customer gets, and why.
+
+## How a customer's price is chosen
+
+For a customer, an offer and a quantity, Neuros takes the first of these that applies:
+
+1. **A contract price** agreed with that customer for that offer.
+2. **The customer's price list**, the one named in their <PageLink who={props.who} page="customers">terms</PageLink>, if the offer is on it.
+3. **The offer's standard price**, with its quantity breaks.
+
+Then **promotions** apply, except on a contract price. A contract is a price you agreed, so a sale never discounts it further.
+
+The price a buyer sees in the marketplace is indicative. An order or quotation locks it.
+
+## Price lists
+
+<Shot id={`${props.who}/pricing/price-lists`} />
+
+A price list is a named set of prices, for example "Gold resellers". It does nothing until a customer's terms name it: open the customer under **Customers** and set **Price list** in their terms. Offers not on the list still sell to that customer at your standard price.
+
+### New price list
+
+<Shot id={`${props.who}/pricing/price-list-new`} />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What you call this group of customers, for example "Gold resellers".', others: 'Your colleagues pick it in a customer’s terms. Customers see their prices, not the list.' },
+  { name: 'Description', meaning: 'Who the list is for, for your colleagues.' },
+  { name: 'Currency', required: true, meaning: 'The currency of every price on the list.', implications: 'Defaults to your company currency. Pick another only for customers you deliberately price in theirs.' },
+  { name: 'Valid', meaning: 'When the list applies.', implications: 'Outside these dates its customers pay your standard price.', rules: 'Leave as Always for a standing list.' },
+]} />
+
+### A price list
+
+Click a list to see its prices and add or change one. Each entry is an offer with its own quantity breaks in the list's currency.
+
+<Shot id={`${props.who}/pricing/price-list-detail`} />
+
+<FieldTable fields={[
+  { name: 'Offer', required: true, meaning: 'Which of your offers this price is for.', implications: 'Saving an offer already on the list replaces its prices.' },
+  { name: 'From quantity / Unit price', required: true, meaning: 'The price per unit from each quantity. The first row is usually from 1.', others: 'Customers on this list see these prices on the offer.' },
+]} />
+
+**Archive** takes a list out of use: its customers pay your standard price again. **Restore** brings it back.
+
+## Contract prices
+
+<Shot id={`${props.who}/pricing/contracts`} />
+
+A contract price is one price agreed with one customer for one offer. It beats their price list and is not discounted by promotions.
+
+### New contract price
+
+<Shot id={`${props.who}/pricing/contract-new`} />
+
+<FieldTable fields={[
+  { name: 'Customer', required: true, meaning: 'The customer you agreed it with.', others: 'Only that customer sees the price.', rules: 'Approved customers only.' },
+  { name: 'Offer', required: true, meaning: 'The offer it covers.' },
+  { name: 'Unit price', required: true, meaning: 'The agreed price per unit.', rules: "In the offer's currency." },
+  { name: 'From quantity', meaning: 'The contract applies from this quantity. Below it, the customer pays their usual price.', rules: '0 means any quantity.' },
+  { name: 'Contract reference', meaning: 'Your reference for the agreement, for example C-2026-014, so anyone can trace the price to the paper.' },
+  { name: 'Valid', required: true, meaning: 'When the agreed price runs.', rules: 'Starts today or later. Leave the end open for a standing agreement.' },
+]} />
+
+**End now** stops a contract price early. From then on the customer pays their price list or the standard price. Orders already placed keep the agreed price.
+
+## Promotions
+
+<Shot id={`${props.who}/pricing/promotions`} />
+
+### New promotion
+
+<Shot id={`${props.who}/pricing/promotion-new`} />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What you call it, for example "October pump sale".', others: 'Named in the price check when it applies.' },
+  { name: 'Kind', meaning: 'Percent off, amount off, or a fixed price.' },
+  { name: 'Percent / Amount', required: true, meaning: 'How much off, or the fixed price.', rules: "Percent is off the price; an amount is in each offer's currency." },
+  { name: 'Offers', meaning: 'Which offers it covers.', rules: 'Leave empty to cover all your offers.' },
+  { name: 'Who gets it', meaning: 'Every buyer, or approved customers only.' },
+  { name: 'Runs', required: true, meaning: 'The start and end dates.', implications: 'It starts and ends on its own.', rules: 'Both ends are needed.' },
+  { name: 'Stacks with others', meaning: 'Whether it combines with other running promotions.', rules: 'Off: only the best one applies.' },
+  { name: 'Priority', meaning: 'When promotions stack, the higher priority applies first.' },
+]} />
+
+A running promotion can be **paused**, **resumed** or **ended**. An ended promotion cannot change.
+
+## Price check
+
+<Shot id={`${props.who}/pricing/check`} />
+
+Pick an offer, a customer and a quantity, then press **Check price**. You see the price they would pay and each step that produced it: contract, list, breaks, promotions. Leave the customer empty to see the public price. Use it before you answer "why did I get this price?".
+
+## Live
+
+Prices you change apply at once to new price checks and orders. A colleague's new list, contract or promotion appears in your tabs without reloading.

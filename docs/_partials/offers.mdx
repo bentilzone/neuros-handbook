@@ -1,0 +1,56 @@
+{/* Shared by every guide that has this page: <Offers who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="offer:read" />
+
+An offer is what you sell: your SKU, your price and terms, and who may see it, all on a shared <PageLink who={props.who} page="catalogue">catalogue</PageLink> product. One catalogue product can carry offers from many sellers, and buyers compare them in the <PageLink who={props.who} page="marketplace">marketplace</PageLink>. See [selling and pricing](../01-glossary/30-selling-and-pricing.mdx) for the terms.
+
+<Shot id={`${props.who}/offers/list`} />
+
+## Statuses
+
+| Status | What it means | What moves it |
+|---|---|---|
+| Draft | Saved; nobody else sees it | **Publish** (needs `offer:publish`) |
+| Published | Live in the marketplace and through the API, for whoever **Who can see it** allows | **Withdraw** |
+| Withdrawn | Off sale | Edit and publish again |
+
+Withdrawing an offer does not touch open orders. Editing a published offer changes it for new orders; orders already accepted keep the price and terms they were placed at.
+
+## New offer
+
+<Shot id={`${props.who}/offers/new`} />
+
+<FieldTable fields={[
+  { name: 'Product', required: true, meaning: 'The published catalogue product you are selling.', others: 'Buyers see the product name, brand, part number and attributes from the catalogue.', rules: "Only published products. Can't find it? Contribute it under Catalogue." },
+  { name: 'Your SKU', required: true, meaning: 'Your own code for this offer.', others: 'Shown to buyers on the offer and on their orders.', rules: 'Unique among your offers.' },
+  { name: 'Title', meaning: 'A name for the offer when the product name is not enough, for example "Box of 12".', others: 'Shown to buyers instead of the product name.', rules: 'Optional.' },
+  { name: 'Standard price', required: true, meaning: 'Your price before any price list, contract price or promotion.', others: 'Every buyer sees it when the offer is public, unless their own price is lower.', implications: 'The base of every price calculation for this offer. See Pricing for how a customer’s own price is chosen.', rules: 'In your company currency unless you pick another.' },
+  { name: 'Per', required: true, meaning: 'The unit the price is quoted in: each, metre, a box of 12.', others: 'Buyers order in this unit.', rules: 'The product’s base unit or one of its packs.' },
+  { name: 'Quantity breaks', meaning: 'Lower unit prices from a quantity: from 10, from 50.', others: 'Buyers see the breaks on the offer.', rules: 'None means one price whatever the quantity.' },
+  { name: 'Minimum order', meaning: 'The smallest quantity you accept, in the unit above.', others: 'Buyers cannot order less.' },
+  { name: 'Order in steps of', meaning: 'Orders must be a multiple of this, for example cartons of 6.', rules: '1 means any whole quantity.' },
+  { name: 'Who can see it', required: true, meaning: <>Everyone: any buyer on Neuros finds it, with your standard price.<br/>Approved customers: buyers you have approved find it and see their own price.<br/>Invited buyers only: only the buyers you pick find it.</>, others: 'Decides who finds the offer at all. A buyer who may not see it gets "not found", not a locked page.' },
+  { name: 'Invited buyers', required: true, meaning: 'Which of your approved customers may see an invite-only offer.', rules: 'Only when Who can see it is Invited buyers only.' },
+  { name: 'Sell through', required: true, meaning: 'Where buyers can order it: the Marketplace, your API, or both.', others: 'An offer not sold through the Marketplace is invisible there.', rules: 'At least one.' },
+  { name: 'Stock', meaning: <>From stock: sold from stock you hold; orders reserve it.<br/>Special order: ordered in for each sale, with your lead time.<br/>Backorder allowed: sells past zero; the rest ships when it arrives.</>, others: 'Buyers see In stock, Low stock, On backorder or Made to order.', implications: 'From stock ties the offer to your Inventory: what is free to sell is what buyers can have.' },
+  { name: 'Lead time (days)', meaning: 'How long before you can ship.', others: 'Shown on the offer as Ready to ship or the number of days.' },
+  { name: 'Delivers to', meaning: 'The countries you deliver to.', others: 'Shown on the offer. Searches for a delivery region leave out offers that do not deliver there.', rules: 'Empty means anywhere.' },
+  { name: 'Show buyers the quantity available', meaning: 'Show the exact number in stock.', others: 'Otherwise buyers see In stock, Low or Out.' },
+  { name: 'Warranty', meaning: 'Your warranty terms, in your words.', others: 'Shown on the offer.' },
+]} />
+
+## An offer
+
+Click a row to open it: its price and breaks, fulfilment, where it sells, and a **price check**. Pick a customer and a quantity to see exactly what they would pay and why.
+
+<Shot id={`${props.who}/offers/detail`} />
+
+## Live
+
+When a colleague publishes, edits or withdraws an offer, your list updates on its own. So does every buyer's marketplace.
+
+## Common questions
+
+**I published an offer. Why can't a customer see it?** Check **Who can see it**. Approved customers needs an approved account on <PageLink who={props.who} page="customers">Customers</PageLink>, and invite-only needs the buyer picked.
+
+**Can a customer see another customer's price?** No. Each buyer sees only their own price.
