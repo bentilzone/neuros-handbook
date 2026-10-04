@@ -1,0 +1,57 @@
+/* Neuros blue (neuros-client src/theme/index.ts — the client's primary tuple). */
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-code-font-size: 95%;
+  --nh-callout: #e8590c;
+  --nh-border: var(--ifm-color-emphasis-300);
+}
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bfdbfe;
+  --ifm-color-primary-lightest: #dbeafe;
+}
+
+/* Shot: the screenshot, framed like a window, with its numbered legend. */
+.nh-shot { margin: 1.25rem 0 1.5rem; }
+.nh-shot__frame { border: 1px solid var(--nh-border); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgb(0 0 0 / 8%); }
+.nh-shot__frame img { display: block; width: 100%; height: auto; }
+.nh-shot__caption { font-size: 0.85rem; color: var(--ifm-color-emphasis-700); margin-top: 0.5rem; }
+.nh-shot__legend { list-style: none; padding: 0; margin: 0.6rem 0 0; display: grid; gap: 0.35rem; }
+.nh-shot__legend li { display: flex; gap: 0.6rem; align-items: baseline; font-size: 0.92rem; }
+.nh-num { flex: none; display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--nh-callout); color: #fff; font-size: 0.75rem; font-weight: 700; }
+.nh-shot--missing { border: 1px dashed var(--nh-border); border-radius: 10px; padding: 2rem; text-align: center; color: var(--ifm-color-emphasis-600); }
+
+/* FieldTable: one row per form field. */
+.nh-fields { width: 100%; display: table; font-size: 0.9rem; }
+.nh-fields td:first-child { white-space: nowrap; font-weight: 600; }
+.nh-fields .nh-req { color: var(--nh-callout); margin-left: 0.15rem; }
+.nh-fields .nh-rules { color: var(--ifm-color-emphasis-700); font-size: 0.82rem; }
+
+/* PersonaBadge */
+.nh-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 1rem; }
+.nh-badge { font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--ifm-color-primary-lightest); color: var(--ifm-color-primary-darkest); }
+[data-theme='dark'] .nh-badge { background: var(--ifm-color-primary-darkest); color: var(--ifm-color-primary-lightest); }
+.nh-badge--perm { background: var(--ifm-color-emphasis-200); color: var(--ifm-color-emphasis-800); font-family: var(--ifm-font-family-monospace); font-weight: 500; }
+
+/* Video */
+.nh-video { margin: 1.25rem 0; }
+.nh-video video { width: 100%; border-radius: 10px; border: 1px solid var(--nh-border); }
+
+/* Home */
+.nh-hero { padding: 4rem 1rem 2rem; text-align: center; }
+.nh-hero h1 { font-size: 2.4rem; }
+.nh-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto 4rem; padding: 0 1rem; }
+.nh-card { border: 1px solid var(--nh-border); border-radius: 12px; padding: 1.1rem 1.2rem; color: inherit; }
+.nh-card:hover { border-color: var(--ifm-color-primary); text-decoration: none; }
+.nh-card h3 { margin-bottom: 0.35rem; }
+.nh-card p { margin: 0; font-size: 0.92rem; color: var(--ifm-color-emphasis-700); }
