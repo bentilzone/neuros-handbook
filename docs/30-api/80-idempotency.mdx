@@ -1,0 +1,36 @@
+---
+title: Idempotency and replay
+sidebar_label: Idempotency
+sidebar_position: 80
+description: Retry writes that move stock or money without doing them twice.
+---
+
+A network can fail after Neuros has done what you asked but before you hear back. For writes that move stock or money, retrying must not do it twice. These operations require an `Idempotency-Key` header:
+
+| Operation | Moves |
+|---|---|
+| `POST /v1/inventory/receipts` | Stock and its value in the books |
+| `POST /v1/ledger/journals` | A journal |
+| `POST /v1/ledger/fx-revaluation` | Revaluation postings |
+| `POST /v1/billing/subscribe` | Your plan and its invoice |
+
+More join as orders and payments arrive. The [reference](./reference/index.mdx) marks each one.
+
+## How it works
+
+1. Make up a key for the action, for example your own document number: `grn-2026-0042`.
+2. Send it as `Idempotency-Key: grn-2026-0042`.
+3. If you retry with the same key and the same body, Neuros returns the **original response**, byte for byte, and does nothing more.
+
+| Situation | Answer |
+|---|---|
+| First request | Done, and the response is kept for 7 days |
+| Same key, same body, after it finished | The original response again |
+| Same key while the first is still running | `409` `IDEMPOTENCY_IN_PROGRESS`: wait and retry |
+| Same key, different body | `422` `IDEMPOTENCY_KEY_REUSED`: a key means one action |
+| The first attempt failed | The key is free again; retrying runs the action |
+| No key | `400` `IDEMPOTENCY_KEY_REQUIRED` |
+
+Keys are 8 to 128 characters of `A–Z a–z 0–9 . _ : -`, and belong to your company: another company's identical key is a different key.
+
+Use a key that names the business action, not the attempt. Your goods received note number is a good key; a random value per attempt defeats the point.

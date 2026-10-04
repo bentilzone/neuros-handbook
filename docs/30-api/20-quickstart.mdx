@@ -1,0 +1,124 @@
+---
+slug: /api/quickstart
+title: Quickstart
+sidebar_position: 20
+description: Get a token with your API client, then read your company, search the marketplace and receive stock.
+---
+
+Get a token with your API client, then make your first calls: read your company, list your offers, price a marketplace offer and receive stock. The examples use `curl`; any HTTP client works the same way.
+
+## Before you start
+
+You need:
+
+- an **API client** with its **client ID** and **secret** ([Get access](./10-get-access.mdx));
+- the scopes `org:read`, `offer:read`, `marketplace:search`, `stock:receive` and `warehouse:read` granted to it, for the calls below;
+- the API base URL: <ApiBase />.
+
+Set them once in your shell:
+
+```bash
+export NEUROS_API="https://<your Neuros API address>"
+export CLIENT_ID="<client id>"
+export CLIENT_SECRET="<client secret>"
+```
+
+## 1. Get a token
+
+Exchange the client's credentials for an access token:
+
+```bash
+curl -s "$NEUROS_API/v1/oauth/token" \
+  -H "Content-Type: application/json" \
+  -d "{\"grant_type\":\"client_credentials\",\"client_id\":\"$CLIENT_ID\",\"client_secret\":\"$CLIENT_SECRET\"}"
+```
+
+```json
+{
+  "access_token": "eyJhbGciOi…",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "scope": "org:read offer:read marketplace:search stock:receive warehouse:read"
+}
+```
+
+The token lasts an hour. Keep it and reuse it for every call until then; ask for a new one when it expires. Save it for the next steps:
+
+```bash
+export TOKEN="<access_token>"
+```
+
+## 2. Read your company
+
+```bash
+curl -s "$NEUROS_API/v1/organization" -H "Authorization: Bearer $TOKEN"
+```
+
+The response is your company's profile, capabilities and settings. The token is bound to this company: everything you do with it happens here.
+
+## 3. List your offers
+
+```bash
+curl -s "$NEUROS_API/v1/selling/offers?limit=5" -H "Authorization: Bearer $TOKEN"
+```
+
+Lists come in pages: `data` holds the items and `meta` the page, limit, total and total pages. See [Requests and responses](./60-requests-and-responses.mdx).
+
+## 4. Search the marketplace and price an offer
+
+```bash
+curl -s "$NEUROS_API/v1/offers?q=pump&limit=5" -H "Authorization: Bearer $TOKEN"
+```
+
+Take an offer's `id` and ask what your company would pay for a quantity:
+
+```bash
+curl -s "$NEUROS_API/v1/offers/<offer id>/price" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"quantity":"10"}'
+```
+
+The answer applies your contract, your price list, quantity breaks and promotions, and lists each `step`. It is indicative until an order or quotation locks it. Quantities and amounts are decimal strings: `"10"`, `"250000.00"`.
+
+## 5. Receive stock
+
+Find a warehouse, then record goods that arrived. Receiving changes stock and your books, so it needs an `Idempotency-Key`: if the network drops and you retry with the same key, Neuros returns the first result instead of receiving twice.
+
+```bash
+curl -s "$NEUROS_API/v1/inventory/warehouses" -H "Authorization: Bearer $TOKEN"
+```
+
+```bash
+curl -s "$NEUROS_API/v1/inventory/receipts" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -H "Idempotency-Key: grn-2026-0042" \
+  -d '{
+    "reference": "GRN-2026-0042",
+    "lines": [
+      { "productId": "<product id>", "warehouseId": "<warehouse id>", "quantity": "12",
+        "unitCost": { "amount": "228000.00", "currency": "NGN" } }
+    ]
+  }'
+```
+
+The response lists the stock movements it made. The receipt also appears in the app under **Inventory → Movements**, and its value posts to your ledger.
+
+## Troubleshoot
+
+| You see | Why | What to do |
+|---|---|---|
+| `401` `UNAUTHENTICATED` | No token, or it expired | Get a new token (step 1) |
+| `403` `PERMISSION_DENIED` | The token lacks the scope | Grant the scope to the client, then get a new token |
+| `403` `CAPABILITY_REQUIRED` | Your company is not a seller, buyer or stockholder as that area needs | See [capabilities](../01-glossary/10-companies-and-people.mdx) |
+| `402` `SUBSCRIPTION_REQUIRED` or `SUBSCRIPTION_LAPSED` | No active plan, or an unpaid one (read-only) | An administrator fixes it under Settings → Billing |
+| `400` `invalid_scope` | You asked for a scope the client does not hold | Ask for fewer, or grant it |
+| `400` `IDEMPOTENCY_KEY_REQUIRED` | A write that moves stock or money had no key | Send `Idempotency-Key` |
+| `404` | The record does not exist, or your company may not see it | Check the id and the company |
+| `429` `RATE_LIMITED` | Too many requests | Wait and retry; see [Rate limits](./85-rate-limits.mdx) |
+
+## Next
+
+- [Authentication](./40-authentication.mdx): token lifetimes, narrower tokens, people's sessions.
+- [Errors](./70-errors.mdx) and [Idempotency](./80-idempotency.mdx): build retries that are safe.
+- [Live updates](./90-live-updates.mdx): hear about changes instead of polling.
+- [API reference](./reference/index.mdx): every operation.

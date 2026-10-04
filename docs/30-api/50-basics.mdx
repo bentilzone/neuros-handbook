@@ -1,0 +1,45 @@
+---
+title: API basics
+sidebar_position: 50
+description: Base URL, versions, JSON, ids, money, quantities, dates and capabilities.
+---
+
+## Base URL and version
+
+Every path starts with `/v1` after the base URL, <ApiBase />. Responses can gain fields as Neuros grows, so ignore fields you do not know rather than rejecting the response.
+
+## JSON over HTTPS
+
+Send `Content-Type: application/json` with every body. The token endpoint also accepts a form-encoded body. Responses are JSON. Always call over HTTPS: tokens and secrets travel in the headers.
+
+## Ids
+
+Records are identified by 24-character hexadecimal ids, for example `66f1c0a2b4d5e6f708192a3b`. Treat them as opaque strings. The numbers people see, such as `JNL-2026-000007` or `LIS-SP5A12`, are fields on the record, not its id.
+
+## Money
+
+An amount is an object with a decimal string and an ISO 4217 currency code:
+
+```json
+{ "amount": "228000.00", "currency": "NGN" }
+```
+
+The amount is a string so no precision is lost in a floating-point number: up to 20 digits before the point and 8 after. Never send a number for an amount.
+
+Your company has a **functional currency**: its books are kept in it, and an amount you leave to default is in it. `GET /v1/organization` returns it. Send another currency only when you mean it, for example on a price list for buyers abroad.
+
+## Quantities
+
+Quantities are decimal strings too, such as `"12"` or `"2.5"`, with a `unit` from the product's units. Stock is counted in the product's base unit.
+
+## Dates and times
+
+Instants are ISO 8601 in UTC, for example `2026-10-04T09:30:00.000Z`. Calendar days, such as a posting date, are `YYYY-MM-DD`. Your company's time zone (Settings → My company → Operating policies) decides which day an instant falls on, and so its accounting period.
+
+## Capabilities
+
+What your company may do depends on its [capabilities](../01-glossary/10-companies-and-people.mdx): supply, distribution, purchasing. Selling needs supply or distribution, buying needs distribution or purchasing, and stock needs supply or distribution. An area your company is not enabled for answers `403` `CAPABILITY_REQUIRED`, whatever the token's scopes.
+
+## What you can see
+
+A token sees only its own company's records, plus what other companies share with it: their published offers in the marketplace, and the accounts between you. A record your company may not see answers `404`, the same as one that does not exist, so ids reveal nothing.

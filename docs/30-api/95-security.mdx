@@ -1,0 +1,17 @@
+---
+title: Security and transport
+sidebar_position: 95
+description: Keep credentials safe and give each system only what it needs.
+---
+
+- **HTTPS only.** Tokens and secrets travel in headers; never send them over plain HTTP.
+- **Secrets stay on servers.** A client secret never goes in a browser, a mobile app or a repository. For an app that runs on a device, sign the person in instead ([Sign in as a person](./30-user-sessions.mdx)).
+- **Least privilege.** Give each API client only the scopes it needs, and [narrow tokens](./40-authentication.mdx#narrow-a-token) further for parts of your system that need less.
+- **One client per system.** Then you can rotate or revoke one without touching the others, and the audit log names the system that made each change.
+- **Rotate on suspicion.** Rotating a secret ends it at once. Update your system with the new one.
+- **Tokens are short-lived.** API client tokens last an hour, and people's access tokens are refreshed with single-use refresh tokens.
+- **One company per token.** A token cannot read or change another company's records, whatever its scopes.
+- **Everything is recorded.** Every change, and every API request, is in your company's audit log with the client or person that made it.
+- **Two-step verification** guards the sensitive actions of people's sessions: roles, members, API clients, posting rules, periods, money approvals.
+
+Found a security problem? Tell us through the support page on the Neuros website rather than in public.
