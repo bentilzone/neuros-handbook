@@ -23,7 +23,7 @@
 
 /* Shot: the screenshot, framed like a window, with its numbered legend. */
 .nh-shot { margin: 1.25rem 0 1.5rem; }
-.nh-shot__frame { border: 1px solid var(--nh-border); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgb(0 0 0 / 8%); }
+.nh-shot__frame { display: block; cursor: zoom-in; border: 1px solid var(--nh-border); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 24px rgb(0 0 0 / 8%); }
 .nh-shot__frame img { display: block; width: 100%; height: auto; }
 .nh-shot__caption { font-size: 0.85rem; color: var(--ifm-color-emphasis-700); margin-top: 0.5rem; }
 .nh-shot__legend { list-style: none; padding: 0; margin: 0.6rem 0 0; display: grid; gap: 0.35rem; }

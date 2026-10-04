@@ -1,0 +1,85 @@
+# Re-shoot every screenshot and video against a freshly seeded Neuros, and open a PR when any changed.
+# Triggered by neuros-client / neuros-engine merges to dev (repository_dispatch "app-changed"),
+# weekly as a safety net, or by hand. Prose stays human/agent-written; this only refreshes pictures.
+#
+# Needs secret NEUROS_REPOS_TOKEN: read access to bentilzone/neuros-engine and neuros-client
+# (private), and permission to open PRs here.
+name: Capture
+
+on:
+  repository_dispatch:
+    types: [app-changed]
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch of neuros-engine and neuros-client to shoot
+        default: dev
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: capture
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      APP_REF: ${{ github.event.client_payload.ref || inputs.ref || 'dev' }}
+      NEUROS_ENGINE_DIR: ${{ github.workspace }}/app/neuros-engine
+      NEUROS_CLIENT_DIR: ${{ github.workspace }}/app/neuros-client
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: dev
+      - uses: actions/checkout@v7
+        with:
+          repository: bentilzone/neuros-engine
+          ref: ${{ env.APP_REF }}
+          path: app/neuros-engine
+          token: ${{ secrets.NEUROS_REPOS_TOKEN }}
+      - uses: actions/checkout@v7
+        with:
+          repository: bentilzone/neuros-client
+          ref: ${{ env.APP_REF }}
+          path: app/neuros-client
+          token: ${{ secrets.NEUROS_REPOS_TOKEN }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          yarn install --frozen-lockfile
+          (cd app/neuros-engine && yarn install --frozen-lockfile)
+          (cd app/neuros-client && yarn install --frozen-lockfile)
+          npx playwright install --with-deps chromium
+      - name: Capture
+        run: yarn capture
+      - name: Report
+        id: report
+        run: |
+          {
+            echo 'body<<EOF'
+            echo "Screenshots re-shot from neuros-engine and neuros-client \`${APP_REF}\`."
+            echo
+            cat capture/.out/report.md
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.NEUROS_REPOS_TOKEN }}
+          branch: chore/refresh-screenshots
+          base: dev
+          commit-message: Refresh screenshots and videos
+          title: Refresh screenshots
+          body: ${{ steps.report.outputs.body }}
+          add-paths: |
+            static/shots
+            static/video
+            src/data/shots.json

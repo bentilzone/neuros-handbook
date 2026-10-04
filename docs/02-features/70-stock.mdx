@@ -1,0 +1,48 @@
+---
+title: Stock, from receipt to valuation
+sidebar_label: Stock
+---
+
+<PersonaBadge who={['supply', 'distribution']} permission="stock:read" />
+
+How stock comes in, moves, gets corrected and counted, and what it is worth. Every step updates live for everyone watching.
+
+## Set up warehouses
+Under **Inventory → Warehouses**, add each place you hold stock (a code and a name; one is the default) and, if useful, its zones and bins. The number of warehouses is a plan limit.
+
+## Receive stock
+**Receive stock** records goods that arrived without a purchase order, such as opening stock. Each line needs:
+- the product and warehouse;
+- the quantity, in the product's unit;
+- the unit cost, in your currency or another;
+- lot or serial numbers for tracked products.
+
+Pressing twice still records one receipt. Each receipt posts to your books automatically: inventory up, *goods received not invoiced* up.
+
+## Keep stock in the right condition
+From a balance's panel, move stock to **quarantine** for checking, mark it **damaged** or **expired**, or **release** it back to sellable. Only sellable stock can be sold.
+
+## Correct it: adjustments
+Under **Adjustments**, propose a change with a reason per line (damage, loss, found). It changes nothing until someone approves it. With segregation of duties, that's someone other than you. Approved adjustments post their gain or loss to your books.
+
+## Move it: transfers
+Under **Transfers**:
+1. Draft a move between warehouses.
+2. **Dispatch** it. Stock leaves the first warehouse at once and is *in transit*.
+3. **Receive** it at the other end. If less arrives, say how much: the rest is written off as lost in transit, with its own record.
+
+## Check it: counts
+Under **Counts**:
+1. Open a count for a warehouse.
+2. Record what you find; the difference against the system shows as you type.
+3. Save, then **submit**.
+4. Once approved, gains and losses are applied and posted.
+
+## Plan it: reorder
+Under **Reorder**, set a level and quantity per product and warehouse. Neuros lists what is at or below its level. It suggests and never orders by itself.
+
+## Trace it: movements
+**Movements** is the full history: every receipt, issue, adjustment, transfer, count, condition change and write-off, with who and when. Nothing in it is ever edited.
+
+## Value it
+**Valuation** shows each product's quantity, unit cost and value in your functional currency, by your method (FIFO or weighted average). The total equals the inventory account in your [ledger](./80-books.mdx), because every valued movement posts there in the same step.

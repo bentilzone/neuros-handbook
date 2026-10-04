@@ -13,9 +13,10 @@ export default function Shot({ id, caption }: { id: string; caption?: string }) 
   if (!entry) return <div className="nh-shot nh-shot--missing">Screenshot <code>{id}</code> appears after the next capture run.</div>;
   return (
     <figure className="nh-shot">
-      <div className="nh-shot__frame">
+      {/* Full size on click: at the column's width a 1440px screen is too small to read. */}
+      <a className="nh-shot__frame" href={src} target="_blank" rel="noopener" title="Open full size">
         <img src={src} width={entry.width} height={entry.height} loading="lazy" alt={caption ?? entry.title ?? id} />
-      </div>
+      </a>
       {caption && <figcaption className="nh-shot__caption">{caption}</figcaption>}
       {entry.callouts.length > 0 && (
         <ol className="nh-shot__legend">

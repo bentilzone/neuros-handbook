@@ -1,1 +1,70 @@
-{}
+{
+  "distributor/inventory/stock": {
+    "file": "distributor/inventory/stock.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: stock on hand in each warehouse",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The tabs: stock, every movement, adjustments, transfers, counts, reorder rules, warehouses and valuation."
+      },
+      {
+        "n": 2,
+        "text": "Narrow the list to one warehouse or one condition (sellable, quarantined, damaged)."
+      },
+      {
+        "n": 3,
+        "text": "Record a delivery that arrived without a purchase order — opening stock, a supplier drop."
+      },
+      {
+        "n": 4,
+        "text": "One product in one warehouse: on hand, reserved for orders, and what is left to sell. Click a row for its detail."
+      }
+    ]
+  },
+  "distributor/ledger/journals": {
+    "file": "distributor/ledger/journals.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Ledger: every journal, automatic or manual",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Draft a manual journal. It posts only after someone else approves it."
+      },
+      {
+        "n": 2,
+        "text": "Filter by state — drafts, waiting for approval, posted, reversed, cancelled — and by period."
+      },
+      {
+        "n": 3,
+        "text": "A journal waiting for a colleague with posting rights."
+      }
+    ]
+  },
+  "reseller/marketplace/search": {
+    "file": "reseller/marketplace/search.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Marketplace: offers from every seller you can buy from",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Search by product, brand, part number or seller."
+      },
+      {
+        "n": 2,
+        "text": "Most relevant first, or by price."
+      },
+      {
+        "n": 3,
+        "text": "Filter by availability, category, brand and seller. The counts are what each filter would leave."
+      },
+      {
+        "n": 4,
+        "text": "An offer card: the seller’s price for you where you have an account, its availability and the seller. Click for the detail and your price in any unit."
+      }
+    ]
+  }
+}

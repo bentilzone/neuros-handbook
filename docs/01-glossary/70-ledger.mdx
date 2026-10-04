@@ -1,0 +1,58 @@
+---
+title: Ledger and books
+sidebar_label: Ledger
+---
+
+### Ledger
+Your company's books inside Neuros: the chart of accounts, every journal, the accounting periods and the balances they add up to.
+
+### Chart of accounts
+Your list of accounts, grouped by type: assets, liabilities, equity, income and expenses. Each account sits in a reporting group (current assets, operating expenses…), which decides where it appears in statements. Every company starts with a standard chart it can extend and rename.
+
+### Account code
+An account's short code, such as `1020` or `6300`. It is fixed once the account is added. Letters, digits, dots and dashes.
+
+### Journal
+One balanced entry in the books. Debits equal credits, in your functional currency. It has a date, a memo and lines, each line an account with a debit or a credit. A posted journal is never changed.
+
+### Journal status
+- **Draft**
+- **Waiting for approval**
+- **Posted**
+- **Reversed**
+- **Cancelled:** never posted, kept visible.
+
+### Automatic posting
+A journal Neuros posts itself when something with a financial effect happens, such as stock received (debit inventory, credit goods received not invoiced). It shows where it came from: *Stock*, and later invoices and payments.
+
+### Manual journal
+A journal a person writes, for things Neuros doesn't post itself: capital paid in, rent, salaries, corrections.
+1. Draft it.
+2. Submit it.
+3. Someone with posting rights approves and posts it. With segregation of duties on, not the person who prepared it.
+
+### Reversal
+How a posted journal is corrected: Neuros posts its mirror image with a reason, and both stay in the books, the original marked *Reversed*.
+
+### Control account
+An account fed only by its own records: what customers owe you, what you owe suppliers, inventory, goods received not invoiced, money held in escrow. Manual journals can't use them, so they always agree with the records behind them.
+
+### Posting rule (role)
+Which of your accounts each automatic posting uses: inventory → *1300 Inventory*, cost of goods sold → *5000*, and so on. Changing one affects new postings only.
+
+### Accounting period
+A calendar month in your company's timezone.
+- **Open:** posting allowed.
+- **Closed:** posting only with a recorded reason. Earlier months must be closed first and no drafts may be left in it.
+- **Locked:** final; nothing can post into it again.
+
+A closed month can be reopened with a reason.
+
+### Trial balance
+Every account's balance on a chosen date, debits beside credits. When the books are right the two totals are equal: *Balanced*.
+
+### FX revaluation
+Bringing accounts held in a foreign currency (a dollar bank account) to their value at the rate on a date. The difference posts as an unrealised exchange gain or loss.
+
+### Exchange rate
+How many units of one currency buy one of another. Platform rates and your company's own rates are entered by one person and approved by another. Neuros never guesses a missing rate.

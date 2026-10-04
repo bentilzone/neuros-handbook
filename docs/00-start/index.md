@@ -28,6 +28,6 @@ Every page in the role guides follows the same shape:
 - **States.** What a record can be (draft, published, posted…) and what moves it.
 - **Live.** What updates on its own when someone else acts.
 
-:::note Screens show demo data
-Every screenshot is taken automatically from a freshly prepared demo: Medius Industrial Supplies, Abuja Pumps & Valves, Ikeja Hardware Resellers and their people. None of it is a real customer's data.
+:::note[Screens show demo data]
+Every screenshot is taken automatically from a freshly prepared demo: Lagos Industrial Supplies and Abuja Pumps & Valves (distributors), Kumasi Pump Works (a supplier) and Ikeja Hardware Resellers, with their people. None of it is a real customer's data.
 :::
