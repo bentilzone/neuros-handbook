@@ -34,22 +34,22 @@ jobs:
       NEUROS_ENGINE_DIR: ${{ github.workspace }}/app/neuros-engine
       NEUROS_CLIENT_DIR: ${{ github.workspace }}/app/neuros-client
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: dev
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: bentilzone/neuros-engine
           ref: ${{ env.APP_REF }}
           path: app/neuros-engine
           token: ${{ secrets.NEUROS_REPOS_TOKEN }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: bentilzone/neuros-client
           ref: ${{ env.APP_REF }}
           path: app/neuros-client
           token: ${{ secrets.NEUROS_REPOS_TOKEN }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: Install
@@ -71,7 +71,7 @@ jobs:
             cat capture/.out/report.md
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.NEUROS_REPOS_TOKEN }}
           branch: chore/refresh-screenshots

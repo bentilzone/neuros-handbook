@@ -1,0 +1,61 @@
+---
+title: Inventory
+sidebar_label: Inventory
+---
+
+### Warehouse
+A place you hold stock: a depot, a shop, a site store. Each has a code (`MAIN`) and a name. One is your default. The number of warehouses is a plan limit.
+
+### Zone and bin
+Optional places inside a warehouse: zones (an aisle, a cold room) and bins within them. Without them, stock is held at warehouse level.
+
+### Stock on hand
+How much of a product is physically in a warehouse, in each condition.
+
+### Reserved
+Stock held for an order that hasn't left yet. It is still on hand but can't be sold again.
+
+### Free to sell (available)
+Sellable stock on hand minus what is reserved. It is the only stock an order can claim, and two orders can never claim the same last unit.
+
+### Condition
+The state of stock, which decides whether it can be sold:
+- **Sellable**
+- **Quarantine:** held back for checking.
+- **Damaged**
+- **Expired**
+
+Moving stock between conditions is a *condition change*. Releasing quarantined stock makes it sellable again.
+
+### Receipt (receive stock)
+Recording stock that arrived: opening stock, a delivery without a purchase order. Each line has a product, a warehouse, a quantity and a unit cost; lot or serial numbers are added for tracked products. A receipt is sent exactly once, however often the button is pressed.
+
+### Movement
+One line in the stock history: received, issued, adjusted in or out, transferred, counted, quarantined, released, written off. Movements are never edited or deleted. Stock changes only by writing one.
+
+### Adjustment
+A correction to stock with a reason (damage, theft, found stock). It is proposed and changes nothing until someone approves it. With segregation of duties on, that can't be the proposer.
+
+### Transfer
+Moving stock between your warehouses:
+1. **Draft**
+2. **In transit:** it has left the first warehouse and is in neither until received.
+3. **Received**, or **Received short:** the missing quantity is written off as lost in transit.
+
+A draft can be cancelled.
+
+### Stock count
+Counting what is actually on the shelf:
+1. **Counting:** you record what you found.
+2. **Waiting for approval:** submitted.
+3. **Approved:** the differences (count gains and losses) are applied.
+
+### Reorder rule
+For a product in a warehouse: the level at which to reorder and how much. Neuros suggests what is at or below its level, but never orders by itself.
+
+### Valuation
+What your stock is worth at cost, in your functional currency, by your company's method:
+- **FIFO:** the oldest cost is used first.
+- **Weighted average:** one running average cost.
+
+The method can't be changed once stock has been valued. The total always equals the inventory account in your ledger.

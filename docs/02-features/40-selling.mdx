@@ -1,0 +1,47 @@
+---
+title: "Selling: from offer to price"
+sidebar_label: Selling
+---
+
+<PersonaBadge who={['supply', 'distribution']} permission={['offer:manage', 'price_list:manage']} />
+
+How a seller puts a product on sale, decides who sees it, and how Neuros works out each buyer's price.
+
+## 1. Create an offer
+Under **Offers → New offer**, pick the catalogue product and set your terms:
+- your SKU, standard price and unit;
+- quantity breaks;
+- [visibility](../01-glossary/30-selling-and-pricing.mdx#visibility);
+- [supply](../01-glossary/30-selling-and-pricing.mdx#supply-stock-mode) and lead time;
+- warranty, minimum order and order steps;
+- whether buyers see your quantity;
+- where you deliver.
+
+Prices start in your company's currency. The offer is a **draft** until you publish it.
+
+## 2. Publish
+Publishing puts it in the marketplace for the buyers its visibility allows, within seconds. Published offers count towards your plan's limit. **Withdraw** takes it off sale and keeps its history.
+
+## 3. Give customers their prices
+Under **Pricing**:
+- **Price lists:** create one (name, currency, dates), add offers with their own quantity breaks, then attach it to customers' accounts in their terms.
+- **Contract prices:** a negotiated price for one customer on one offer, with a minimum quantity, your reference and dates. End it when it no longer applies.
+- **Promotions:** percent off, amount off or a fixed price, on chosen offers, for every buyer or approved customers only, between dates. Pause, resume or end it.
+
+## 4. How the price is decided
+Neuros uses one rule everywhere, the [pricing precedence](../01-glossary/30-selling-and-pricing.mdx#pricing-precedence):
+1. the customer's contract price;
+2. else their price list, at the highest quantity break reached;
+3. else your standard price or the offer's own break.
+
+The best promotion then applies to 2 or 3, never to a contract. Prices convert between units through the product's conversions and are rounded to the currency's precision.
+
+The **price check** on Offers and Pricing shows exactly what a chosen customer would pay for a quantity, step by step. It is the same calculation buyers get.
+
+## What the buyer sees
+- A public offer shows your standard price to everyone.
+- Your approved customers see *their* price, with its source (*Your price list*, *Your contract price*).
+- Nobody sees your other customers' prices, your lists' contents or your costs.
+
+## Live
+Offers, price lists, contracts and promotions update on every colleague's screen as they change, and in the marketplace for buyers.

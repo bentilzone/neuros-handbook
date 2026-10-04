@@ -1,0 +1,57 @@
+---
+title: Companies, people and access
+sidebar_label: Companies and people
+---
+
+### Company (organisation)
+A business on Neuros: a supplier, a distributor or a reseller. All of them are peers. A company has a legal name, a country, a functional currency, a timezone and the capabilities Neuros approved for it. In the engine and some screens it is called an *organisation*; the handbook uses *company*.
+
+### Capability
+What Neuros has verified a company may do. Capabilities are granted by the platform operator when it approves the company's application, never bought with a plan.
+- **Supply:** sells and holds stock, never buys.
+- **Distribution:** buys, holds stock and sells on.
+- **Purchasing:** buys only.
+
+Capabilities decide which parts of the app a company sees. A purchasing-only company has no Selling or Inventory pages, and Neuros refuses those actions even if someone tries them directly.
+
+### Functional currency
+The currency a company keeps its books in. It comes from the company's country (Ghana → cedis, Nigeria → naira) and is fixed once journals are posted or stock is valued. Every price, cost and journal the company records starts in it. Another currency is always a deliberate choice in the field.
+
+### Company timezone
+The timezone the company's dates and accounting periods follow. It defaults to the country's zone, so a sale at 23:30 UTC on 31 October belongs to November for a Lagos company (UTC+1). It is fixed once journals are posted.
+
+### Person (user)
+Someone who signs in. One person has one sign-in (email and password, optionally two-step verification) and can belong to several companies.
+
+### Member (membership)
+A person's place in one company: their roles, their spending and approval limits, and whether they are active or suspended. A person who works for two companies has two memberships.
+
+### Invitation
+How a company adds a member. The invitee gets an email link, accepts it, and becomes a member with the roles the invitation named. It can be revoked before it is accepted, and it expires if not used.
+
+### Role
+A named set of permissions given to members: *Company administrator*, *Accountant*, *Storekeeper* and so on. Neuros provides standard roles, and a company can create its own. Nobody can grant a permission they don't hold themselves.
+
+### Permission
+One thing a member may do, written as *area:action*: `stock:receive`, `journal:post`, `coa:manage`. Reading is always a separate permission from changing, so a view-only role is possible. The handbook shows the permission each page needs.
+
+### System administrator
+The person who set the company up on Neuros. They hold every permission, and the company cannot remove, suspend or demote them; only the platform operator can hand the role to someone else.
+
+### Two-step verification (MFA)
+A six-digit code from an authenticator app, asked for at sign-in after the password. Sensitive actions require a session that signed in with it: granting roles, posting and reversing journals, closing periods, changing posting rules and revaluing foreign currency. Recovery codes, shown once, let you in if you lose the device.
+
+### Segregation of duties
+A company setting, on by default: the person who prepared something cannot approve it. It applies to manual journals, stock adjustments and stock counts. Someone else must approve or post.
+
+### Company switcher
+The control at the top left that moves you between the companies you belong to. Switching signs you into the other company properly: you see only what that membership allows.
+
+### API client
+A machine login for a company's own systems (an ERP, a shop) to use Neuros's API. It has scopes like a role. Its secret is shown once when it is created or rotated, and never again.
+
+### Audit trail
+The record of who changed what, when, and why. Every change in Neuros is written to it at the same moment as the change itself, so nothing changes without a trace. Each record's history appears on its own page; the full log is under **Audit log**.
+
+### Live updates
+Pages that others change update on their own: a colleague's approval, a customer's request or a supplier's new price appears without reloading. The **Live** dot at the top right shows the connection. When it reconnects, open pages refresh to catch up.

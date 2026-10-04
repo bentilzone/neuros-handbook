@@ -1,0 +1,39 @@
+---
+title: People, roles and access
+sidebar_label: People and access
+---
+
+<PersonaBadge who={['everyone']} permission={['member:manage', 'role:manage']} />
+
+Who can do what in your company, and how every action stays traceable.
+
+## Inviting a colleague
+Under **Members → Invite**, give their email and the roles they get. You can also set:
+- **Purchase limit:** orders above it need approval.
+- **Approval limit:** the most they may approve.
+
+You can only grant roles whose permissions you hold yourself. They receive an email, accept it (signing up if they are new to Neuros) and become a member. Pending invitations can be revoked; unused ones expire. The number of active members is a plan limit.
+
+## Roles and permissions
+Each member has one or more [roles](../01-glossary/10-companies-and-people.mdx#role), and each role is a set of [permissions](../01-glossary/10-companies-and-people.mdx#permission).
+- Neuros's standard roles cover the usual jobs: administrator, sales, purchasing, stores, accounts.
+- Under **Roles** you can create your own from the permission picker, grouped by area. Each area has read and change permissions, so view-only roles are possible.
+- Granting roles needs a session signed in with [two-step verification](../01-glossary/10-companies-and-people.mdx#two-step-verification-mfa) and a reason, because it hands over authority.
+
+## Suspending and removing
+A member can be suspended (they can't sign in to this company until reactivated) or removed. The system administrator can't be suspended, removed or demoted by the company.
+
+## Segregation of duties
+On by default under **Settings → My company**: the person who prepares a manual journal, a stock adjustment or a stock count can't also approve it. Turn it off only if your company is too small to have two people.
+
+## Your own security
+Under **Settings → Security**:
+- change your password;
+- turn on two-step verification and keep your recovery codes;
+- see where you are signed in and sign out everywhere.
+
+## Machines: API clients
+Under **API clients**, create a login for your own systems with chosen scopes. The secret is shown **once**: copy it then. Rotating gives a new secret and stops the old one. Revoking stops the client for good.
+
+## Everything is audited
+Every change is recorded with who made it, when and, where asked, why. The record is written at the same moment as the change. Each record's page shows its own history in plain words. **Audit log** shows everything, filterable by action, record, person and date, with the before and after of each change.
