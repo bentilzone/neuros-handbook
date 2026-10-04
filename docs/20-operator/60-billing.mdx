@@ -1,0 +1,88 @@
+---
+title: Billing
+sidebar_position: 60
+---
+
+<PersonaBadge who={['operator']} permission="platform:billing:read" />
+
+What Neuros has billed, collected and is owed. Invoices, receipts and credit notes are Neuros' own documents. Its books are kept outside Neuros and fed by the **Reports** tab. See [plans and billing](../02-features/90-plans-and-billing.mdx).
+
+## Overview
+
+<Shot id="operator/billing/overview" />
+
+Monthly recurring revenue, what is outstanding and overdue, trials ending this week, what was billed and collected this month, how many companies pay, and how many are cancelling. Amounts are shown per currency: each company is billed in its own.
+
+## Invoices
+
+<Shot id="operator/billing/invoices" />
+
+Subscriptions raise their invoices on their own, one per period. Filter by status, or **Overdue only**.
+
+| Status | What it means |
+|---|---|
+| Open | Issued, nothing paid yet |
+| Partially paid | Some paid, the rest still owed |
+| Paid | Settled |
+| Void | Cancelled with a credit note for the whole of it; its number stays used |
+
+### New invoice
+
+For one-off work. It is taxed like any other invoice.
+
+<Shot id="operator/billing/invoice-new" />
+
+<FieldTable fields={[
+  { name: 'Company', required: true, meaning: 'Who you are billing.', others: 'The company sees it under Settings → Billing, with how to pay.' },
+  { name: 'Currency', required: true, meaning: 'What it is billed in.' },
+  { name: 'Lines', required: true, meaning: 'Each with a description, quantity and unit price. **Add a line** for more.', implications: 'Tax is added by the company’s country, from Billing settings → Tax.' },
+  { name: 'Due date', meaning: 'When it must be paid.', rules: 'Blank: the payment terms in Billing settings.' },
+  { name: 'Notes on the invoice', meaning: 'Text printed on it.', others: 'The company reads it on the invoice.' },
+  { name: 'Reason', required: true, meaning: 'Why you raised it.', implications: 'Kept in the audit log, not printed.' },
+]} />
+
+### An invoice
+
+<Shot id="operator/billing/invoice" />
+
+Click an invoice for its lines, tax, payments and credit notes, and the PDF to view or download.
+
+- **Record payment** records money received against it.
+- **Send reminder** emails the company's billing contact now.
+- **Credit note** reduces what is owed. Leave the amount blank to credit the whole balance.
+- **Void** cancels an unpaid invoice with a credit note for the whole of it.
+
+## Payments
+
+<Shot id="operator/billing/payments" />
+
+Money received from companies, each with its receipt. **Void payment** is for a payment recorded in error: the invoices it paid are owed again.
+
+### Record payment
+
+<Shot id="operator/billing/payment-new" />
+
+<FieldTable fields={[
+  { name: 'Company', required: true, meaning: 'Who paid.' },
+  { name: 'Amount received', required: true, meaning: 'What arrived, and in what currency.', implications: 'Settles the company’s oldest open invoices in that currency first. Anything left over is kept as credit and used on its next invoice.', rules: 'More than zero.' },
+  { name: 'Method', meaning: 'Bank transfer, cash, card, mobile money or other.' },
+  { name: 'Reference', meaning: 'The bank reference or receipt number.', others: 'Printed on the receipt.' },
+  { name: 'Received on', meaning: 'When the money arrived.', rules: 'Not in the future.' },
+  { name: 'Note', meaning: 'Anything worth keeping with it.' },
+]} />
+
+Paying up restores a read-only company at once. Opened from an invoice, the form also offers **Apply to that invoice only**.
+
+### A payment
+
+<Shot id="operator/billing/payment" />
+
+The payment, its receipt, and the invoices it was applied to.
+
+## Reports
+
+<Shot id="operator/billing/reports" />
+
+- **Revenue by month**: invoiced, earned, tax charged and collected, per currency. A subscription invoice is earned month by month over the period it covers. What is still to be earned after the range is shown below it.
+- **Receivables**: what each company owes, by how late it is.
+- **Export journal (CSV)**: the period as journal lines for Neuros' own accounting system.

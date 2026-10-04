@@ -1,0 +1,42 @@
+---
+title: Applications
+sidebar_position: 20
+---
+
+<PersonaBadge who={['operator']} permission="platform:org:review" />
+
+A business that wants to trade on Neuros applies with its details, what it intends to do, and its documents. Applications is where reviewers decide. See [joining Neuros](../02-features/10-joining-neuros.mdx).
+
+<Shot id="operator/applications/list" />
+
+## States
+
+| State | What it means | What moves it |
+|---|---|---|
+| Waiting for review | Submitted, nobody has it yet | **Start review** |
+| In review | A reviewer has it | **Approve**, **Ask for changes** or **Reject** |
+| Changes requested | Back with the applicant, with what to fix | The applicant resubmits |
+| Approved | The company exists on Neuros | — |
+| Declined | Rejected, with the reason | — |
+
+## Review an application
+
+Click a row to read it: the applicant, when it was submitted, what it asked to do, its website, addresses, contacts and documents, and its history.
+
+<Shot id="operator/applications/review" />
+
+- **Start review** takes the application, so colleagues can see someone has it.
+- **Documents** open in a new tab. Each view is recorded in the audit log.
+- **Ask for changes** sends it back with a note saying what to fix.
+- **Reject** closes it, with a note saying why.
+
+## Approve
+
+Approving creates the company's workspace and its standard roles, and makes the applicant its system administrator, all in one step. The administrator can sign in at once.
+
+<FieldTable fields={[
+  { name: 'Supply, Distribution, Purchasing', required: true, meaning: 'The capabilities the company gets. Each starts as the applicant asked; switch off any you have not verified.', others: 'The company sees only the sides of trade its capabilities give it: selling and stock, buying, or both.', implications: 'Changeable later on the company’s page; the change is recorded.', rules: 'At least one.' },
+  { name: 'Note', meaning: 'Anything worth keeping with the decision.', implications: 'Kept on the application’s history.' },
+]} />
+
+Approving needs a session signed in with two-step verification.
