@@ -1,0 +1,57 @@
+---
+title: Live updates
+sidebar_position: 90
+description: A WebSocket that tells you when something changed, so you don't have to poll.
+---
+
+The Neuros app updates without reloading because the engine tells it when something changes. Your systems can listen to the same stream instead of polling.
+
+The stream says **what kind of record changed and which one**, never its contents. You then read the record through the API, which applies your token's permissions. So the stream cannot reveal anything your token could not already read.
+
+## Connect
+
+Open a WebSocket at `/v1/live` on the API host, using `wss://`. Within 10 seconds, send your access token as the first message. It goes in a message, not in the URL, so it never lands in an access log.
+
+```js
+const ws = new WebSocket(`${NEUROS_API.replace(/^http/, 'ws')}/v1/live`);
+ws.onopen = () => ws.send(JSON.stringify({ type: 'auth', token: accessToken }));
+ws.onmessage = (m) => {
+  const msg = JSON.parse(m.data);
+  if (msg.type === 'ready') console.log('listening for', msg.organizationId);
+  if (msg.type === 'event') refetch(msg.event.type, msg.event.resource);
+};
+```
+
+API client tokens and people's tokens both work.
+
+## Messages
+
+| Message | Means |
+|---|---|
+| `{"type":"ready","organizationId":"…"}` | Authenticated; events for this company follow |
+| `{"type":"event","event":{"type":"stock.changed","resource":{"type":"…","id":"…"},"at":"…"}}` | Something changed: read it again |
+
+Events go to the companies they concern: both sides of an account, for example. Marketplace changes go to everyone, because the marketplace is everyone's.
+
+Some event types:
+
+| `event.type` | When |
+|---|---|
+| `offer.created`, `offer.updated`, `offer.published`, `offer.withdrawn` | Your offers change |
+| `marketplace.listing_changed` | An offer anyone can see changed in the marketplace |
+| `price_list.changed`, `contract_price.changed`, `promotion.changed` | Your pricing changes |
+| `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes |
+| `stock.changed` | Stock moved |
+| `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
+
+Ignore types you don't use. New types appear as Neuros grows.
+
+## Closing and reconnecting
+
+| Close code | Means | Do |
+|---|---|---|
+| `4401` | No token in time, or an invalid one | Get a token and reconnect |
+| `4001` | The token expired: the socket lives no longer than its token | Get a new token and reconnect |
+| `4403` | A person's token with no company chosen | Choose a company first |
+
+The server pings every 30 seconds; a connection that stops answering is dropped. After any drop, reconnect with backoff and **read what you care about again**: events sent while you were away are not replayed.

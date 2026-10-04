@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: true # and the leading underscore keeps it out of dev builds too
 ---
 
 # Writing the handbook

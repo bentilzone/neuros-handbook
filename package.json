@@ -15,7 +15,8 @@
     "typecheck": "tsc && tsc -p capture",
     "lint:public": "node tools/lint-public.mjs",
     "verify": "yarn typecheck && yarn lint:public && yarn build",
-    "capture": "tsx capture/run.ts"
+    "capture": "tsx capture/run.ts",
+    "api:ref": "node tools/api-reference.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -35,6 +36,7 @@
     "@types/node": "^26.6.4",
     "@types/pngjs": "^6.0.5",
     "@types/react": "^19.0.0",
+    "github-slugger": "^1",
     "mongodb-memory-server": "^10.1.4",
     "pixelmatch": "^7.2.0",
     "playwright": "1.52.0",

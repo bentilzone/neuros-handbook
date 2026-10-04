@@ -1,0 +1,18 @@
+---
+title: Rate limits
+sidebar_position: 85
+description: How many requests you can make, and what to do when you hit the limit.
+---
+
+| What | Limit |
+|---|---|
+| Every operation | 600 requests a minute, per IP address |
+| Signing in, registering, password reset and the token endpoint | 20 requests a minute, per IP address |
+
+Each response carries the IETF `RateLimit` and `RateLimit-Policy` headers: how many requests remain and when the window resets. Past the limit, Neuros answers `429` with `RATE_LIMITED`. Wait for the reset, then carry on.
+
+To stay well inside:
+
+- Reuse an access token for its hour. Don't ask for one per call.
+- Ask for up to 100 items a page instead of many small pages.
+- Listen to [live updates](./90-live-updates.mdx) instead of polling.

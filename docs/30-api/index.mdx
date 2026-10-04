@@ -1,0 +1,37 @@
+---
+slug: /api
+title: Neuros API
+sidebar_label: Neuros API
+sidebar_position: 0
+description: Connect your own systems to Neuros. Everything the app does, it does through this API.
+---
+
+The Neuros API is the same API the Neuros app uses. Anything a person can do on a page, your systems can do with a request: keep stock in step with your warehouse system, publish offers from your ERP, read the marketplace, post journals from your accounting tool.
+
+## What you need
+
+- **An API client**, created by a company administrator under **API clients**, with the scopes your system needs. See [Get access](./10-get-access.mdx).
+- **The API base URL**: <ApiBase />. Every path in this section starts with `/v1`.
+- **HTTPS and JSON.** Requests and responses are JSON, over HTTPS only.
+
+## Two ways in
+
+| | API client | Person |
+|---|---|---|
+| For | A system calling on its own: an ERP, a shop, a script | An app acting for a signed-in person |
+| Credentials | Client ID and secret | Email, password and, if on, a two-step code |
+| Token | `POST /v1/oauth/token` (client credentials) | `POST /v1/auth/login`, then `select-organization` |
+| May do | What its scopes allow | What the person's roles allow |
+| Bound to | One company | One company per session |
+
+Most integrations use an API client. See [Authentication](./40-authentication.mdx).
+
+## Start here
+
+1. [Get access](./10-get-access.mdx): create an API client and choose its scopes.
+2. [Quickstart](./20-quickstart.mdx): get a token and make your first calls in a few minutes.
+3. [API reference](./reference/index.mdx): every operation, area by area.
+
+:::info[Built from the engine]
+The [reference](./reference/index.mdx) is generated from the engine's own OpenAPI document, so it lists exactly what the API accepts and returns. If the reference and this guide ever disagree, the reference is right.
+:::

@@ -61,6 +61,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Capture
         run: yarn capture
+      - name: API reference
+        # The engine's OpenAPI document is in the checkout already; the reference follows it.
+        run: yarn api:ref
       - name: Report
         id: report
         run: |

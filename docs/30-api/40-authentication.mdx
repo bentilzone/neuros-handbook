@@ -1,0 +1,58 @@
+---
+title: Authentication
+sidebar_position: 40
+description: Bearer tokens for API clients and people, their lifetimes and scopes.
+---
+
+Every call except signing in carries a bearer token:
+
+```http
+Authorization: Bearer <token>
+```
+
+A token is bound to one company. Whatever you read or change, you read or change in that company.
+
+## API client tokens
+
+`POST /v1/oauth/token` follows OAuth 2.0 client credentials. It accepts a JSON or form-encoded body, with the credentials in the body or as HTTP Basic:
+
+```bash
+curl -s "$NEUROS_API/v1/oauth/token" -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d grant_type=client_credentials
+```
+
+| Field | Value |
+|---|---|
+| `access_token` | The bearer token |
+| `token_type` | `Bearer` |
+| `expires_in` | `3600`: the token lasts one hour |
+| `scope` | The scopes this token carries, space-separated |
+
+There is no refresh token: ask for a new token when the old one expires. Reuse a token for its hour instead of asking for one per call. The token endpoint is [rate limited](./85-rate-limits.mdx) more tightly than the rest.
+
+### Narrow a token
+
+Ask for fewer scopes than the client holds by sending `scope`, space-separated. A part of your system that only reads stock can carry a token that only reads stock:
+
+```bash
+curl -s "$NEUROS_API/v1/oauth/token" -u "$CLIENT_ID:$CLIENT_SECRET" \
+  -d grant_type=client_credentials -d "scope=stock:read warehouse:read"
+```
+
+Asking for a scope the client does not hold fails with `400` `invalid_scope`.
+
+## People's tokens
+
+See [Sign in as a person](./30-user-sessions.mdx): sign in, choose a company, call with the access token, and rotate it with the refresh token.
+
+## What a token may do
+
+| Answer | Code | Means |
+|---|---|---|
+| `401` | `UNAUTHENTICATED` | No token, a malformed one, or an expired one |
+| `403` | `PERMISSION_DENIED` | The token lacks the permission (scope) the operation needs |
+| `403` | `MFA_REQUIRED` | A person's session that did not sign in with a two-step code |
+| `403` | `CAPABILITY_REQUIRED` | Your company is not enabled for that area, for example selling |
+| `402` | `SUBSCRIPTION_REQUIRED`, `SUBSCRIPTION_LAPSED` | No active plan, or an unpaid one: reads still work, changes do not |
+
+Some operations are open to people only, not API clients, for example everything under `/v1/auth`. The [reference](./reference/index.mdx) says who can call each one.

@@ -1,0 +1,43 @@
+---
+title: Get access to the API
+sidebar_label: Get access
+sidebar_position: 10
+description: Create an API client, choose its scopes and keep its secret safe.
+---
+
+An API client is a set of credentials that belongs to your company, not to a person. It keeps working when people come and go, and it can do exactly what its scopes allow, nothing more.
+
+## Who can create one
+
+A member with the `api_client:manage` permission, usually a company administrator, in a session signed in with two-step verification. Your plan sets how many clients your company can hold: see **Settings → Billing**.
+
+## Create the client
+
+1. In the app, open **API clients** and press **New client**.
+2. Name it after the system that will use it, for example "ERP sync".
+3. Choose its **scopes**: the permissions it may use. You can grant only permissions you hold yourself.
+4. Press **Create**. Neuros shows the **client ID** and **client secret** once.
+5. Store the secret in your system's secret manager, then press **I have saved it**.
+
+The [API clients page of the distributor guide](../11-distributor/120-api-clients.mdx) walks the screens.
+
+## Choose scopes
+
+Scopes are the same permissions people get through roles, for example `offer:read`, `offer:manage`, `stock:read`. The [reference](./reference/index.mdx) shows the scope each operation needs. A few combinations:
+
+| The system | Scopes |
+|---|---|
+| Reads stock for a shop front | `stock:read`, `warehouse:read` |
+| Publishes offers from an ERP | `catalogue:read`, `offer:read`, `offer:manage`, `offer:publish` |
+| Keeps customer prices in step | `pricelist:read`, `pricelist:manage`, `relationship:read` |
+| Receives goods from a warehouse system | `stock:receive`, `warehouse:read` |
+| Reads the books for reporting | `coa:read`, `journal:read`, `report:financial` |
+
+Grant the least that works. A leaked secret can do exactly what its scopes allow. A token can also ask for fewer scopes than its client holds: see [Authentication](./40-authentication.mdx#narrow-a-token).
+
+## Look after the secret
+
+- **Never** put it in a browser, a mobile app or a repository. It belongs on a server.
+- **Rotate** it from the API clients page if it may have leaked. The old secret stops working at once.
+- **Revoke** a client you no longer use. Every call with it fails from then on, and this cannot be undone.
+- Every call a client makes is in your company's **audit log**, under API requests.
