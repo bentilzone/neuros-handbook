@@ -1,0 +1,31 @@
+{/* Shared by every guide that has this page: <Roles who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} permission="role:read" />
+
+A role is a named set of permissions. Members get what their roles allow. See [people and access](../02-features/20-people-and-access.mdx).
+
+<Shot id={`${props.who}/roles/list`} />
+
+- **System roles** follow Neuros' templates, such as Company administrator, Finance approver or Warehouse operator. They stay in step with new features, and you cannot edit them.
+- **Custom roles** are yours. **Duplicate** a system role to start one, then change it.
+
+## A role
+
+Click a role for its permissions, grouped by area. Each chip is one action: view, manage, approve and so on.
+
+<Shot id={`${props.who}/roles/detail`} />
+
+## New or edited role
+
+Creating or editing a role needs a session signed in with two-step verification.
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What the role is called, for example "Branch buyer".', others: 'Your colleagues see it on members.' },
+  { name: 'Description', meaning: 'What the role is for.' },
+  { name: 'Permissions', required: true, meaning: 'Each action the role allows, by area.' },
+  { name: 'Reason for the change', required: true, meaning: 'Why you changed an existing role.', implications: 'Everyone holding this role is affected at once. The reason is kept in the audit log.', rules: 'When editing.' },
+]} />
+
+**Delete** works only for a custom role that nobody holds.
+
+Your plan limits how many custom roles you can have. See <PageLink who={props.who} page="settings" hash="billing">Settings → Billing</PageLink>.

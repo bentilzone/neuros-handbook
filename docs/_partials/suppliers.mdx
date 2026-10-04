@@ -1,0 +1,35 @@
+{/* Shared by every guide that has this page: <Suppliers who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="relationship:read" />
+
+Suppliers are the sellers you buy from: the terms each one gave you, and your requests for new accounts. It is the buyer's side of the same account your supplier sees under their <PageLink who={props.who} page="customers">Customers</PageLink>.
+
+<Shot id={`${props.who}/suppliers/list`} />
+
+## Find suppliers
+
+**Find suppliers** searches the sellers on Neuros by name. You see public business identity only: name, country and what kind of company they are. No prices, stock or contacts. Each one also shows your account with them, if you have one. Ask for an account from the <PageLink who={props.who} page="marketplace">marketplace</PageLink> offer or from here.
+
+<Shot id={`${props.who}/suppliers/find`} />
+
+## A supplier account
+
+Click a row for the account: its status, **your terms** as the supplier set them, your own reference for them, and the history.
+
+<Shot id={`${props.who}/suppliers/detail`} />
+
+<FieldTable fields={[
+  { name: 'Supplier code', meaning: 'Your own code for this supplier, for example the one in your purchasing system.', others: 'Only your company sees it. The supplier never does.' },
+]} />
+
+**Your terms** are read-only here: how you usually pay, the ways you may pay, credit, the largest order, and when the account runs. Only the supplier changes them.
+
+**End account** ends trading with the supplier. Existing obligations stand. To trade again you would ask for a new account.
+
+| Status | What it means for you |
+|---|---|
+| Waiting for approval | Your request is with the supplier |
+| Approved | You can order on your terms |
+| Suspended | The supplier blocked new orders; open orders continue |
+| Declined | The supplier said no, with a reason; you may ask again later |
+| Ended | Trading has ended |

@@ -1,0 +1,17 @@
+{/* Shared by every guide that has this page: <Catalogue who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} permission="catalogue:read" />
+
+The catalogue is Neuros' shared list of real products, one record per product, used by every seller. Prices and stock are not here. They live on each seller's <PageLink who={props.who} page="offers">offer</PageLink>. Two distributors selling the same pump both point at the same catalogue product, which is how a buyer can compare them side by side in the <PageLink who={props.who} page="marketplace">marketplace</PageLink>.
+
+<Shot id={`${props.who}/catalogue/browse`} />
+
+## Browse
+
+- **Categories** on the left narrow the list to one branch of the tree.
+- **Search** matches product name, brand and part number. **Type** filters by product type.
+- **Click a row** to open the product: its category, brand, part number, GTIN, attributes, units and history.
+
+<Shot id={`${props.who}/catalogue/product`} />
+
+{props.who === 'reseller' ? 'Products are contributed by the companies that sell them, so a buyer browses the catalogue but does not add to it.' : ''}
