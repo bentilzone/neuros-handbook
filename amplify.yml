@@ -1,0 +1,19 @@
+# AWS Amplify (later): the same build GitHub Pages runs, served at the root of handbook.<domain>.
+# Set HANDBOOK_URL (e.g. https://handbook.neuros.app) in the Amplify app's environment.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install --frozen-lockfile
+    build:
+      commands:
+        - yarn lint:public
+        - HANDBOOK_BASE_URL=/ yarn build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
