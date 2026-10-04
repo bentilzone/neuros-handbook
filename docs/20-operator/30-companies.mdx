@@ -1,0 +1,68 @@
+---
+title: Companies
+sidebar_position: 30
+---
+
+<PersonaBadge who={['operator']} permission="platform:org:read" />
+
+Every business on Neuros: its administrator, plan, capabilities, status and when it joined. Click a row for a quick look, or **Explore** it to manage it.
+
+<Shot id="operator/companies/list" />
+
+The console sees a company in counts: its members, roles, warehouses, published offers and API clients, its administrators, and what it owes Neuros. Stock, prices, orders, books and its people are the company's own. To look inside, [request support access](./50-support-access.mdx).
+
+## New company
+
+Onboard a business directly, without an application. An approved application is left on record, so every company has one.
+
+<Shot id="operator/companies/new" />
+
+**Company**
+
+<FieldTable fields={[
+  { name: 'Legal name', required: true, meaning: 'The name as registered.', others: 'On every document the company issues and receives.' },
+  { name: 'Trading name', meaning: 'The name it trades under, if different.', others: 'What people see across Neuros.' },
+  { name: 'Country', required: true, meaning: 'Where it is registered.', implications: 'Sets its functional currency and timezone. You can correct either later; the company cannot.' },
+  { name: 'Registration number', meaning: 'Its company registration number.' },
+  { name: 'Website', meaning: 'Its website.' },
+]} />
+
+**Administrator**
+
+<FieldTable fields={[
+  { name: 'Full name', required: true, meaning: 'Who manages the company on Neuros: its system administrator.', implications: 'The company cannot remove or demote this person. Only Neuros can hand the role on.' },
+  { name: 'Email', required: true, meaning: 'Their sign-in.', others: 'Someone new gets an email to set their password. Someone already on Neuros joins with their existing login.' },
+  { name: 'Phone', meaning: 'A number to reach them.' },
+]} />
+
+**Capabilities**
+
+<FieldTable fields={[
+  { name: 'Supply, Distribution, Purchasing', required: true, meaning: 'What the company may do.', others: 'It sees only those sides of trade.', rules: 'At least one.' },
+  { name: 'Reason', required: true, meaning: 'Why Neuros is onboarding it directly.', implications: 'Kept on the application.' },
+]} />
+
+## A company at a glance
+
+Click a row for its system administrator, what Neuros set (legal name, country, functional currency, timezone, capabilities), how long its audit trail is kept, and its subscription. A company with no plan is locked until it subscribes.
+
+<Shot id="operator/companies/summary" />
+
+## A company's page
+
+**Explore** opens the company's own page.
+
+<Shot id="operator/companies/page" />
+
+| Section | What you can do |
+|---|---|
+| Set by Neuros | **Edit** what Neuros verified: slug, legal name, registration number, country, functional currency and timezone. The functional currency locks once its books or stock values hold amounts; the timezone once journals are posted, because moving it would re-date their periods. The company sees these but cannot change them, except its slug. |
+| Capabilities | **Edit** supply, distribution and purchasing. Grant only what you have verified. |
+| System administrator | **Send password reset** emails them a link to choose a new password; Neuros never sees it. **Change system administrator** hands the role to another of the company's administrators. The previous one stays an ordinary administrator. |
+| Roles | The company's roles and how many members hold each. **Give a role** creates a role for this company only, which its administrators then manage. |
+| Subscription | Its plan, what it owes, what is overdue, its credit, billing contact, limits against use and recent invoices. **Subscribe** puts a company with no plan on one. |
+| Audit retention | How long its change history and API request log are kept. Empty follows the platform's period. Never below the platform minimum. |
+
+At the top, **Request support access** asks the company to let you in ([Support access](./50-support-access.mdx)). **Suspend** stops its members working on their next request; nothing is deleted, and **Reactivate** restores it.
+
+Every change on this page asks for a reason, kept in the audit log, and needs a session signed in with two-step verification.

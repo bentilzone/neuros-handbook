@@ -1,0 +1,29 @@
+---
+title: Platform staff
+sidebar_position: 120
+---
+
+<PersonaBadge who={['operator']} permission="platform:user:read" />
+
+Who can sign in to this console, and what each may do: their roles, status and last sign-in. Changes need a reason and two-step verification, and are audited.
+
+<Shot id="operator/staff/list" />
+
+## Add staff
+
+<Shot id="operator/staff/add" />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'How colleagues see them.' },
+  { name: 'Email', required: true, meaning: 'Their sign-in.', others: 'Someone new gets an email with a link to set their password.' },
+  { name: 'Platform roles', required: true, meaning: 'What they may do in the console. The field explains what each chosen role allows.' },
+]} />
+
+## Change roles
+
+<Shot id="operator/staff/roles" />
+
+<FieldTable fields={[
+  { name: 'Platform roles', meaning: 'What they may do.', implications: 'No roles: they lose access to the console. Removing a role signs them out everywhere, so no open session keeps it.' },
+  { name: 'Reason', required: true, meaning: 'Why.', implications: 'Kept with the change in the audit log.' },
+]} />

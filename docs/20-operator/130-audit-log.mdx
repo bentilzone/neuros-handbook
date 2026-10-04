@@ -1,0 +1,23 @@
+---
+title: Audit log
+sidebar_position: 130
+---
+
+<PersonaBadge who={['operator']} permission="platform:audit:read" />
+
+Who did what on the platform: sign-ins, onboarding, companies, the catalogue, support access, billing and staff. A company's own changes stay in its own log. See [audit trail](../01-glossary/90-platform.mdx).
+
+<Shot id="operator/audit/log" />
+
+- **Changes** lists every change. **API requests** lists the requests themselves: who called what, and when.
+- **The cards** count events by record type. Click one to filter.
+- **Filter** by action, record and time.
+- How long each kind is kept is shown at the top right.
+
+## An event
+
+Click an event to see what changed, field by field, and the reason when one was given.
+
+<Shot id="operator/audit/event" />
+
+Nobody can edit or delete an event. Retention removes old ones on schedule, and that removal is audited too.

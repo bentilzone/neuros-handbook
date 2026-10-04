@@ -1,0 +1,50 @@
+---
+title: Subscriptions
+sidebar_position: 70
+---
+
+<PersonaBadge who={['operator']} permission="platform:subscription:read" />
+
+Which plan each company holds, what it pays and what happens next. A company holds one subscription. See [plans and billing](../01-glossary/80-plans-and-billing.mdx).
+
+<Shot id="operator/subscriptions/list" />
+
+| Status | What it means |
+|---|---|
+| Trialing | On a free trial; billing starts when it ends |
+| Active | Paid up |
+| Past due | An invoice is overdue, within the grace period |
+| Lapsed | Past the grace period: the company is read-only until it pays |
+| Cancelled | Not renewing; it keeps access until the period ends |
+| Ended | Over |
+
+## New subscription
+
+<Shot id="operator/subscriptions/new" />
+
+<FieldTable fields={[
+  { name: 'Company', required: true, meaning: 'Who you are subscribing. The list shows each company’s current plan.', rules: 'A company with a subscription already is offered that subscription instead.' },
+  { name: 'Plan', required: true, meaning: 'What it gets: limits, retention and features.' },
+  { name: 'Cycle', meaning: 'Monthly or yearly.' },
+  { name: 'Bill in', meaning: 'The currency it is billed in.', implications: 'Defaults to the company’s own currency when the plan has a price in it.' },
+  { name: 'Add-ons', meaning: 'Extras on top of the plan.' },
+  { name: 'Start', meaning: 'Start with a trial, or bill now.', implications: 'Billing now issues the first invoice at once (**Subscribe and invoice**).' },
+  { name: 'Trial days', meaning: 'How long the trial lasts, for this company only.', rules: 'The plan’s own trial unless you change it. 1 to 365.' },
+  { name: 'Reason', required: true, meaning: 'Why you are subscribing it.', implications: 'Kept in the audit log.' },
+]} />
+
+## A subscription
+
+<Shot id="operator/subscriptions/detail" />
+
+Click a row for the subscription, its invoices, what it includes and what the company uses of it.
+
+| Action | What it does |
+|---|---|
+| **Change plan** | A dearer plan applies now, with a pro-rata invoice. A cheaper plan or a new cycle applies at renewal. |
+| **Add-ons** | Added units apply now, charged pro rata. Removed units stay until renewal. |
+| **Extend trial** / **End trial and bill** | More trial days, or billing from today with the first invoice issued at once. |
+| **Extend grace** | More time before an unpaid company becomes read-only. |
+| **Free periods** | Bill the next periods at 100% off. |
+| **Custom price** | A negotiated price from the next invoice. Clear it to return to the plan's price. |
+| **Cancel** / **Resume** | Stop renewing (access lasts until the period ends) or end now. Resume undoes a cancellation before the period ends. |

@@ -1,0 +1,44 @@
+---
+title: Catalogue
+sidebar_position: 40
+---
+
+<PersonaBadge who={['operator']} permission="platform:catalogue:read" />
+
+The shared catalogue every company lists from. Here Neuros reviews what companies contribute, curates the categories and their attributes, and decides which product types it supports. See [the catalogue](../02-features/30-catalogue.mdx).
+
+## Review queue
+
+<Shot id="operator/catalogue/review" />
+
+Products sellers have contributed, with the company that contributed each. A product that looks like one already in the catalogue is marked **Possible duplicate**. **Add curated product** adds one yourself, published at once.
+
+Click a product to check its details, category, attributes and units, then decide:
+
+<Shot id="operator/catalogue/product" />
+
+| Decision | What happens |
+|---|---|
+| **Publish** | Every seller can make offers on it, and buyers find it in the marketplace |
+| **Ask for changes** | The contributor sees your note, fixes the product and sends it again |
+| **Retire** | No new offers can be made on it. Existing offers and orders keep it |
+
+## Categories
+
+<Shot id="operator/catalogue/categories" />
+
+The category tree. Choose a category to see its attributes, its own and those inherited from above. **Edit** changes it; **New category in …** adds a sub-category under it, and **New top-level category** one at the top. Products are filed under a category and inherit every attribute above it. **Proposed by a seller** marks a category a company asked for: **Approve** it to use it.
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What contributors and buyers see.' },
+  { name: 'Parent', meaning: 'Where it sits in the tree. Empty: top level.', implications: 'A category inherits every attribute of its parents.' },
+  { name: 'Attributes', meaning: 'What a contributor fills in for products here: each with a label, a type, options for a list, a unit, a minimum and maximum.', others: 'Contributors must describe a product with them. **Filter in search** offers the attribute as a marketplace filter.', rules: 'Removing or retyping an attribute that published products use is refused.' },
+]} />
+
+**Archive** stops contributors filing new products in a category; products already in it stay.
+
+## Product types
+
+<Shot id="operator/catalogue/types" />
+
+Which product types companies can contribute and offer. Enable a type only once its valuation, tax, inventory and fulfilment rules are tested. Disabling one stops new products and offers of that type; existing ones are kept.

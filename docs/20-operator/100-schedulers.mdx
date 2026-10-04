@@ -1,0 +1,28 @@
+---
+title: Schedulers
+sidebar_position: 100
+---
+
+<PersonaBadge who={['operator']} permission="platform:job:read" />
+
+The background jobs that renew subscriptions, send reminders, recognise revenue and purge old records. Each row shows how often it runs, its last run and how it went, its next run, and its failures in the last 24 hours. Click a job for its runs over the last 30 days.
+
+<Shot id="operator/schedulers/list" />
+
+| Action | What it does |
+|---|---|
+| **Run now** | Runs it once now and waits for it. It shares the schedule's lease, so it never runs twice at once. |
+| **Pause** / **Resume** | Skips its scheduled runs until resumed. Running it by hand still works. |
+| **Change schedule** | Sets how often it runs. |
+
+Each asks for a reason, kept in the audit log. Running, pausing and rescheduling need a session signed in with two-step verification.
+
+## Change schedule
+
+<Shot id="operator/schedulers/change" />
+
+<FieldTable fields={[
+  { name: 'Run every, Unit', required: true, meaning: 'How often it runs, in minutes, hours or days.', implications: 'Counted from when the last run began. Every server follows the new schedule at its next check, within a minute.', rules: 'Between a minute and 31 days.' },
+]} />
+
+A job on a custom schedule also offers **Return to the default**.

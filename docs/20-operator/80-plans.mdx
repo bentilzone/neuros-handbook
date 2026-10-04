@@ -1,0 +1,52 @@
+---
+title: Plans & add-ons
+sidebar_position: 80
+---
+
+<PersonaBadge who={['operator']} permission="platform:plan:read" />
+
+What Neuros sells. A plan sets limits, retention and features at a price per currency; add-ons raise one of them. Changes reach subscribers at their next renewal: until then they keep what they bought. See [plans and billing](../01-glossary/80-plans-and-billing.mdx).
+
+## Plans
+
+<Shot id="operator/plans/plans" />
+
+Each plan shows its prices, how many companies hold it, and what it includes. **Edit** changes it; archiving one stops new companies taking it, and companies that hold it keep it until they change.
+
+### New plan
+
+<Shot id="operator/plans/plan-new" />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What companies see when they choose.', others: 'On their invoices and Settings → Billing.', rules: 'At least 2 characters.' },
+  { name: 'Code', meaning: 'A short identifier on invoices.', rules: 'Made from the name when blank. Fixed once created.' },
+  { name: 'Description', meaning: 'What the plan is for.', others: 'Shown to companies choosing a plan.' },
+  { name: 'Offered to everyone / Custom for one company', meaning: 'Who can take it. A custom plan names its company.', others: 'Only that company sees a custom plan.' },
+  { name: 'Prices', required: true, meaning: 'A monthly and yearly price per currency.', implications: 'A company can be billed only in a currency the plan has a price in.' },
+  { name: 'Trial days', meaning: 'The free trial a new subscription starts with.', rules: '0 to 365.' },
+  { name: 'Requires capabilities', meaning: 'Which companies it suits. Empty: any company.' },
+  { name: 'Highlight as recommended', meaning: 'Marks it as the one to choose.', others: 'Companies see it marked when they compare plans.' },
+  { name: 'What it includes', meaning: 'Its limits (members, warehouses, API clients, published offers, custom roles), how long the audit trail is kept, and its features.', implications: 'A company at a limit cannot add another until it upgrades or buys an add-on.' },
+  { name: 'Reason', required: true, meaning: 'Why you made the change.', implications: 'Kept in the audit log.' },
+]} />
+
+## Add-ons
+
+<Shot id="operator/plans/add-ons" />
+
+### New add-on
+
+<Shot id="operator/plans/add-on-new" />
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'What companies see, such as "10 more members".', rules: 'At least 2 characters.' },
+  { name: 'Code', meaning: 'A short identifier on invoices.' },
+  { name: 'Description', meaning: 'What it is for.' },
+  { name: 'What it does', meaning: 'Raises a limit, extends retention, or turns on a feature.' },
+  { name: 'Limit, By per unit', meaning: 'Which limit it raises and by how much for each unit bought.' },
+  { name: 'Trail, Days per unit', meaning: 'Which audit trail it keeps longer (change history or API request log) and by how many days per unit.' },
+  { name: 'Feature', meaning: 'Which feature it turns on: API access, bulk import, webhooks, advanced reports or priority support.' },
+  { name: 'Can be bought more than once', meaning: 'Whether a company can take several units.', rules: 'A feature is bought once.' },
+  { name: 'Prices, per unit', required: true, meaning: 'Its price per currency, monthly and yearly.' },
+  { name: 'Reason', required: true, meaning: 'Why you made the change.', implications: 'Kept in the audit log.' },
+]} />

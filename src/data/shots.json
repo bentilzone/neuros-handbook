@@ -624,6 +624,474 @@
       }
     ]
   },
+  "operator/applications/list": {
+    "file": "operator/applications/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Applications",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Show one state: submitted, under review, changes asked, approved or rejected."
+      },
+      {
+        "n": 2,
+        "text": "What the business wants to do on Neuros: supply, distribute, buy."
+      },
+      {
+        "n": 3,
+        "text": "Click an application to read it and decide."
+      }
+    ]
+  },
+  "operator/applications/review": {
+    "file": "operator/applications/review.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An application",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Take the application: it moves to Under review, so colleagues know someone has it."
+      }
+    ]
+  },
+  "operator/audit/event": {
+    "file": "operator/audit/event.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An audit event: a payment recorded",
+    "callouts": []
+  },
+  "operator/audit/log": {
+    "file": "operator/audit/log.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Platform audit log",
+    "callouts": []
+  },
+  "operator/billing-settings/business": {
+    "file": "operator/billing-settings/business.png",
+    "width": 1440,
+    "height": 951,
+    "title": "Billing settings: business details",
+    "callouts": []
+  },
+  "operator/billing-settings/payment": {
+    "file": "operator/billing-settings/payment.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing settings: payment details",
+    "callouts": []
+  },
+  "operator/billing-settings/tax": {
+    "file": "operator/billing-settings/tax.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing settings: tax",
+    "callouts": []
+  },
+  "operator/billing-settings/terms": {
+    "file": "operator/billing-settings/terms.png",
+    "width": 1440,
+    "height": 1061,
+    "title": "Billing settings: terms and reminders",
+    "callouts": []
+  },
+  "operator/billing/invoice": {
+    "file": "operator/billing/invoice.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An invoice",
+    "callouts": []
+  },
+  "operator/billing/invoice-new": {
+    "file": "operator/billing/invoice-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New invoice",
+    "callouts": []
+  },
+  "operator/billing/invoices": {
+    "file": "operator/billing/invoices.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: invoices",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Raise a one-off invoice, outside a subscription."
+      }
+    ]
+  },
+  "operator/billing/overview": {
+    "file": "operator/billing/overview.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: overview",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The figures, then invoices, payments and the reports for the books."
+      },
+      {
+        "n": 2,
+        "text": "What companies owe on open invoices, by currency."
+      }
+    ]
+  },
+  "operator/billing/payment": {
+    "file": "operator/billing/payment.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A payment",
+    "callouts": []
+  },
+  "operator/billing/payment-new": {
+    "file": "operator/billing/payment-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Record payment",
+    "callouts": []
+  },
+  "operator/billing/payments": {
+    "file": "operator/billing/payments.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: payments",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Record money a company sent: a transfer, cash or mobile money."
+      }
+    ]
+  },
+  "operator/billing/reports": {
+    "file": "operator/billing/reports.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: reports",
+    "callouts": []
+  },
+  "operator/catalogue/categories": {
+    "file": "operator/catalogue/categories.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Catalogue: a category and its attributes",
+    "callouts": []
+  },
+  "operator/catalogue/product": {
+    "file": "operator/catalogue/product.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A contributed product",
+    "callouts": []
+  },
+  "operator/catalogue/review": {
+    "file": "operator/catalogue/review.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Catalogue: review queue",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Products sellers contributed, waiting for Neuros, then the category tree and the product types."
+      },
+      {
+        "n": 2,
+        "text": "Add a product to the catalogue yourself, published straight away."
+      },
+      {
+        "n": 3,
+        "text": "Click a product to check it, then publish it or ask for changes."
+      }
+    ]
+  },
+  "operator/catalogue/types": {
+    "file": "operator/catalogue/types.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Catalogue: product types",
+    "callouts": []
+  },
+  "operator/companies/list": {
+    "file": "operator/companies/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Companies",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Onboard a business directly, with its administrator, without an application."
+      },
+      {
+        "n": 2,
+        "text": "The plan each company is on. No plan means it cannot work yet."
+      },
+      {
+        "n": 3,
+        "text": "Open the company’s page: registration, administrator, roles, subscription and support."
+      }
+    ]
+  },
+  "operator/companies/new": {
+    "file": "operator/companies/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New company",
+    "callouts": []
+  },
+  "operator/companies/page": {
+    "file": "operator/companies/page.png",
+    "width": 1440,
+    "height": 1589,
+    "title": "A company’s page",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What only Neuros can change: country, functional currency, timezone and legal name. Some lock once the books have entries."
+      },
+      {
+        "n": 2,
+        "text": "The person who holds the company’s top role. Only Neuros can hand it on."
+      },
+      {
+        "n": 3,
+        "text": "Ask the company to let you in, for a purpose and a set time. The company decides."
+      }
+    ]
+  },
+  "operator/companies/summary": {
+    "file": "operator/companies/summary.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A company at a glance",
+    "callouts": []
+  },
+  "operator/overview": {
+    "file": "operator/overview.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Platform overview",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The console’s pages, grouped into Management, Commercial and System. Which you see depends on your platform roles."
+      },
+      {
+        "n": 2,
+        "text": "Businesses that applied and are waiting for a decision. Click to open the queue."
+      },
+      {
+        "n": 3,
+        "text": "Support requests waiting for a company’s answer, and access that is open now."
+      }
+    ]
+  },
+  "operator/plans/add-on-new": {
+    "file": "operator/plans/add-on-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New add-on",
+    "callouts": []
+  },
+  "operator/plans/add-ons": {
+    "file": "operator/plans/add-ons.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plans & add-ons: add-ons",
+    "callouts": []
+  },
+  "operator/plans/plan-new": {
+    "file": "operator/plans/plan-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New plan",
+    "callouts": []
+  },
+  "operator/plans/plans": {
+    "file": "operator/plans/plans.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plans & add-ons: plans",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Plans, and the add-ons a company can buy on top."
+      },
+      {
+        "n": 2,
+        "text": "Create a plan offered to everyone, or a custom one for one company."
+      }
+    ]
+  },
+  "operator/roles/detail": {
+    "file": "operator/roles/detail.png",
+    "width": 1440,
+    "height": 968,
+    "title": "A role template",
+    "callouts": []
+  },
+  "operator/roles/new": {
+    "file": "operator/roles/new.png",
+    "width": 1440,
+    "height": 968,
+    "title": "New role",
+    "callouts": []
+  },
+  "operator/roles/organization": {
+    "file": "operator/roles/organization.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Roles & Access: company roles",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The roles every company starts with, and the roles of Neuros staff."
+      },
+      {
+        "n": 2,
+        "text": "Add a role for every company, or for one company only."
+      }
+    ]
+  },
+  "operator/roles/platform": {
+    "file": "operator/roles/platform.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Roles & Access: platform roles",
+    "callouts": []
+  },
+  "operator/schedulers/change": {
+    "file": "operator/schedulers/change.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Change schedule",
+    "callouts": []
+  },
+  "operator/schedulers/list": {
+    "file": "operator/schedulers/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Schedulers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "How often each background job runs."
+      },
+      {
+        "n": 2,
+        "text": "Run a job straight away, outside its schedule."
+      }
+    ]
+  },
+  "operator/settings/access": {
+    "file": "operator/settings/access.png",
+    "width": 1440,
+    "height": 996,
+    "title": "Settings: role and access",
+    "callouts": []
+  },
+  "operator/settings/preferences": {
+    "file": "operator/settings/preferences.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: preferences",
+    "callouts": []
+  },
+  "operator/settings/profile": {
+    "file": "operator/settings/profile.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: profile",
+    "callouts": []
+  },
+  "operator/settings/security": {
+    "file": "operator/settings/security.png",
+    "width": 1440,
+    "height": 1242,
+    "title": "Settings: security",
+    "callouts": []
+  },
+  "operator/staff/add": {
+    "file": "operator/staff/add.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add platform staff",
+    "callouts": []
+  },
+  "operator/staff/list": {
+    "file": "operator/staff/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Platform staff",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Give someone a sign-in to this console, with platform roles."
+      }
+    ]
+  },
+  "operator/staff/roles": {
+    "file": "operator/staff/roles.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Change a person’s platform roles",
+    "callouts": []
+  },
+  "operator/subscriptions/detail": {
+    "file": "operator/subscriptions/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A subscription",
+    "callouts": []
+  },
+  "operator/subscriptions/list": {
+    "file": "operator/subscriptions/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Subscriptions",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Put a company on a plan."
+      }
+    ]
+  },
+  "operator/subscriptions/new": {
+    "file": "operator/subscriptions/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New subscription",
+    "callouts": []
+  },
+  "operator/support/list": {
+    "file": "operator/support/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Support access",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Ask a company for time-boxed access to its workspace."
+      },
+      {
+        "n": 2,
+        "text": "Why access was asked for. The company reads it before deciding, and the audit trail keeps it."
+      },
+      {
+        "n": 3,
+        "text": "When open access ends on its own."
+      }
+    ]
+  },
+  "operator/support/request": {
+    "file": "operator/support/request.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Request support access",
+    "callouts": []
+  },
   "reseller/api-clients/list": {
     "file": "reseller/api-clients/list.png",
     "width": 1440,
