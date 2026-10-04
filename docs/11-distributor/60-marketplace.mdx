@@ -1,0 +1,39 @@
+---
+title: Marketplace
+sidebar_position: 60
+---
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="marketplace:search" />
+
+The marketplace is where you buy. It shows offers from sellers on Neuros: public ones with their price, plus offers from sellers who approved you, at your own price. Your own offers appear too, marked **Yours**, so you see your listing the way buyers do. See [marketplace](../01-glossary/50-marketplace.mdx).
+
+<Shot id="distributor/marketplace/search" />
+
+## Search and filter
+
+- **Search** matches products, brands, part numbers and sellers. **Sort** by best match, newest, or name.
+- **Filters** on the left (availability, category, brand, seller) show how many offers each would leave. **Clear filters** resets them.
+- **A card** shows the product, the seller and their country, the price per unit, and availability: In stock, Low stock, On backorder or Made to order.
+- **Price for you** in place of a price means the seller prices you individually. Open the offer and price it.
+
+## An offer
+
+Click a card to open the offer: product facts, the seller's SKU, minimum order, units, where they deliver, and how they supply it.
+
+<Shot id="distributor/marketplace/offer" />
+
+- **Price it** works out your price for a quantity from your account terms with this seller: their contract with you, your price list, quantity breaks and any promotion. The answer is indicative until an order or quotation locks it.
+- **Ask for an account** appears when you have no account with the seller. It sends them your request.
+
+<FieldTable fields={[
+  { name: 'Quantity', meaning: 'How many units you want priced.', implications: 'Quantity breaks and contract prices from a quantity depend on it.' },
+  { name: 'Message (Ask for an account)', meaning: 'What you buy, roughly how much, and where you deliver.', others: "The seller sees your company's name and your message, and approves you with their terms." },
+]} />
+
+## Live
+
+When a seller publishes, changes or withdraws an offer, the marketplace updates on its own. The same happens when your account with them is approved.
+
+## Common questions
+
+**Why do I see an offer one colleague says is missing?** Everyone in your company sees the same marketplace. Check the filters, and whether the offer is invite-only for another buyer.

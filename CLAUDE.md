@@ -25,7 +25,8 @@ capture/stack.ts       throwaway Neuros: in-memory replica set, prepare-db (inde
 capture/personas.ts    who each guide is shot as (seeded demo logins) and the real sign-in
 capture/scenarios/     one file per persona: shots (path, steps, callouts) and videos (steps + captions)
 capture/callouts.ts    numbered arrows drawn on the live page before the screenshot
-capture/run.ts         `yarn capture [--persona x] [--only id-prefix] [--app url]`; report in capture/.out
+capture/run.ts         `yarn capture [--persona x] [--only id-prefix] [--app url]`; report in capture/.out;
+                       drops manifest entries (and images) whose scenario is gone
 .github/workflows/capture.yml  re-shoots on app merges (repository_dispatch app-changed) and weekly; opens a PR
 tools/lint-public.mjs  refuses anything unpublishable
 .github/workflows/pages.yml  verify on PRs, deploy main to GitHub Pages
@@ -48,4 +49,9 @@ amplify.yml            the same build for Amplify, unused until the AWS move
   the page does not have.
 - **Must not** write an admonition title after a space (`:::note Title`). Docusaurus 3 needs
   `:::note[Title]`, or the block renders as raw text.
+- **Must not** loosen the capture diff back to a share of the frame. It is an absolute 20 pixels:
+  a ratio that ignored anti-aliasing also ignored a changed label, and kept a shot showing
+  "Invalid Date" after the fix shipped. Re-runs are zero-diff because `shoot` pins clock times and
+  "n minutes ago" in the page; pin any new moving text the same way rather than raising the bar.
+- **Must not** run two captures at once. They share ports 2101/5199 and the manifest.
 - **Must not** run Prettier over `docs/` — MDX tables and JSX props are laid out by hand.

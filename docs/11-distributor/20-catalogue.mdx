@@ -1,0 +1,59 @@
+---
+title: Catalogue
+sidebar_position: 20
+---
+
+<PersonaBadge who={['everyone']} permission="catalogue:read" />
+
+The catalogue is Neuros' shared list of real products, one record per product, used by every seller. Prices and stock are not here. They live on each seller's [offer](./30-offers.mdx). Two distributors selling the same pump both point at the same catalogue product, which is how a buyer can compare them side by side in the [marketplace](./60-marketplace.mdx).
+
+<Shot id="distributor/catalogue/browse" />
+
+## Browse
+
+- **Categories** on the left narrow the list to one branch of the tree.
+- **Search** matches product name, brand and part number. **Type** filters by product type.
+- **Click a row** to open the product: its category, brand, part number, GTIN, attributes, units and history.
+
+<Shot id="distributor/catalogue/product" />
+
+## My contributions
+
+When a product you sell is missing, you contribute it. **My contributions** lists the products you have submitted and where each one stands.
+
+<Shot id="distributor/catalogue/mine" />
+
+| Status | What it means | What moves it |
+|---|---|---|
+| Draft | Saved, not yet sent | You submit it (send icon on the row) |
+| In review | Waiting for Neuros | Neuros publishes it or rejects it with a reason |
+| Rejected | Sent back, with the reviewer's reason | You edit it (pencil on the row) and submit again |
+| Published | In the shared catalogue | Every seller can now offer it |
+
+Neuros reviews each product before it is published. The catalogue stays one record per real product, so a duplicate or a vague name is sent back.
+
+## Contribute a product
+
+<Shot id="distributor/catalogue/contribute" />
+
+<FieldTable fields={[
+  { name: 'Product name', required: true, meaning: 'The product as the manufacturer names it, for example "Grundfos SP 5A-12 submersible pump".', others: 'Every seller and buyer on Neuros, once published.', implications: 'Neuros reviewers check it against the brand and part number. A shop name or a price in the name is sent back.' },
+  { name: 'Brand', meaning: 'The brand on the product.', others: 'Buyers filter the marketplace by it.' },
+  { name: 'Manufacturer', meaning: 'Who makes it, when that differs from the brand.' },
+  { name: 'Part number (MPN)', meaning: "The manufacturer's part number.", others: 'Shown on every offer for this product; buyers search by it.', implications: 'A product already in the catalogue with the same brand and part number is flagged to the reviewer as a likely duplicate.' },
+  { name: 'GTIN / barcode', meaning: 'The barcode printed on the product or its box.', implications: 'A barcode can belong to one catalogue product only, so a second product with the same barcode is refused. That refusal usually means the product already exists: search for it before contributing.', rules: '8 to 14 digits.' },
+  { name: 'Category', required: true, meaning: 'Where the product belongs in the tree.', others: 'Buyers browse and filter by it.', implications: 'The category decides which attributes the product must describe, so choose it first. If no category fits, use "Propose one": Neuros reviews the new category with the product.' },
+  { name: 'Product type', meaning: 'Standard for physical goods.', rules: 'Other types switch on once Neuros supports them end to end.' },
+  { name: 'Description', meaning: 'A plain description of the product.', others: 'Shown on the product and in the marketplace.' },
+  { name: 'Attributes', meaning: 'The facts this category asks for: colour, voltage, standard and so on.', others: 'Buyers see them on the offer.', rules: 'Appear once a category is chosen. Required attributes must be filled before you can submit.' },
+  { name: 'Base unit', meaning: 'The unit stock is counted in: each, metre, pair.', implications: 'Every stock balance, movement and count for this product uses this unit.' },
+  { name: 'Weight (kg)', meaning: 'Weight of one base unit.' },
+  { name: 'Other units', meaning: 'Packs you also sell in, each with how many base units it holds, for example a box of 12.', implications: 'An offer can be priced per pack; stock still counts base units.' },
+  { name: 'Track expiry dates', meaning: 'Marks the product as perishable or dated stock.' },
+]} />
+
+## Common questions
+
+**Can I edit a product after it is published?** No. You can edit your contribution only while it is a draft or after it is rejected. Once published it belongs to the shared catalogue, so every seller's offers stay accurate. Ask Neuros support for a correction.
+
+**Can I delete a product?** No. Other sellers may already offer it. Withdraw your own [offer](./30-offers.mdx) instead.

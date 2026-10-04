@@ -1,0 +1,23 @@
+---
+title: Audit log
+sidebar_position: 130
+---
+
+<PersonaBadge who={['everyone']} permission="audit:read" />
+
+The audit log says who did what, to which record, and why. It covers every change in your company, by a person, an API client or Neuros itself. See [audit trail](../01-glossary/90-platform.mdx).
+
+<Shot id="distributor/audit/log" />
+
+- **Changes** lists every change to your records. **API requests** lists every call your API clients made.
+- **The cards** at the top count events by record type: products, offers, price lists, journals, stock receipts and so on. Click one to filter.
+- **Filter** by action, record and time.
+- How long each kind is kept depends on your plan, shown at the top right.
+
+## An event
+
+Click an event to see what changed: each field with its old and new value, and the reason when one was given.
+
+<Shot id="distributor/audit/event" />
+
+Nobody can edit or delete an event, administrators included. When Neuros support views your company under a grant you gave, every page they open is recorded here too.

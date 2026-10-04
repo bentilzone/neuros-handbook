@@ -1,45 +1,626 @@
 {
+  "distributor/api-clients/list": {
+    "file": "distributor/api-clients/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "API clients",
+    "callouts": []
+  },
+  "distributor/api-clients/new": {
+    "file": "distributor/api-clients/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New API client",
+    "callouts": []
+  },
+  "distributor/audit/event": {
+    "file": "distributor/audit/event.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An audit event",
+    "callouts": []
+  },
+  "distributor/audit/log": {
+    "file": "distributor/audit/log.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Audit log",
+    "callouts": []
+  },
+  "distributor/catalogue/browse": {
+    "file": "distributor/catalogue/browse.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Catalogue",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The category tree. Pick a category to list its products, sub-categories included."
+      },
+      {
+        "n": 2,
+        "text": "Search by name, brand or part number."
+      },
+      {
+        "n": 3,
+        "text": "The products your company contributed, where each one stands, and the button to contribute another."
+      },
+      {
+        "n": 4,
+        "text": "Click a product for its details, attributes and units."
+      }
+    ]
+  },
+  "distributor/catalogue/contribute": {
+    "file": "distributor/catalogue/contribute.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Contribute a product",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Pick the category first: it decides which attributes the product must describe."
+      }
+    ]
+  },
+  "distributor/catalogue/mine": {
+    "file": "distributor/catalogue/mine.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Catalogue: my contributions",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Add a product the catalogue doesn’t have yet. It goes to Neuros for review."
+      }
+    ]
+  },
+  "distributor/catalogue/product": {
+    "file": "distributor/catalogue/product.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A catalogue product",
+    "callouts": []
+  },
+  "distributor/customers/approve": {
+    "file": "distributor/customers/approve.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Approve a customer, with terms",
+    "callouts": []
+  },
+  "distributor/customers/detail": {
+    "file": "distributor/customers/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A customer’s account",
+    "callouts": []
+  },
+  "distributor/customers/list": {
+    "file": "distributor/customers/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Customers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Requests waiting for your answer."
+      },
+      {
+        "n": 2,
+        "text": "Invite a company you already trade with, with its terms."
+      },
+      {
+        "n": 3,
+        "text": "The terms each customer trades on: their price list and how they pay."
+      },
+      {
+        "n": 4,
+        "text": "Approve a request, setting its terms as you do."
+      }
+    ]
+  },
+  "distributor/dashboard": {
+    "file": "distributor/dashboard.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Dashboard",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The sidebar: your company’s pages, grouped into Main, Sell, Buy, Stock & finance and System. Which groups you see depends on what your company does and what your role allows."
+      },
+      {
+        "n": 2,
+        "text": "The company you are working in. If you belong to several, click to switch."
+      },
+      {
+        "n": 3,
+        "text": "Live: this tab is connected, so changes others make appear on their own."
+      }
+    ]
+  },
+  "distributor/inventory/adjustment-new": {
+    "file": "distributor/inventory/adjustment-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Propose an adjustment",
+    "callouts": []
+  },
+  "distributor/inventory/adjustments": {
+    "file": "distributor/inventory/adjustments.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: adjustments",
+    "callouts": []
+  },
+  "distributor/inventory/balance": {
+    "file": "distributor/inventory/balance.png",
+    "width": 1440,
+    "height": 965,
+    "title": "A stock balance",
+    "callouts": []
+  },
+  "distributor/inventory/count-open": {
+    "file": "distributor/inventory/count-open.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Open a count",
+    "callouts": []
+  },
+  "distributor/inventory/counts": {
+    "file": "distributor/inventory/counts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: counts",
+    "callouts": []
+  },
+  "distributor/inventory/movements": {
+    "file": "distributor/inventory/movements.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: movements",
+    "callouts": []
+  },
+  "distributor/inventory/receive": {
+    "file": "distributor/inventory/receive.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Receive stock",
+    "callouts": []
+  },
+  "distributor/inventory/reorder": {
+    "file": "distributor/inventory/reorder.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: reorder",
+    "callouts": []
+  },
+  "distributor/inventory/reorder-new": {
+    "file": "distributor/inventory/reorder-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New reorder rule",
+    "callouts": []
+  },
   "distributor/inventory/stock": {
     "file": "distributor/inventory/stock.png",
     "width": 1440,
     "height": 900,
-    "title": "Inventory: stock on hand in each warehouse",
+    "title": "Inventory: stock",
     "callouts": [
       {
         "n": 1,
-        "text": "The tabs: stock, every movement, adjustments, transfers, counts, reorder rules, warehouses and valuation."
+        "text": "Stock, movements, adjustments, transfers, counts, reorder, warehouses and valuation."
       },
       {
         "n": 2,
-        "text": "Narrow the list to one warehouse or one condition (sellable, quarantined, damaged)."
+        "text": "Narrow to one warehouse, one condition or one product."
       },
       {
         "n": 3,
-        "text": "Record a delivery that arrived without a purchase order — opening stock, a supplier drop."
+        "text": "Record goods that arrived: opening stock, a delivery without an order."
       },
       {
         "n": 4,
-        "text": "One product in one warehouse: on hand, reserved for orders, and what is left to sell. Click a row for its detail."
+        "text": "On hand minus what orders have reserved: what you can still sell."
       }
     ]
+  },
+  "distributor/inventory/transfers": {
+    "file": "distributor/inventory/transfers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: transfers",
+    "callouts": []
+  },
+  "distributor/inventory/valuation": {
+    "file": "distributor/inventory/valuation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: valuation",
+    "callouts": []
+  },
+  "distributor/inventory/warehouse": {
+    "file": "distributor/inventory/warehouse.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A warehouse, with zones and bins",
+    "callouts": []
+  },
+  "distributor/inventory/warehouses": {
+    "file": "distributor/inventory/warehouses.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Inventory: warehouses",
+    "callouts": []
+  },
+  "distributor/ledger/account-entries": {
+    "file": "distributor/ledger/account-entries.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An account’s entries",
+    "callouts": []
+  },
+  "distributor/ledger/account-new": {
+    "file": "distributor/ledger/account-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New account",
+    "callouts": []
+  },
+  "distributor/ledger/accounts": {
+    "file": "distributor/ledger/accounts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Ledger: accounts",
+    "callouts": []
+  },
+  "distributor/ledger/journal-detail": {
+    "file": "distributor/ledger/journal-detail.png",
+    "width": 1440,
+    "height": 1138,
+    "title": "A journal waiting for approval",
+    "callouts": []
+  },
+  "distributor/ledger/journal-new": {
+    "file": "distributor/ledger/journal-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New journal",
+    "callouts": []
   },
   "distributor/ledger/journals": {
     "file": "distributor/ledger/journals.png",
     "width": 1440,
     "height": 900,
-    "title": "Ledger: every journal, automatic or manual",
+    "title": "Ledger: journals",
     "callouts": [
       {
         "n": 1,
-        "text": "Draft a manual journal. It posts only after someone else approves it."
+        "text": "Draft a manual journal. Someone else approves and posts it."
       },
       {
         "n": 2,
-        "text": "Filter by state — drafts, waiting for approval, posted, reversed, cancelled — and by period."
+        "text": "Filter by state and by period."
       },
       {
         "n": 3,
-        "text": "A journal waiting for a colleague with posting rights."
+        "text": "Where it came from: Manual, or Stock and the other automatic sources."
+      },
+      {
+        "n": 4,
+        "text": "Submitted, waiting for a colleague with posting rights."
+      }
+    ]
+  },
+  "distributor/ledger/periods": {
+    "file": "distributor/ledger/periods.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Ledger: periods",
+    "callouts": []
+  },
+  "distributor/ledger/posting-rules": {
+    "file": "distributor/ledger/posting-rules.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Ledger: posting rules",
+    "callouts": []
+  },
+  "distributor/ledger/trial-balance": {
+    "file": "distributor/ledger/trial-balance.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Ledger: trial balance",
+    "callouts": []
+  },
+  "distributor/marketplace/offer": {
+    "file": "distributor/marketplace/offer.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An offer in the marketplace",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your price for a quantity, worked out from your account terms with this seller."
+      }
+    ]
+  },
+  "distributor/marketplace/search": {
+    "file": "distributor/marketplace/search.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Marketplace",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Search products, brands, part numbers or sellers."
+      },
+      {
+        "n": 2,
+        "text": "Filters: availability, category, brand and seller, with what each would leave."
+      },
+      {
+        "n": 3,
+        "text": "Your own offers are marked, so you can see them as buyers do."
+      },
+      {
+        "n": 4,
+        "text": "Offers only approved customers see: open one for your price."
+      }
+    ]
+  },
+  "distributor/members/detail": {
+    "file": "distributor/members/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A member",
+    "callouts": []
+  },
+  "distributor/members/list": {
+    "file": "distributor/members/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Members",
+    "callouts": []
+  },
+  "distributor/offers/detail": {
+    "file": "distributor/offers/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An offer",
+    "callouts": []
+  },
+  "distributor/offers/list": {
+    "file": "distributor/offers/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Offers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Put a catalogue product on sale with your SKU, price and terms."
+      },
+      {
+        "n": 2,
+        "text": "Show drafts, published or withdrawn offers."
+      },
+      {
+        "n": 3,
+        "text": "Who can find each offer: everyone, approved customers, or invited buyers only."
+      },
+      {
+        "n": 4,
+        "text": "Click an offer for its detail, publish or withdraw, and the price check."
+      }
+    ]
+  },
+  "distributor/offers/new": {
+    "file": "distributor/offers/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New offer",
+    "callouts": []
+  },
+  "distributor/pricing/check": {
+    "file": "distributor/pricing/check.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Pricing: price check",
+    "callouts": []
+  },
+  "distributor/pricing/contract-new": {
+    "file": "distributor/pricing/contract-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New contract price",
+    "callouts": []
+  },
+  "distributor/pricing/contracts": {
+    "file": "distributor/pricing/contracts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Pricing: contract prices",
+    "callouts": []
+  },
+  "distributor/pricing/price-list-detail": {
+    "file": "distributor/pricing/price-list-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A price list",
+    "callouts": []
+  },
+  "distributor/pricing/price-list-new": {
+    "file": "distributor/pricing/price-list-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New price list",
+    "callouts": []
+  },
+  "distributor/pricing/price-lists": {
+    "file": "distributor/pricing/price-lists.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Pricing: price lists",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Price lists, contract prices, promotions, and the price check."
+      },
+      {
+        "n": 2,
+        "text": "Create a list of prices for a group of customers."
+      },
+      {
+        "n": 3,
+        "text": "Click a list to add, change or remove its prices."
+      }
+    ]
+  },
+  "distributor/pricing/promotion-new": {
+    "file": "distributor/pricing/promotion-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New promotion",
+    "callouts": []
+  },
+  "distributor/pricing/promotions": {
+    "file": "distributor/pricing/promotions.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Pricing: promotions",
+    "callouts": []
+  },
+  "distributor/roles/detail": {
+    "file": "distributor/roles/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A role and its permissions",
+    "callouts": []
+  },
+  "distributor/roles/list": {
+    "file": "distributor/roles/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Roles",
+    "callouts": []
+  },
+  "distributor/settings/access": {
+    "file": "distributor/settings/access.png",
+    "width": 1440,
+    "height": 2376,
+    "title": "Settings: role and access",
+    "callouts": []
+  },
+  "distributor/settings/billing": {
+    "file": "distributor/settings/billing.png",
+    "width": 1440,
+    "height": 1188,
+    "title": "Settings: billing",
+    "callouts": []
+  },
+  "distributor/settings/company": {
+    "file": "distributor/settings/company.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: my company",
+    "callouts": []
+  },
+  "distributor/settings/company-addresses": {
+    "file": "distributor/settings/company-addresses.png",
+    "width": 1440,
+    "height": 900,
+    "title": "My company: addresses and contacts",
+    "callouts": []
+  },
+  "distributor/settings/company-capabilities": {
+    "file": "distributor/settings/company-capabilities.png",
+    "width": 1440,
+    "height": 900,
+    "title": "My company: capabilities",
+    "callouts": []
+  },
+  "distributor/settings/company-log": {
+    "file": "distributor/settings/company-log.png",
+    "width": 1440,
+    "height": 900,
+    "title": "My company: change log",
+    "callouts": []
+  },
+  "distributor/settings/company-policies": {
+    "file": "distributor/settings/company-policies.png",
+    "width": 1440,
+    "height": 903,
+    "title": "My company: operating policies",
+    "callouts": []
+  },
+  "distributor/settings/company-tax": {
+    "file": "distributor/settings/company-tax.png",
+    "width": 1440,
+    "height": 900,
+    "title": "My company: tax",
+    "callouts": []
+  },
+  "distributor/settings/preferences": {
+    "file": "distributor/settings/preferences.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: preferences",
+    "callouts": []
+  },
+  "distributor/settings/profile": {
+    "file": "distributor/settings/profile.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: profile",
+    "callouts": []
+  },
+  "distributor/settings/security": {
+    "file": "distributor/settings/security.png",
+    "width": 1440,
+    "height": 1242,
+    "title": "Settings: security",
+    "callouts": []
+  },
+  "distributor/settings/support": {
+    "file": "distributor/settings/support.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: support access",
+    "callouts": []
+  },
+  "distributor/suppliers/detail": {
+    "file": "distributor/suppliers/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A supplier account",
+    "callouts": []
+  },
+  "distributor/suppliers/find": {
+    "file": "distributor/suppliers/find.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Find suppliers",
+    "callouts": []
+  },
+  "distributor/suppliers/list": {
+    "file": "distributor/suppliers/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Suppliers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Find sellers on Neuros and ask for an account."
+      },
+      {
+        "n": 2,
+        "text": "Your own code for each supplier; only you see it."
+      },
+      {
+        "n": 3,
+        "text": "How each supplier lets you pay."
       }
     ]
   },
