@@ -7,6 +7,7 @@ export default function Video({ id, title }: { id: string; title: string }) {
     <figure className="nh-video">
       <video controls preload="metadata" poster={`${base}.jpg`} aria-label={title}>
         <source src={`${base}.mp4`} type="video/mp4" />
+        <source src={`${base}.webm`} type="video/webm" />
         <track kind="captions" src={`${base}.vtt`} srcLang="en" label="English" default />
       </video>
       <figcaption className="nh-shot__caption">{title}</figcaption>
