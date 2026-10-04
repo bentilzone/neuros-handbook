@@ -1,0 +1,51 @@
+---
+title: Your books
+sidebar_label: Books
+---
+
+<PersonaBadge who={['everyone']} permission={['journal:read', 'coa:read']} />
+
+Every company keeps its books in Neuros, whatever it trades. Neuros posts what it can itself; people post the rest, with approval.
+
+## The chart of accounts
+Under **Ledger → Accounts**, your accounts are grouped by type with the roles each plays. Click one to see its recent entries.
+- **Add** an account: code, name, type and reporting group, optionally a foreign currency for a foreign bank account.
+- **Edit** names and groups.
+- **Archive** an account that is no longer used. An account with a balance or a role can't be archived, and an account's type is fixed once it has postings.
+
+## Automatic postings
+When stock is received, adjusted, counted or written off, Neuros posts the journal itself, in the same step:
+
+| Event | Debit | Credit |
+|---|---|---|
+| Receipt | Inventory | Goods received not invoiced |
+| Stock gain | Inventory | Stock gains |
+| Stock loss | Stock losses | Inventory |
+
+**Posting rules** decide which of your accounts plays each role. Invoices, payments and settlements will post the same way as those phases arrive.
+
+## Manual journals
+For everything else (capital, rent, salaries, corrections):
+1. **New journal:** a date, a memo and at least two lines, each an account with a debit or a credit. It can't be saved until debits equal credits. Receivables, payables, inventory and other [control accounts](../01-glossary/70-ledger.mdx#control-account) aren't offered.
+2. **Submit** it. It waits for approval.
+3. A colleague with posting rights **approves and posts** it, or **sends it back** to draft with a reason. With segregation of duties on, the person who prepared it can't post it.
+4. A draft can be edited or **cancelled**. A posted journal is never changed: **reverse** it, with a reason, and Neuros posts the mirror image.
+
+Posting and reversing need a session signed in with two-step verification.
+
+## Periods
+Under **Periods**, each month in your timezone is:
+- **Open:** posting allowed.
+- **Closed:** posting only with a recorded reason. Earlier months first; no drafts left in it.
+- **Locked:** never again.
+
+A closed month can be reopened with a reason.
+
+## Reports
+- **Trial balance:** every account's balance on any date, debits beside credits, and whether they balance.
+- **FX revaluation:** restates foreign-currency accounts at the rate on a date. The difference posts as an unrealised gain or loss.
+
+Exchange rates are entered by one person and approved by another; Neuros never guesses a missing one.
+
+## Live
+Journals, accounts, periods and rules update for everyone in the ledger as colleagues act.
