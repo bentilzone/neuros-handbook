@@ -92,7 +92,7 @@ export async function startStack(): Promise<Stack> {
   };
   await run(join(ENGINE_DIR, 'node_modules/.bin/tsx'), [resolve('capture/prepare-db.ts')], ENGINE_DIR, engineEnv, 'collections and indexes');
   // Order matters: companies need a plan before they can hold warehouses or trade.
-  for (const script of ['seed', 'seed:catalogue', 'seed:billing', 'seed:trade']) await run('yarn', ['-s', script], ENGINE_DIR, engineEnv, `engine ${script}`);
+  for (const script of ['seed', 'seed:catalogue', 'seed:billing', 'seed:trade', 'seed:platform']) await run('yarn', ['-s', script], ENGINE_DIR, engineEnv, `engine ${script}`);
 
   say(`engine on ${API_URL}`);
   const engine = spawn(join(ENGINE_DIR, 'node_modules/.bin/tsx'), ['src/server.ts'], { cwd: ENGINE_DIR, env: engineEnv, stdio: process.env.CAPTURE_VERBOSE ? 'inherit' : 'ignore' });

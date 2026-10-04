@@ -1,0 +1,46 @@
+---
+title: Roles & Access
+sidebar_position: 110
+---
+
+<PersonaBadge who={['operator']} permission="platform:role:read" />
+
+The roles every company starts with, and the roles platform staff hold. A change reaches everyone holding the role straight away. See [people and access](../02-features/20-people-and-access.mdx).
+
+## Company roles
+
+<Shot id="operator/roles/organization" />
+
+Each role shows its permissions, how many companies use it, and when it last changed. Companies can't edit these roles; they make custom roles of their own.
+
+Click a role for its permissions. The company administrator role is locked: it always holds every permission, so no edit can lock a company out. Only its name and description change.
+
+<Shot id="operator/roles/detail" />
+
+**Archive** removes a role from every company. Only a role nobody holds can be archived.
+
+## New role
+
+<Shot id="operator/roles/new" />
+
+<FieldTable fields={[
+  { name: 'Who gets it', meaning: 'Every company (system role), or one company only.', others: 'Every company: added to each company now and to new ones as they join. One company: it becomes that company’s own custom role, which its administrators then manage.' },
+  { name: 'Company', required: true, meaning: 'For one company only: which.' },
+  { name: 'Name', required: true, meaning: 'What members see.' },
+  { name: 'Description', meaning: 'What the role is for.' },
+  { name: 'Permissions', required: true, meaning: 'What holders may do, grouped by area.', rules: 'You cannot grant a permission you do not hold yourself.' },
+  { name: 'Reason', required: true, meaning: 'Why you made the change.', implications: 'An edit says how many people in how many companies it reaches. Kept in the audit log.' },
+]} />
+
+## Platform roles
+
+<Shot id="operator/roles/platform" />
+
+| Role | What it allows |
+|---|---|
+| Super administrator | Every platform power: companies, staff, reference data, catalogue, support and audit. Locked, like the company administrator. |
+| Onboarding reviewer | Reviews company applications and the shared catalogue |
+| Support agent | Requests time-boxed, read-only access to a company to help it |
+| Platform finance | Subscriptions, invoices, payments, fees, disputes and the platform audit trail |
+
+Archiving a platform role means staff can no longer be given it.

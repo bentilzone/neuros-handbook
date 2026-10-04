@@ -1,0 +1,59 @@
+{/* Your own Settings tabs, shared by every guide: <SettingsPersonal who="…" />. settings.mdx adds the company tabs. */}
+
+## Profile
+
+<Shot id={`${props.who}/settings/profile`} />
+
+<FieldTable fields={[
+  { name: 'Full name', required: true, meaning: 'Your name as colleagues see it.', others: props.who === 'operator' ? 'Shown on decisions, support requests and the audit trail.' : 'Shown on members, approvals and history across your company.' },
+  { name: 'Email', meaning: 'Your sign-in.', rules: 'Changing it goes through support, so nobody can take an account by editing a field.' },
+  { name: 'Phone', meaning: 'A number colleagues can reach you on.' },
+]} />
+
+## Preferences
+
+<Shot id={`${props.who}/settings/preferences`} />
+
+Preferences apply only to you, on this browser.
+
+| Setting | What it does |
+|---|---|
+| Theme | System follows your device; or choose Light or Dark |
+| Compact sidebar | Icons only, more room for the page |
+| Footer | The strip at the bottom with links to the handbook, privacy, terms and support |
+| Side panel width | Drag a panel's left edge to change it; **Reset** puts it back |
+
+## Security
+
+<Shot id={`${props.who}/settings/security`} />
+
+### Change password
+
+<FieldTable fields={[
+  { name: 'Current password', required: true, meaning: 'Proves it is you.' },
+  { name: 'New password', required: true, meaning: 'Your new password.', rules: '10 to 72 characters.' },
+  { name: 'Confirm new password', required: true, meaning: 'The same again, to catch a typo.' },
+]} />
+
+### Two-step verification
+
+With only a password, anyone who learns it can sign in as you. Two-step verification asks for a code from your phone as well. {props.who === 'operator' ? 'Platform staff must use it: the console reaches every company, so a password alone is not enough to sign in to it.' : 'Neuros requires it before you can approve money movements or change who may do what: invite members, edit roles, create API clients, change posting rules, close periods.'}
+
+1. **Turn on**, then scan the QR code with Google Authenticator, 1Password or Authy. Can't scan? Enter the key shown instead.
+2. Enter the 6-digit code it shows.
+3. Save the **recovery codes**. Each signs you in once if you lose your phone, and they are not shown again.
+4. Sign out and back in with your code. Actions that need two-step verification check that this session began with it.
+
+To turn it off, confirm with your password and a current code.
+
+### Sessions
+
+**Signed-in devices** lists where you are signed in. **Sign out everywhere** ends every session on every device, this one included. Use it if a device is lost.
+
+## Role and access
+
+<Shot id={`${props.who}/settings/access`} />
+
+{props.who === 'operator'
+  ? 'Your platform roles and every permission they give you, read-only. Another administrator changes them under Platform staff.'
+  : <>The roles you hold in this company and every permission they give you, read-only. Ask a company administrator to change them under <PageLink who={props.who} page="members">Members</PageLink>. If you work for other companies too, they are listed under <strong>Your other workspaces</strong>.</>}

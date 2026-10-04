@@ -1,0 +1,33 @@
+---
+title: Support access
+sidebar_position: 50
+---
+
+<PersonaBadge who={['operator']} permission="platform:support" />
+
+Neuros staff have no standing access to a company. To help one, you ask; the company decides. Access is read-only, for a set time, and the company's audit log shows every page you open. See [support access](../02-features/95-support-access.mdx).
+
+<Shot id="operator/support/list" />
+
+| State | What it means |
+|---|---|
+| Waiting for the company | Asked; the company has not answered |
+| Active | Granted. **Open company** takes the requester into it, read-only, until the time runs out |
+| Declined | The company said no, or a colleague turned the request down |
+| Ended early | **End access now** stopped it before its time, or the requester withdrew it |
+| Expired | Its time ran out |
+
+**Whose** shows everyone's requests or only yours. Only the person who asked can open the company. **Withdraw request** takes back your own request before the company answers. A colleague with `platform:support:approve` can **Turn down** someone else's request first, saying why, so they can ask again properly.
+
+Open a request for its trail: sessions started, requests made inside the company (and any refused), first and last activity, and the screens opened most.
+
+## Request access
+
+<Shot id="operator/support/request" />
+
+<FieldTable fields={[
+  { name: 'Company', required: true, meaning: 'Who you need to look at.' },
+  { name: 'Purpose', required: true, meaning: 'What you need to look at and why.', others: 'The company’s administrators read it before deciding.', implications: 'Kept with every action you take under the grant.' },
+  { name: 'Ticket reference', meaning: 'Your support ticket, if there is one.', others: 'Shown to the company with the request.' },
+  { name: 'For how long (minutes)', meaning: 'How long access lasts once granted.', implications: 'The clock starts when the company grants it, not when you ask.', rules: '5 to 480 minutes.' },
+]} />

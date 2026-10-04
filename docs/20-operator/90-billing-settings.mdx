@@ -1,0 +1,69 @@
+---
+title: Billing settings
+sidebar_position: 90
+---
+
+<PersonaBadge who={['operator']} permission="platform:billing:read" />
+
+How Neuros bills: who the invoices are from, terms, grace, trials, reminders, how companies pay, numbering and tax. **Save changes** asks for a reason, kept in the audit log, and needs a session signed in with two-step verification.
+
+## Business details
+
+<Shot id="operator/billing-settings/business" />
+
+Who sells Neuros. Every invoice, receipt and credit note is issued in this name.
+
+<FieldTable fields={[
+  { name: 'Legal name', required: true, meaning: 'The seller on every document.', others: 'Printed on what companies receive.' },
+  { name: 'Trading name', meaning: 'The name Neuros trades under.' },
+  { name: 'Country', required: true, meaning: 'Where the seller is registered.', implications: 'Sets the billing calendar’s timezone unless you choose one.' },
+  { name: 'Billing timezone', meaning: 'The calendar due dates, periods and reports follow.', rules: 'Blank: the country’s zone.' },
+  { name: 'Email, Phone, Website', meaning: 'How companies reach billing.', others: 'Printed on documents.' },
+  { name: 'Address', meaning: 'One line per row, as printed.' },
+  { name: 'Tax registrations', meaning: 'Printed under the seller, such as a TIN or VAT number.', rules: 'Up to 5.' },
+]} />
+
+## Terms and reminders
+
+<Shot id="operator/billing-settings/terms" />
+
+<FieldTable fields={[
+  { name: 'Payment terms', meaning: 'Days from issue to due date.', rules: 'Up to 120 days.' },
+  { name: 'Grace period', meaning: 'Days after the due date before an unpaid company becomes read-only.', rules: 'Up to 90 days.' },
+  { name: 'Default trial', meaning: 'Trial days when a plan does not set its own.', rules: 'Up to 365 days.' },
+  { name: 'Default currency', meaning: 'Offered first when pricing and invoicing.' },
+  { name: 'Renewals', meaning: 'Off pauses every renewal invoice platform-wide.', implications: 'Trials, reminders and lapses carry on.' },
+  { name: 'Send reminders', meaning: 'Email unpaid invoices to the company’s billing contact.' },
+  { name: 'Before the due date', meaning: 'Days before it falls due. 0 sends none.' },
+  { name: 'On the due date', meaning: 'One reminder the day it falls due.' },
+  { name: 'Then every', meaning: 'Days between reminders while it stays unpaid.' },
+  { name: 'At most', meaning: 'Reminders per invoice in all.' },
+]} />
+
+## Payment details
+
+<Shot id="operator/billing-settings/payment" />
+
+**How companies pay**: the bank accounts printed on every unpaid invoice and shown in each company's Settings → Billing. **Add a bank account** for each currency you take.
+
+<FieldTable fields={[
+  { name: 'Bank, Account name, Account number', required: true, meaning: 'Where companies send money.', others: 'Printed on invoices.' },
+  { name: 'Branch, SWIFT', meaning: 'For transfers that need them.' },
+  { name: 'For payments in', meaning: 'The currency this account takes.', rules: 'Blank: any currency.' },
+  { name: 'Instructions', meaning: 'Anything the payer must do, such as quote the invoice number.' },
+]} />
+
+This tab also sets the billing email, the footer printed on invoices, and the prefixes that number invoices, credit notes and payments.
+
+## Tax
+
+<Shot id="operator/billing-settings/tax" />
+
+The tax charged on subscriptions, by the buyer's country. A company in a country with no rate is invoiced without tax.
+
+<FieldTable fields={[
+  { name: 'Charge tax', meaning: 'Off: no invoice carries tax.' },
+  { name: 'Name on the invoice', meaning: 'Such as VAT, GST or Sales tax.' },
+  { name: 'Prices include tax', meaning: 'On: the plan price is the total and tax is taken out of it. Off: tax is added on top.' },
+  { name: 'Rates by country', meaning: 'Each with its country, rate, and the dates it applies from and until.', implications: 'A new rate applies from its start date; issued invoices keep theirs.', rules: 'Two rates for one country cannot overlap. To change a rate, end the current one and add the new one from the day after.' },
+]} />
