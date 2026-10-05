@@ -79,10 +79,11 @@ jobs:
           token: ${{ secrets.NEUROS_REPOS_TOKEN }}
           branch: chore/refresh-screenshots
           base: dev
-          commit-message: Refresh screenshots and videos
+          commit-message: Refresh screenshots, videos and the API reference
           title: Refresh screenshots
           body: ${{ steps.report.outputs.body }}
           add-paths: |
             static/shots
             static/video
             src/data/shots.json
+            docs/30-api/reference
