@@ -1,6 +1,7 @@
 // Who each guide is shot as: the seeded demo companies (neuros-engine src/scripts/seed.ts).
 import type { Browser, BrowserContext, Page } from 'playwright';
 import { DEMO_PASSWORD, OPERATOR } from './stack';
+import { totp } from './totp';
 
 export type Persona = 'supplier' | 'distributor' | 'reseller' | 'operator';
 
@@ -28,6 +29,12 @@ export async function signedIn(browser: Browser, appUrl: string, persona: Person
   await page.getByPlaceholder('you@company.com').fill(who.email);
   await page.getByPlaceholder('Your password').fill(who.password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  if (persona === 'operator') {
+    // Platform staff always have a second step. The code fields autofocus; the last digit submits.
+    if (!OPERATOR.totpSecret) throw new Error('The operator signs in with two-step verification: no TOTP secret (set CAPTURE_OPERATOR_TOTP with --app)');
+    await page.getByLabel('Authentication code').first().waitFor({ timeout: 15_000 });
+    await page.keyboard.type(totp(OPERATOR.totpSecret));
+  }
   // The operator lands on a scope choice when the account also has companies; the demo admin has none.
   await page.waitForURL((u) => !u.pathname.startsWith('/login'), { timeout: 30_000 });
   return { ctx, page };
