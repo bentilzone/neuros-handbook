@@ -673,7 +673,7 @@
   "operator/billing-settings/business": {
     "file": "operator/billing-settings/business.png",
     "width": 1440,
-    "height": 951,
+    "height": 900,
     "title": "Billing settings: business details",
     "callouts": []
   },
@@ -694,7 +694,7 @@
   "operator/billing-settings/terms": {
     "file": "operator/billing-settings/terms.png",
     "width": 1440,
-    "height": 1061,
+    "height": 969,
     "title": "Billing settings: terms and reminders",
     "callouts": []
   },
@@ -844,7 +844,7 @@
   "operator/companies/page": {
     "file": "operator/companies/page.png",
     "width": 1440,
-    "height": 1589,
+    "height": 1497,
     "title": "A company’s page",
     "callouts": [
       {
@@ -928,14 +928,14 @@
   "operator/roles/detail": {
     "file": "operator/roles/detail.png",
     "width": 1440,
-    "height": 968,
+    "height": 900,
     "title": "A role template",
     "callouts": []
   },
   "operator/roles/new": {
     "file": "operator/roles/new.png",
     "width": 1440,
-    "height": 968,
+    "height": 900,
     "title": "New role",
     "callouts": []
   },
@@ -1009,7 +1009,7 @@
   "operator/settings/security": {
     "file": "operator/settings/security.png",
     "width": 1440,
-    "height": 1242,
+    "height": 1319,
     "title": "Settings: security",
     "callouts": []
   },

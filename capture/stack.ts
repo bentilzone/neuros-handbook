@@ -3,6 +3,7 @@
 // capture run starts from the same demo companies.
 import { spawn, type ChildProcess } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
+import { totp } from './totp';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -19,7 +20,13 @@ export const APP_URL = `http://localhost:${APP_PORT}`;
  * carry a password that works anywhere — the seed's shared demo one included (SEED_DEMO_PASSWORD).
  */
 // With --app (a stack already running) pass that stack's passwords as CAPTURE_OPERATOR_PASSWORD / CAPTURE_DEMO_PASSWORD.
-export const OPERATOR = { email: 'admin@neuros.local', password: process.env.CAPTURE_OPERATOR_PASSWORD ?? randomBytes(18).toString('base64url') };
+export const OPERATOR: { email: string; password: string; totpSecret?: string } = {
+  email: 'admin@neuros.local',
+  password: process.env.CAPTURE_OPERATOR_PASSWORD ?? randomBytes(18).toString('base64url'),
+  // Platform staff sign in with two-step verification. startStack enrols a fresh secret each run;
+  // with --app, pass that stack's as CAPTURE_OPERATOR_TOTP.
+  totpSecret: process.env.CAPTURE_OPERATOR_TOTP,
+};
 export const DEMO_PASSWORD = process.env.CAPTURE_DEMO_PASSWORD ?? randomBytes(18).toString('base64url');
 
 export interface Stack { appUrl: string; stop: () => Promise<void> }
@@ -56,6 +63,20 @@ function run(cmd: string, args: string[], cwd: string, env: NodeJS.ProcessEnv, w
   });
 }
 
+/** Turn on the operator's two-step verification through the API, as the Security tab does. */
+async function enrolOperator() {
+  const call = async (path: string, body: object, token?: string) => {
+    const res = await fetch(`${API_URL}/v1${path}`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(`${path} → ${res.status} ${await res.text()}`);
+    return res.json() as Promise<Record<string, any>>;
+  };
+  const login = await call('/auth/login', { email: OPERATOR.email, password: OPERATOR.password });
+  const token = login.identityToken ?? login.accessToken;
+  const { secret } = await call('/auth/mfa/setup', {}, token);
+  await call('/auth/mfa/enable', { code: totp(secret) }, token);
+  OPERATOR.totpSecret = secret;
+}
+
 export async function startStack(): Promise<Stack> {
   const mongo = await MongoMemoryReplSet.create({ replSet: { count: 1, storageEngine: 'wiredTiger' }, binary: { version: process.env.MONGOMS_VERSION ?? '8.0.4' } });
   const secret = () => randomBytes(32).toString('hex');
@@ -77,7 +98,7 @@ export async function startStack(): Promise<Stack> {
     DOCS_USERNAME: '',
     DOCS_PASSWORD_HASH: '',
     APP_URL,
-    PLATFORM_MFA_REQUIRED: 'false',
+    PLATFORM_MFA_REQUIRED: 'true',
     SEED_ADMIN_EMAIL: OPERATOR.email,
     SEED_ADMIN_PASSWORD: OPERATOR.password,
     SEED_DEMO_PASSWORD: DEMO_PASSWORD,
@@ -97,6 +118,7 @@ export async function startStack(): Promise<Stack> {
   say(`engine on ${API_URL}`);
   const engine = spawn(join(ENGINE_DIR, 'node_modules/.bin/tsx'), ['src/server.ts'], { cwd: ENGINE_DIR, env: engineEnv, stdio: process.env.CAPTURE_VERBOSE ? 'inherit' : 'ignore' });
   await waitFor(`${API_URL}/health`, 'The engine');
+  await enrolOperator();
 
   const outDir = mkdtempSync(join(tmpdir(), 'nh-client-'));
   const clientEnv = { ...process.env, VITE_API_BASE_URL: API_URL };
