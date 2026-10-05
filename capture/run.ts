@@ -22,7 +22,9 @@ const MANIFEST = 'src/data/shots.json';
 const OUT = 'capture/.out';
 
 /** Animations off, caret hidden: the same page gives the same picture. */
-const STILL = `*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}`;
+// Mantine's overlay scrollbars flash for a second after a layout change (a drawer narrowing a table),
+// so whether a shot caught one depended on timing. Hide them; the page's content is what matters.
+const STILL = `*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}.mantine-ScrollArea-scrollbar,.mantine-ScrollArea-corner{opacity:0!important}`;
 
 async function loadScenarios(): Promise<Scenario[]> {
   const dir = 'capture/scenarios';
