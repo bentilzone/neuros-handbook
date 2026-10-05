@@ -1180,7 +1180,16 @@ Earlier periods must be closed and no drafts dated in the period may remain.
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `role` | string (one of 29) | may be null |
+| `accountId` | string | 24 characters, may be null |
+| `changedBy` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Trial balance in the functional currency

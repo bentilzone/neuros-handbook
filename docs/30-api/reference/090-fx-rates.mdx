@@ -41,7 +41,22 @@ This page lists the 6 operations in this area, generated from the engine's OpenA
 
 A page: `data` holds the items below, `meta` the page, limit, total and total pages.
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` | string (one of 155) | may be null |
+| `quote` | string (one of 155) | may be null |
+| `rate` | string | may be null |
+| `source` | string | may be null |
+| `effectiveAt` | string (date-time) | may be null |
+| `status` | `pending` · `approved` · `rejected` | may be null |
+| `enteredBy` | string | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### My organisation’s exchange rates
@@ -62,7 +77,23 @@ object
 
 A page: `data` holds the items below, `meta` the page, limit, total and total pages.
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` | string (one of 155) | may be null |
+| `quote` | string (one of 155) | may be null |
+| `rate` | string | may be null |
+| `source` | string | may be null |
+| `effectiveAt` | string (date-time) | may be null |
+| `status` | `pending` · `approved` · `rejected` | may be null |
+| `enteredBy` | string | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Record an organisation rate (pending until someone else approves)
@@ -84,7 +115,23 @@ object
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` | string (one of 155) | may be null |
+| `quote` | string (one of 155) | may be null |
+| `rate` | string | may be null |
+| `source` | string | may be null |
+| `effectiveAt` | string (date-time) | may be null |
+| `status` | `pending` · `approved` · `rejected` | may be null |
+| `enteredBy` | string | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Approve a pending organisation rate
@@ -99,7 +146,23 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` | string (one of 155) | may be null |
+| `quote` | string (one of 155) | may be null |
+| `rate` | string | may be null |
+| `source` | string | may be null |
+| `effectiveAt` | string (date-time) | may be null |
+| `status` | `pending` · `approved` · `rejected` | may be null |
+| `enteredBy` | string | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Reject a pending organisation rate
@@ -114,7 +177,23 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` | string (one of 155) | may be null |
+| `quote` | string (one of 155) | may be null |
+| `rate` | string | may be null |
+| `source` | string | may be null |
+| `effectiveAt` | string (date-time) | may be null |
+| `status` | `pending` · `approved` · `rejected` | may be null |
+| `enteredBy` | string | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### The rate in force: my organisation’s approved rate, else the platform’s
@@ -133,5 +212,13 @@ Never fabricated. With no approved rate the answer is 422 FX_RATE_UNAVAILABLE.
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `base` * | string | 3 characters |
+| `quote` * | string | 3 characters |
+| `rate` * | string |  |
+| `source` * | `identity` · `platform` · `organization` |  |
+| `rateId` * | string | may be null |
+| `effectiveAt` * | string (date-time) |  |
+| `inverted` * | boolean |  |
 
