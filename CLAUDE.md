@@ -37,6 +37,8 @@ capture/walk.ts        the page-by-page walk every persona guide is shot from; a
 capture/scenarios/     one file per persona: walk({...}) plus any extra shots and videos; operator.ts is its
                        own list (the console shares no pages with a company). Its waiting work comes from
                        the engine's seed:platform
+capture/browser.ts     Chromium in Playwright's Docker image (linux/amd64, the package's exact version) for
+                       laptops and CI alike; the page's localhost is tunnelled to the host stack
 capture/callouts.ts    numbered arrows drawn on the live page before the screenshot
 capture/run.ts         `yarn capture [--persona x] [--only id-prefix] [--app url]`; report in capture/.out;
                        drops manifest entries (and images) whose scenario is gone
@@ -67,7 +69,10 @@ amplify.yml            the same build for Amplify, unused until the AWS move
 - **Must not** loosen the capture diff back to a share of the frame. It is an absolute 20 pixels:
   a ratio that ignored anti-aliasing also ignored a changed label, and kept a shot showing
   "Invalid Date" after the fix shipped. Re-runs are zero-diff because `shoot` pins clock times,
-  "n minutes ago" and job durations ("12 ms") in the page; pin any new moving text the same way rather than raising the bar.
+  "n minutes ago", job durations ("12 ms") and the sign-in greeting in the page, and `settle` stops SVG animations; pin any new moving text the same way rather than raising the bar.
+- **Must not** commit shots taken with `CAPTURE_HOST_BROWSER=1`, or move the browser out of Docker.
+  A host browser draws text with that system's fonts and anti-aliasing: the first CI run after
+  Mac-shot images rewrote all 91 of them. Docker must be running for `yarn capture`.
 - **Must not** run two captures at once. They share ports 2101/5199 and the manifest.
 - **Must not** commit the platform audit shots from a `--persona operator` run. The platform log
   records every persona's sign-in, so it differs from the full run CI makes; shoot it in a full run.

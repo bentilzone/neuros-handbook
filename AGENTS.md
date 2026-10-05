@@ -7,7 +7,8 @@ platform operator. Docusaurus 3. Published to GitHub Pages from `main`; Amplify 
 PRs target `dev` (ADR-010). `main` is what the public reads. The agent never merges and never deploys.
 
 - **Screenshots are generated, never hand-made.** `yarn capture` drives the real client against a
-  freshly seeded engine and writes `static/shots/**` and `src/data/shots.json`. To change a picture
+  freshly seeded engine and writes `static/shots/**` and `src/data/shots.json`. Chromium runs in
+  Playwright's Docker image so a laptop and CI produce the same pixels: Docker must be running. To change a picture
   or its numbered callouts, change `capture/scenarios/`, then re-run capture.
 - **Public site.** Only seeded demo companies and people may appear. `yarn lint:public` fails on
   credentials, connection strings, internal hosts and personal email addresses.

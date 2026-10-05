@@ -58,8 +58,8 @@ jobs:
           yarn install --frozen-lockfile
           (cd app/neuros-engine && yarn install --frozen-lockfile)
           (cd app/neuros-client && yarn install --frozen-lockfile)
-          npx playwright install --with-deps chromium
       - name: Capture
+        # Chromium runs in Playwright's Docker image (capture/browser.ts), the same one laptops use.
         run: yarn capture
       - name: API reference
         # The engine's OpenAPI document is in the checkout already; the reference follows it.
