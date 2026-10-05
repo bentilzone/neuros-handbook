@@ -379,7 +379,52 @@ Excludes quarantined, damaged and expired stock.
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `out` * | object |  |
+| `out.type` | string (one of 15) | may be null |
+| `out.direction` | `1` · `-1` | may be null |
+| `out.productId` | string | 24 characters, may be null |
+| `out.warehouseId` | string | 24 characters, may be null |
+| `out.locationId` | string | 24 characters, may be null |
+| `out.condition` | `sellable` · `quarantine` · `damaged` · `expired` | may be null |
+| `out.lotId` | string | 24 characters, may be null |
+| `out.serialNumber` | string | may be null |
+| `out.quantity` | string | may be null |
+| `out.balanceId` | string | 24 characters, may be null |
+| `out.unitCost` | object | may be null |
+| `out.totalCost` | object | may be null |
+| `out.source` | object | may be null |
+| `out.reasonCode` | string | may be null |
+| `out.note` | string | may be null |
+| `out.actorId` | string | may be null |
+| `out.effectiveAt` | string (date-time) | may be null |
+| `out.createdAt` | string (date-time) | may be null |
+| `out.organizationId` | string | 24 characters, may be null |
+| `out.__v` | number | may be null |
+| `out.id` | string | 24 characters |
+| `in` * | object |  |
+| `in.type` | string (one of 15) | may be null |
+| `in.direction` | `1` · `-1` | may be null |
+| `in.productId` | string | 24 characters, may be null |
+| `in.warehouseId` | string | 24 characters, may be null |
+| `in.locationId` | string | 24 characters, may be null |
+| `in.condition` | `sellable` · `quarantine` · `damaged` · `expired` | may be null |
+| `in.lotId` | string | 24 characters, may be null |
+| `in.serialNumber` | string | may be null |
+| `in.quantity` | string | may be null |
+| `in.balanceId` | string | 24 characters, may be null |
+| `in.unitCost` | object | may be null |
+| `in.totalCost` | object | may be null |
+| `in.source` | object | may be null |
+| `in.reasonCode` | string | may be null |
+| `in.note` | string | may be null |
+| `in.actorId` | string | may be null |
+| `in.effectiveAt` | string (date-time) | may be null |
+| `in.createdAt` | string (date-time) | may be null |
+| `in.organizationId` | string | 24 characters, may be null |
+| `in.__v` | number | may be null |
+| `in.id` | string | 24 characters |
 
 
 ### Stock counts
