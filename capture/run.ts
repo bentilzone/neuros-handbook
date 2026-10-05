@@ -6,7 +6,8 @@
 import { spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { chromium, type Page } from 'playwright';
+import type { Page } from 'playwright';
+import { startBrowser } from './browser';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import { drawCallouts } from './callouts';
@@ -66,6 +67,8 @@ async function settle(page: Page) {
     }
   }, STILL);
   await page.evaluate(() => document.fonts.ready);
+  // SVG's own animations (the sign-in pages' network mark) ignore the CSS above: stop them at frame 0.
+  await page.evaluate(() => document.querySelectorAll('svg').forEach((svg) => { svg.pauseAnimations(); svg.setCurrentTime(0); }));
   await page.waitForTimeout(300);
 }
 
@@ -138,8 +141,11 @@ async function record(browser: import('playwright').Browser, appUrl: string, v: 
   await v.steps(page, say);
   await page.waitForTimeout(1200);
   const end = Date.now() - start;
-  const raw = await page.video()!.path();
+  // saveAs, not path(): the browser is in Docker, and the recording has to come back to this machine.
+  const video = page.video()!;
   await ctx.close();
+  const raw = join(dir, 'raw.webm');
+  await video.saveAs(raw);
   mkdirSync(VIDEOS, { recursive: true });
   const vtt = ['WEBVTT', '', ...cues.flatMap((c, i) => [`${vttTime(c.at)} --> ${vttTime(cues[i + 1]?.at ?? end)}`, c.text, ''])].join('\n');
   writeFileSync(join(VIDEOS, `${v.id}.vtt`), vtt);
@@ -163,7 +169,7 @@ async function main() {
 
   let stack: Stack | null = null;
   const appUrl = arg('app') ?? (stack = await startStack()).appUrl;
-  const browser = await chromium.launch();
+  const { browser, stop: stopBrowser } = await startBrowser();
   const manifest: Record<string, unknown> = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {};
   // A shot whose scenario is gone is stale: drop it from the manifest and delete its image.
   const known = new Set(all.map((s) => s.id));
@@ -196,7 +202,7 @@ async function main() {
       await ctx.close();
     }
   } finally {
-    await browser.close();
+    await stopBrowser();
     // Keys sorted, so the manifest diff shows only what really changed.
     writeFileSync(MANIFEST, JSON.stringify(Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b))), null, 2) + '\n');
     mkdirSync(OUT, { recursive: true });
