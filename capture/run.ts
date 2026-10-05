@@ -100,19 +100,19 @@ async function shoot(page: Page, s: Shot, manifest: Record<string, unknown>, rep
   await page.mouse.move(VIEWPORT.width - 2, VIEWPORT.height - 2);
   await page.waitForTimeout(150);
   // The seed runs at the real time, so clock times, "n minutes ago" and job durations differ on
-  // every run. Pin them in the page, or each run reports every history panel as changed.
+  // every run (and the sign-in page greets by the hour). Pin them in the page, or each run reports every history panel as changed.
   await page.evaluate(() => {
     const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
       const t = n.nodeValue ?? '';
-      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ ms\b/g, '12 ms');
+      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ ms\b/g, '12 ms').replace(/\bGood (afternoon|evening)\b/g, 'Good morning');
       if (next !== t) n.nodeValue = next;
     }
   });
   if (s.callouts?.length) await drawCallouts(page, s.callouts);
   const png = await page.screenshot({ fullPage: !!s.fullPage });
   await page.evaluate(() => document.getElementById('nh-callouts')?.remove());
-  if (new URL(page.url()).pathname.startsWith('/login')) throw new Error('signed out before the shot');
+  if (s.persona !== 'visitor' && new URL(page.url()).pathname.startsWith('/login')) throw new Error('signed out before the shot');
   const file = join(SHOTS, `${s.id}.png`);
   mkdirSync(dirname(file), { recursive: true });
   const state = changed(file, png);

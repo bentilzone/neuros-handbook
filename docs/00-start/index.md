@@ -7,6 +7,8 @@ title: Start here
 
 Neuros is where distributors, suppliers and resellers trade with each other and keep the records that trade creates. That means the catalogue, offers and prices, the accounts companies hold with each other, stock in each warehouse, and the books that follow from all of it.
 
+New here? [Signing in](./20-signing-in.mdx) covers creating an account, two-step verification and choosing your company.
+
 This handbook explains Neuros in three passes:
 
 1. **[Glossary](/glossary).** Every word Neuros uses, defined once. When a page says *offer*, *price list* or *period*, it means exactly what the glossary says.

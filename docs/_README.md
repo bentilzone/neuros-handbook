@@ -16,3 +16,7 @@ This file is for authors and the dev agent; `draft: true` keeps it off the site.
   - Take wording from the app's own field descriptions and the engine route descriptions, so the handbook says what the code does.
 - **Videos:** use `<Video id="flow" title="…" />`, recorded by capture. Only for flows that cross parties or have many steps.
 - **Who sees a page:** use `<PersonaBadge who={['distribution']} permission="stock:read" />`.
+- **Routes:** `handbook.manifest.json` maps every `neuros-client` route to the pages that document it.
+  - A new route in the app needs a page here and an entry there; neuros-client copies the file (`yarn sync:handbook`) and its coverage test fails on a route missing from it.
+  - `yarn check:manifest` (part of `yarn verify`) fails on a listed page that does not exist.
+  - Public pages (sign-in, registration, password, invitations) are shot as the `visitor` persona, which never signs in.
