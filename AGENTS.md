@@ -14,10 +14,13 @@ PRs target `dev` (ADR-010). `main` is what the public reads. The agent never mer
 - **The handbook follows the code.** A user-visible change in `neuros-client` or `neuros-engine`
   ships with a PR here: the page, its `FieldTable`, and fresh captures. Wording comes from the
   app's field descriptions and the engine's route descriptions.
+- **Every app route has a page.** `handbook.manifest.json` lists each `neuros-client` route and the
+  pages that document it. The client's coverage test reads a synced copy, so a new route lands
+  here first: page, manifest entry, then `yarn sync:handbook` in the client.
 - Read `docs/_README.md` (the authoring guide) before writing a page.
 
 ## Verify
 
 ```bash
-yarn verify        # typecheck + lint:public + build
+yarn verify        # typecheck + lint:public + check:manifest + build
 ```

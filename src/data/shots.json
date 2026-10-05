@@ -1987,5 +1987,62 @@
     "height": 900,
     "title": "Settings: support access",
     "callouts": []
+  },
+  "visitor/forgot-password": {
+    "file": "visitor/forgot-password.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Forgot your password?",
+    "callouts": []
+  },
+  "visitor/login": {
+    "file": "visitor/login.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Sign in",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The email you registered or were invited with."
+      },
+      {
+        "n": 2,
+        "text": "Sends a link to choose a new password."
+      },
+      {
+        "n": 3,
+        "text": "New to Neuros: create an account, then apply for your business."
+      }
+    ]
+  },
+  "visitor/mfa": {
+    "file": "visitor/mfa.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Two-step verification",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The six-digit code your authenticator app shows now. The last digit submits."
+      },
+      {
+        "n": 2,
+        "text": "Lost the phone: use one of the recovery codes you saved when you turned this on."
+      }
+    ]
+  },
+  "visitor/register": {
+    "file": "visitor/register.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Create your account",
+    "callouts": []
+  },
+  "visitor/resend-verification": {
+    "file": "visitor/resend-verification.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Resend confirmation",
+    "callouts": []
   }
 }

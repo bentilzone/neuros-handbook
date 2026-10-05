@@ -3,7 +3,8 @@ import type { Browser, BrowserContext, Page } from 'playwright';
 import { DEMO_PASSWORD, OPERATOR } from './stack';
 import { totp } from './totp';
 
-export type Persona = 'supplier' | 'distributor' | 'reseller' | 'operator';
+/** `visitor` never signs in: the sign-in, registration and password pages as anyone sees them. */
+export type Persona = 'supplier' | 'distributor' | 'reseller' | 'operator' | 'visitor';
 
 const DEMO = DEMO_PASSWORD;
 export const PERSONAS: Record<Persona, { email: string; password: string; company: string }> = {
@@ -11,6 +12,7 @@ export const PERSONAS: Record<Persona, { email: string; password: string; compan
   distributor: { email: 'dist1@demo.neuros.local', password: DEMO, company: 'Lagos Industrial Supplies Ltd' },
   reseller: { email: 'res1@demo.neuros.local', password: DEMO, company: 'Ikeja Hardware Resellers' },
   operator: { ...OPERATOR, company: 'Neuros platform' },
+  visitor: { email: '', password: '', company: '' },
 };
 
 export const VIEWPORT = { width: 1440, height: 900 };
@@ -25,6 +27,12 @@ export async function signedIn(browser: Browser, appUrl: string, persona: Person
   const ctx = await browser.newContext({ viewport: VIEWPORT, colorScheme: 'light', reducedMotion: 'reduce', locale: 'en-GB', timezoneId: 'Africa/Lagos', ...extra });
   const page = await ctx.newPage();
   const who = PERSONAS[persona];
+  if (persona === 'visitor') {
+    // Load the app once; the shots then move between its public pages like the others do.
+    await page.goto(`${appUrl}/login`);
+    await page.getByPlaceholder('you@company.com').waitFor();
+    return { ctx, page };
+  }
   await page.goto(`${appUrl}/login`);
   await page.getByPlaceholder('you@company.com').fill(who.email);
   await page.getByPlaceholder('Your password').fill(who.password);

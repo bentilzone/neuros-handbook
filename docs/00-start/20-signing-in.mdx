@@ -1,0 +1,90 @@
+---
+title: Signing in
+sidebar_label: Signing in
+---
+
+<PersonaBadge who={['everyone']} />
+
+One Neuros account works for every company you belong to. You sign in once, confirm it is you if two-step verification is on, then choose which company to work in.
+
+## Signing in
+
+<Shot id="visitor/login" />
+
+Enter the email and password of your account and press **Sign in**. Then, depending on your account:
+
+1. **Two-step verification**, if you turned it on or your company requires it. Platform staff always have this step.
+2. **Choose a workspace**, if you belong to more than one company (or to a company and the platform console). With exactly one, Neuros opens it straight away.
+
+Five wrong passwords in a row lock the account for 15 minutes. Wait, or reset the password.
+
+## Two-step verification
+
+<Shot id="visitor/mfa" />
+
+Open your authenticator app and type the six-digit code it shows for Neuros. The last digit submits the code.
+
+- **Use a recovery code** swaps the code boxes for one of the recovery codes you saved when you turned two-step verification on. Each code works once.
+- **Cancel** goes back to the email and password.
+
+You turn two-step verification on, and get new recovery codes, under **Settings → Security**. Some actions need a session that went through this step, for example granting roles or approving journals: see [People and access](../02-features/20-people-and-access.mdx).
+
+## Choosing a company
+
+**Choose a workspace** lists each company you are a member of, with your roles in it. Pick one to open it. Each company is a separate workspace: its catalogue, stock and books are its own.
+
+Neuros staff also see **Platform console**. **Sign in as someone else** cancels and goes back to the start.
+
+**No workspace yet** means your account belongs to no company. Ask an administrator to invite you, or [apply to join Neuros](../02-features/10-joining-neuros.mdx) for your business.
+
+### Switching later
+
+The company name at the top of the sidebar is a menu. Open it to move to another of your companies, to a company whose [support access](../02-features/95-support-access.mdx) you hold (staff only, read-only until the time shown), or to the platform console. Switching does not sign you out.
+
+## Creating an account
+
+<Shot id="visitor/register" />
+
+From the sign-in page, **Create an account**.
+
+<FieldTable fields={[
+  { name: 'Full name', required: true, meaning: 'Your name as colleagues know you.', others: 'Shown to the people in every company you join: on members, approvals and the audit log.' },
+  { name: 'Work email', required: true, meaning: 'The address you sign in with and receive Neuros mail at.', implications: 'Invitations are sent to an email. Use the one colleagues will invite, so their invitation joins this account.', rules: 'One account per email.' },
+  { name: 'Phone', meaning: 'A number colleagues can reach you on.', rules: 'Optional.' },
+  { name: 'Password', required: true, meaning: 'Your password for every company you belong to.', rules: 'At least 10 characters.' },
+]} />
+
+Neuros then sends a confirmation link. You can't sign in until you open it. A confirmed account belongs to no company yet: either accept an invitation or apply for your business.
+
+### The confirmation link
+
+Opening the link shows **Email confirmed**, and you can sign in. **That link didn't work** means it was already used, has expired or was copied incompletely.
+
+<Shot id="visitor/resend-verification" />
+
+**Resend confirmation** sends a fresh link. For privacy, Neuros answers the same whether or not the address has an account.
+
+## Forgot your password
+
+<Shot id="visitor/forgot-password" />
+
+From the sign-in page, **Forgot password?**, then enter your email. Neuros sends a link if the address has an account, and says the same either way.
+
+The link opens **Choose a new password**: type it twice (at least 10 characters). Changing it signs you out everywhere else, so anyone holding an old session loses it. The link works once and expires; request another if it does.
+
+## Accepting an invitation
+
+An invitation arrives by email from someone in a company. Its link opens **Join your team on Neuros**:
+
+- **You already have an account** with that email: accept, and the company joins your workspaces.
+- **You don't**: the page asks for your **Full name** and a **Password** (at least 10 characters) and creates the account as it accepts. The email is already confirmed by the invitation.
+
+**You're in** confirms it. Sign in and pick the company. An invitation that was revoked or has expired can't be accepted; ask for a new one.
+
+## Common questions
+
+**I belong to two companies. Do I need two accounts?** No. One account, and you choose the company after signing in.
+
+**I lost my phone.** Use a recovery code, then turn two-step verification off and on again under **Settings → Security** to set up the new phone. Without recovery codes, contact Neuros support.
+
+**Why was I signed out?** You changed your password, signed out everywhere, or an administrator suspended your membership.
