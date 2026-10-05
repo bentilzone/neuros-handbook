@@ -15,6 +15,7 @@ const section = (label: string, dir: string, collapsed = false) => ({
 const sidebars: SidebarsConfig = {
   overview: [
     { type: 'doc', id: 'start/index', label: 'Start here' },
+    { type: 'doc', id: 'start/signing-in', label: 'Signing in' },
     section('Glossary', '01-glossary'),
     section('Features end to end', '02-features'),
   ],

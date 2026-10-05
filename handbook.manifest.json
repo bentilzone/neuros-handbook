@@ -1,0 +1,144 @@
+{
+  "$comment": "Every neuros-client route (public, workspace and hidden) and the docs/ pages that document it. neuros-client copies this file (yarn sync:handbook) and its coverage test fails on a route missing here. tools/check-manifest.mjs checks every page exists.",
+  "routes": {
+    "/login": [
+      "00-start/20-signing-in.mdx"
+    ],
+    "/register": [
+      "00-start/20-signing-in.mdx",
+      "02-features/10-joining-neuros.mdx"
+    ],
+    "/resend-verification": [
+      "00-start/20-signing-in.mdx"
+    ],
+    "/verify-email": [
+      "00-start/20-signing-in.mdx"
+    ],
+    "/forgot-password": [
+      "00-start/20-signing-in.mdx"
+    ],
+    "/reset-password": [
+      "00-start/20-signing-in.mdx"
+    ],
+    "/invitations/accept": [
+      "00-start/20-signing-in.mdx",
+      "02-features/20-people-and-access.mdx"
+    ],
+    "/": [
+      "10-supplier/10-dashboard.mdx",
+      "11-distributor/10-dashboard.mdx",
+      "12-reseller/10-dashboard.mdx",
+      "20-operator/10-overview.mdx"
+    ],
+    "/catalogue": [
+      "10-supplier/20-catalogue.mdx",
+      "11-distributor/20-catalogue.mdx",
+      "12-reseller/20-catalogue.mdx"
+    ],
+    "/selling/offers": [
+      "10-supplier/30-offers.mdx",
+      "11-distributor/30-offers.mdx"
+    ],
+    "/selling/pricing": [
+      "10-supplier/40-pricing.mdx",
+      "11-distributor/40-pricing.mdx"
+    ],
+    "/selling/customers": [
+      "10-supplier/50-customers.mdx",
+      "11-distributor/50-customers.mdx"
+    ],
+    "/marketplace": [
+      "11-distributor/60-marketplace.mdx",
+      "12-reseller/60-marketplace.mdx"
+    ],
+    "/suppliers": [
+      "11-distributor/70-suppliers.mdx",
+      "12-reseller/70-suppliers.mdx"
+    ],
+    "/inventory": [
+      "10-supplier/80-inventory.mdx",
+      "11-distributor/80-inventory.mdx"
+    ],
+    "/ledger": [
+      "10-supplier/90-ledger.mdx",
+      "11-distributor/90-ledger.mdx",
+      "12-reseller/90-ledger.mdx"
+    ],
+    "/organization": [
+      "10-supplier/140-settings.mdx",
+      "11-distributor/140-settings.mdx",
+      "12-reseller/140-settings.mdx"
+    ],
+    "/members": [
+      "10-supplier/100-members.mdx",
+      "11-distributor/100-members.mdx",
+      "12-reseller/100-members.mdx"
+    ],
+    "/roles": [
+      "10-supplier/110-roles.mdx",
+      "11-distributor/110-roles.mdx",
+      "12-reseller/110-roles.mdx"
+    ],
+    "/api-clients": [
+      "10-supplier/120-api-clients.mdx",
+      "11-distributor/120-api-clients.mdx",
+      "12-reseller/120-api-clients.mdx"
+    ],
+    "/audit": [
+      "10-supplier/130-audit-log.mdx",
+      "11-distributor/130-audit-log.mdx",
+      "12-reseller/130-audit-log.mdx"
+    ],
+    "/platform/applications": [
+      "20-operator/20-applications.mdx"
+    ],
+    "/platform/companies": [
+      "20-operator/30-companies.mdx"
+    ],
+    "/platform/companies/:id": [
+      "20-operator/30-companies.mdx"
+    ],
+    "/platform/catalogue": [
+      "20-operator/40-catalogue.mdx"
+    ],
+    "/platform/support": [
+      "20-operator/50-support-access.mdx"
+    ],
+    "/platform/billing": [
+      "20-operator/60-billing.mdx"
+    ],
+    "/platform/subscriptions": [
+      "20-operator/70-subscriptions.mdx"
+    ],
+    "/platform/plans": [
+      "20-operator/80-plans.mdx"
+    ],
+    "/platform/billing-settings": [
+      "20-operator/90-billing-settings.mdx"
+    ],
+    "/platform/schedulers": [
+      "20-operator/100-schedulers.mdx"
+    ],
+    "/platform/roles": [
+      "20-operator/110-roles.mdx"
+    ],
+    "/platform/staff": [
+      "20-operator/120-staff.mdx"
+    ],
+    "/platform/audit": [
+      "20-operator/130-audit-log.mdx"
+    ],
+    "/settings": [
+      "10-supplier/140-settings.mdx",
+      "11-distributor/140-settings.mdx",
+      "12-reseller/140-settings.mdx",
+      "20-operator/140-settings.mdx"
+    ],
+    "/account": [
+      "10-supplier/140-settings.mdx",
+      "11-distributor/140-settings.mdx",
+      "12-reseller/140-settings.mdx",
+      "20-operator/140-settings.mdx"
+    ]
+  }
+}
