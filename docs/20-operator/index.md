@@ -30,5 +30,5 @@ The demo console has one application waiting for review, a support request a res
 :::note[Two-step verification]
 Platform staff sign in with two-step verification. Changes that grant authority or move money also check that this session began with it: approving an application, onboarding a company, changing roles, plans, subscriptions and billing settings, recording payments, running jobs. Every one of them asks for a reason, kept in the audit log.
 
-The screenshots here come from a session without it, so they show the **Two-step sign-in needed** banner, and those buttons are disabled. Signed in with your code, the banner goes away.
+Until your session has signed in with it, a **Two-step sign-in needed** banner shows on those pages and their buttons stay disabled.
 :::
