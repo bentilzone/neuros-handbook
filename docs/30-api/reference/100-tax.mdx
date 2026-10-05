@@ -48,7 +48,20 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `lines` * | object[] |  |
+| `lines[].ref` * | string |  |
+| `lines[].taxCodeId` * | string | may be null |
+| `lines[].taxCode` * | string | may be null |
+| `lines[].ratePercent` * | string |  |
+| `lines[].taxRateId` * | string | may be null |
+| `lines[].exemptionId` * | string | may be null |
+| `lines[].tax` * | object |  |
+| `lines[].treatment` * | `taxed` · `exempt` · `untaxed` |  |
+| `totalTax` * | object | may be null |
+| `totalTax.amount` * | string |  |
+| `totalTax.currency` * | string | 3 characters |
 
 
 ### Tax codes
@@ -60,7 +73,19 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `data` * | object[] |  |
+| `data[].code` | string | may be null |
+| `data[].name` | string | may be null |
+| `data[].description` | string | may be null |
+| `data[].kind` | `vat` · `sales` · `withholding` · `excise` · `other` | may be null |
+| `data[].status` | `active` · `archived` | may be null |
+| `data[].createdAt` | string (date-time) | may be null |
+| `data[].updatedAt` | string (date-time) | may be null |
+| `data[].organizationId` | string | 24 characters, may be null |
+| `data[].__v` | number | may be null |
+| `data[].id` | string | 24 characters |
 
 
 ### Create a tax code
@@ -81,7 +106,18 @@ object
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `code` | string | may be null |
+| `name` | string | may be null |
+| `description` | string | may be null |
+| `kind` | `vat` · `sales` · `withholding` · `excise` · `other` | may be null |
+| `status` | `active` · `archived` | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Rename or archive a tax code
@@ -104,7 +140,18 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `code` | string | may be null |
+| `name` | string | may be null |
+| `description` | string | may be null |
+| `kind` | `vat` · `sales` · `withholding` · `excise` · `other` | may be null |
+| `status` | `active` · `archived` | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Rates for a tax code, newest first
@@ -119,7 +166,20 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `data` * | object[] |  |
+| `data[].taxCodeId` | string | 24 characters, may be null |
+| `data[].country` | string | may be null |
+| `data[].region` | string | may be null |
+| `data[].ratePercent` | string | may be null |
+| `data[].validFrom` | string (date-time) | may be null |
+| `data[].validTo` | string (date-time) | may be null |
+| `data[].createdAt` | string (date-time) | may be null |
+| `data[].updatedAt` | string (date-time) | may be null |
+| `data[].organizationId` | string | 24 characters, may be null |
+| `data[].__v` | number | may be null |
+| `data[].id` | string | 24 characters |
 
 
 ### Add a dated rate for a country (and optional region)
@@ -146,7 +206,19 @@ Validity periods for the same code and place cannot overlap.
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `taxCodeId` | string | 24 characters, may be null |
+| `country` | string | may be null |
+| `region` | string | may be null |
+| `ratePercent` | string | may be null |
+| `validFrom` | string (date-time) | may be null |
+| `validTo` | string (date-time) | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Buyer exemptions
@@ -164,7 +236,19 @@ object
 
 A page: `data` holds the items below, `meta` the page, limit, total and total pages.
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `taxCodeId` | string | 24 characters, may be null |
+| `certificateRef` | string | may be null |
+| `validFrom` | string (date-time) | may be null |
+| `validTo` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Record a buyer’s exemption certificate
@@ -187,7 +271,19 @@ object
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `taxCodeId` | string | 24 characters, may be null |
+| `certificateRef` | string | may be null |
+| `validFrom` | string (date-time) | may be null |
+| `validTo` | string (date-time) | may be null |
+| `note` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### End a rate on a date
@@ -208,5 +304,17 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `taxCodeId` | string | 24 characters, may be null |
+| `country` | string | may be null |
+| `region` | string | may be null |
+| `ratePercent` | string | may be null |
+| `validFrom` | string (date-time) | may be null |
+| `validTo` | string (date-time) | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 

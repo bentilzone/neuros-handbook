@@ -39,7 +39,53 @@ This page lists the 7 operations in this area, generated from the engine's OpenA
 
 A page: `data` holds the items below, `meta` the page, limit, total and total pages.
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Start an application to register a business
@@ -71,7 +117,53 @@ A person can apply for (and belong to) several organisations.
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### One of my applications
@@ -86,7 +178,53 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Edit a draft (or a returned) application
@@ -119,7 +257,53 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Register a supporting document and get a signed upload URL
@@ -143,7 +327,21 @@ object
 
 **Response** `201`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `document` * | object |  |
+| `document.type` | string | may be null |
+| `document.name` | string | may be null |
+| `document.storageKey` | string | may be null |
+| `document.contentType` | string | may be null |
+| `document.size` | number | may be null |
+| `document.uploadedAt` | string (date-time) | may be null |
+| `document.id` | string | 24 characters |
+| `upload` * | object |  |
+| `upload.url` * | string |  |
+| `upload.method` * | `PUT` · `GET` |  |
+| `upload.expiresAt` * | string (date-time) |  |
+| `upload.headers` | object |  |
 
 
 ### Remove a document from an editable application
@@ -159,7 +357,53 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
 
 ### Submit (or resubmit) an application for review
@@ -174,5 +418,51 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 
