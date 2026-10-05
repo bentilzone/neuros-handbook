@@ -29,7 +29,13 @@ This page lists the 3 operations in this area, generated from the engine's OpenA
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `data` * | object[] |  |
+| `data[].code` * | string | 2 characters |
+| `data[].name` * | string |  |
+| `data[].currency` * | string | 3 characters |
+| `data[].timezone` * | string |  |
 
 
 ### ISO 4217 currencies with minor units; NGN is the platform default
@@ -41,7 +47,14 @@ object
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `data` * | object[] |  |
+| `data[].code` * | string | 3 characters |
+| `data[].name` * | string |  |
+| `data[].minorUnits` * | integer |  |
+| `data[].status` * | `active` · `inactive` |  |
+| `data[].isDefault` * | boolean |  |
 
 
 ### Units of measure and their universal conversion factors

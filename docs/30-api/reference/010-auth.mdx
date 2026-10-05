@@ -72,7 +72,7 @@ object or object or object
 |---|---|---|
 | `refreshToken` | string |  |
 
-**Response** `201`
+**Response** `204`
 
 object
 
@@ -84,7 +84,7 @@ object
 **Who can call it:** People signed in (not API clients)
 
 
-**Response** `201`
+**Response** `204`
 
 object
 
@@ -200,7 +200,7 @@ Email is the sign-in identity and is not changed here.
 | `password` * | string | at most 72 characters |
 | `code` * | string | at least 6 characters, at most 20 characters |
 
-**Response** `201`
+**Response** `204`
 
 object
 
@@ -293,7 +293,7 @@ object or object or object
 | `currentPassword` * | string | at most 72 characters |
 | `newPassword` * | string | 10–72 characters. at least 10 characters, at most 72 characters |
 
-**Response** `201`
+**Response** `204`
 
 object
 
@@ -605,5 +605,10 @@ Accepts JSON or form-encoded bodies; client credentials in the body or HTTP Basi
 
 **Response** `200`
 
-object
+| Field | Type | Notes |
+|---|---|---|
+| `access_token` * | string |  |
+| `token_type` * | `Bearer` |  |
+| `expires_in` * | integer |  |
+| `scope` * | string |  |
 
