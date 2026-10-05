@@ -10,6 +10,7 @@ This file is for authors and the dev agent; `draft: true` keeps it off the site.
 - **Page shape:** every role-guide page follows the layout in `00-start/index.md`.
 - **Screenshots:** use `<Shot id="persona/page/state" />`, where the id is a key in `src/data/shots.json`.
   - `yarn capture` writes both the PNG and that key. Never add or edit a screenshot by hand.
+  - Capture runs Chromium in Docker (start Docker first), so your shots are the same pixels CI produces.
   - To change a picture or its numbered callouts, change the scenario in `capture/scenarios/`.
 - **Forms:** use `<FieldTable fields={[…]} />`.
   - Cover every field the form shows, including what the *other party* sees and what the field locks or posts.
