@@ -51,6 +51,7 @@ Your tax identifiers, such as a TIN, each with its type and number.
   { name: 'Reservation hold (minutes)', meaning: 'How long stock stays reserved for an order that is not yet confirmed.' },
   { name: 'Default payment terms (days)', meaning: 'The days to pay new customers start with.' },
   { name: 'Quotation validity (days)', meaning: 'How long your quotations hold their prices.' },
+  { name: 'When stock is short', meaning: 'What accepting an order does when there is not enough free stock: reserve what is free and backorder the rest, hold a short line until it can be reserved whole, or refuse to accept the order.', others: 'The customer sees the order accepted; backordered quantities wait for stock.', implications: 'Special-order offers are always backordered: there is no stock to reserve.' },
   { name: 'Segregation of duties', meaning: 'Whoever prepares an adjustment, journal or approval cannot also approve it.', implications: 'You need at least two people with the right roles to post manual journals and adjustments.' },
 ]} />
 

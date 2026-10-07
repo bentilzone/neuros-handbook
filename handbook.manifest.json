@@ -47,6 +47,10 @@
       "10-supplier/55-quotes.mdx",
       "11-distributor/55-quotes.mdx"
     ],
+    "/selling/orders": [
+      "10-supplier/57-orders.mdx",
+      "11-distributor/57-orders.mdx"
+    ],
     "/selling/customers": [
       "10-supplier/50-customers.mdx",
       "11-distributor/50-customers.mdx"
@@ -58,6 +62,10 @@
     "/buying/quotes": [
       "11-distributor/75-buying-quotes.mdx",
       "12-reseller/75-buying-quotes.mdx"
+    ],
+    "/buying/orders": [
+      "11-distributor/77-buying-orders.mdx",
+      "12-reseller/77-buying-orders.mdx"
     ],
     "/suppliers": [
       "11-distributor/70-suppliers.mdx",
