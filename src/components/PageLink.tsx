@@ -4,9 +4,9 @@ import Link from '@docusaurus/Link';
 import type { ReactNode } from 'react';
 
 const PAGES: Record<string, string[]> = {
-  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'customers', 'inventory', 'fulfilment', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'customers', 'marketplace', 'buying-quotes', 'buying-orders', 'buying-invoices', 'suppliers', 'inventory', 'fulfilment', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'buying-orders', 'buying-invoices', 'suppliers', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'customers', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'customers', 'marketplace', 'buying-quotes', 'buying-orders', 'buying-invoices', 'suppliers', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'buying-orders', 'buying-invoices', 'suppliers', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
 };
 
 export default function PageLink({ who, page, hash, children }: { who: string; page: string; hash?: string; children: ReactNode }) {

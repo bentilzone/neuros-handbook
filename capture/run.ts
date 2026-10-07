@@ -78,6 +78,13 @@ async function settle(page: Page) {
 async function go(page: Page, path: string) {
   await page.keyboard.press('Escape').catch(() => undefined);
   await page.evaluate(() => document.getElementById('nh-callouts')?.remove());
+  // The bell opens the notifications list in the aside and it stays open across in-app navigation:
+  // close it, so one scenario's bell never shows in the next picture.
+  // A collapsed aside is moved off-screen, not hidden, so check it is on screen before clicking.
+  const asideClose = page.locator('aside button[aria-label="Close"]');
+  // count() does not wait; boundingBox() alone would wait for a button a panel has replaced.
+  const box = (await asideClose.count()) ? await asideClose.boundingBox({ timeout: 500 }).catch(() => null) : null;
+  if (box && box.x >= 0 && box.x < VIEWPORT.width) await asideClose.click({ timeout: 2000 }).catch(() => undefined);
   // Through a route that matches nothing, so the target page mounts fresh (drawers closed).
   for (const p of ['/__handbook__', path]) {
     await page.evaluate((to) => { window.history.pushState({}, '', to); window.dispatchEvent(new PopStateEvent('popstate')); }, p);
