@@ -56,6 +56,10 @@ An approved change makes a new **revision** of the order, for example *SO-2026-0
 
 Accepting and rejecting needs `order:accept`; reserving stock needs `order:allocate`; changes need `order:amend`; cancelling needs `order:cancel`.
 
+## Invoices
+
+An accepted order lists its **invoices** under its shipments. They are issued as it ships, or when you accept it, by your **Invoice orders** setting; see <PageLink who={props.who} page="invoices">Invoices</PageLink>. Its **Payment** status follows them, and an order that is paid and delivered is **Completed**. An invoiced order cannot be cancelled or changed until its invoices are void.
+
 ## Live
 
 A new order, an approval, a cancellation or a proposed change appears on its own, on both sides.

@@ -65,6 +65,21 @@ const shipment: Scenario = {
   ],
 };
 
+// From seed:trade: the credit order's invoice, half paid by transfer.
+const invoice: Scenario = {
+  id: 'distributor/invoices/detail',
+  persona: 'distributor',
+  path: '/selling/invoices',
+  title: 'An invoice part paid',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: /^Outstanding$/, nth: 1 }, text: 'What the customer still owes on it.', side: 'left' },
+    { n: 2, target: { text: /^Payment RCT-/ }, text: 'Each payment and credit note that settled part of it.', side: 'left' },
+    { n: 3, target: { role: 'button', name: 'Record payment' }, text: 'Record what they paid against this invoice.', side: 'top' },
+    { n: 4, target: { role: 'button', name: 'Credit note' }, text: 'Reduce what they owe, with a reason they see.', side: 'bottom' },
+  ],
+};
+
 export default [...walk({
   persona: 'distributor',
   company: 'Lagos Industrial Supplies Ltd',
@@ -74,4 +89,4 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
-}), credit, newQuotation, draft, order, shipment];
+}), credit, newQuotation, draft, order, shipment, invoice];

@@ -159,6 +159,14 @@
     "/fulfilment": [
       "10-supplier/85-fulfilment.mdx",
       "11-distributor/85-fulfilment.mdx"
+    ],
+    "/selling/invoices": [
+      "10-supplier/58-invoices.mdx",
+      "11-distributor/58-invoices.mdx"
+    ],
+    "/buying/invoices": [
+      "11-distributor/78-buying-invoices.mdx",
+      "12-reseller/78-buying-invoices.mdx"
     ]
   }
 }
