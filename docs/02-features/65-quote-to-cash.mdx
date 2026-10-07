@@ -1,0 +1,64 @@
+---
+title: Quote to cash
+sidebar_label: Quote to cash
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['order:create', 'order:accept', 'shipment:manage', 'payment:initiate']} />
+
+One order between a seller and a buyer, from the price to the money: what each side does, what the other sees, and what lands in each company's books. Every step is recorded against the person who took it, and the other side's screen updates as it happens.
+
+<Video id="quote-to-cash" title="One order from offer to payment: the seller on the left, the buyer on the right" />
+
+## 1. Agree the price
+The buyer starts from an offer they can see in the [marketplace](./60-buying.mdx), priced for them by the seller's own rules, or asks for a [quotation](../01-glossary/30-selling-and-pricing.mdx#quotation). A quotation fixes prices and terms until its date; the seller can send a revision, and the buyer accepts or declines it. An accepted quotation becomes the order, at its prices. An expired one cannot.
+
+A private offer (customers only, or invited buyers only) is never shown to a company without an approved account with that seller, and cannot be priced or ordered by one.
+
+## 2. Order
+The buyer drafts an [order](../01-glossary/30-selling-and-pricing.mdx#order) to one seller, chooses how to pay from what their account allows, and submits it. Above the submitter's purchase limit, someone else in the buyer's company approves it first. The seller is told at once.
+
+## 3. Accept
+The seller accepts or rejects with a reason. Accepting:
+- freezes the prices: a later price change touches only new orders;
+- on credit, claims the order's total from the buyer's [credit](../01-glossary/40-relationships.mdx#credit-limit), refused over the limit unless the seller approved an override;
+- [allocates](../01-glossary/30-selling-and-pricing.mdx#allocation-stock-reserved-for-an-order) free stock to the order. Two orders accepted at the same moment can never take the same last unit; what is short is [backordered](../01-glossary/30-selling-and-pricing.mdx#backorder) by the seller's setting. On prepay, stock is reserved once the order is paid; on escrow, once the partner confirms the funds.
+
+Either side can propose a change while nothing has shipped; the other approves or rejects it.
+
+## 4. Ship and prove delivery
+The seller starts a [shipment](../01-glossary/30-selling-and-pricing.mdx#shipment) from what is allocated, picks it from the [pick list](../01-glossary/30-selling-and-pricing.mdx#pick-list), packs it (naming serial numbers where the product is tracked) and dispatches it with how it travels and a tracking reference. At dispatch its stock leaves inventory at cost. The seller attaches the signed delivery note or a photo as [delivery proof](../01-glossary/30-selling-and-pricing.mdx#delivery-proof) and marks it delivered; the buyer opens the proof and confirms receipt.
+
+## 5. Invoice
+The seller's [sales invoice](../01-glossary/30-selling-and-pricing.mdx#sales-invoice) is issued per shipment as it is dispatched, or once for the whole order on acceptance, by the seller's setting. It is in the order's currency and due after the account's payment terms. The buyer reads it as a [purchase invoice](../01-glossary/30-selling-and-pricing.mdx#purchase-invoice) addressed to them.
+
+## 6. Get paid
+By the arrangement on the account:
+
+| Arrangement | The buyer | The seller |
+|---|---|---|
+| Bank transfer | Pays outside Neuros, then **I have paid** with the bank reference and the slip | Checks the bank, then **Confirm received** (a receipt that pays the order's invoices) or **Not received** with a reason |
+| Pay before dispatch | The same, before anything ships | Stock is reserved once it is paid; an order left unpaid cancels itself |
+| On credit | Pays each invoice by its due date | Records the payment; the credit it used is free again |
+| Escrow | **Pay into escrow**, then **Release to the seller** when satisfied | Ships once the partner confirms the funds; can **Refund the buyer** before release |
+
+Escrow money is held by the partner under an [escrow agreement](../01-glossary/40-relationships.mdx#escrow-agreement), released by the buyer's instruction or a set number of days after delivery, never by delivery alone, and held while a dispute is open. When everything is delivered and paid, the order is complete.
+
+## In each company's books
+Only the seller posts. Each entry is in the seller's own functional currency, balanced, and visible to no other company:
+
+| When | Seller's journal |
+|---|---|
+| Dispatch | Cost of goods sold, off inventory, at the stock's cost |
+| Invoice issued | What the customer owes, to sales and output tax |
+| Payment received | To the bank, off what the customer owes |
+| Escrow funded | To money held in escrow, off what the customer owes |
+| Escrow released | To the bank, off money held in escrow |
+
+An order in another currency stays in that currency on the order, the invoice and the receipt. The seller's books carry it at the rate on the day, and a payment at a different rate posts the exchange gain or loss. The buyer's own payables arrive with procurement.
+
+## Notifications
+Each step tells the people on the other side who need to act or know: a new order to those who accept orders, acceptance and dispatch to the buyer, a payment notice to those who confirm payments. See [notifications](../11-distributor/95-notifications.mdx).
+
+## In the guides
+- Seller: <PageLink who="distributor" page="quotes">Quotes</PageLink>, <PageLink who="distributor" page="orders">Orders</PageLink>, <PageLink who="distributor" page="fulfilment">Fulfilment</PageLink>, <PageLink who="distributor" page="invoices">Invoices</PageLink>.
+- Buyer: <PageLink who="reseller" page="buying-quotes">Quotes</PageLink>, <PageLink who="reseller" page="buying-orders">Orders</PageLink>, <PageLink who="reseller" page="buying-invoices">Invoices</PageLink>.
