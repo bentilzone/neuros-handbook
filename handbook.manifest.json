@@ -167,6 +167,12 @@
     "/buying/invoices": [
       "11-distributor/78-buying-invoices.mdx",
       "12-reseller/78-buying-invoices.mdx"
+    ],
+    "/notifications": [
+      "10-supplier/95-notifications.mdx",
+      "11-distributor/95-notifications.mdx",
+      "12-reseller/95-notifications.mdx",
+      "30-api/90-live-updates.mdx"
     ]
   }
 }

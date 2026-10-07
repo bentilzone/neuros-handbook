@@ -211,6 +211,16 @@ export function walk(w: Walk): Scenario[] {
   ];
 
   const system: Scenario[] = [
+    shot('notifications/bell', '/', 'Notifications beside the page', {
+      steps: click(/^Notifications/),
+      callouts: [
+        { n: 1, target: { role: 'button', name: /^Notifications/ }, text: 'Your unread count; orange when something needs you.', side: 'left' },
+        { n: 2, target: { role: 'button', name: 'See all' }, text: 'Every notification, read and unread, by category.', side: 'left' },
+      ],
+    }),
+    shot('notifications/list', '/notifications?show=all', 'Notifications', {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Mark all read' }, text: 'Clear them all, or only the category you filtered.', side: 'left' }],
+    }),
     shot('members/list', '/members', 'Members'),
     shot('members/detail', '/members', 'A member', { steps: firstRow }),
     shot('roles/list', '/roles', 'Roles'),

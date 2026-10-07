@@ -1,0 +1,52 @@
+{/* Shared by every guide that has this page: <Notifications who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} permission="notification:read" />
+
+Notifications tell you what happened that concerns you: an order arrived, a payment was confirmed, a change waits for your answer. They are yours alone. Each person sees only their own, in the company they are working in. See [notification](../01-glossary/90-platform.mdx#notification).
+
+## The bell
+
+The bell at the top right counts your unread notifications. It turns orange when some of them need you to act. Click it to see the latest beside the page. Click one to open what it is about; that also marks it read.
+
+<Shot id={`${props.who}/notifications/bell`} />
+
+- New notifications arrive as they happen; you do not need to reload.
+- One that needs you to act, such as a new order to accept, also shows a short note at the top of the screen.
+- Reading a notification in one tab marks it read in your other tabs too.
+- The number in your browser tab's title is your unread count.
+
+## All your notifications
+
+**See all** opens this page. It lists your unread notifications first; choose **All** to see the ones you have read. Filter by category, and use **Mark all read** to clear them.
+
+<Shot id={`${props.who}/notifications/list`} />
+
+## Who is told what
+
+You are told about things you can act on, or that you started. You are never told about something you did yourself.
+
+| When | Who is told |
+|---|---|
+| A customer asks for a quotation | The seller's people who prepare quotations |
+| A quotation is sent | The buyer who asked for it, and people who can accept quotations |
+| A quotation is accepted or declined | The seller's people who prepared it |
+| An order is placed | The seller's people who can accept orders (also by email) |
+| An order is accepted or rejected | The buyer's people who placed it (also by email) |
+| A change to an order is proposed, approved or rejected | The other side: who placed or accepted the order, and people who can change orders |
+| An order is cancelled | The other side |
+| An order ships | The buyer's people who placed it (also by email, with the tracking reference) |
+| A delivery is recorded | The buyer, to confirm receipt |
+| A delivery fails | Both sides' people who handle shipments |
+| A buyer confirms receipt | The seller's people who handle shipments |
+| An invoice is issued | The buyer's people who can see bills (the billing contact is emailed the invoice) |
+| A buyer says they paid | The seller's people who record payments |
+| A payment is confirmed or not received | The buyer's people who placed the order (confirmed: also by email) |
+| An order is funded, released or refunded in escrow | The seller's people who ship (funded) or see payments (released); the buyer (refunded) |
+
+When nobody in a company fits, its system administrator is told, so nothing that needs an answer is missed.
+
+## Common questions
+
+**Why did a colleague get a notification I did not?** Notifications follow what each person can do. Someone who can accept orders hears of new orders; someone who only handles stock does not.
+
+**How long are notifications kept?** Read ones for 90 days; everything for a year.
