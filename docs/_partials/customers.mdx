@@ -34,6 +34,7 @@ The same form sets the terms when you approve, when you open an account yourself
   { name: 'Usually pays by', meaning: 'The arrangement their orders start with.', rules: 'One of the ways they may pay.' },
   { name: 'Days to pay', meaning: 'How long after the order or delivery they have to pay.', others: 'Shown on their side as their terms.', rules: '0 means on order or delivery.' },
   { name: 'Credit-eligible', meaning: 'Allows orders on credit, within their credit limit.', implications: 'Switching it off also removes On credit from the ways they may pay.' },
+  { name: 'Accept their orders automatically', meaning: 'Accepts this customer’s orders the moment they submit them, without waiting for you.', others: 'Their orders are confirmed at once.', implications: 'Credit and stock are still checked: an order over their credit, or one your shortfall setting refuses, waits for you instead. Your company-wide Order acceptance setting does the same for every customer.' },
   { name: 'Largest order', meaning: 'The most a single order may be worth.', implications: 'Orders above this need a new agreement.', rules: 'Empty means no limit.' },
   { name: 'Trades from', meaning: 'When the account starts, and optionally when it ends.', rules: 'Empty means from now, open-ended.' },
   { name: 'Private notes', meaning: 'Anything your team should know about this customer.', others: 'Only your company sees these. The customer keeps their own notes, which you never see.' },
@@ -60,8 +61,8 @@ A **credit-eligible** customer's account has a **Credit** section. Both of you s
 - **Available:** the limit less what is in use.
 - **Expires:** after this date, new orders cannot use credit until you renew the limit.
 
-:::note[Orders arrive with ordering]
-Ordering on credit comes with quotations and orders. Until then, **In use** stays at zero.
+:::note[Credit and orders]
+Accepting an order on credit claims its total; cancelling it gives the credit back. Paying it will give it back too, once invoices and payments arrive.
 :::
 
 **Set limit** (or **Change limit**) needs a sign-in made with [two-step verification](../01-glossary/10-companies-and-people.mdx#two-step-verification-mfa):

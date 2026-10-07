@@ -1,0 +1,67 @@
+{/* Shared by the selling guides: <OrdersSelling who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="order:read" />
+
+Orders is where your customers' orders arrive: you accept or reject them, reserve their stock, and agree any changes. An order is one customer buying from you, at prices fixed when they priced it. See [order](../01-glossary/30-selling-and-pricing.mdx#order).
+
+<Shot id={`${props.who}/orders/list`} />
+
+Each order shows three statuses side by side, because each moves on its own:
+
+| Status | What it says | Values |
+|---|---|---|
+| Order | Where the agreement stands | Waiting for the seller, Accepted, Rejected, Cancelled, Completed |
+| Payment | Whether it is paid | Awaiting payment, Part paid, Paid, Refunded |
+| Stock | What is reserved or shipped | Not reserved, Partly reserved, Stock reserved, then dispatch and delivery |
+
+You never see a customer's draft. An order appears here when they submit it, or once their approver approves it.
+
+## Accept or reject
+
+{props.who === 'distributor' && <Shot id="distributor/orders/detail" />}
+
+**Accept** confirms the order. What it does depends on how the customer pays:
+
+- **On credit:** it claims the order's total from the customer's [credit](../01-glossary/40-relationships.mdx#credit-limit). Over their available credit it is refused, unless you choose a **credit override** you approved under <PageLink who={props.who} page="customers">Customers</PageLink>.
+- **On credit or by bank transfer:** it reserves the stock now, by your **When stock is short** setting (under Settings, My company).
+- **Paying first or by escrow:** stock is reserved once they have paid.
+
+**Reject** declines the order with a reason the customer sees.
+
+Prices do not change after acceptance: a later price list or offer change only affects new orders.
+
+:::tip[Accepting automatically]
+Switch on **Accept their orders automatically** in a customer's terms, or set **Order acceptance** to automatic for every customer. An order that fails the credit or stock check still waits for you.
+:::
+
+## Stock short
+
+With the default setting, accepting reserves what is free and **backorders** the rest. A line shows how much is reserved and how much is backordered. When stock arrives, **Reserve stock** reserves what the order is still waiting for. Lines for special-order offers are always backordered.
+
+## Change an order
+
+Either side can **propose a change** to an order that is waiting or accepted and not yet shipped: a new quantity per line (0 removes it) or a new delivery date. The other side approves or rejects it.
+
+<FieldTable fields={[
+  { name: 'Quantity (per line)', meaning: 'The new quantity of that line.', others: 'They see the old and new quantity before deciding.', implications: 'Keeps the line’s agreed price. On an accepted order, its stock reservation and any credit follow the new total once approved.', rules: '0 removes the line; an order keeps at least one.' },
+  { name: 'Deliver by', meaning: 'A new delivery date.' },
+  { name: 'Reason', required: true, meaning: 'Why the order should change.', others: 'They read it before deciding.' },
+]} />
+
+An approved change makes a new **revision** of the order, for example *SO-2026-000004 rev 2*.
+
+## Cancel
+
+**Cancel order** on an accepted order gives back its reserved stock and claimed credit, with a reason the customer sees. Once part of it has shipped it can no longer be cancelled.
+
+Accepting and rejecting needs `order:accept`; reserving stock needs `order:allocate`; changes need `order:amend`; cancelling needs `order:cancel`.
+
+## Live
+
+A new order, an approval, a cancellation or a proposed change appears on its own, on both sides.
+
+## Common questions
+
+**Why was accepting refused?** The order is over the customer's available credit, or your **When stock is short** setting is *Refuse* and stock is short. The message says which.
+
+**The customer changed their price list. Do their orders change?** No. An order keeps the prices it was placed at.

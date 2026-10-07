@@ -27,6 +27,25 @@
     "title": "Audit log",
     "callouts": []
   },
+  "distributor/buying-orders/list": {
+    "file": "distributor/buying-orders/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Orders",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Draft an order to one supplier, at your price."
+      }
+    ]
+  },
+  "distributor/buying-orders/new": {
+    "file": "distributor/buying-orders/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New order",
+    "callouts": []
+  },
   "distributor/buying-quotes/list": {
     "file": "distributor/buying-quotes/list.png",
     "width": 1440,
@@ -466,6 +485,42 @@
     "title": "New offer",
     "callouts": []
   },
+  "distributor/orders/detail": {
+    "file": "distributor/orders/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An order to accept",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The lines at the customer’s price, fixed when they ordered."
+      },
+      {
+        "n": 2,
+        "text": "Accept claims credit if they pay on credit, and reserves the stock."
+      },
+      {
+        "n": 3,
+        "text": "Reject with a reason they see."
+      }
+    ]
+  },
+  "distributor/orders/list": {
+    "file": "distributor/orders/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Orders",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Orders waiting for you, accepted, rejected or cancelled."
+      },
+      {
+        "n": 2,
+        "text": "Three statuses each: the order, its payment, and its stock."
+      }
+    ]
+  },
   "distributor/pricing/check": {
     "file": "distributor/pricing/check.png",
     "width": 1440,
@@ -648,7 +703,7 @@
   "distributor/settings/company-policies": {
     "file": "distributor/settings/company-policies.png",
     "width": 1440,
-    "height": 903,
+    "height": 1000,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -1217,6 +1272,41 @@
     "title": "Audit log",
     "callouts": []
   },
+  "reseller/buying-orders/detail": {
+    "file": "reseller/buying-orders/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An accepted order",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The order, its payment and its stock, each with its own status."
+      },
+      {
+        "n": 2,
+        "text": "Ask for a new quantity or date; the supplier approves or rejects it."
+      }
+    ]
+  },
+  "reseller/buying-orders/list": {
+    "file": "reseller/buying-orders/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Orders",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Draft an order to one supplier, at your price."
+      }
+    ]
+  },
+  "reseller/buying-orders/new": {
+    "file": "reseller/buying-orders/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New order",
+    "callouts": []
+  },
   "reseller/buying-quotes/detail": {
     "file": "reseller/buying-quotes/detail.png",
     "width": 1440,
@@ -1500,7 +1590,7 @@
   "reseller/settings/company-policies": {
     "file": "reseller/settings/company-policies.png",
     "width": 1440,
-    "height": 903,
+    "height": 1000,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -1961,6 +2051,22 @@
     "title": "New offer",
     "callouts": []
   },
+  "supplier/orders/list": {
+    "file": "supplier/orders/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Orders",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Orders waiting for you, accepted, rejected or cancelled."
+      },
+      {
+        "n": 2,
+        "text": "Three statuses each: the order, its payment, and its stock."
+      }
+    ]
+  },
   "supplier/pricing/check": {
     "file": "supplier/pricing/check.png",
     "width": 1440,
@@ -2116,7 +2222,7 @@
   "supplier/settings/company-policies": {
     "file": "supplier/settings/company-policies.png",
     "width": 1440,
-    "height": 903,
+    "height": 1000,
     "title": "My company: operating policies",
     "callouts": []
   },
