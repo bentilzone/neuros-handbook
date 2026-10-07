@@ -524,6 +524,10 @@
       {
         "n": 1,
         "text": "Your price for a quantity, worked out from your account terms with this seller."
+      },
+      {
+        "n": 2,
+        "text": "Put it in the order you are building with this seller."
       }
     ]
   },
@@ -1454,6 +1458,26 @@
       }
     ]
   },
+  "reseller/buying-orders/edit": {
+    "file": "reseller/buying-orders/edit.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Edit a draft order",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Change a quantity; saving prices every line again."
+      },
+      {
+        "n": 2,
+        "text": "Take a line out of the basket."
+      },
+      {
+        "n": 3,
+        "text": "Still yours alone until you submit it."
+      }
+    ]
+  },
   "reseller/buying-orders/escrow": {
     "file": "reseller/buying-orders/escrow.png",
     "width": 1440,
@@ -1688,6 +1712,10 @@
       {
         "n": 1,
         "text": "Your price for a quantity, worked out from your account terms with this seller."
+      },
+      {
+        "n": 2,
+        "text": "Put it in the order you are building with this seller."
       }
     ]
   },

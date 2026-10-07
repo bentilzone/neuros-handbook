@@ -61,6 +61,25 @@ const invoice: Scenario = {
   ],
 };
 
+// From seed:trade: the basket Ikeja Hardware is still building with Lagos Industrial.
+const edit: Scenario = {
+  id: 'reseller/buying-orders/edit',
+  persona: 'reseller',
+  path: '/buying/orders?status=draft',
+  title: 'Edit a draft order',
+  steps: async (page: Page) => {
+    await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+    // The whole form in view, so placing a callout never scrolls the aside under the others.
+    await page.getByRole('button', { name: 'Save draft' }).scrollIntoViewIfNeeded();
+  },
+  callouts: [
+    { n: 1, target: { role: 'textbox', name: /^Quantity of / }, text: 'Change a quantity; saving prices every line again.', side: 'left' },
+    { n: 2, target: { role: 'button', name: /^Remove / }, text: 'Take a line out of the basket.', side: 'top' },
+    { n: 3, target: { role: 'button', name: 'Save draft' }, text: 'Still yours alone until you submit it.', side: 'top' },
+  ],
+};
+
 // From seed:trade: an escrow order funded with the partner.
 const escrow: Scenario = {
   id: 'reseller/buying-orders/escrow',
@@ -85,4 +104,4 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
-}), quotation, order, shipment, invoice, escrow];
+}), quotation, order, shipment, invoice, edit, escrow];
