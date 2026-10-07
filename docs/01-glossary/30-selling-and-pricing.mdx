@@ -83,3 +83,14 @@ The part of an accepted order that could not be reserved because stock was short
 ### Amendment
 A change to a waiting or accepted order (quantities, removed lines, a new delivery date) proposed by one side and approved or rejected by the other. Quantities keep their agreed price. An approved amendment makes a new revision of the order (*SO-2026-000004 rev 2*).
 
+### Shipment
+One delivery of an accepted order, from one warehouse: picking, packed, on its way (dispatched), delivered, or cancelled. An order can go out in several. Its stock leaves inventory, and its cost of goods sold is posted, when it is dispatched.
+
+### Pick list
+For one warehouse, everything waiting to be picked: each shipment's items, quantities, the bins their stock is reserved in, and the serial numbers reserved.
+
+### Delivery proof
+The signed delivery note or a photo the seller attaches to a dispatched shipment. A shipment cannot be marked delivered without one.
+
+### Failed delivery
+A dispatched shipment that did not arrive. The seller records the reason, which the buyer sees, and it goes back to packed to dispatch again; its stock is not taken twice.

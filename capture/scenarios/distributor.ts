@@ -50,6 +50,21 @@ const order: Scenario = {
   ],
 };
 
+// From seed:trade: the credit order's shipment, dispatched by own fleet.
+const shipment: Scenario = {
+  id: 'distributor/fulfilment/detail',
+  persona: 'distributor',
+  path: '/fulfilment?status=dispatched',
+  title: 'A shipment on its way',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: 'LIS-TRK-0412', nth: 1 }, text: 'How it goes and its tracking reference: the customer sees both.', side: 'left' },
+    { n: 2, target: { role: 'button', name: 'Add proof' }, text: 'Attach the signed delivery note or a photo.', side: 'top' },
+    { n: 3, target: { role: 'button', name: 'Delivered' }, text: 'Delivered needs proof first.', side: 'top' },
+    { n: 4, target: { role: 'button', name: 'Delivery failed' }, text: 'Record why it did not arrive; it goes back to packed.', side: 'bottom' },
+  ],
+};
+
 export default [...walk({
   persona: 'distributor',
   company: 'Lagos Industrial Supplies Ltd',
@@ -59,4 +74,4 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
-}), credit, newQuotation, draft, order];
+}), credit, newQuotation, draft, order, shipment];

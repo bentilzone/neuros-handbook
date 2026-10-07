@@ -202,6 +202,53 @@
       }
     ]
   },
+  "distributor/fulfilment/detail": {
+    "file": "distributor/fulfilment/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A shipment on its way",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "How it goes and its tracking reference: the customer sees both."
+      },
+      {
+        "n": 2,
+        "text": "Attach the signed delivery note or a photo."
+      },
+      {
+        "n": 3,
+        "text": "Delivered needs proof first."
+      },
+      {
+        "n": 4,
+        "text": "Record why it did not arrive; it goes back to packed."
+      }
+    ]
+  },
+  "distributor/fulfilment/list": {
+    "file": "distributor/fulfilment/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your shipments, and what to pick in each warehouse."
+      },
+      {
+        "n": 2,
+        "text": "Picking, packed, on its way, delivered or cancelled."
+      }
+    ]
+  },
+  "distributor/fulfilment/pick": {
+    "file": "distributor/fulfilment/pick.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: pick list",
+    "callouts": []
+  },
   "distributor/inventory/adjustment-new": {
     "file": "distributor/inventory/adjustment-new.png",
     "width": 1440,
@@ -341,7 +388,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1138,
+    "height": 1217,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -1284,7 +1331,7 @@
       },
       {
         "n": 2,
-        "text": "Ask for a new quantity or date; the supplier approves or rejects it."
+        "text": "Its shipments: open one to follow it and confirm receipt."
       }
     ]
   },
@@ -1306,6 +1353,22 @@
     "height": 900,
     "title": "New order",
     "callouts": []
+  },
+  "reseller/buying-orders/shipment": {
+    "file": "reseller/buying-orders/shipment.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A shipment on its way to you",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "How it travels, and the reference to follow it."
+      },
+      {
+        "n": 2,
+        "text": "Tell the supplier it arrived."
+      }
+    ]
   },
   "reseller/buying-quotes/detail": {
     "file": "reseller/buying-quotes/detail.png",
@@ -1803,6 +1866,29 @@
         "text": "Live: this tab is connected, so changes others make appear on their own."
       }
     ]
+  },
+  "supplier/fulfilment/list": {
+    "file": "supplier/fulfilment/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your shipments, and what to pick in each warehouse."
+      },
+      {
+        "n": 2,
+        "text": "Picking, packed, on its way, delivered or cancelled."
+      }
+    ]
+  },
+  "supplier/fulfilment/pick": {
+    "file": "supplier/fulfilment/pick.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: pick list",
+    "callouts": []
   },
   "supplier/inventory/adjustment-new": {
     "file": "supplier/inventory/adjustment-new.png",
