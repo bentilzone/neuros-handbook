@@ -8,7 +8,7 @@ description: "Orders between a buyer and one seller: draft, submit, approve, acc
 
 Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel.
 
-This page lists the 13 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 15 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -17,6 +17,7 @@ This page lists the 13 operations in this area, generated from the engine's Open
 | [GET `/v1/orders`](#orders-you-placed-buying-or-received-selling) | Orders you placed (buying) or received (selling) | `order:read` |
 | [POST `/v1/orders`](#buyer-draft-an-order-from-an-accepted-quotation-or-from-one-sellers-offers) | Buyer: draft an order, from an accepted quotation or from one seller’s offers | `order:create` |
 | [GET `/v1/orders/{id}`](#one-order) | One order | `order:read` |
+| [PATCH `/v1/orders/{id}`](#buyer-change-a-draft-order-the-basket-for-one-seller) | Buyer: change a draft order (the basket for one seller) | `order:create` |
 | [POST `/v1/orders/{id}/accept`](#seller-accept-the-order) | Seller: accept the order | `order:accept` |
 | [POST `/v1/orders/{id}/allocate`](#seller-reserve-stock-for-what-accepted-lines-still-wait-for) | Seller: reserve stock for what accepted lines still wait for | `order:allocate` |
 | [POST `/v1/orders/{id}/amendments`](#propose-a-change-quantities-added-lines-or-the-delivery-date) | Propose a change: quantities, added lines or the delivery date | `order:amend` |
@@ -24,6 +25,7 @@ This page lists the 13 operations in this area, generated from the engine's Open
 | [POST `/v1/orders/{id}/amendments/{n}/reject`](#reject-the-other-sides-amendment-with-a-reason) | Reject the other side’s amendment, with a reason | `order:amend` |
 | [POST `/v1/orders/{id}/approve`](#buyer-approve-an-order-held-above-its-submitters-purchase-limit) | Buyer: approve an order held above its submitter’s purchase limit | `order:approve` |
 | [POST `/v1/orders/{id}/cancel`](#cancel-the-order-with-a-reason) | Cancel the order, with a reason | `order:cancel` |
+| [POST `/v1/orders/{id}/lines`](#buyer-add-an-offer-to-a-draft-order) | Buyer: add an offer to a draft order | `order:create` |
 | [GET `/v1/orders/{id}/pdf`](#the-order-confirmation-once-accepted-as-a-pdf) | The order (confirmation, once accepted) as a PDF | `order:read` |
 | [POST `/v1/orders/{id}/reject`](#seller-reject-the-order-with-a-reason-the-buyer-sees) | Seller: reject the order, with a reason the buyer sees | `order:accept` |
 | [POST `/v1/orders/{id}/submit`](#buyer-submit-the-draft-to-the-seller) | Buyer: submit the draft to the seller | `order:create` |
@@ -42,6 +44,7 @@ This page lists the 13 operations in this area, generated from the engine's Open
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `view` | query | `selling` · `buying` |  |
 | `status` | query | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` |  |
+| `sellerOrganizationId` | query | string | Only orders with this seller (your buying side). 24 characters |
 
 **Response** `200`
 
@@ -337,6 +340,161 @@ The seller never sees the buyer’s draft. Commercial, payment and fulfilment st
 | Parameter | In | Type | Notes |
 |---|---|---|---|
 | `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `number` | string | may be null |
+| `buyerReference` | string | may be null |
+| `quotationId` | string | 24 characters, may be null |
+| `relationshipId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
+| `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
+| `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
+| `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
+| `termsDays` | number | may be null |
+| `currency` | string | may be null |
+| `lines` | object[] |  |
+| `lines[].lineId` | string | may be null |
+| `lines[].offerId` | string | 24 characters, may be null |
+| `lines[].productId` | string | 24 characters, may be null |
+| `lines[].title` | string | may be null |
+| `lines[].sellerSku` | string | may be null |
+| `lines[].product` | object | may be null |
+| `lines[].stockMode` | string | may be null |
+| `lines[].quantity` | string | may be null |
+| `lines[].unit` | string | may be null |
+| `lines[].baseQuantity` | string | may be null |
+| `lines[].unitPrice` | object | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].net` | object | may be null |
+| `lines[].taxCodeId` | string | 24 characters, may be null |
+| `lines[].taxCode` | string | may be null |
+| `lines[].ratePercent` | string | may be null |
+| `lines[].treatment` | `taxed` · `exempt` · `untaxed` | may be null |
+| `lines[].tax` | object | may be null |
+| `lines[].allocated` | string | may be null |
+| `lines[].backordered` | string | may be null |
+| `lines[].dispatched` | string | may be null |
+| `lines[].id` | string | 24 characters |
+| `freight` | object | may be null |
+| `freight.amount` | string | may be null |
+| `freight.currency` | string (one of 155) | may be null |
+| `freight.id` | string | 24 characters |
+| `subtotal` | object | may be null |
+| `subtotal.amount` | string | may be null |
+| `subtotal.currency` | string (one of 155) | may be null |
+| `subtotal.id` | string | 24 characters |
+| `taxTotal` | object | may be null |
+| `taxTotal.amount` | string | may be null |
+| `taxTotal.currency` | string (one of 155) | may be null |
+| `taxTotal.id` | string | 24 characters |
+| `total` | object | may be null |
+| `total.amount` | string | may be null |
+| `total.currency` | string (one of 155) | may be null |
+| `total.id` | string | 24 characters |
+| `seller` | object | may be null |
+| `seller.name` | string | may be null |
+| `seller.legalName` | string | may be null |
+| `seller.taxIds` | object[] |  |
+| `seller.address` | object | may be null |
+| `seller.id` | string | 24 characters |
+| `buyer` | object | may be null |
+| `buyer.name` | string | may be null |
+| `buyer.legalName` | string | may be null |
+| `buyer.taxIds` | object[] |  |
+| `buyer.address` | object | may be null |
+| `buyer.id` | string | 24 characters |
+| `deliveryAddress` | string | may be null |
+| `requestedDeliveryDate` | string (date-time) | may be null |
+| `notes` | string | may be null |
+| `sellerNotes` | string | may be null |
+| `revision` | number | may be null |
+| `amendments` | object[] |  |
+| `amendments[].n` | number | may be null |
+| `amendments[].status` | `pending` · `approved` · `rejected` | may be null |
+| `amendments[].proposedBySide` | `seller` · `buyer` | may be null |
+| `amendments[].proposedBy` | string | may be null |
+| `amendments[].proposedAt` | string (date-time) | may be null |
+| `amendments[].reason` | string | may be null |
+| `amendments[].changes` | object | may be null |
+| `amendments[].decidedBy` | string | may be null |
+| `amendments[].decidedAt` | string (date-time) | may be null |
+| `amendments[].decisionReason` | string | may be null |
+| `amendments[].id` | string | 24 characters |
+| `submittedBy` | string | may be null |
+| `submittedAt` | string (date-time) | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `acceptedBy` | string | may be null |
+| `acceptedAt` | string (date-time) | may be null |
+| `statusReason` | string | may be null |
+| `creditReference` | string | may be null |
+| `createdBy` | string | may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `sellerOrganizationId` | string | 24 characters, may be null |
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+| `viewerSide` * | `seller` · `buyer` | may be null |
+| `sellerOrg` * | object | may be null |
+| `sellerOrg.id` * | string |  |
+| `sellerOrg.name` * | string |  |
+| `sellerOrg.legalName` * | string |  |
+| `sellerOrg.slug` | string | may be null |
+| `sellerOrg.jurisdiction` | string | may be null |
+| `sellerOrg.status` | string |  |
+| `buyerOrg` * | object | may be null |
+| `buyerOrg.id` * | string |  |
+| `buyerOrg.name` * | string |  |
+| `buyerOrg.legalName` * | string |  |
+| `buyerOrg.slug` | string | may be null |
+| `buyerOrg.jurisdiction` | string | may be null |
+| `buyerOrg.status` | string |  |
+
+
+### Buyer: change a draft order (the basket for one seller)
+
+<span className="nh-method nh-method--patch">PATCH</span> `/v1/orders/{id}`
+
+Only while it is a draft. Lines given replace the draft’s lines (keep a line’s lineId to keep it) and are priced now, as on create; a quotation’s order keeps the quotation’s lines (QUOTE_LINES_FIXED). The payment mode must be one your terms allow. The seller sees nothing until you submit.
+
+**Who can call it:** People and API clients · **Scope:** `order:create`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `lines` | object[] |  |
+| `lines[].offerId` * | string | 24 characters |
+| `lines[].quantity` * | string |  |
+| `lines[].unit` | string | at most 20 characters |
+| `lines[].lineId` | string | at most 40 characters |
+| `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` |  |
+| `deliveryAddress` | string | at most 500 characters |
+| `requestedDeliveryDate` | string (date-time) | may be null |
+| `buyerReference` | string | at most 100 characters |
+| `notes` | string | at most 2000 characters |
 
 **Response** `200`
 
@@ -1361,6 +1519,154 @@ The buyer before acceptance; either side after it, while nothing has shipped. Gi
 | Field | Type | Notes |
 |---|---|---|
 | `reason` * | string | at least 3 characters, at most 1000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `number` | string | may be null |
+| `buyerReference` | string | may be null |
+| `quotationId` | string | 24 characters, may be null |
+| `relationshipId` | string | 24 characters, may be null |
+| `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
+| `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
+| `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
+| `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
+| `termsDays` | number | may be null |
+| `currency` | string | may be null |
+| `lines` | object[] |  |
+| `lines[].lineId` | string | may be null |
+| `lines[].offerId` | string | 24 characters, may be null |
+| `lines[].productId` | string | 24 characters, may be null |
+| `lines[].title` | string | may be null |
+| `lines[].sellerSku` | string | may be null |
+| `lines[].product` | object | may be null |
+| `lines[].stockMode` | string | may be null |
+| `lines[].quantity` | string | may be null |
+| `lines[].unit` | string | may be null |
+| `lines[].baseQuantity` | string | may be null |
+| `lines[].unitPrice` | object | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].net` | object | may be null |
+| `lines[].taxCodeId` | string | 24 characters, may be null |
+| `lines[].taxCode` | string | may be null |
+| `lines[].ratePercent` | string | may be null |
+| `lines[].treatment` | `taxed` · `exempt` · `untaxed` | may be null |
+| `lines[].tax` | object | may be null |
+| `lines[].allocated` | string | may be null |
+| `lines[].backordered` | string | may be null |
+| `lines[].dispatched` | string | may be null |
+| `lines[].id` | string | 24 characters |
+| `freight` | object | may be null |
+| `freight.amount` | string | may be null |
+| `freight.currency` | string (one of 155) | may be null |
+| `freight.id` | string | 24 characters |
+| `subtotal` | object | may be null |
+| `subtotal.amount` | string | may be null |
+| `subtotal.currency` | string (one of 155) | may be null |
+| `subtotal.id` | string | 24 characters |
+| `taxTotal` | object | may be null |
+| `taxTotal.amount` | string | may be null |
+| `taxTotal.currency` | string (one of 155) | may be null |
+| `taxTotal.id` | string | 24 characters |
+| `total` | object | may be null |
+| `total.amount` | string | may be null |
+| `total.currency` | string (one of 155) | may be null |
+| `total.id` | string | 24 characters |
+| `seller` | object | may be null |
+| `seller.name` | string | may be null |
+| `seller.legalName` | string | may be null |
+| `seller.taxIds` | object[] |  |
+| `seller.address` | object | may be null |
+| `seller.id` | string | 24 characters |
+| `buyer` | object | may be null |
+| `buyer.name` | string | may be null |
+| `buyer.legalName` | string | may be null |
+| `buyer.taxIds` | object[] |  |
+| `buyer.address` | object | may be null |
+| `buyer.id` | string | 24 characters |
+| `deliveryAddress` | string | may be null |
+| `requestedDeliveryDate` | string (date-time) | may be null |
+| `notes` | string | may be null |
+| `sellerNotes` | string | may be null |
+| `revision` | number | may be null |
+| `amendments` | object[] |  |
+| `amendments[].n` | number | may be null |
+| `amendments[].status` | `pending` · `approved` · `rejected` | may be null |
+| `amendments[].proposedBySide` | `seller` · `buyer` | may be null |
+| `amendments[].proposedBy` | string | may be null |
+| `amendments[].proposedAt` | string (date-time) | may be null |
+| `amendments[].reason` | string | may be null |
+| `amendments[].changes` | object | may be null |
+| `amendments[].decidedBy` | string | may be null |
+| `amendments[].decidedAt` | string (date-time) | may be null |
+| `amendments[].decisionReason` | string | may be null |
+| `amendments[].id` | string | 24 characters |
+| `submittedBy` | string | may be null |
+| `submittedAt` | string (date-time) | may be null |
+| `approvedBy` | string | may be null |
+| `approvedAt` | string (date-time) | may be null |
+| `acceptedBy` | string | may be null |
+| `acceptedAt` | string (date-time) | may be null |
+| `statusReason` | string | may be null |
+| `creditReference` | string | may be null |
+| `createdBy` | string | may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `sellerOrganizationId` | string | 24 characters, may be null |
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+| `viewerSide` * | `seller` · `buyer` | may be null |
+| `sellerOrg` * | object | may be null |
+| `sellerOrg.id` * | string |  |
+| `sellerOrg.name` * | string |  |
+| `sellerOrg.legalName` * | string |  |
+| `sellerOrg.slug` | string | may be null |
+| `sellerOrg.jurisdiction` | string | may be null |
+| `sellerOrg.status` | string |  |
+| `buyerOrg` * | object | may be null |
+| `buyerOrg.id` * | string |  |
+| `buyerOrg.name` * | string |  |
+| `buyerOrg.legalName` * | string |  |
+| `buyerOrg.slug` | string | may be null |
+| `buyerOrg.jurisdiction` | string | may be null |
+| `buyerOrg.status` | string |  |
+
+
+### Buyer: add an offer to a draft order
+
+<span className="nh-method nh-method--post">POST</span> `/v1/orders/{id}/lines`
+
+The offer must be the same seller’s (OTHER_SELLER otherwise). The same offer in the same unit adds to that line; every line is priced again, so quantity breaks follow. A quotation’s order keeps the quotation’s lines.
+
+**Who can call it:** People and API clients · **Scope:** `order:create`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `offerId` * | string | 24 characters |
+| `quantity` * | string |  |
+| `unit` | string | at most 20 characters |
 
 **Response** `200`
 
