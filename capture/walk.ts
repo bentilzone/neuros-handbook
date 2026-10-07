@@ -166,6 +166,13 @@ export function walk(w: Walk): Scenario[] {
     shot('inventory/warehouses', '/inventory?tab=warehouses', 'Inventory: warehouses'),
     shot('inventory/warehouse', '/inventory?tab=warehouses', 'A warehouse, with zones and bins', { steps: firstRow }),
     shot('inventory/valuation', '/inventory?tab=valuation', 'Inventory: valuation'),
+    shot('fulfilment/list', '/fulfilment', 'Fulfilment', {
+      callouts: [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, and what to pick in each warehouse.', side: 'right' },
+        { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Picking, packed, on its way, delivered or cancelled.', side: 'bottom' },
+      ],
+    }),
+    shot('fulfilment/pick', '/fulfilment?tab=pick', 'Fulfilment: pick list'),
   ];
 
   const ledger: Scenario[] = [
