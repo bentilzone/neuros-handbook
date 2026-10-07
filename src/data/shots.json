@@ -27,6 +27,29 @@
     "title": "Audit log",
     "callouts": []
   },
+  "distributor/buying-quotes/list": {
+    "file": "distributor/buying-quotes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Quotations suppliers sent you, and the requests you sent."
+      },
+      {
+        "n": 2,
+        "text": "Ask a supplier to price some of their offers for you."
+      }
+    ]
+  },
+  "distributor/buying-quotes/new": {
+    "file": "distributor/buying-quotes/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Request a quote",
+    "callouts": []
+  },
   "distributor/catalogue/browse": {
     "file": "distributor/catalogue/browse.png",
     "width": 1440,
@@ -510,6 +533,60 @@
     "width": 1440,
     "height": 900,
     "title": "Pricing: promotions",
+    "callouts": []
+  },
+  "distributor/quotes/draft": {
+    "file": "distributor/quotes/draft.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A draft quotation",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "A draft stays with you until you send it."
+      },
+      {
+        "n": 2,
+        "text": "Where each price came from: your own price, or their contract, price list or standard price. Only you see this."
+      },
+      {
+        "n": 3,
+        "text": "Send fixes the prices and starts the validity."
+      }
+    ]
+  },
+  "distributor/quotes/list": {
+    "file": "distributor/quotes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your quotations, and the requests customers sent you."
+      },
+      {
+        "n": 2,
+        "text": "Quote any approved customer, without waiting for a request."
+      },
+      {
+        "n": 3,
+        "text": "Drafts, sent, accepted, declined, expired, or replaced by a revision."
+      }
+    ]
+  },
+  "distributor/quotes/new": {
+    "file": "distributor/quotes/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "New quotation",
+    "callouts": []
+  },
+  "distributor/quotes/requests": {
+    "file": "distributor/quotes/requests.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes: requests received",
     "callouts": []
   },
   "distributor/roles/detail": {
@@ -1138,6 +1215,49 @@
     "width": 1440,
     "height": 900,
     "title": "Audit log",
+    "callouts": []
+  },
+  "reseller/buying-quotes/detail": {
+    "file": "reseller/buying-quotes/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A quotation to decide on",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Each line with its tax, the freight and the total: fixed since the supplier sent it."
+      },
+      {
+        "n": 2,
+        "text": "Accept agrees these prices and terms, and closes your request."
+      },
+      {
+        "n": 3,
+        "text": "Decline with a reason; the supplier may send a revision."
+      }
+    ]
+  },
+  "reseller/buying-quotes/list": {
+    "file": "reseller/buying-quotes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Quotations suppliers sent you, and the requests you sent."
+      },
+      {
+        "n": 2,
+        "text": "Ask a supplier to price some of their offers for you."
+      }
+    ]
+  },
+  "reseller/buying-quotes/new": {
+    "file": "reseller/buying-quotes/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Request a quote",
     "callouts": []
   },
   "reseller/catalogue/browse": {
@@ -1908,6 +2028,33 @@
     "width": 1440,
     "height": 900,
     "title": "Pricing: promotions",
+    "callouts": []
+  },
+  "supplier/quotes/list": {
+    "file": "supplier/quotes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your quotations, and the requests customers sent you."
+      },
+      {
+        "n": 2,
+        "text": "Quote any approved customer, without waiting for a request."
+      },
+      {
+        "n": 3,
+        "text": "Drafts, sent, accepted, declined, expired, or replaced by a revision."
+      }
+    ]
+  },
+  "supplier/quotes/requests": {
+    "file": "supplier/quotes/requests.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Quotes: requests received",
     "callouts": []
   },
   "supplier/roles/detail": {

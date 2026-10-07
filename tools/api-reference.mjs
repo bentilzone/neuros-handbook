@@ -25,6 +25,7 @@ const AREAS = [
   ['Catalogue', 'catalogue', 'The shared product catalogue: browse, contribute and propose categories.'],
   ['Selling', 'selling', 'Offers, price lists, contract prices, promotions and the price check.'],
   ['Relationships', 'relationships', 'Accounts between sellers and buyers, and their terms.'],
+  ['Quotations', 'quotations', 'Requests for quotation and quotations: ask, price, send, revise, accept.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
   ['Ledger', 'ledger', 'Accounts, posting rules, periods, journals and the trial balance.'],

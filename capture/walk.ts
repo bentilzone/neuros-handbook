@@ -81,6 +81,14 @@ export function walk(w: Walk): Scenario[] {
     shot('pricing/promotions', '/selling/pricing?tab=promotions', 'Pricing: promotions'),
     shot('pricing/promotion-new', '/selling/pricing?tab=promotions', 'New promotion', { steps: click('New promotion'), fullPage: true }),
     shot('pricing/check', '/selling/pricing?tab=check', 'Pricing: price check'),
+    shot('quotes/list', '/selling/quotes', 'Quotes', {
+      callouts: [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your quotations, and the requests customers sent you.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'New quotation' }, text: 'Quote any approved customer, without waiting for a request.', side: 'left' },
+        { n: 3, target: { role: 'textbox', name: 'Status' }, text: 'Drafts, sent, accepted, declined, expired, or replaced by a revision.', side: 'bottom' },
+      ],
+    }),
+    shot('quotes/requests', '/selling/quotes?tab=requests', 'Quotes: requests received'),
     shot('customers/list', '/selling/customers', 'Customers', {
       callouts: [
         { n: 1, target: { text: /waiting for approval/i, nth: 0 }, text: 'Requests waiting for your answer.', side: 'bottom' },
@@ -108,6 +116,13 @@ export function walk(w: Walk): Scenario[] {
       steps: async (p) => { await p.getByRole('button').filter({ hasText: w.marketplaceSeller ?? '' }).first().click(); },
       callouts: [{ n: 1, target: { role: 'button', name: 'Price it' }, text: 'Your price for a quantity, worked out from your account terms with this seller.', side: 'left' }],
     }),
+    shot('buying-quotes/list', '/buying/quotes', 'Quotes', {
+      callouts: [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Quotations suppliers sent you, and the requests you sent.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'Request a quote' }, text: 'Ask a supplier to price some of their offers for you.', side: 'left' },
+      ],
+    }),
+    shot('buying-quotes/new', '/buying/quotes', 'Request a quote', { steps: click('Request a quote') }),
     shot('suppliers/list', '/suppliers', 'Suppliers', {
       callouts: [
         { n: 1, target: { role: 'button', name: 'Find suppliers' }, text: 'Find sellers on Neuros and ask for an account.', side: 'left' },
