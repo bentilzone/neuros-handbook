@@ -43,6 +43,14 @@ Some event types:
 | `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes |
 | `stock.changed` | Stock moved |
 | `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
+| `quote_request.*`, `quotation.sent`, `quotation.accepted`, `quotation.declined`, `quotation.expired` | A request for quotation or a quotation changes |
+| `order.submitted`, `order.accepted`, `order.rejected`, `order.cancelled`, `order.amended`, `order.completed` | An order moves |
+| `order.fulfilment_changed`, `order.payment_changed` | An order's stock or payment status changes |
+| `shipment.created`, `shipment.packed`, `shipment.dispatched`, `shipment.delivered`, `shipment.failed`, `shipment.received` | A shipment moves |
+| `sales_invoice.issued`, `sales_invoice.paid`, `sales_invoice.credited`, `sales_invoice.voided` | An invoice is issued or settled |
+| `payment.notified`, `payment.confirmed`, `payment.rejected`, `escrow.funded`, `escrow.released`, `escrow.refunded` | A payment or escrow moves |
+
+Trading events go to both companies once the other side can see the record; a draft's go to its owner only.
 
 Ignore types you don't use. New types appear as Neuros grows.
 
