@@ -59,6 +59,8 @@ People's tokens also hear about their own notifications. These go only to that p
 | `notification.created` | A notification for you arrived: read `GET /v1/notifications` |
 | `notification.read` | One of yours was marked read, in another tab or app |
 
+Platform staff can open the socket with a platform token too. They hear only their own notifications, read from `GET /v1/platform/notifications`.
+
 Ignore types you don't use. New types appear as Neuros grows.
 
 ## Closing and reconnecting

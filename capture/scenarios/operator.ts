@@ -140,6 +140,8 @@ const scenarios: Scenario[] = [
   // Settings: a platform person has no company, so only their own tabs.
   shot('settings/profile', '/settings?tab=profile', 'Settings: profile'),
   shot('settings/preferences', '/settings?tab=preferences', 'Settings: preferences'),
+  shot('settings/notifications', '/settings?tab=notifications', 'Settings: notifications', { fullPage: true }),
+  shot('notifications/list', '/platform/notifications?show=all', 'Notifications'),
   shot('settings/security', '/settings?tab=security', 'Settings: security', { fullPage: true }),
   shot('settings/access', '/settings?tab=access', 'Settings: role and access', { fullPage: true }),
 ];
