@@ -52,6 +52,13 @@ Some event types:
 
 Trading events go to both companies once the other side can see the record; a draft's go to its owner only.
 
+People's tokens also hear about their own notifications. These go only to that person's connections, in the company they are working in:
+
+| `event.type` | When |
+|---|---|
+| `notification.created` | A notification for you arrived: read `GET /v1/notifications` |
+| `notification.read` | One of yours was marked read, in another tab or app |
+
 Ignore types you don't use. New types appear as Neuros grows.
 
 ## Closing and reconnecting

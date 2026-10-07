@@ -569,6 +569,34 @@
     "title": "Members",
     "callouts": []
   },
+  "distributor/notifications/bell": {
+    "file": "distributor/notifications/bell.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications beside the page",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your unread count; orange when something needs you."
+      },
+      {
+        "n": 2,
+        "text": "Every notification, read and unread, by category."
+      }
+    ]
+  },
+  "distributor/notifications/list": {
+    "file": "distributor/notifications/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Clear them all, or only the category you filtered."
+      }
+    ]
+  },
   "distributor/offers/detail": {
     "file": "distributor/offers/detail.png",
     "width": 1440,
@@ -1757,6 +1785,34 @@
     "title": "Members",
     "callouts": []
   },
+  "reseller/notifications/bell": {
+    "file": "reseller/notifications/bell.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications beside the page",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your unread count; orange when something needs you."
+      },
+      {
+        "n": 2,
+        "text": "Every notification, read and unread, by category."
+      }
+    ]
+  },
+  "reseller/notifications/list": {
+    "file": "reseller/notifications/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Clear them all, or only the category you filtered."
+      }
+    ]
+  },
   "reseller/roles/detail": {
     "file": "reseller/roles/detail.png",
     "width": 1440,
@@ -2296,6 +2352,34 @@
     "height": 900,
     "title": "Members",
     "callouts": []
+  },
+  "supplier/notifications/bell": {
+    "file": "supplier/notifications/bell.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications beside the page",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your unread count; orange when something needs you."
+      },
+      {
+        "n": 2,
+        "text": "Every notification, read and unread, by category."
+      }
+    ]
+  },
+  "supplier/notifications/list": {
+    "file": "supplier/notifications/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Clear them all, or only the category you filtered."
+      }
+    ]
   },
   "supplier/offers/detail": {
     "file": "supplier/offers/detail.png",
