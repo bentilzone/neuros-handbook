@@ -12,7 +12,8 @@ Each feature followed across everyone it touches: the seller, the buyer, your te
 4. [Selling](./40-selling.mdx): offers, price lists, contracts, promotions and how a price is decided.
 5. [Accounts between companies](./50-accounts-between-companies.mdx): requests, terms, suspension and ending.
 6. [Buying](./60-buying.mdx): the marketplace and your price.
-7. [Stock](./70-stock.mdx): receipts, conditions, adjustments, transfers, counts, reorder, valuation.
-8. [Your books](./80-books.mdx): accounts, automatic and manual journals, periods, reports.
-9. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
-10. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.
+7. [Quote to cash](./65-quote-to-cash.mdx): one order from the price to the money, on both sides and in the books.
+8. [Stock](./70-stock.mdx): receipts, conditions, adjustments, transfers, counts, reorder, valuation.
+9. [Your books](./80-books.mdx): accounts, automatic and manual journals, periods, reports.
+10. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
+11. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.

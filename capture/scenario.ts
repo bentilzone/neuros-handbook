@@ -26,8 +26,13 @@ export interface Video {
   persona: Persona;
   path: string;
   title: string;
-  /** The flow. `say` adds a caption from that moment until the next one. */
-  steps: (page: Page, say: (text: string) => Promise<void>) => Promise<void>;
+  /**
+   * The other party, recorded at the same time and shown on the right: a flow between two
+   * companies reads best with both screens side by side. Needs ffmpeg (CI installs it).
+   */
+  with?: { persona: Persona; path: string };
+  /** The flow. `say` adds a caption from that moment until the next one; `other` is `with`'s tab. */
+  steps: (page: Page, say: (text: string) => Promise<void>, other?: Page) => Promise<void>;
 }
 
 export type Scenario = Shot | Video;

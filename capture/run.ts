@@ -1,4 +1,4 @@
-// yarn capture [--persona distributor] [--only distributor/ledger] [--app http://localhost:5176]
+// yarn capture [--persona distributor] [--only distributor/ledger] [--videos] [--app http://localhost:5176]
 //
 // Starts a throwaway seeded Neuros (stack.ts) unless --app points at one already running, signs in
 // as each persona, and writes every scenario's PNG to static/shots/<id>.png and its callouts to
@@ -140,31 +140,54 @@ const vttTime = (ms: number) => new Date(ms).toISOString().slice(11, 23);
 async function record(browser: import('playwright').Browser, appUrl: string, v: Video) {
   const dir = join(OUT, 'video', v.id);
   rmSync(dir, { recursive: true, force: true });
-  const { ctx, page } = await signedIn(browser, appUrl, v.persona, { recordVideo: { dir, size: VIEWPORT } });
-  track(page);
+  const ffmpeg = spawnSync('ffmpeg', ['-version']).status === 0;
+  if (v.with && !ffmpeg) throw new Error('a side-by-side video needs ffmpeg');
+  // Each tab records from the moment it opens; note when, so both can be cut to the same start.
+  const tabs: { ctx: import('playwright').BrowserContext; page: Page; opened: number; path: string; dir: string }[] = [];
+  for (const [i, who] of [[0, v.persona], ...(v.with ? [[1, v.with.persona]] : [])] as [number, Persona][]) {
+    const opened = Date.now();
+    const sub = join(dir, String(i));
+    const { ctx, page } = await signedIn(browser, appUrl, who, { recordVideo: { dir: sub, size: VIEWPORT } });
+    track(page);
+    tabs.push({ ctx, page, opened, path: i ? v.with!.path : v.path, dir: sub });
+  }
+  for (const t of tabs) { await go(t.page, t.path); await settle(t.page); }
   const start = Date.now();
   const cues: { at: number; text: string }[] = [];
-  const say = async (text: string) => { cues.push({ at: Date.now() - start, text }); await page.waitForTimeout(900); };
-  await go(page, v.path);
-  await settle(page);
-  await v.steps(page, say);
-  await page.waitForTimeout(1200);
+  const say = async (text: string) => { cues.push({ at: Date.now() - start, text }); await tabs[0].page.waitForTimeout(2500); };
+  try {
+    await v.steps(tabs[0].page, say, tabs[1]?.page);
+  } catch (err) {
+    // Keep what each tab recorded up to the failure, to see where the flow went wrong.
+    for (const t of tabs) { const video = t.page.video()!; await t.ctx.close(); await video.saveAs(join(t.dir, 'failed.webm')).catch(() => undefined); }
+    console.log(`  (recordings up to the failure in ${dir})`);
+    throw err;
+  }
+  await tabs[0].page.waitForTimeout(1200);
   const end = Date.now() - start;
   // saveAs, not path(): the browser is in Docker, and the recording has to come back to this machine.
-  const video = page.video()!;
-  await ctx.close();
-  const raw = join(dir, 'raw.webm');
-  await video.saveAs(raw);
+  const raws: { file: string; skip: number }[] = [];
+  for (const t of tabs) {
+    const video = t.page.video()!;
+    await t.ctx.close();
+    const file = join(t.dir, 'raw.webm');
+    await video.saveAs(file);
+    raws.push({ file, skip: (start - t.opened) / 1000 });
+  }
   mkdirSync(VIDEOS, { recursive: true });
   const vtt = ['WEBVTT', '', ...cues.flatMap((c, i) => [`${vttTime(c.at)} --> ${vttTime(cues[i + 1]?.at ?? end)}`, c.text, ''])].join('\n');
   writeFileSync(join(VIDEOS, `${v.id}.vtt`), vtt);
   // MP4 plays everywhere; without ffmpeg (local machines) the WebM Playwright recorded is kept.
-  const ffmpeg = spawnSync('ffmpeg', ['-version']).status === 0;
   if (ffmpeg) {
-    spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', raw, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-crf', '28', join(VIDEOS, `${v.id}.mp4`)]);
-    spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '1', '-i', raw, '-frames:v', '1', join(VIDEOS, `${v.id}.jpg`)]);
+    const inputs = raws.flatMap((r) => ['-ss', r.skip.toFixed(2), '-t', (end / 1000).toFixed(2), '-i', r.file]);
+    // Two tabs: each scaled to half of a 1920-wide frame, seller left, buyer right.
+    const filter = raws.length > 1 ? ['-filter_complex', '[0:v]scale=960:-2[l];[1:v]scale=960:-2[r];[l][r]hstack=inputs=2[v]', '-map', '[v]'] : [];
+    const mp4 = join(VIDEOS, `${v.id}.mp4`);
+    const out = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, ...filter, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-crf', '28', mp4]);
+    if (out.status !== 0) throw new Error(`ffmpeg: ${out.stderr}`);
+    spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '1', '-i', mp4, '-frames:v', '1', join(VIDEOS, `${v.id}.jpg`)]);
   } else {
-    copyFileSync(raw, join(VIDEOS, `${v.id}.webm`));
+    copyFileSync(raws[0].file, join(VIDEOS, `${v.id}.webm`));
   }
   console.log(`  video   ${v.id}${ffmpeg ? '' : ' (webm: install ffmpeg for mp4)'}`);
 }
@@ -191,25 +214,31 @@ async function main() {
   const report: string[] = [];
   const failed: string[] = [];
   try {
-    const byPersona = new Map<Persona, Scenario[]>();
-    for (const s of scenarios) byPersona.set(s.persona, [...(byPersona.get(s.persona) ?? []), s]);
+    // One broken scenario (a renamed button) must not cost the rest of the run.
+    const attempt = async (s: Scenario, run: () => Promise<void>) => {
+      try {
+        await run();
+      } catch (err) {
+        const lines = (err as Error).message.split('\n');
+        failed.push(`${s.id}: ${lines[0]}${(lines.find((l) => l.includes('waiting for')) ?? '').replace(/\u001b\[\d+m/g, '').trim().replace(/^-\s*/, ' — ')}`);
+        console.log(`  FAILED  ${s.id}`);
+      }
+    };
+    const byPersona = new Map<Persona, Shot[]>();
+    for (const s of scenarios) if (s.kind !== 'video') byPersona.set(s.persona, [...(byPersona.get(s.persona) ?? []), s]);
     for (const [who, list] of byPersona) {
       console.log(`${who}:`);
       const { ctx, page } = await signedIn(browser, appUrl, who);
       track(page);
-      for (const s of list) {
-        try {
-          if (s.kind === 'video') await record(browser, appUrl, s);
-          else await shoot(page, s, manifest, report);
-        } catch (err) {
-          // One broken scenario (a renamed button) must not cost the rest of the run.
-          const lines = (err as Error).message.split('\n');
-          failed.push(`${s.id}: ${lines[0]}${(lines.find((l) => l.includes('waiting for')) ?? '').replace(/\u001b\[\d+m/g, '').trim().replace(/^-\s*/, ' — ')}`);
-          console.log(`  FAILED  ${s.id}`);
-        }
-      }
+      for (const s of list) await attempt(s, () => shoot(page, s, manifest, report));
       await ctx.close();
     }
+    // Videos last: a flow places orders and moves stock, and no picture may show what a video did.
+    // A recording never comes out byte-identical, so re-recording on every run would make every
+    // capture PR carry a video. Record one that is missing, named by --only, or with --videos.
+    const videos = scenarios.filter((s): s is Video => s.kind === 'video' && (!!only || process.argv.includes('--videos') || !existsSync(join(VIDEOS, `${s.id}.vtt`))));
+    if (videos.length) console.log('videos:');
+    for (const v of videos) await attempt(v, () => record(browser, appUrl, v));
   } finally {
     await stopBrowser();
     // Keys sorted, so the manifest diff shows only what really changed.
