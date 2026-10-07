@@ -884,6 +884,13 @@
     "title": "My company: tax",
     "callouts": []
   },
+  "distributor/settings/notifications": {
+    "file": "distributor/settings/notifications.png",
+    "width": 1440,
+    "height": 1213,
+    "title": "Settings: notifications",
+    "callouts": []
+  },
   "distributor/settings/preferences": {
     "file": "distributor/settings/preferences.png",
     "width": 1440,
@@ -1190,6 +1197,13 @@
     "title": "A company at a glance",
     "callouts": []
   },
+  "operator/notifications/list": {
+    "file": "operator/notifications/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Notifications",
+    "callouts": []
+  },
   "operator/overview": {
     "file": "operator/overview.png",
     "width": 1440,
@@ -1310,8 +1324,15 @@
   "operator/settings/access": {
     "file": "operator/settings/access.png",
     "width": 1440,
-    "height": 996,
+    "height": 1075,
     "title": "Settings: role and access",
+    "callouts": []
+  },
+  "operator/settings/notifications": {
+    "file": "operator/settings/notifications.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Settings: notifications",
     "callouts": []
   },
   "operator/settings/preferences": {
@@ -1881,6 +1902,13 @@
     "width": 1440,
     "height": 900,
     "title": "My company: tax",
+    "callouts": []
+  },
+  "reseller/settings/notifications": {
+    "file": "reseller/settings/notifications.png",
+    "width": 1440,
+    "height": 1213,
+    "title": "Settings: notifications",
     "callouts": []
   },
   "reseller/settings/preferences": {
@@ -2599,6 +2627,13 @@
     "width": 1440,
     "height": 900,
     "title": "My company: tax",
+    "callouts": []
+  },
+  "supplier/settings/notifications": {
+    "file": "supplier/settings/notifications.png",
+    "width": 1440,
+    "height": 1213,
+    "title": "Settings: notifications",
     "callouts": []
   },
   "supplier/settings/preferences": {
