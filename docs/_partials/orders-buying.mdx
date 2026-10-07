@@ -48,6 +48,26 @@ Once the supplier ships, the order lists its **shipments**. Open one for what wa
 
 Ordering needs `order:create`; approving needs `order:approve`; changes need `order:amend`; cancelling needs `order:cancel`.
 
+## Paying
+
+{props.who === 'reseller' && <Shot id="reseller/buying-orders/escrow" />}
+
+How you pay is the order's **payment mode**:
+
+- **Bank transfer or prepay:** pay the supplier by transfer, then **I have paid** with the bank reference and the slip. It counts once the supplier confirms the money arrived; if they say it did not, their reason is shown. A prepay order is only reserved and shipped once paid, and one left unpaid too long is cancelled.
+- **Credit:** pay each invoice by its due date. What you pay comes back to your available credit.
+- **Escrow:** **Pay into escrow** sends the money to the escrow partner, who holds it. The supplier ships once the partner confirms it. **Release to the seller** when you are satisfied; delivery alone never releases it. A dispute holds it.
+
+<FieldTable fields={[
+  { name: 'Amount paid', required: true, meaning: 'What you transferred for this order.', others: 'The supplier sees it waiting for their confirmation.', rules: 'In the order’s currency.' },
+  { name: 'Bank reference', required: true, meaning: 'The reference on your transfer, so the supplier can find it.' },
+  { name: 'Paid on', meaning: 'The day you paid. Blank is today.', rules: 'Not in the future.' },
+  { name: 'Slip', meaning: 'Your bank’s confirmation: PDF, PNG or JPEG up to 10 MB.', others: 'The supplier can open it.' },
+  { name: 'Release (escrow)', required: true, meaning: 'When the escrow releases to the supplier: when you release it, or automatically a number of days after delivery.', implications: 'Automatic release still waits while a dispute holds it.' },
+]} />
+
+Saying you paid needs `order:create`; funding escrow needs `escrow:manage`; releasing it needs `escrow:release_approve`.
+
 ## Invoices
 
 The supplier's invoices for the order are listed on it; see <PageLink who={props.who} page="buying-invoices">Invoices</PageLink>. Its **Payment** status follows them.

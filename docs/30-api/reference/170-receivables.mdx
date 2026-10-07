@@ -571,7 +571,8 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `amount.amount` | string | may be null |
 | `amount.currency` | string (one of 155) | may be null |
 | `amount.id` | string | 24 characters |
-| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` | may be null |
+| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` · `escrow` | may be null |
+| `orderId` | string | 24 characters, may be null |
 | `reference` | string | may be null |
 | `receivedAt` | string (date-time) | may be null |
 | `fxRate` | string | may be null |
@@ -653,7 +654,8 @@ Applied to the invoices you give, or to the customer’s oldest due. What is lef
 | `amount.amount` | string | may be null |
 | `amount.currency` | string (one of 155) | may be null |
 | `amount.id` | string | 24 characters |
-| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` | may be null |
+| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` · `escrow` | may be null |
+| `orderId` | string | 24 characters, may be null |
 | `reference` | string | may be null |
 | `receivedAt` | string (date-time) | may be null |
 | `fxRate` | string | may be null |
@@ -720,7 +722,8 @@ Applied to the invoices you give, or to the customer’s oldest due. What is lef
 | `amount.amount` | string | may be null |
 | `amount.currency` | string (one of 155) | may be null |
 | `amount.id` | string | 24 characters |
-| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` | may be null |
+| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` · `escrow` | may be null |
+| `orderId` | string | 24 characters, may be null |
 | `reference` | string | may be null |
 | `receivedAt` | string (date-time) | may be null |
 | `fxRate` | string | may be null |
@@ -797,7 +800,8 @@ To the invoices given, or the customer’s oldest due.
 | `amount.amount` | string | may be null |
 | `amount.currency` | string (one of 155) | may be null |
 | `amount.id` | string | 24 characters |
-| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` | may be null |
+| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` · `escrow` | may be null |
+| `orderId` | string | 24 characters, may be null |
 | `reference` | string | may be null |
 | `receivedAt` | string (date-time) | may be null |
 | `fxRate` | string | may be null |
@@ -872,7 +876,8 @@ Reverses its journals; the invoices it paid are owed again.
 | `amount.amount` | string | may be null |
 | `amount.currency` | string (one of 155) | may be null |
 | `amount.id` | string | 24 characters |
-| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` | may be null |
+| `method` | `bank_transfer` · `cash` · `card` · `mobile_money` · `other` · `escrow` | may be null |
+| `orderId` | string | 24 characters, may be null |
 | `reference` | string | may be null |
 | `receivedAt` | string (date-time) | may be null |
 | `fxRate` | string | may be null |

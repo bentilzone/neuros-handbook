@@ -53,6 +53,7 @@ Your tax identifiers, such as a TIN, each with its type and number.
   { name: 'Quotation validity (days)', meaning: 'How long your quotations hold their prices.' },
   { name: 'When stock is short', meaning: 'What accepting an order does when there is not enough free stock: reserve what is free and backorder the rest, hold a short line until it can be reserved whole, or refuse to accept the order.', others: 'The customer sees the order accepted; backordered quantities wait for stock.', implications: 'Special-order offers are always backordered: there is no stock to reserve.' },
   { name: 'Invoice orders', meaning: 'When a customer’s order is invoiced: each shipment as it is dispatched, or the whole order when it is accepted.', others: 'The customer’s billing contact is emailed each invoice, and it appears under their Invoices.', implications: 'Each invoice posts to receivables, revenue and output tax at once. Invoicing on acceptance bills before anything ships.' },
+  { name: 'Cancel unpaid prepay orders after (days)', meaning: 'How long a prepay order may stay unpaid after you accept it.', others: 'The customer sees it cancelled, with the reason.', implications: 'Its stock is freed. One the customer says they have paid waits for you.', rules: '1 to 90 days; 7 by default.' },
   { name: 'Segregation of duties', meaning: 'Whoever prepares an adjustment, journal or approval cannot also approve it.', implications: 'You need at least two people with the right roles to post manual journals and adjustments.' },
 ]} />
 

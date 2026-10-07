@@ -25,7 +25,7 @@ const order: Scenario = {
   persona: 'reseller',
   path: '/buying/orders?status=accepted',
   title: 'An accepted order',
-  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Part paid' }).first().click(); },
   callouts: [
     { n: 1, target: { text: 'Part paid', nth: 1 }, text: 'The order, its payment and its stock, each with its own status.', side: 'bottom' },
     { n: 2, target: { role: 'button', name: /^DN-/ }, text: 'Its shipments: open one to follow it and confirm receipt.', side: 'top' },
@@ -39,7 +39,7 @@ const shipment: Scenario = {
   path: '/buying/orders?status=accepted',
   title: 'A shipment on its way to you',
   steps: async (page: Page) => {
-    await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click();
+    await page.getByRole('row').filter({ hasText: 'Part paid' }).first().click();
     await page.getByRole('button', { name: /^DN-/ }).first().click();
   },
   callouts: [
@@ -61,6 +61,22 @@ const invoice: Scenario = {
   ],
 };
 
+// From seed:trade: an escrow order funded with the partner.
+const escrow: Scenario = {
+  id: 'reseller/buying-orders/escrow',
+  persona: 'reseller',
+  path: '/buying/orders?status=accepted',
+  title: 'An order paid into escrow',
+  steps: async (page: Page) => {
+    await page.getByRole('row').filter({ hasText: 'Stock reserved' }).first().click();
+    await page.getByRole('button', { name: 'Release to the seller' }).scrollIntoViewIfNeeded();
+  },
+  callouts: [
+    { n: 1, target: { text: 'Funds in escrow', nth: 0 }, text: 'The partner holds your money for this order.', side: 'left' },
+    { n: 2, target: { role: 'button', name: 'Release to the seller' }, text: 'Your own instruction: delivery alone never releases it.', side: 'top' },
+  ],
+};
+
 export default [...walk({
   persona: 'reseller',
   company: 'Ikeja Hardware Resellers',
@@ -69,4 +85,4 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
-}), quotation, order, shipment, invoice];
+}), quotation, order, shipment, invoice, escrow];

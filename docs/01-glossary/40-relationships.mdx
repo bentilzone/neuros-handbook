@@ -26,7 +26,7 @@ What an approved account trades on, set by the seller:
 The most a credit-eligible buyer may owe a seller at once, in the seller's own currency. The seller sets it, optionally with an expiry date.
 
 ### Credit in use (exposure)
-The part of the limit already claimed: orders on credit that the seller accepted and the buyer has not yet paid. Each order claims its value when it is accepted and gives it back when it is paid or cancelled. **Available** is the limit less what is in use.
+The part of the limit already claimed: orders on credit that the seller accepted and the buyer has not yet paid. Each order claims its value when it is accepted and gives it back as its invoices are paid, or all at once when it is cancelled. **Available** is the limit less what is in use.
 
 ### Credit hold
 A pause the seller puts on an account, with a reason: no new orders on credit until it is lifted. Open orders and invoices are untouched.
@@ -36,6 +36,15 @@ A one-off approval to go over a buyer's limit by a set amount, with a reason and
 
 ### Payment mode
 How a buyer may pay on an account: pay before dispatch, bank transfer, on credit, deposit with the balance later, milestones, or escrow.
+
+### Payment notice
+A buyer telling the seller an order is paid, with the bank reference and optionally the slip. It is not a payment until the seller confirms the money arrived; the seller can also say it did not, with a reason.
+
+### Prepay
+Paying before the order is fulfilled. Stock is reserved once the order is fully paid; one left unpaid past the seller's limit cancels itself.
+
+### Escrow
+A regulated partner holds the buyer's money for an order. The seller ships once the partner confirms the funds; they are released to the seller by the buyer's own instruction, or a set number of days after delivery, never by delivery alone. A dispute holds them. Before release, the seller can refund them.
 
 ### Supplier code
 The buyer's own reference for a seller, such as their supplier number in their own system. Only the buyer sees it.
