@@ -459,7 +459,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1374,
+    "height": 1453,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -636,6 +636,26 @@
       {
         "n": 2,
         "text": "Three statuses each: the order, its payment, and its stock."
+      }
+    ]
+  },
+  "distributor/orders/payment": {
+    "file": "distributor/orders/payment.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A payment to confirm",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What the customer says they paid, and their bank reference."
+      },
+      {
+        "n": 2,
+        "text": "Once it is in your bank: records the receipt and, on prepay, reserves the stock."
+      },
+      {
+        "n": 3,
+        "text": "It never arrived: tell them why."
       }
     ]
   },
@@ -821,7 +841,7 @@
   "distributor/settings/company-policies": {
     "file": "distributor/settings/company-policies.png",
     "width": 1440,
-    "height": 1000,
+    "height": 1110,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -1434,6 +1454,22 @@
       }
     ]
   },
+  "reseller/buying-orders/escrow": {
+    "file": "reseller/buying-orders/escrow.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An order paid into escrow",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The partner holds your money for this order."
+      },
+      {
+        "n": 2,
+        "text": "Your own instruction: delivery alone never releases it."
+      }
+    ]
+  },
   "reseller/buying-orders/list": {
     "file": "reseller/buying-orders/list.png",
     "width": 1440,
@@ -1752,7 +1788,7 @@
   "reseller/settings/company-policies": {
     "file": "reseller/settings/company-policies.png",
     "width": 1440,
-    "height": 1000,
+    "height": 1110,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -2442,7 +2478,7 @@
   "supplier/settings/company-policies": {
     "file": "supplier/settings/company-policies.png",
     "width": 1440,
-    "height": 1000,
+    "height": 1110,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -2470,7 +2506,7 @@
   "supplier/settings/security": {
     "file": "supplier/settings/security.png",
     "width": 1440,
-    "height": 900,
+    "height": 1242,
     "title": "Settings: security",
     "callouts": []
   },

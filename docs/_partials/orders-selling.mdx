@@ -56,6 +56,24 @@ An approved change makes a new **revision** of the order, for example *SO-2026-0
 
 Accepting and rejecting needs `order:accept`; reserving stock needs `order:allocate`; changes need `order:amend`; cancelling needs `order:cancel`.
 
+## Payment
+
+{props.who === 'distributor' && <Shot id="distributor/orders/payment" />}
+
+An accepted order shows how it is being paid under **Payment**. Nothing is paid on the customer's word alone:
+
+- **Bank transfer or prepay:** the customer says they have paid, with the bank reference and often the slip. Check your bank, then **Confirm received** (it records a receipt that pays the order's invoices, and holds anything over for its next ones) or **Not received** with a reason they see. **Money received** records a payment that came without a notice. See [payment notice](../01-glossary/40-relationships.mdx#payment-notice).
+- **Prepay:** the stock is reserved only once the order is fully paid. One still unpaid after your **Cancel unpaid prepay orders after** setting cancels itself and frees its stock, unless the customer has said they paid.
+- **Credit:** what the order claimed comes back to their available credit as its invoices are paid.
+- **Escrow:** the customer pays into escrow with the partner first; you can reserve and ship only once the partner confirms the funds. They are released to you when the customer releases them, or automatically some days after delivery if they chose that, never on delivery alone. Before release you can **Refund the buyer** with a reason. See [escrow](../01-glossary/40-relationships.mdx#escrow).
+
+<FieldTable fields={[
+  { name: 'Amount received', required: true, meaning: 'What arrived in your bank for this order.', others: 'The customer sees the order part paid or paid.', implications: 'Records a receipt: Dr bank, Cr receivable, or held for the order’s next invoice.', rules: 'In the order’s currency.' },
+  { name: 'Reference', meaning: 'The bank reference; taken from the customer’s notice when there is one.' },
+]} />
+
+Confirming needs `payment:initiate`; refunding escrow needs `escrow:release_approve`.
+
 ## Invoices
 
 An accepted order lists its **invoices** under its shipments. They are issued as it ships, or when you accept it, by your **Invoice orders** setting; see <PageLink who={props.who} page="invoices">Invoices</PageLink>. Its **Payment** status follows them, and an order that is paid and delivered is **Completed**. An invoiced order cannot be cancelled or changed until its invoices are void.

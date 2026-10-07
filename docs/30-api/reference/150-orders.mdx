@@ -56,6 +56,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -208,6 +209,7 @@ Needs an approved trading relationship. Offer lines are priced as your price now
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -347,6 +349,7 @@ The seller never sees the buyer’s draft. Commercial, payment and fulfilment st
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -492,6 +495,7 @@ On credit it claims the buyer’s credit (an approved override may lift the limi
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -635,6 +639,7 @@ object
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -788,6 +793,7 @@ On a submitted or accepted order. The other side approves or rejects it; a quant
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -932,6 +938,7 @@ object
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -1076,6 +1083,7 @@ object
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -1219,6 +1227,7 @@ object
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -1364,6 +1373,7 @@ The buyer before acceptance; either side after it, while nothing has shipped. Gi
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -1520,6 +1530,7 @@ The buyer before acceptance; either side after it, while nothing has shipped. Gi
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |
@@ -1663,6 +1674,7 @@ object
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
 | `fulfilmentStatus` | `unallocated` · `partially_allocated` · `allocated` · `processing` · `partially_dispatched` · `dispatched` · `delivered` | may be null |
+| `escrowStatus` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `paymentMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
 | `termsDays` | number | may be null |
 | `currency` | string | may be null |

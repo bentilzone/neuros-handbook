@@ -80,6 +80,23 @@ const invoice: Scenario = {
   ],
 };
 
+// From seed:trade: a prepay order Ikeja Hardware says it has paid.
+const payment: Scenario = {
+  id: 'distributor/orders/payment',
+  persona: 'distributor',
+  path: '/selling/orders?status=accepted',
+  title: 'A payment to confirm',
+  steps: async (page: Page) => {
+    await page.getByRole('row').filter({ hasText: 'Not reserved' }).first().click();
+    await page.getByRole('button', { name: 'Confirm received' }).scrollIntoViewIfNeeded();
+  },
+  callouts: [
+    { n: 1, target: { text: /IH-TRF-5530/ }, text: 'What the customer says they paid, and their bank reference.', side: 'left' },
+    { n: 2, target: { role: 'button', name: 'Confirm received' }, text: 'Once it is in your bank: records the receipt and, on prepay, reserves the stock.', side: 'top' },
+    { n: 3, target: { role: 'button', name: 'Not received' }, text: 'It never arrived: tell them why.', side: 'bottom' },
+  ],
+};
+
 export default [...walk({
   persona: 'distributor',
   company: 'Lagos Industrial Supplies Ltd',
@@ -89,4 +106,4 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
-}), credit, newQuotation, draft, order, shipment, invoice];
+}), credit, newQuotation, draft, order, shipment, invoice, payment];
