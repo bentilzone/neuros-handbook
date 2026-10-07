@@ -25,7 +25,7 @@ Quotes is where you ask suppliers for a price before you order, and decide on wh
 |---|---|---|
 | Waiting for a quote | The supplier has not answered yet | Cancel request |
 | Quoted | The supplier sent at least one quotation | Accept or decline it; Cancel request |
-| Accepted | You accepted one of its quotations | Nothing more: the order follows |
+| Accepted | You accepted one of its quotations | Place the order from the quotation |
 | Cancelled | You withdrew it, with a reason the supplier sees | Nothing more |
 
 Cancelling a request also declines the quotations still open on it.
@@ -42,8 +42,8 @@ Open a quotation from **Quotations** or from its request. It shows each line's p
 
 You can accept only the **latest** revision the supplier sent, and only until it is **valid until**. An older revision shows *Replaced by a revision*, with a link to the newer one. One past its date shows *Expired*: ask the supplier for a new revision.
 
-:::note[Orders follow]
-An accepted quotation becomes an order with the next part of Neuros. Until then, accepting records the agreement.
+:::note[Then the order]
+Open the accepted quotation and choose **Place order**: it drafts an order at the quotation's prices, under <PageLink who={props.who} page="buying-orders">Orders</PageLink>. One quotation makes one order.
 :::
 
 Seeing quotes needs `quote:read`; requesting, accepting and declining needs `quote:request`.

@@ -1,0 +1,51 @@
+{/* Shared by the buying guides: <OrdersBuying who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="order:read" />
+
+Orders is where you buy: draft an order with one supplier, submit it, and follow it to acceptance. An order is priced at **your** price with that supplier (their contract with you, your price list, quantity breaks and promotions), or at the prices of a quotation you accepted. See [order](../01-glossary/30-selling-and-pricing.mdx#order).
+
+<Shot id={`${props.who}/buying-orders/list`} />
+
+## Place an order
+
+**New order** drafts an order to one supplier you have an approved account with. To order at a quotation's prices, open the accepted quotation under <PageLink who={props.who} page="buying-quotes">Quotes</PageLink> and choose **Place order**.
+
+<Shot id={`${props.who}/buying-orders/new`} />
+
+<FieldTable fields={[
+  { name: 'Supplier', required: true, meaning: 'Who you are buying from.', rules: 'A supplier with an approved account.' },
+  { name: 'Offer and Quantity', required: true, meaning: 'What you are buying, and how much.', implications: 'Priced at your price for that quantity. The supplier’s minimum order and order steps apply.', rules: 'Offers of that supplier you can see; all in one currency.' },
+  { name: 'How you pay', meaning: 'How you will pay for this order.', others: 'The supplier sees it.', implications: 'On credit uses your credit with them. Paying first means stock is reserved only once you have paid.', rules: 'One of the ways the supplier accepts from you; starts at your usual way.' },
+  { name: 'Deliver by', meaning: 'When you need it.', others: 'The supplier sees it.' },
+  { name: 'Deliver to', meaning: 'Where it should go.', others: 'The supplier sees it.' },
+  { name: 'Your reference', meaning: 'Your own purchase order number.', others: 'Only your company sees it.' },
+  { name: 'Note to the seller', meaning: 'Anything the supplier should know.', others: 'They see it.' },
+]} />
+
+The draft is yours alone until you **Submit** it. Submitting checks again that your account is open, that the offers are still on sale, and their prices. If a price changed, the draft shows the new price and asks you to submit again, so you never buy at a price you did not see.
+
+## Approval above your limit
+
+If the order is over your **purchase limit** (set under <PageLink who={props.who} page="members">Members</PageLink>), it waits as *Waiting for approval*. Someone else with approval rights, within their own approval limit, approves it. Then it goes to the supplier.
+
+## After you submit
+
+{props.who === 'reseller' && <Shot id="reseller/buying-orders/detail" />}
+
+- **Waiting for the seller:** the supplier accepts or rejects it. Some suppliers accept automatically.
+- **Accepted:** the prices are fixed, and the **Payment** and **Stock** statuses beside it show what happens next.
+- **Rejected:** the supplier's reason is shown.
+
+Either of you can **propose a change** before it ships: new quantities (0 removes a line) or a new date. The other side approves or rejects it. **Cancel order** works until it ships; on an accepted order the supplier sees your reason.
+
+Ordering needs `order:create`; approving needs `order:approve`; changes need `order:amend`; cancelling needs `order:cancel`.
+
+## Live
+
+The supplier accepting, rejecting or proposing a change appears on its own.
+
+## Common questions
+
+**Why did Submit say prices changed?** The supplier changed a price after you drafted. The draft now shows the new total; submit again if it is still right.
+
+**Can I order a quotation twice?** No. One accepted quotation makes one order. For more, ask for a new quotation.

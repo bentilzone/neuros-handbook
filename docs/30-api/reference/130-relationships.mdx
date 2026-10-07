@@ -136,6 +136,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -220,6 +221,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -300,6 +302,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -376,6 +379,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `terms.paymentTerms` | object |  |
 | `terms.allowedPaymentModes` | array of `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` |  |
 | `terms.creditEligible` | boolean |  |
+| `terms.autoAccept` | boolean | Accept this buyer’s orders automatically when submitted |
 | `terms.restrictions` | object |  |
 | `terms.effectiveFrom` | string (date-time) |  |
 | `terms.effectiveTo` | string (date-time) | may be null |
@@ -394,6 +398,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -480,6 +485,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -765,6 +771,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -851,6 +858,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -978,6 +986,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -1064,6 +1073,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -1141,6 +1151,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | integer | ≥ 0, ≤ 365 |
 | `allowedPaymentModes` | array of `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` |  |
 | `creditEligible` | boolean |  |
+| `autoAccept` | boolean | Accept this buyer’s orders automatically when submitted |
 | `restrictions` | object |  |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | string[] |  |
@@ -1161,6 +1172,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |
@@ -1235,6 +1247,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `terms.paymentTerms` | object |  |
 | `terms.allowedPaymentModes` | array of `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` |  |
 | `terms.creditEligible` | boolean |  |
+| `terms.autoAccept` | boolean | Accept this buyer’s orders automatically when submitted |
 | `terms.restrictions` | object |  |
 | `terms.effectiveFrom` | string (date-time) |  |
 | `terms.effectiveTo` | string (date-time) | may be null |
@@ -1253,6 +1266,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
 | `credit` | object | may be null |
 | `credit.limit` | object | may be null |
 | `credit.expiresAt` | string (date-time) | may be null |

@@ -89,6 +89,12 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     shot('quotes/requests', '/selling/quotes?tab=requests', 'Quotes: requests received'),
+    shot('orders/list', '/selling/orders', 'Orders', {
+      callouts: [
+        { n: 1, target: { role: 'textbox', name: 'Status' }, text: 'Orders waiting for you, accepted, rejected or cancelled.', side: 'bottom' },
+        { n: 2, target: { text: /^Status$/ }, text: 'Three statuses each: the order, its payment, and its stock.', side: 'bottom' },
+      ],
+    }),
     shot('customers/list', '/selling/customers', 'Customers', {
       callouts: [
         { n: 1, target: { text: /waiting for approval/i, nth: 0 }, text: 'Requests waiting for your answer.', side: 'bottom' },
@@ -123,6 +129,10 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     shot('buying-quotes/new', '/buying/quotes', 'Request a quote', { steps: click('Request a quote') }),
+    shot('buying-orders/list', '/buying/orders', 'Orders', {
+      callouts: [{ n: 1, target: { role: 'button', name: 'New order' }, text: 'Draft an order to one supplier, at your price.', side: 'left' }],
+    }),
+    shot('buying-orders/new', '/buying/orders', 'New order', { steps: click('New order'), fullPage: true }),
     shot('suppliers/list', '/suppliers', 'Suppliers', {
       callouts: [
         { n: 1, target: { role: 'button', name: 'Find suppliers' }, text: 'Find sellers on Neuros and ask for an account.', side: 'left' },

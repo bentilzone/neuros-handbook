@@ -36,6 +36,20 @@ const draft: Scenario = {
   ],
 };
 
+// From seed:trade: Ikeja Hardware's order waiting for acceptance.
+const order: Scenario = {
+  id: 'distributor/orders/detail',
+  persona: 'distributor',
+  path: '/selling/orders?status=submitted',
+  title: 'An order to accept',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: /^Total$/, nth: 1 }, text: 'The lines at the customer’s price, fixed when they ordered.', side: 'left' },
+    { n: 2, target: { role: 'button', name: 'Accept' }, text: 'Accept claims credit if they pay on credit, and reserves the stock.', side: 'top' },
+    { n: 3, target: { role: 'button', name: 'Reject' }, text: 'Reject with a reason they see.', side: 'top' },
+  ],
+};
+
 export default [...walk({
   persona: 'distributor',
   company: 'Lagos Industrial Supplies Ltd',
@@ -45,4 +59,4 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
-}), credit, newQuotation, draft];
+}), credit, newQuotation, draft, order];

@@ -61,3 +61,25 @@ A new version of a quotation, with the same number (*Q-2026-000004 rev 2*). Send
 
 ### Quote validity
 How long a quotation can be accepted: the date the seller sets, or by default the company's quote validity days (14) from when it is sent. After it the quotation is *Expired*, and the seller can revise it.
+
+### Order
+One buyer buying from one seller, with a snapshot of what was agreed: both companies' names, tax ids and addresses, each product, its price and where the price came from, tax, freight, currency and how it is paid. Numbered from the seller's series (*SO-2026-000001*). The buyer drafts and submits it; the seller accepts or rejects it. Prices never change after it is priced, except through an approved amendment.
+
+### Order statuses
+An order carries three statuses that move separately, so one never implies another:
+- **Order:** draft, waiting for approval, waiting for the seller, accepted, rejected, cancelled, completed.
+- **Payment:** awaiting payment, part paid, paid, refunded.
+- **Stock:** not reserved, partly reserved, stock reserved, then dispatch and delivery.
+
+### Purchase approval
+An order over the submitter's purchase limit waits for someone else with approval rights, within their own approval limit, before it goes to the seller. No purchase limit set means no limit.
+
+### Automatic acceptance
+The seller's choice to accept orders as soon as they are submitted: for every customer (Order acceptance in company settings) or for one (Accept their orders automatically, in that customer's terms). The credit and stock checks still apply; an order that fails them waits for a person.
+
+### Backorder
+The part of an accepted order that could not be reserved because stock was short. It waits until stock arrives and the seller reserves it. What happens when stock is short is the seller's **When stock is short** setting: backorder the rest, hold the line until it can be reserved whole, or refuse to accept.
+
+### Amendment
+A change to a waiting or accepted order (quantities, removed lines, a new delivery date) proposed by one side and approved or rejected by the other. Quantities keep their agreed price. An approved amendment makes a new revision of the order (*SO-2026-000004 rev 2*).
+

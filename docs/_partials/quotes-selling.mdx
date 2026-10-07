@@ -12,7 +12,7 @@ Quotes is where you price a deal for one customer before they order: the **reque
 |---|---|---|
 | Draft | You are preparing it. The customer cannot see it. | Edit, Send |
 | Sent | The customer has it and can accept it until its validity ends | Revise |
-| Accepted | The customer agreed the prices and terms | Nothing more: the order follows |
+| Accepted | The customer agreed the prices and terms | Nothing more: the customer places the order |
 | Declined | The customer said no, with a reason you see | Revise |
 | Expired | Its validity ran out before the customer decided | Revise |
 | Replaced by a revision | You sent a newer revision, which replaced this one | Open the newer one |
@@ -60,8 +60,8 @@ Open a request and choose **Prepare a quotation**. The draft starts from the req
 - **The customer** accepts or declines the latest revision you sent, until it expires. Accepting closes their request. Declining tells you their reason, and you can revise.
 - **The PDF** icon opens the quotation as the customer receives it.
 
-:::note[Orders follow]
-An accepted quotation becomes an order with the next part of Neuros. Until then, accepting records the agreement.
+:::note[Then the order]
+The customer then places the order from the accepted quotation, at its prices. It arrives under <PageLink who={props.who} page="orders">Orders</PageLink>. One quotation makes one order.
 :::
 
 Seeing quotes needs `quote:read`; preparing, sending and revising them needs `quote:prepare`.

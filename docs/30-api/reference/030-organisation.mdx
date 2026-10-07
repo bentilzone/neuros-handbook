@@ -86,6 +86,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.reservationTtlMinutes` | number | may be null |
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
+| `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -181,6 +182,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.reservationTtlMinutes` | number | may be null |
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
+| `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -208,6 +210,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `reservationTtlMinutes` | integer | ≥ 5, ≤ 10080 |
 | `defaultPaymentTermsDays` | integer | ≥ 0, ≤ 365 |
 | `quoteValidityDays` | integer | ≥ 1, ≤ 365 |
+| `shortfall` | `backorder` · `hold` · `reject` |  |
 | `timezone` | string (one of 418) | IANA zone, e.g. Africa/Accra |
 
 **Response** `200`
@@ -264,6 +267,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.reservationTtlMinutes` | number | may be null |
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
+| `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |

@@ -19,6 +19,19 @@ const quotation: Scenario = {
   ],
 };
 
+// From seed:trade: the order Lagos Industrial accepted on credit.
+const order: Scenario = {
+  id: 'reseller/buying-orders/detail',
+  persona: 'reseller',
+  path: '/buying/orders?status=accepted',
+  title: 'An accepted order',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: 'Awaiting payment', nth: 1 }, text: 'The order, its payment and its stock, each with its own status.', side: 'bottom' },
+    { n: 2, target: { role: 'button', name: 'Propose a change' }, text: 'Ask for a new quantity or date; the supplier approves or rejects it.', side: 'top' },
+  ],
+};
+
 export default [...walk({
   persona: 'reseller',
   company: 'Ikeja Hardware Resellers',
@@ -27,4 +40,4 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
-}), quotation];
+}), quotation, order];
