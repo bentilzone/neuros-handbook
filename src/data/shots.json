@@ -27,6 +27,18 @@
     "title": "Audit log",
     "callouts": []
   },
+  "distributor/buying-invoices/list": {
+    "file": "distributor/buying-invoices/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "When each invoice is due; overdue ones show in red."
+      }
+    ]
+  },
   "distributor/buying-orders/list": {
     "file": "distributor/buying-orders/list.png",
     "width": 1440,
@@ -364,6 +376,65 @@
     "title": "Inventory: warehouses",
     "callouts": []
   },
+  "distributor/invoices/ageing": {
+    "file": "distributor/invoices/ageing.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices: ageing",
+    "callouts": []
+  },
+  "distributor/invoices/detail": {
+    "file": "distributor/invoices/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An invoice part paid",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What the customer still owes on it."
+      },
+      {
+        "n": 2,
+        "text": "Each payment and credit note that settled part of it."
+      },
+      {
+        "n": 3,
+        "text": "Record what they paid against this invoice."
+      },
+      {
+        "n": 4,
+        "text": "Reduce what they owe, with a reason they see."
+      }
+    ]
+  },
+  "distributor/invoices/list": {
+    "file": "distributor/invoices/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Invoices, the payments you received, and what each customer owes by age."
+      },
+      {
+        "n": 2,
+        "text": "What is still owed on each invoice."
+      }
+    ]
+  },
+  "distributor/invoices/receipts": {
+    "file": "distributor/invoices/receipts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices: payments received",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Record money a customer paid; it goes to their oldest invoices first."
+      }
+    ]
+  },
   "distributor/ledger/account-entries": {
     "file": "distributor/ledger/account-entries.png",
     "width": 1440,
@@ -388,7 +459,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1217,
+    "height": 1374,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -1319,6 +1390,34 @@
     "title": "Audit log",
     "callouts": []
   },
+  "reseller/buying-invoices/detail": {
+    "file": "reseller/buying-invoices/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An invoice from a supplier",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What you still owe, and below, when it is due."
+      },
+      {
+        "n": 2,
+        "text": "Payments the supplier has recorded from you."
+      }
+    ]
+  },
+  "reseller/buying-invoices/list": {
+    "file": "reseller/buying-invoices/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "When each invoice is due; overdue ones show in red."
+      }
+    ]
+  },
   "reseller/buying-orders/detail": {
     "file": "reseller/buying-orders/detail.png",
     "width": 1440,
@@ -2005,6 +2104,41 @@
     "title": "Inventory: warehouses",
     "callouts": []
   },
+  "supplier/invoices/ageing": {
+    "file": "supplier/invoices/ageing.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices: ageing",
+    "callouts": []
+  },
+  "supplier/invoices/list": {
+    "file": "supplier/invoices/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Invoices, the payments you received, and what each customer owes by age."
+      },
+      {
+        "n": 2,
+        "text": "What is still owed on each invoice."
+      }
+    ]
+  },
+  "supplier/invoices/receipts": {
+    "file": "supplier/invoices/receipts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invoices: payments received",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Record money a customer paid; it goes to their oldest invoices first."
+      }
+    ]
+  },
   "supplier/ledger/account-entries": {
     "file": "supplier/ledger/account-entries.png",
     "width": 1440,
@@ -2336,7 +2470,7 @@
   "supplier/settings/security": {
     "file": "supplier/settings/security.png",
     "width": 1440,
-    "height": 1242,
+    "height": 900,
     "title": "Settings: security",
     "callouts": []
   },

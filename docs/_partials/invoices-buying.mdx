@@ -1,0 +1,21 @@
+{/* Shared by the buying guides: <InvoicesBuying who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="bill:read" />
+
+Invoices lists what your suppliers have billed you for: what you owe each one, when it is due, and what you have paid. A supplier invoices each delivery as it leaves, or a whole order when they accept it.
+
+<Shot id={`${props.who}/buying-invoices/list`} />
+
+{props.who === 'reseller' && <Shot id="reseller/buying-invoices/detail" />}
+
+Open an invoice for its lines, the delivery and order it is for, its due date, and **Settled by**: each payment the supplier recorded and each credit note they issued. The PDF opens from its header. An invoice past its due date with something outstanding shows **Overdue**.
+
+You pay outside Neuros, by the arrangement on your account. The supplier records your payment, and the invoice shows it as part paid or paid. Your order's **Payment** status follows its invoices.
+
+Reading needs `bill:read`.
+
+## Common questions
+
+**I paid but the invoice still shows unpaid.** The supplier has not recorded it yet. Send them your transfer reference.
+
+**Why is the amount less than my order?** It is one delivery of it. The rest is invoiced as it ships.

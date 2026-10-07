@@ -27,7 +27,7 @@ const order: Scenario = {
   title: 'An accepted order',
   steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
   callouts: [
-    { n: 1, target: { text: 'Awaiting payment', nth: 1 }, text: 'The order, its payment and its stock, each with its own status.', side: 'bottom' },
+    { n: 1, target: { text: 'Part paid', nth: 1 }, text: 'The order, its payment and its stock, each with its own status.', side: 'bottom' },
     { n: 2, target: { role: 'button', name: /^DN-/ }, text: 'Its shipments: open one to follow it and confirm receipt.', side: 'top' },
   ],
 };
@@ -48,6 +48,19 @@ const shipment: Scenario = {
   ],
 };
 
+// The same invoice, addressed to Ikeja Hardware.
+const invoice: Scenario = {
+  id: 'reseller/buying-invoices/detail',
+  persona: 'reseller',
+  path: '/buying/invoices',
+  title: 'An invoice from a supplier',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: /^Outstanding$/, nth: 1 }, text: 'What you still owe, and below, when it is due.', side: 'left' },
+    { n: 2, target: { text: /^Payment RCT-/ }, text: 'Payments the supplier has recorded from you.', side: 'left' },
+  ],
+};
+
 export default [...walk({
   persona: 'reseller',
   company: 'Ikeja Hardware Resellers',
@@ -56,4 +69,4 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
-}), quotation, order, shipment];
+}), quotation, order, shipment, invoice];

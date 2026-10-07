@@ -87,6 +87,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
+| `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -183,6 +184,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
+| `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -211,6 +213,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `defaultPaymentTermsDays` | integer | ≥ 0, ≤ 365 |
 | `quoteValidityDays` | integer | ≥ 1, ≤ 365 |
 | `shortfall` | `backorder` · `hold` · `reject` |  |
+| `invoiceTiming` | `on_dispatch` · `on_acceptance` |  |
 | `timezone` | string (one of 418) | IANA zone, e.g. Africa/Accra |
 
 **Response** `200`
@@ -268,6 +271,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.defaultPaymentTermsDays` | number | may be null |
 | `settings.quoteValidityDays` | number | may be null |
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
+| `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
