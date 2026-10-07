@@ -1,0 +1,59 @@
+{/* Shared by the buying guides: <QuotesBuying who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="quote:read" />
+
+Quotes is where you ask suppliers for a price before you order, and decide on what they send. A **request for quotation** asks one supplier to price some of their offers for you. A **quotation** is their answer: fixed prices and terms, valid until a date. See [quotation](../01-glossary/30-selling-and-pricing.mdx#quotation).
+
+<Shot id={`${props.who}/buying-quotes/list`} />
+
+## Request a quote
+
+**Request a quote** asks one supplier you have an approved account with. You can also ask from an offer in the <PageLink who={props.who} page="marketplace">Marketplace</PageLink>: **Request a quote** under your price.
+
+<Shot id={`${props.who}/buying-quotes/new`} />
+
+<FieldTable fields={[
+  { name: 'Supplier', required: true, meaning: 'Who you are asking.', others: 'They see your request under their Quotes, with your company name.', rules: 'A supplier with an approved account.' },
+  { name: 'Offer and Quantity', required: true, meaning: 'What you want priced, and how much.', implications: 'Quantity breaks and contract prices depend on the quantity.', rules: "Offers of that supplier you can see; a positive quantity." },
+  { name: 'Needed by', meaning: 'When you need the goods.', others: 'They see it and can commit a delivery to it.' },
+  { name: 'Deliver to', meaning: 'Where the supplier should price delivery to.', others: 'They see it.' },
+  { name: 'Note to the seller', meaning: 'Anything that changes the price: a project, split deliveries, a competing offer.', others: 'They see it.' },
+  { name: 'Your reference', meaning: 'Your own number for it, for example your purchase requisition.', others: 'Only your company sees it.' },
+]} />
+
+| Request status | What it means | What you can do |
+|---|---|---|
+| Waiting for a quote | The supplier has not answered yet | Cancel request |
+| Quoted | The supplier sent at least one quotation | Accept or decline it; Cancel request |
+| Accepted | You accepted one of its quotations | Nothing more: the order follows |
+| Cancelled | You withdrew it, with a reason the supplier sees | Nothing more |
+
+Cancelling a request also declines the quotations still open on it.
+
+## Decide on a quotation
+
+Open a quotation from **Quotations** or from its request. It shows each line's price, tax and amount, the freight, the total, and the supplier's lead time, delivery and terms.
+
+{props.who === 'reseller' && <Shot id="reseller/buying-quotes/detail" />}
+
+- **Accept** agrees the prices and terms. You can add a note for the supplier. It closes the request.
+- **Decline** needs a reason, which the supplier sees. They may send a revision.
+- **The PDF** icon opens the quotation as a document.
+
+You can accept only the **latest** revision the supplier sent, and only until it is **valid until**. An older revision shows *Replaced by a revision*, with a link to the newer one. One past its date shows *Expired*: ask the supplier for a new revision.
+
+:::note[Orders follow]
+An accepted quotation becomes an order with the next part of Neuros. Until then, accepting records the agreement.
+:::
+
+Seeing quotes needs `quote:read`; requesting, accepting and declining needs `quote:request`.
+
+## Live
+
+A quotation the supplier sends appears on its own, and so does a new revision.
+
+## Common questions
+
+**Why can't I accept this quotation?** It is either past its date, or the supplier sent a newer revision. Open the newest one, or ask them to revise.
+
+**Do I see the supplier's draft while they work on it?** No. You see a quotation only once they send it.

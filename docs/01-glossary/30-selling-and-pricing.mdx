@@ -40,7 +40,7 @@ A temporary reduction: a percentage off, an amount off or a fixed price, on chos
 
 ### Pricing precedence
 The one rule Neuros uses to decide a buyer's price, in this order:
-1. A quotation price, once quotations exist.
+1. A quotation price: the seller's own price on a line of a quotation.
 2. The buyer's contract price.
 3. The buyer's price list, at the highest quantity break reached.
 4. The offer's standard price or its own quantity break.
@@ -49,3 +49,15 @@ Promotions then apply to 3 or 4, never to a contract price. The result is rounde
 
 ### Price check
 A tool on the seller's Offers and Pricing pages that answers "what would this customer pay for this quantity?". It shows each step of the precedence and why it applied, exactly as Neuros will compute it.
+
+### Request for quotation
+A buyer asking one seller to price some of the seller's offers, in given quantities, with when and where they are needed. Numbered from the buyer's own series (*RFQ-2026-000001*). The buyer needs an approved account with the seller and can only ask about offers it can see.
+
+### Quotation
+A seller's fixed offer of prices and terms to one buyer, valid until a date. Each line is priced like the price check, unless the seller sets their own price on it, and taxed with the offer's tax code. Once sent, its prices never change. Numbered from the seller's series (*Q-2026-000004*). The buyer can accept or decline it; an accepted quotation becomes an order.
+
+### Revision
+A new version of a quotation, with the same number (*Q-2026-000004 rev 2*). Sending it replaces the revision sent before it, which can no longer be accepted. Only the latest revision sent, still within its validity, can be accepted.
+
+### Quote validity
+How long a quotation can be accepted: the date the seller sets, or by default the company's quote validity days (14) from when it is sent. After it the quotation is *Expired*, and the seller can revise it.
