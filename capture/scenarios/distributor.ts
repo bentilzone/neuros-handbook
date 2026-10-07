@@ -20,6 +20,22 @@ const credit: Scenario = {
   ],
 };
 
+const newQuotation: Scenario = { id: 'distributor/quotes/new', persona: 'distributor', path: '/selling/quotes', title: 'New quotation', fullPage: true, steps: async (page: Page) => { await page.getByRole('button', { name: 'New quotation' }).click(); } };
+
+// From seed:trade: a draft for Ikeja Hardware the customer cannot see yet.
+const draft: Scenario = {
+  id: 'distributor/quotes/draft',
+  persona: 'distributor',
+  path: '/selling/quotes?status=draft',
+  title: 'A draft quotation',
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).first().click(); },
+  callouts: [
+    { n: 1, target: { text: /sees nothing until you send it/ }, text: 'A draft stays with you until you send it.', side: 'left' },
+    { n: 2, target: { text: 'Quoted price', nth: 0 }, text: 'Where each price came from: your own price, or their contract, price list or standard price. Only you see this.', side: 'left' },
+    { n: 3, target: { role: 'button', name: 'Send' }, text: 'Send fixes the prices and starts the validity.', side: 'left' },
+  ],
+};
+
 export default [...walk({
   persona: 'distributor',
   company: 'Lagos Industrial Supplies Ltd',
@@ -29,4 +45,4 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
-}), credit];
+}), credit, newQuotation, draft];

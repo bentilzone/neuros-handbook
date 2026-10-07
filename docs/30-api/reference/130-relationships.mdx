@@ -8,7 +8,7 @@ description: "Accounts between sellers and buyers, and their terms."
 
 Accounts between sellers and buyers, and their terms.
 
-This page lists the 13 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 19 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -21,8 +21,14 @@ This page lists the 13 operations in this area, generated from the engine's Open
 | [GET `/v1/relationships/{id}`](#one-relationship-each-side-sees-only-its-own-private-notes) | One relationship (each side sees only its own private notes) | `relationship:read` |
 | [POST `/v1/relationships/{id}/approve`](#seller-approve-a-request-optionally-setting-terms) | Seller: approve a request, optionally setting terms | `relationship:manage` |
 | [PUT `/v1/relationships/{id}/buyer-reference`](#buyer-my-own-reference-for-this-supplier-private-to-me) | Buyer: my own reference for this supplier (private to me) | `relationship:request` |
+| [GET `/v1/relationships/{id}/credit`](#the-buyers-credit-with-this-seller-limit-used-available-hold) | The buyer’s credit with this seller: limit, used, available, hold | `credit:read` |
+| [PATCH `/v1/relationships/{id}/credit`](#seller-set-or-clear-the-credit-limit-and-its-expiry) | Seller: set or clear the credit limit and its expiry | `credit:manage` |
+| [GET `/v1/relationships/{id}/credit-overrides`](#seller-one-off-credit-overrides-approved-for-this-buyer) | Seller: one-off credit overrides approved for this buyer | `credit:read` |
+| [POST `/v1/relationships/{id}/credit-overrides`](#seller-approve-a-one-off-lift-of-the-limit-for-the-next-order-that-needs-it) | Seller: approve a one-off lift of the limit for the next order that needs it | `credit:override` |
+| [POST `/v1/relationships/{id}/hold`](#seller-put-the-account-on-hold--no-new-credit-orders) | Seller: put the account on hold — no new credit orders | `credit:manage` |
 | [POST `/v1/relationships/{id}/reinstate`](#seller-reinstate-the-relationship) | Seller: reinstate the relationship | `relationship:manage` |
 | [POST `/v1/relationships/{id}/reject`](#seller-reject-the-relationship) | Seller: reject the relationship | `relationship:manage` |
+| [POST `/v1/relationships/{id}/release-hold`](#seller-lift-the-account-hold) | Seller: lift the account hold | `credit:manage` |
 | [POST `/v1/relationships/{id}/revoke`](#end-the-relationship-either-side-existing-obligations-stand) | End the relationship (either side). Existing obligations stand | `relationship:read` |
 | [POST `/v1/relationships/{id}/suspend`](#seller-suspend-the-relationship--blocks-new-orders-keeps-history) | Seller: suspend the relationship — blocks new orders, keeps history | `relationship:manage` |
 | [PATCH `/v1/relationships/{id}/terms`](#seller-change-price-list-payment-terms-credit-eligibility-restrictions) | Seller: change price list, payment terms, credit eligibility, restrictions | `relationship:manage` |
@@ -130,6 +136,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -205,6 +220,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -276,6 +300,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -361,6 +394,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -438,6 +480,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -486,6 +537,205 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `priceList.currency` * | string |  |
 
 
+### The buyer’s credit with this seller: limit, used, available, hold
+
+<span className="nh-method nh-method--get">GET</span> `/v1/relationships/{id}/credit`
+
+Both sides see it. `used` is the active exposure: accepted orders not yet paid (§9.6).
+
+**Who can call it:** People and API clients · **Scope:** `credit:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationshipId` * | string |  |
+| `viewerSide` * | `seller` · `buyer` |  |
+| `creditEligible` * | boolean |  |
+| `limit` * | object | may be null |
+| `limit.amount` * | string |  |
+| `limit.currency` * | string | 3 characters |
+| `used` * | string |  |
+| `available` * | string | may be null |
+| `expiresAt` * | string (date-time) | may be null |
+| `expired` * | boolean |  |
+| `hold` * | object |  |
+| `hold.active` * | boolean |  |
+| `hold.reason` * | string | may be null |
+| `hold.at` * | string (date-time) | may be null |
+| `reservations` * | object[] |  |
+| `reservations[].id` * | string |  |
+| `reservations[].amount` * | object |  |
+| `reservations[].reference` * | object |  |
+| `reservations[].createdAt` * | string (date-time) |  |
+
+
+### Seller: set or clear the credit limit and its expiry
+
+<span className="nh-method nh-method--patch">PATCH</span> `/v1/relationships/{id}/credit`
+
+In your functional currency. The buyer must be credit-eligible. A limit below current exposure blocks new credit orders only.
+
+**Who can call it:** People and API clients · **Scope:** `credit:manage` · **Two-step verification:** the session must have signed in with it
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `limit` * | object | may be null |
+| `limit.amount` * | string | Decimal as a string, e.g. "250000.00" |
+| `limit.currency` * | string (one of 155) | ISO 4217 currency code |
+| `expiresAt` | string (date-time) | may be null |
+| `reason` * | string | at least 3 characters, at most 1000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationshipId` * | string |  |
+| `viewerSide` * | `seller` · `buyer` |  |
+| `creditEligible` * | boolean |  |
+| `limit` * | object | may be null |
+| `limit.amount` * | string |  |
+| `limit.currency` * | string | 3 characters |
+| `used` * | string |  |
+| `available` * | string | may be null |
+| `expiresAt` * | string (date-time) | may be null |
+| `expired` * | boolean |  |
+| `hold` * | object |  |
+| `hold.active` * | boolean |  |
+| `hold.reason` * | string | may be null |
+| `hold.at` * | string (date-time) | may be null |
+| `reservations` * | object[] |  |
+| `reservations[].id` * | string |  |
+| `reservations[].amount` * | object |  |
+| `reservations[].reference` * | object |  |
+| `reservations[].createdAt` * | string (date-time) |  |
+
+
+### Seller: one-off credit overrides approved for this buyer
+
+<span className="nh-method nh-method--get">GET</span> `/v1/relationships/{id}/credit-overrides`
+
+**Who can call it:** People and API clients · **Scope:** `credit:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `data` * | object[] |  |
+| `data[].relationshipId` | string | 24 characters, may be null |
+| `data[].amount` | object | may be null |
+| `data[].reason` | string | may be null |
+| `data[].expiresAt` | string (date-time) | may be null |
+| `data[].approvedBy` | string | 24 characters, may be null |
+| `data[].usedAt` | string (date-time) | may be null |
+| `data[].usedFor` | object | may be null |
+| `data[].createdAt` | string (date-time) | may be null |
+| `data[].updatedAt` | string (date-time) | may be null |
+| `data[].organizationId` | string | 24 characters, may be null |
+| `data[].__v` | number | may be null |
+| `data[].id` | string | 24 characters |
+
+
+### Seller: approve a one-off lift of the limit for the next order that needs it
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/credit-overrides`
+
+Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
+
+**Who can call it:** People and API clients · **Scope:** `credit:override` · **Two-step verification:** the session must have signed in with it
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `amount` * | object |  |
+| `amount.amount` * | string | Decimal as a string, e.g. "250000.00" |
+| `amount.currency` * | string (one of 155) | ISO 4217 currency code |
+| `reason` * | string | at least 3 characters, at most 1000 characters |
+| `expiresAt` * | string (date-time) |  |
+
+**Response** `201`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationshipId` | string | 24 characters, may be null |
+| `amount` | object | may be null |
+| `amount.amount` | string | may be null |
+| `amount.currency` | string (one of 155) | may be null |
+| `amount.id` | string | 24 characters |
+| `reason` | string | may be null |
+| `expiresAt` | string (date-time) | may be null |
+| `approvedBy` | string | 24 characters, may be null |
+| `usedAt` | string (date-time) | may be null |
+| `usedFor` | object | may be null |
+| `usedFor.type` | string | may be null |
+| `usedFor.id` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+
+
+### Seller: put the account on hold — no new credit orders
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/hold`
+
+**Who can call it:** People and API clients · **Scope:** `credit:manage`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `reason` * | string | at least 3 characters, at most 1000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationshipId` * | string |  |
+| `viewerSide` * | `seller` · `buyer` |  |
+| `creditEligible` * | boolean |  |
+| `limit` * | object | may be null |
+| `limit.amount` * | string |  |
+| `limit.currency` * | string | 3 characters |
+| `used` * | string |  |
+| `available` * | string | may be null |
+| `expiresAt` * | string (date-time) | may be null |
+| `expired` * | boolean |  |
+| `hold` * | object |  |
+| `hold.active` * | boolean |  |
+| `hold.reason` * | string | may be null |
+| `hold.at` * | string (date-time) | may be null |
+| `reservations` * | object[] |  |
+| `reservations[].id` * | string |  |
+| `reservations[].amount` * | object |  |
+| `reservations[].reference` * | object |  |
+| `reservations[].createdAt` * | string (date-time) |  |
+
+
 ### Seller: reinstate the relationship
 
 <span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/reinstate`
@@ -515,6 +765,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -592,6 +851,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -640,6 +908,47 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `priceList.currency` * | string |  |
 
 
+### Seller: lift the account hold
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/release-hold`
+
+**Who can call it:** People and API clients · **Scope:** `credit:manage`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `reason` * | string | at least 3 characters, at most 1000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationshipId` * | string |  |
+| `viewerSide` * | `seller` · `buyer` |  |
+| `creditEligible` * | boolean |  |
+| `limit` * | object | may be null |
+| `limit.amount` * | string |  |
+| `limit.currency` * | string | 3 characters |
+| `used` * | string |  |
+| `available` * | string | may be null |
+| `expiresAt` * | string (date-time) | may be null |
+| `expired` * | boolean |  |
+| `hold` * | object |  |
+| `hold.active` * | boolean |  |
+| `hold.reason` * | string | may be null |
+| `hold.at` * | string (date-time) | may be null |
+| `reservations` * | object[] |  |
+| `reservations[].id` * | string |  |
+| `reservations[].amount` * | object |  |
+| `reservations[].reference` * | object |  |
+| `reservations[].createdAt` * | string (date-time) |  |
+
+
 ### End the relationship (either side). Existing obligations stand
 
 <span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/revoke`
@@ -669,6 +978,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -746,6 +1064,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -834,6 +1161,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |
@@ -917,6 +1253,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `paymentTerms.termsDays` | number | may be null |
 | `allowedPaymentModes` | object[] |  |
 | `creditEligible` | boolean | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
 | `restrictions` | object | may be null |
 | `restrictions.maxOrderValue` | object | may be null |
 | `restrictions.categoryIds` | object[] |  |

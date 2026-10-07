@@ -1,0 +1,79 @@
+{/* Shared by the selling guides: <QuotesSelling who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="quote:read" />
+
+Quotes is where you price a deal for one customer before they order: the **requests** customers send you, and the **quotations** you draft, send and revise. A quotation is a fixed offer to one customer. Its prices are worked out the way the price check does, and you can set your own price on any line. See [quotation](../01-glossary/30-selling-and-pricing.mdx#quotation).
+
+<Shot id={`${props.who}/quotes/list`} />
+
+## Statuses
+
+| Status | What it means | What you can do |
+|---|---|---|
+| Draft | You are preparing it. The customer cannot see it. | Edit, Send |
+| Sent | The customer has it and can accept it until its validity ends | Revise |
+| Accepted | The customer agreed the prices and terms | Nothing more: the order follows |
+| Declined | The customer said no, with a reason you see | Revise |
+| Expired | Its validity ran out before the customer decided | Revise |
+| Replaced by a revision | You sent a newer revision, which replaced this one | Open the newer one |
+
+## Requests received
+
+**Requests received** lists what customers asked you to quote: the products and quantities, when they need them and where to deliver. A customer asks from your offer in their marketplace, or from their own Quotes page. They need an approved [account](../01-glossary/40-relationships.mdx) with you, and can only ask about offers they can see.
+
+<Shot id={`${props.who}/quotes/requests`} />
+
+Open a request and choose **Prepare a quotation**. The draft starts from the request's lines; change anything before you send it.
+
+| Request status | What it means |
+|---|---|
+| Waiting for a quote | Nothing sent yet |
+| Quoted | You sent at least one quotation |
+| Accepted | The customer accepted one of your quotations |
+| Cancelled | The customer withdrew it. Quotations still open on it are declined. |
+
+## Prepare a quotation
+
+**New quotation** starts a draft for any approved customer, without a request. Saving prices every line for that customer: their contract, their price list, quantity breaks and promotions, exactly as the [price check](../01-glossary/30-selling-and-pricing.mdx#price-check) does. Tax comes from each offer's tax code, at the rate in your country.
+
+{props.who === 'distributor' && <Shot id="distributor/quotes/new" />}
+
+<FieldTable fields={[
+  { name: 'Customer', required: true, meaning: 'Who the quotation is for.', others: 'They see it only once you send it.', rules: 'An approved customer. Set for you when you quote on a request.' },
+  { name: 'Offer and Quantity', required: true, meaning: 'What you are quoting, from your own offers.', implications: 'All lines must be in one currency.', rules: 'A published offer of yours; a positive quantity.' },
+  { name: 'Your price', meaning: 'Your price per unit for this deal.', others: 'They see the price, never where it came from.', implications: 'Beats their contract, price list and promotions for this quotation only. Blank: their own price.', rules: "In the offer's currency." },
+  { name: 'Freight', meaning: 'What delivery costs them.', implications: 'Added to the total, untaxed.', rules: "In the quotation's currency." },
+  { name: 'Lead time (days)', meaning: 'Days from acceptance to dispatch.', others: 'Printed on the quotation.' },
+  { name: 'Delivery', meaning: 'What you commit to: where, how and by when.', others: 'Printed on the quotation.' },
+  { name: 'Valid until', meaning: 'The last day they can accept it.', implications: 'After it the quotation expires and can only be revised.', rules: 'Blank: your quote validity days (14 unless your company changed it), counted from when you send it.' },
+  { name: 'Terms', meaning: 'Conditions that come with these prices.', others: 'Printed on the quotation.' },
+  { name: 'Note to the customer', meaning: 'Anything else they should read.', others: 'They see it.' },
+  { name: 'Internal notes', meaning: 'Notes for your team, such as the margin or how far you can go.', others: 'Only your company sees these.' },
+]} />
+
+## Send, revise, and what the customer does
+
+{props.who === 'distributor' && <Shot id="distributor/quotes/draft" />}
+
+- **Send** gives the customer the quotation and fixes its prices: they no longer change, even if your price list does. It also sets the validity date if you left it blank. A request it answers becomes *Quoted*.
+- **Revise** starts the next revision as a draft. It keeps the number, for example *Q-2026-000004 rev 2*. Sending it replaces the revision before it, which can no longer be accepted.
+- **The customer** accepts or declines the latest revision you sent, until it expires. Accepting closes their request. Declining tells you their reason, and you can revise.
+- **The PDF** icon opens the quotation as the customer receives it.
+
+:::note[Orders follow]
+An accepted quotation becomes an order with the next part of Neuros. Until then, accepting records the agreement.
+:::
+
+Seeing quotes needs `quote:read`; preparing, sending and revising them needs `quote:prepare`.
+
+## Live
+
+A new request, or a customer accepting or declining, appears on its own. What you send appears on the customer's screen at the same moment.
+
+## Common questions
+
+**Can the customer see my draft?** No. Until you send it, they cannot find it at all.
+
+**I changed my price list after sending. Does the quotation change?** No. A sent quotation keeps the prices it was sent with. Revise it to send new prices.
+
+**Can I quote a customer without an account?** No. Approve their account first under <PageLink who={props.who} page="customers">Customers</PageLink>.
