@@ -49,6 +49,41 @@ Click a row for the account: its status, terms, contract prices, private notes a
 
 <Shot id={`${props.who}/customers/detail`} />
 
+## Credit
+
+A **credit-eligible** customer's account has a **Credit** section. Both of you see the same figures; only you change them.
+
+{props.who === 'distributor' && <Shot id="distributor/customers/credit" />}
+
+- **Limit:** the most the customer may owe you at once, in your currency.
+- **In use:** orders on credit you accepted that are not yet paid. Each claims its value when you accept it and gives it back when it is paid or cancelled. Two orders accepted at the same moment can never both take the last of the limit.
+- **Available:** the limit less what is in use.
+- **Expires:** after this date, new orders cannot use credit until you renew the limit.
+
+:::note[Orders arrive with ordering]
+Ordering on credit comes with quotations and orders. Until then, **In use** stays at zero.
+:::
+
+**Set limit** (or **Change limit**) needs a sign-in made with [two-step verification](../01-glossary/10-companies-and-people.mdx#two-step-verification-mfa):
+
+<FieldTable fields={[
+  { name: 'Limit', meaning: 'The most this customer may owe you at once: accepted orders not yet paid, plus open invoices.', others: 'They see the limit, what is in use and what is left.', implications: 'Lowering it below what is in use stops new credit orders; nothing already accepted changes. Clearing it ends credit until you set one again.', rules: 'In your functional currency. The customer must be credit-eligible.' },
+  { name: 'Expires', meaning: 'When the facility ends.', others: 'They see the date.', implications: 'After it, orders cannot use credit until you change it.', rules: 'Optional. Blank: until you change it.' },
+  { name: 'Reason', required: true, meaning: 'Why you set or changed the limit.', implications: 'Kept in the audit log with the old and new limit.' },
+]} />
+
+**Put on hold** stops new orders on credit, with a reason they see; **Lift hold** lets them order on credit again. Open orders and invoices are untouched either way.
+
+**Override** approves one order over the limit, for example a seasonal order. It also needs two-step verification:
+
+<FieldTable fields={[
+  { name: 'Extra credit', required: true, meaning: 'How far over the limit the next order may go.', others: 'Not shown to the customer.', implications: 'Used once, by the next order that needs it, then spent.', rules: 'In the limit\'s currency.' },
+  { name: 'Expires', required: true, meaning: 'The last day it can be used.', rules: 'A future date.' },
+  { name: 'Reason', required: true, meaning: 'Why this order may go over the limit.', implications: 'Kept with your name as the approver.' },
+]} />
+
+Seeing credit needs `credit:read`; the limit and holds need `credit:manage`; an override needs `credit:override`.
+
 ## Live
 
 A new request, or a customer ending their account, appears on its own. Approving or suspending updates the customer's side at the same moment.
@@ -56,5 +91,7 @@ A new request, or a customer ending their account, appears on its own. Approving
 ## Common questions
 
 **A customer can't see an offer.** Offers for approved customers need the account to be **Approved**. Invite-only offers also need the customer picked on the offer.
+
+**Why can't I set a limit?** Switch on **Credit-eligible** and allow **On credit** in the customer's terms first.
 
 **Can a customer see my private notes or other customers' terms?** No. Each side sees only its own notes, and a customer sees only their own terms.

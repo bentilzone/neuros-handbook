@@ -89,6 +89,26 @@
     "title": "Approve a customer, with terms",
     "callouts": []
   },
+  "distributor/customers/credit": {
+    "file": "distributor/customers/credit.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A customer’s credit",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What they can still buy on credit: the limit less accepted orders not yet paid."
+      },
+      {
+        "n": 2,
+        "text": "The limit and its expiry, in your currency. Needs two-step sign-in."
+      },
+      {
+        "n": 3,
+        "text": "Stop new credit orders, with a reason. Open orders and invoices stand."
+      }
+    ]
+  },
   "distributor/customers/detail": {
     "file": "distributor/customers/detail.png",
     "width": 1440,
