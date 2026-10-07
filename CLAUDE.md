@@ -37,11 +37,14 @@ capture/walk.ts        the page-by-page walk every persona guide is shot from; a
 capture/scenarios/     one file per persona: walk({...}) plus any extra shots and videos; operator.ts is its
                        own list (the console shares no pages with a company). Its waiting work comes from
                        the engine's seed:platform
+                       flows.ts: videos between companies, seller left and buyer right (`with`), recorded after
+                       every shot so no picture shows what they did; ffmpeg joins the two tabs
 capture/browser.ts     Chromium in Playwright's Docker image (linux/amd64, the package's exact version) for
                        laptops and CI alike; the page's localhost is tunnelled to the host stack
 capture/callouts.ts    numbered arrows drawn on the live page before the screenshot
-capture/run.ts         `yarn capture [--persona x] [--only id-prefix] [--app url]`; report in capture/.out;
-                       drops manifest entries (and images) whose scenario is gone
+capture/run.ts         `yarn capture [--persona x] [--only id-prefix] [--videos] [--app url]`; report in capture/.out;
+                       drops manifest entries (and images) whose scenario is gone. A video is recorded only when
+                       missing, named by --only, or with --videos: recordings are never byte-identical
 .github/workflows/capture.yml  re-shoots on app merges (repository_dispatch app-changed) and weekly; opens a PR
 tools/lint-public.mjs  refuses anything unpublishable
 handbook.manifest.json every neuros-client route → the docs/ pages for it; the client's coverage test reads a

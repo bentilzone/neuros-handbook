@@ -80,6 +80,9 @@ An order over the submitter's purchase limit waits for someone else with approva
 ### Automatic acceptance
 The seller's choice to accept orders as soon as they are submitted: for every customer (Order acceptance in company settings) or for one (Accept their orders automatically, in that customer's terms). The credit and stock checks still apply; an order that fails them waits for a person.
 
+### Allocation (stock reserved for an order)
+The units set aside for an accepted order from the seller's free stock, in one warehouse. Accepting an order allocates what is free; the rest is backordered. Two orders can never be allocated the same last unit, even when accepted at the same moment. Shipments are picked from what is allocated, and cancelling the order gives it back.
+
 ### Backorder
 The part of an accepted order that could not be reserved because stock was short. It waits until stock arrives and the seller reserves it. What happens when stock is short is the seller's **When stock is short** setting: backorder the rest, hold the line until it can be reserved whole, or refuse to accept.
 
@@ -100,6 +103,9 @@ A dispatched shipment that did not arrive. The seller records the reason, which 
 
 ### Sales invoice
 A seller's claim on a customer for goods sold, at the order's prices: one per shipment as it is dispatched, or one for the whole order on acceptance, by the seller's setting. Due after the customer's payment terms. The buyer sees it as an invoice addressed to them.
+
+### Purchase invoice
+The same sales invoice, as the buyer reads it: addressed to them, in the order's currency, with what is still owed and when it is due. The seller's exchange rate and its own accounting stay with the seller.
 
 ### Payment received (receipt)
 Money a seller records as received from a customer, applied to their invoices: the ones chosen, or the oldest due first. It posts to the bank and off what the customer owes.
