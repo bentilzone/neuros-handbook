@@ -1,0 +1,85 @@
+{/* Shared by the selling guides: <InvoicesSelling who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="invoice:read" />
+
+Invoices is where you bill your customers and record what they pay. An invoice is your claim on a customer for goods you sold them, at the prices fixed on their order. See [sales invoice](../01-glossary/30-selling-and-pricing.mdx#sales-invoice).
+
+<Shot id={`${props.who}/invoices/list`} />
+
+## When invoices are issued
+
+You do not write invoices by hand. Neuros issues them by your **Invoice orders** setting (under Settings, My company):
+
+- **Each shipment, as it is dispatched** (the default): one invoice per shipment under <PageLink who={props.who} page="fulfilment">Fulfilment</PageLink>, for what it carried. The last invoice for a line takes whatever is left of it, so an order's invoices always add up to the order.
+- **The whole order, when it is accepted:** one invoice for everything, as soon as you accept.
+
+The due date is the issue date plus the customer's payment terms. The customer's billing contact is emailed the invoice, and it appears under their **Invoices**.
+
+| Status | What it means |
+|---|---|
+| Unpaid | Issued, nothing paid yet |
+| Part paid | Some paid, the rest outstanding |
+| Overdue | Past its due date with something outstanding |
+| Paid | Nothing outstanding |
+| Credited | Settled by credit notes alone |
+| Void | Cancelled before anything settled it |
+
+## Record a payment
+
+{props.who === 'distributor' && <Shot id="distributor/invoices/detail" />}
+
+**Record payment** on an invoice records money the customer paid against it. **Payments received**, then **Record payment**, records money from a customer without choosing the invoice: it goes to their oldest invoices first, and anything over what they owe is held as their **advance** ([customer advance](../01-glossary/30-selling-and-pricing.mdx#customer-advance)). **Apply to open invoices** on the payment uses the advance once they have new invoices.
+
+<Shot id={`${props.who}/invoices/receipts`} />
+
+<FieldTable fields={[
+  { name: 'Customer', required: true, meaning: 'Who paid. Only customers with an approved account.' },
+  { name: 'Amount received', required: true, meaning: 'What arrived, in the currency it arrived in.', others: 'The customer sees each invoice it paid as paid or part paid.', implications: 'Posts to your bank and takes it off what they owe. In another currency than the invoice was issued at, the difference in your own currency posts as an exchange gain or loss.', rules: 'Positive; against one invoice, no more than it has outstanding.' },
+  { name: 'How it was paid', required: true, meaning: 'Bank transfer, cash, card, mobile money or other.' },
+  { name: 'Reference', meaning: 'The transfer or cheque reference, as on your bank statement.', implications: 'Helps you match it when you reconcile the bank.' },
+  { name: 'Received on', meaning: 'The day the money arrived.', implications: 'Posts on that day, at that day’s exchange rate.', rules: 'Not in the future. Blank is today.' },
+]} />
+
+A payment recorded in error (a bounced transfer) is undone with **Void receipt** and a reason: its postings are reversed and the invoices it paid are owed again.
+
+## Credit notes and voids
+
+**Credit note** reduces what the customer owes on an invoice, for a price correction or something you no longer charge for. The amount includes tax; Neuros splits it in the invoice's proportion. See [credit note](../01-glossary/30-selling-and-pricing.mdx#credit-note).
+
+<FieldTable fields={[
+  { name: 'Amount to credit', required: true, meaning: 'How much less the customer owes, tax included.', others: 'They see the credit note against the invoice.', implications: 'Reverses that revenue and tax in your books.', rules: 'No more than the invoice has outstanding.' },
+  { name: 'Reason', required: true, meaning: 'Why you are crediting it.', others: 'The customer sees it.' },
+]} />
+
+**Void invoice** cancels an invoice nothing has paid or credited yet, with a reason. Its posting is reversed and the order can be invoiced again. An order with an invoice cannot be cancelled or changed until the invoice is void.
+
+## Ageing
+
+<Shot id={`${props.who}/invoices/ageing`} />
+
+**Ageing** shows what each customer owes, split by how far past due: not yet due, 1–30 days, 31–60, 61–90 and over 90. See [ageing](../01-glossary/30-selling-and-pricing.mdx#ageing).
+
+## In your books
+
+Every invoice, payment and credit note posts to your <PageLink who={props.who} page="ledger">Ledger</PageLink> on its own:
+
+| Event | Debit | Credit |
+|---|---|---|
+| Invoice issued | Accounts receivable | Sales revenue, output tax |
+| Payment received | Bank | Accounts receivable (and customer advances for any excess) |
+| Advance applied | Customer advances | Accounts receivable |
+| Credit note | Sales revenue, output tax | Accounts receivable |
+
+When a customer pays an invoice in full, the order shows **Paid**; on credit, that gives their credit back. An order that is paid and delivered is **Completed**.
+
+Reading needs `invoice:read`; issuing credit notes and voiding needs `invoice:issue`; recording payments needs `payment:initiate`.
+
+## Live
+
+A new invoice, a payment or a credit note appears on its own.
+
+## Common questions
+
+**Why was there no invoice when I dispatched?** Your setting is to invoice on acceptance, so the order already has one; or it was voided. Open the order: its invoices are listed there.
+
+**The customer paid in another currency's worth.** Record what arrived. The invoice is settled at the rate it was issued at; the difference posts as a realised exchange gain or loss ([realised FX](../01-glossary/70-ledger.mdx#realised-fx)).

@@ -28,6 +28,7 @@ const AREAS = [
   ['Quotations', 'quotations', 'Requests for quotation and quotations: ask, price, send, revise, accept.'],
   ['Orders', 'orders', 'Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel.'],
   ['Fulfilment', 'fulfilment', 'Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt.'],
+  ['Receivables', 'receivables', 'Sales invoices, payments received, credit notes and ageing; the buyer\'s purchase invoices.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
   ['Ledger', 'ledger', 'Accounts, posting rules, periods, journals and the trial balance.'],
