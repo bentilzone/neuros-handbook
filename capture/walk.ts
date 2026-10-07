@@ -130,7 +130,10 @@ export function walk(w: Walk): Scenario[] {
     }),
     shot('marketplace/offer', '/marketplace', 'An offer in the marketplace', {
       steps: async (p) => { await p.getByRole('button').filter({ hasText: w.marketplaceSeller ?? '' }).first().click(); },
-      callouts: [{ n: 1, target: { role: 'button', name: 'Price it' }, text: 'Your price for a quantity, worked out from your account terms with this seller.', side: 'left' }],
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Price it' }, text: 'Your price for a quantity, worked out from your account terms with this seller.', side: 'left' },
+        { n: 2, target: { role: 'button', name: 'Add to order' }, text: 'Put it in the order you are building with this seller.', side: 'left' },
+      ],
     }),
     shot('buying-quotes/list', '/buying/quotes', 'Quotes', {
       callouts: [

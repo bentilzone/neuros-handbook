@@ -21,10 +21,12 @@ Click a card to open the offer: product facts, the seller's SKU, minimum order, 
 
 - **Price it** works out your price for a quantity from your account terms with this seller: their contract with you, your price list, quantity breaks and any promotion. The answer is indicative until an order or quotation locks it.
 - **Ask for an account** appears when you have no account with the seller. It sends them your request.
+- **Add to order** appears when you have an account and may place orders. It puts the offer, at the quantity and unit you chose, into the order you are building with that seller: your open draft with them, or a new draft if there is none. Adding the same offer again adds to its line. The draft is priced at your price now and stays yours until you submit it from <PageLink who={props.who} page="buying-orders">Orders</PageLink>; **Open order** takes you there.
 - **Request a quote** appears when you have an account. It asks the seller to quote this offer for a quantity; the request and their answer are under <PageLink who={props.who} page="buying-quotes">Quotes</PageLink>.
 
 <FieldTable fields={[
-  { name: 'Quantity', meaning: 'How many units you want priced.', implications: 'Quantity breaks and contract prices from a quantity depend on it.' },
+  { name: 'Quantity', meaning: 'How many units you want priced, or added to your order.', implications: 'Quantity breaks and contract prices from a quantity depend on it. Add to order adds this quantity to the draft.' },
+  { name: 'Unit', meaning: 'The unit you buy in, when the product sells in more than one (a bag, a pallet).', implications: 'The price and the order line are in this unit; the seller ships the equivalent in base units.' },
   { name: 'Message (Ask for an account)', meaning: 'What you buy, roughly how much, and where you deliver.', others: "The seller sees your company's name and your message, and approves you with their terms." },
 ]} />
 
@@ -33,5 +35,7 @@ Click a card to open the offer: product facts, the seller's SKU, minimum order, 
 When a seller publishes, changes or withdraws an offer, the marketplace updates on its own. The same happens when your account with them is approved.
 
 ## Common questions
+
+**Which order does Add to order use?** Your company's open draft with that seller, other than one placed from a quotation (a quotation's order keeps the quotation's lines). With none, it starts a draft. One order is always with one seller, so offers from two sellers make two drafts.
 
 **Why do I see an offer one colleague says is missing?** Everyone in your company sees the same marketplace. Check the filters, and whether the offer is invite-only for another buyer.
