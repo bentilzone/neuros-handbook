@@ -173,6 +173,9 @@
       "11-distributor/95-notifications.mdx",
       "12-reseller/95-notifications.mdx",
       "30-api/90-live-updates.mdx"
+    ],
+    "/platform/notifications": [
+      "20-operator/125-notifications.mdx"
     ]
   }
 }

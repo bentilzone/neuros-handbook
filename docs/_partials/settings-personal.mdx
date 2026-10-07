@@ -23,6 +23,18 @@ Preferences apply only to you, on this browser.
 | Footer | The strip at the bottom with links to the handbook, privacy, terms and support |
 | Side panel width | Drag a panel's left edge to change it; **Reset** puts it back |
 
+## Notifications
+
+<Shot id={`${props.who}/settings/notifications`} />
+
+Choose what tells you, the same in every company you work in. Each switch saves on its own. See [notification](../01-glossary/90-platform.mdx#notification).
+
+<FieldTable fields={[
+  { name: 'In the app (per category)', meaning: 'Whether this kind of notification reaches your bell and raises a note.', others: 'Nobody else sees your choice.', implications: 'Switched off, they are still kept under Notifications, already read. Something that needs you to act, such as an order to accept, always reaches the bell.' },
+  { name: 'Email (per category)', meaning: 'Whether the emails in this category reach you.', implications: 'Only some steps email (a new order, a quotation sent, an order accepted or shipped, a payment confirmed). Where nothing is emailed the switch is off and cannot be changed.' },
+  ...(props.who === 'operator' ? [] : [{ name: 'Daily summary by email', meaning: 'A morning email of what is still unread in each company and was not emailed already.', implications: 'Sent at 07:00 in each company’s timezone, at most once a day; nothing new, no email.' }]),
+]} />
+
 ## Security
 
 <Shot id={`${props.who}/settings/security`} />
