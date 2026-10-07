@@ -38,11 +38,19 @@ If the order is over your **purchase limit** (set under <PageLink who={props.who
 
 Either of you can **propose a change** before it ships: new quantities (0 removes a line) or a new date. The other side approves or rejects it. **Cancel order** works until it ships; on an accepted order the supplier sees your reason.
 
+## Shipments
+
+Once the supplier ships, the order lists its **shipments**. Open one for what was sent, how it travels and its tracking reference, and the delivery note PDF.
+
+{props.who === 'reseller' && <Shot id="reseller/buying-orders/shipment" />}
+
+**Confirm receipt** when the goods arrive. The supplier is told; if they had not yet marked it delivered, your confirmation does. A failed delivery shows the supplier's reason until it goes out again.
+
 Ordering needs `order:create`; approving needs `order:approve`; changes need `order:amend`; cancelling needs `order:cancel`.
 
 ## Live
 
-The supplier accepting, rejecting or proposing a change appears on its own.
+The supplier accepting, rejecting, proposing a change or shipping appears on its own.
 
 ## Common questions
 

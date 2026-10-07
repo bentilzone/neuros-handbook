@@ -4,8 +4,8 @@ import Link from '@docusaurus/Link';
 import type { ReactNode } from 'react';
 
 const PAGES: Record<string, string[]> = {
-  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'customers', 'inventory', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'customers', 'marketplace', 'buying-quotes', 'buying-orders', 'suppliers', 'inventory', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'customers', 'inventory', 'fulfilment', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'customers', 'marketplace', 'buying-quotes', 'buying-orders', 'suppliers', 'inventory', 'fulfilment', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
   reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'buying-orders', 'suppliers', 'ledger', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
 };
 

@@ -1,0 +1,64 @@
+{/* Shared by the selling guides that hold stock: <Fulfilment who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="shipment:read" />
+
+Fulfilment is where accepted orders leave your warehouse. Each delivery is a [shipment](../01-glossary/30-selling-and-pricing.mdx#shipment): you pick it, pack it, dispatch it and prove it arrived. One order can go out in several shipments, from one warehouse each.
+
+<Shot id={`${props.who}/fulfilment/list`} />
+
+| Status | What it means |
+|---|---|
+| Picking | Started; the stock is still reserved, not taken |
+| Packed | What went in the box is confirmed |
+| On its way | Dispatched: the stock has left inventory |
+| Delivered | Delivered, with proof |
+| Cancelled | Stopped before it left; its stock stays reserved for the order |
+
+## Start a shipment
+
+Open an accepted order under <PageLink who={props.who} page="orders">Orders</PageLink> and choose **Start a shipment**. It takes everything reserved for the order in one warehouse that is not already in another shipment. Backordered stock is not shipped until it is reserved. While a shipment is open the order cannot be changed.
+
+## Pick
+
+The **Pick list** tab shows, for one warehouse, every shipment being picked: each item, how much, the bins its stock is reserved in, and for serialised products the serial numbers reserved. See [pick list](../01-glossary/30-selling-and-pricing.mdx#pick-list).
+
+## Pack
+
+**Pack** confirms what went in the box.
+
+<FieldTable fields={[
+  { name: 'Packed quantity (per line)', meaning: 'How much of the line you packed, in its base unit.', others: 'The customer sees what was shipped on the shipment and its delivery note.', implications: 'Less than reserved leaves the rest reserved for a later shipment; 0 leaves the line out.', rules: 'Between 0 and the shipment’s quantity; at least one line packed.' },
+  { name: 'Serial numbers', meaning: 'For a serialised product, each unit you packed.', others: 'Printed on the delivery note.', implications: 'Only those units leave inventory.', rules: 'One per unit packed, each one reserved for this order.' },
+]} />
+
+## Dispatch
+
+{props.who === 'distributor' && <Shot id="distributor/fulfilment/detail" />}
+
+**Dispatch** sends it. The packed stock leaves inventory at cost and the cost of goods sold is posted to your <PageLink who={props.who} page="ledger">Ledger</PageLink>, once: dispatching again after a failed delivery takes nothing more.
+
+<FieldTable fields={[
+  { name: 'How it goes', required: true, meaning: 'Your own delivery, a carrier, or the customer collects.', others: 'They see it on the shipment.' },
+  { name: 'Carrier', meaning: 'Who carries it.', others: 'They see it.', rules: 'Required for a carrier.' },
+  { name: 'Tracking reference', meaning: 'The waybill or tracking number.', others: 'They see it, to follow the delivery.' },
+]} />
+
+## Prove delivery
+
+**Add proof** attaches the signed delivery note or a photo (PDF, PNG or JPEG, up to 10 MB). **Delivered** needs at least one; see [delivery proof](../01-glossary/30-selling-and-pricing.mdx#delivery-proof). When everything ordered has been dispatched and delivered, the order's stock status is *Delivered*.
+
+**Delivery failed** records why it did not arrive (customer closed, wrong address) and puts it back to *Packed*, ready to dispatch again. The customer sees the reason. See [failed delivery](../01-glossary/30-selling-and-pricing.mdx#failed-delivery).
+
+**Cancel shipment** stops one that has not left. Its stock stays reserved for the order.
+
+The delivery note PDF opens from the shipment's header. Every step needs `shipment:manage`; adding proof also needs `document:upload`.
+
+## Live
+
+A colleague packing or dispatching, and the customer confirming receipt, appear on their own.
+
+## Common questions
+
+**Why is a line not in the shipment?** Its stock is backordered, or already in another open shipment.
+
+**Why can't I cancel a shipment that failed?** Its stock has already left inventory. Dispatch it again, or agree a return with the customer.

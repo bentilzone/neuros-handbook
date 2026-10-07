@@ -155,6 +155,10 @@
       "11-distributor/140-settings.mdx",
       "12-reseller/140-settings.mdx",
       "20-operator/140-settings.mdx"
+    ],
+    "/fulfilment": [
+      "10-supplier/85-fulfilment.mdx",
+      "11-distributor/85-fulfilment.mdx"
     ]
   }
 }

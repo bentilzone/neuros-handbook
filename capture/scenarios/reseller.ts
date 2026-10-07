@@ -28,7 +28,23 @@ const order: Scenario = {
   steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
   callouts: [
     { n: 1, target: { text: 'Awaiting payment', nth: 1 }, text: 'The order, its payment and its stock, each with its own status.', side: 'bottom' },
-    { n: 2, target: { role: 'button', name: 'Propose a change' }, text: 'Ask for a new quantity or date; the supplier approves or rejects it.', side: 'top' },
+    { n: 2, target: { role: 'button', name: /^DN-/ }, text: 'Its shipments: open one to follow it and confirm receipt.', side: 'top' },
+  ],
+};
+
+// The same order's shipment, as the customer reads it.
+const shipment: Scenario = {
+  id: 'reseller/buying-orders/shipment',
+  persona: 'reseller',
+  path: '/buying/orders?status=accepted',
+  title: 'A shipment on its way to you',
+  steps: async (page: Page) => {
+    await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click();
+    await page.getByRole('button', { name: /^DN-/ }).first().click();
+  },
+  callouts: [
+    { n: 1, target: { text: 'LIS-TRK-0412', nth: 0 }, text: 'How it travels, and the reference to follow it.', side: 'left' },
+    { n: 2, target: { role: 'button', name: 'Confirm receipt' }, text: 'Tell the supplier it arrived.', side: 'top' },
   ],
 };
 
@@ -40,4 +56,4 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
-}), quotation, order];
+}), quotation, order, shipment];
