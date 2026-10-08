@@ -1446,7 +1446,7 @@
   "operator/settings/notifications": {
     "file": "operator/settings/notifications.png",
     "width": 1440,
-    "height": 900,
+    "height": 1139,
     "title": "Settings: notifications",
     "callouts": []
   },
