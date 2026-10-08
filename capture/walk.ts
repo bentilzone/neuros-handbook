@@ -22,6 +22,8 @@ export interface Walk {
   basketFilled?: boolean;
   /** seed:trade left an open dispute and a return request on this persona's orders, on this side. */
   disputes?: 'selling' | 'buying';
+  /** seed:trade gave this persona external suppliers (P4.1). */
+  externalSuppliers?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -198,6 +200,18 @@ export function walk(w: Walk): Scenario[] {
     }),
     shot('suppliers/find', '/suppliers', 'Find suppliers', { steps: click('Find suppliers') }),
     shot('suppliers/detail', '/suppliers', 'A supplier account', { steps: firstRow }),
+    shot('suppliers/external', '/suppliers?tab=external', 'Suppliers: external', {
+      callouts: !w.externalSuppliers ? [] : [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Sellers on Neuros you have accounts with, and suppliers outside Neuros.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'Add supplier' }, text: 'Add a supplier you buy from outside Neuros; only your company sees it.', side: 'left' },
+        { n: 3, target: { text: /^Buys in$/ }, text: 'The currency its prices and invoices come in.', side: 'bottom' },
+      ],
+    }),
+    shot('suppliers/external-new', '/suppliers?tab=external', 'Add an external supplier', { steps: click('Add supplier'), fullPage: true }),
+    ...(w.externalSuppliers ? [shot('suppliers/external-detail', '/suppliers?tab=external', 'An external supplier', {
+      steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Shenzhen Pump Co' }).first().click(); }, fullPage: true,
+      callouts: [{ n: 1, target: { role: 'button', name: 'Change bank details' }, text: 'Only people who manage bank accounts, after two-step sign-in, with a reason.', side: 'top' }],
+    })] : []),
   ];
 
   const stock: Scenario[] = [
