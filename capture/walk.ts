@@ -22,7 +22,7 @@ export interface Walk {
   basketFilled?: boolean;
   /** seed:trade left an open dispute and a return request on this persona's orders, on this side. */
   disputes?: 'selling' | 'buying';
-  /** seed:trade gave this persona external suppliers (P4.1). */
+  /** seed:trade gave this persona external suppliers, requisitions and purchase orders (P4.1, P4.2). */
   externalSuppliers?: boolean;
 }
 
@@ -212,6 +212,34 @@ export function walk(w: Walk): Scenario[] {
       steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Shenzhen Pump Co' }).first().click(); }, fullPage: true,
       callouts: [{ n: 1, target: { role: 'button', name: 'Change bank details' }, text: 'Only people who manage bank accounts, after two-step sign-in, with a reason.', side: 'top' }],
     })] : []),
+    ...(w.externalSuppliers ? [
+      shot('requisitions/list', '/buying/requisitions', 'Requisitions', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'From reorder suggestions' }, text: 'Draft a line for each product at or below its reorder point.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New requisition' }, text: 'Raise one by hand.', side: 'bottom' },
+          { n: 3, target: { text: /^Estimate$/ }, text: 'Fixed at submit, in your company’s currency: what the approval is measured against.', side: 'left' },
+        ],
+      }),
+      shot('requisitions/new', '/buying/requisitions', 'Raise a requisition', { steps: click('New requisition'), fullPage: true }),
+      shot('requisitions/detail', '/buying/requisitions', 'A requisition, ordered', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Ordered' }).first().click(); }, fullPage: true,
+        callouts: [{ n: 1, target: { text: /^PO PO-/ }, text: 'The purchase order this line went into.', side: 'left' }],
+      }),
+      shot('purchase-orders/list', '/buying/purchase-orders', 'Purchase orders', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'New purchase order' }, text: 'Order from a supplier outside Neuros.', side: 'left' },
+          { n: 2, target: { text: /^Total$/ }, text: 'In the supplier’s currency, before tax.', side: 'left' },
+        ],
+      }),
+      shot('purchase-orders/new', '/buying/purchase-orders', 'Draft a purchase order', { steps: click('New purchase order'), fullPage: true }),
+      shot('purchase-orders/detail', '/buying/purchase-orders', 'A purchase order, confirmed', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Confirmed' }).first().click(); }, fullPage: true,
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Open the purchase order PDF' }, text: 'The order as the supplier received it, to download or send another way.', side: 'left' },
+          { n: 2, target: { text: /^Their reference$/ }, text: 'The supplier’s confirmation, recorded with their own reference.', side: 'right' },
+        ],
+      }),
+    ] : []),
   ];
 
   const stock: Scenario[] = [

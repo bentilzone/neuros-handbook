@@ -34,6 +34,8 @@ const AREAS = [
   ['Disputes', 'disputes', 'Disputing part of a delivered order: evidence, messages, escalation, and the seller\'s decision.'],
   ['Returns', 'returns', 'Returning goods: request, authorise, receive into quarantine, inspect and credit.'],
   ['Suppliers', 'suppliers', 'Your suppliers outside Neuros, and where each is paid.'],
+  ['Requisitions', 'requisitions', 'Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it.'],
+  ['Purchase orders', 'purchase-orders', 'Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed.'],
   ['Notifications', 'notifications', 'Your own notifications in a company: list, unread counts, mark read.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
