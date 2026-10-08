@@ -104,4 +104,5 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
+  basketFilled: true,
 }), quotation, order, shipment, invoice, edit, escrow];

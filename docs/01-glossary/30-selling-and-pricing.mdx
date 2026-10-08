@@ -68,6 +68,12 @@ One buyer buying from one seller, with a snapshot of what was agreed: both compa
 ### Draft order (basket)
 An order the buyer is still building with one seller: lines can be added (**Add to order** in the marketplace), changed or removed, and each save prices them at the buyer's price now. Only the buyer's company sees it. Submitting sends it to the seller. A draft placed from a quotation keeps the quotation's lines.
 
+### Basket and split checkout
+The buyer's open draft orders, one per seller, sent together by **Check out**. Each draft is submitted on its own and becomes an independent order with its seller: its own acceptance, payment, delivery, invoices and any dispute. One seller refusing leaves that draft in the basket and the others go ahead; orders with different sellers are never netted.
+
+### Checkout
+One sending of the basket (*CO-2026-000001*): which orders it sent, what happened to each (sent, waiting for approval, accepted, or not sent with the reason) and where each stands now. Only the buyer sees it.
+
 ### Order statuses
 An order carries three statuses that move separately, so one never implies another:
 - **Order:** draft, waiting for approval, waiting for the seller, accepted, rejected, cancelled, completed.
