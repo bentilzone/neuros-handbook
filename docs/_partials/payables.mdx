@@ -1,0 +1,60 @@
+{/* Shared by the buying guides: <Payables who="distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['finance', 'purchasing']} permission="supplier_invoice:read" />
+
+**Payables** is what you owe your suppliers: their invoices, matched to what you ordered and received before they are approved; the payments that settle them; and what you owe each supplier by age. See [three-way match](../01-glossary/40-relationships.mdx#three-way-match).
+
+<Shot id={`${props.who}/payables/list`} />
+
+## Record a supplier invoice
+**Record invoice** is for an external supplier’s invoice, typed in as printed. **Take in from Neuros** brings in an invoice a seller on Neuros issued you, with its lines, tax and due date as they are.
+
+<Shot id={`${props.who}/payables/new`} />
+
+<FieldTable fields={[
+  { name: 'Supplier', meaning: 'Who sent the invoice.', implications: 'Sets the currency and the payment terms the due date follows.' },
+  { name: 'Their invoice number', meaning: 'The number on the supplier’s invoice.', rules: 'The same number from the same supplier twice is refused, so nothing is paid twice.' },
+  { name: 'Invoice date', meaning: 'The date on the invoice.', implications: 'Due that many days later by the supplier’s terms. The books record it at that day’s rate.' },
+  { name: 'Goods / Charges', meaning: 'Goods bills a purchase order; Charges bills the freight, duty and so on of a landed cost.' },
+  { name: 'Quantity and unit price', meaning: 'As billed, before tax.', implications: 'Matched against what was ordered and received.' },
+  { name: 'Tax %', meaning: 'The tax rate the supplier charged on the line.', implications: 'Recorded as tax you can reclaim.' },
+]} />
+
+## Match and approve
+**Match** checks each line against the order’s price and what was received and not yet invoiced:
+
+- **Matched**: the price is within your company’s price tolerance (2% unless changed in Settings) and the quantity within its quantity tolerance (exact unless changed).
+- **Price differs**, **Quantity differs**, **Not matched**: the invoice is an **exception**, and the people who approve supplier invoices are notified.
+
+A matched invoice is approved with **Approve for payment**. An exception is approved with **Approve anyway** and a reason, by someone other than who recorded it; the reason stays with the invoice. Approving records what you owe; a price difference adjusts the cost of the goods still on hand, and of cost of sales for what has already gone.
+
+<Shot id={`${props.who}/payables/detail`} />
+
+**Void** takes a reason and is possible only before approval.
+
+## Pay
+**Pay a supplier** on the **Payments** tab either records a payment already made (**Already paid**), or schedules one for a date (**Schedule it**), which someone who approves payments marks paid when it goes out.
+
+<FieldTable fields={[
+  { name: 'Supplier / Seller', meaning: 'An external supplier, or a seller on Neuros you buy from.' },
+  { name: 'Amount', meaning: 'What is paid, in the invoice’s currency.', implications: 'A difference in exchange rate since the invoice is recorded as an exchange gain or loss.' },
+  { name: 'Paid on / Pay on', meaning: 'When it went out, or when it should.' },
+  { name: 'Method and reference', meaning: 'How it was paid, and the bank’s reference.' },
+  { name: 'Invoices it pays', meaning: 'The approved invoices it settles, and how much on each.', rules: 'None ticked: the oldest due are paid first. Anything left over is a supplier advance, applied later with **Apply the advance**.' },
+]} />
+
+**Void** on a payment takes a reason; a paid one is reversed in the books and its invoices are owed again.
+
+## Ageing
+The **Ageing** tab shows what you owe each supplier, by how long past the due date: not yet due, 1–30, 31–60, 61–90 and over 90 days.
+
+<Shot id={`${props.who}/payables/ageing`} />
+
+## Live
+Invoices, payments and the ageing update as your team records, matches, approves and pays.
+
+## Common questions
+
+**Why can’t I void an approved invoice?** It is already in the books and may be paid. Supplier credit notes are not in Neuros yet; record the correction with your supplier and a manual journal.
+
+**Does a seller on Neuros see my payment?** A payment here is your own record. Tell the seller you paid on the order, under <PageLink who={props.who} page="buying-orders">Orders</PageLink>, so they can confirm it.

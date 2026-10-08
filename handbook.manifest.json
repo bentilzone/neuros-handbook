@@ -81,6 +81,12 @@
     "/buying/purchase-orders": [
       "11-distributor/72-purchase-orders.mdx"
     ],
+    "/buying/receiving": [
+      "11-distributor/73-receiving.mdx"
+    ],
+    "/buying/payables": [
+      "11-distributor/74-payables.mdx"
+    ],
     "/buying/disputes": [
       "11-distributor/79-buying-disputes.mdx",
       "12-reseller/79-buying-disputes.mdx"

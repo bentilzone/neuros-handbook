@@ -1,6 +1,6 @@
 ---
 title: "Ledger"
-sidebar_position: 280
+sidebar_position: 320
 description: "Accounts, posting rules, periods, journals and the trial balance."
 ---
 
@@ -242,7 +242,7 @@ Idempotent per account and date. Fails if a closing rate is missing — it never
 | `page` | query | integer | ≥ 1, default `1` |
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `status` | query | `draft` · `pending_approval` · `posted` · `reversed` · `cancelled` |  |
-| `sourceType` | query | string (one of 15) |  |
+| `sourceType` | query | string (one of 16) |  |
 | `sourceId` | query | string | at most 100 characters |
 | `accountId` | query | string | 24 characters |
 | `from` | query | string (date-time) |  |
@@ -257,7 +257,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -346,7 +346,7 @@ Control accounts (receivables, payables, inventory) cannot be used.
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -421,7 +421,7 @@ Control accounts (receivables, payables, inventory) cannot be used.
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -511,7 +511,7 @@ Control accounts (receivables, payables, inventory) cannot be used.
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -592,7 +592,7 @@ Control accounts (receivables, payables, inventory) cannot be used.
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -675,7 +675,7 @@ With segregation of duties on, the preparer cannot post. A closed period needs p
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -756,7 +756,7 @@ With segregation of duties on, the preparer cannot post. A closed period needs p
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
@@ -842,7 +842,7 @@ Posts the mirror image and marks the original reversed. Both stay visible.
 | `original.ref` | string | may be null |
 | `original.postingDate` | string (date-time) | may be null |
 | `original.periodId` | string | 24 characters, may be null |
-| `original.sourceType` | string (one of 15) | may be null |
+| `original.sourceType` | string (one of 16) | may be null |
 | `original.sourceId` | string | may be null |
 | `original.purpose` | string | may be null |
 | `original.memo` | string | may be null |
@@ -877,7 +877,7 @@ Posts the mirror image and marks the original reversed. Both stay visible.
 | `reversal.ref` | string | may be null |
 | `reversal.postingDate` | string (date-time) | may be null |
 | `reversal.periodId` | string | 24 characters, may be null |
-| `reversal.sourceType` | string (one of 15) | may be null |
+| `reversal.sourceType` | string (one of 16) | may be null |
 | `reversal.sourceId` | string | may be null |
 | `reversal.purpose` | string | may be null |
 | `reversal.memo` | string | may be null |
@@ -927,7 +927,7 @@ Posts the mirror image and marks the original reversed. Both stay visible.
 | `ref` | string | may be null |
 | `postingDate` | string (date-time) | may be null |
 | `periodId` | string | 24 characters, may be null |
-| `sourceType` | string (one of 15) | may be null |
+| `sourceType` | string (one of 16) | may be null |
 | `sourceId` | string | may be null |
 | `purpose` | string | may be null |
 | `memo` | string | may be null |
