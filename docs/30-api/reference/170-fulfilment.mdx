@@ -1,6 +1,6 @@
 ---
 title: "Fulfilment"
-sidebar_position: 160
+sidebar_position: 170
 description: "Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt."
 ---
 
@@ -90,6 +90,7 @@ From one warehouse: everything reserved there and not already being shipped, or 
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -189,6 +190,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -284,6 +286,7 @@ The buyer sees what was sent and how, never the warehouse or the seller’s note
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -385,6 +388,7 @@ Its stock stays reserved for the order.
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -486,6 +490,7 @@ Marks a dispatched shipment delivered, or confirms one the seller delivered.
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -587,6 +592,7 @@ Needs at least one delivery proof.
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -690,6 +696,7 @@ The first dispatch takes its stock out of inventory at cost and posts it (Dr cos
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -791,6 +798,7 @@ Back to packed, with the attempt and reason kept. Dispatch it again when it goes
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |
@@ -895,6 +903,7 @@ Lower a quantity if less went in (0 leaves the line out). A serialised product n
 | `number` | string | may be null |
 | `orderId` | string | 24 characters, may be null |
 | `orderNumber` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
 | `status` | `picking` · `packed` · `dispatched` · `delivered` · `cancelled` | may be null |
 | `lines` | object[] |  |

@@ -1,6 +1,6 @@
 ---
 title: "Receivables"
-sidebar_position: 170
+sidebar_position: 180
 description: "Sales invoices, payments received, credit notes and ageing; the buyer's purchase invoices."
 ---
 
@@ -68,7 +68,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `total.amount` | string | may be null |
 | `total.currency` | string (one of 155) | may be null |
 | `total.id` | string | 24 characters |
+| `advance` | object | may be null |
+| `advance.amount` | string | may be null |
+| `advance.currency` | string (one of 155) | may be null |
+| `advance.id` | string | 24 characters |
 | `reason` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
+| `returnId` | string | 24 characters, may be null |
 | `createdBy` | string | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
@@ -81,7 +87,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 <span className="nh-method nh-method--post">POST</span> `/v1/credit-notes`
 
-The amount includes tax, split in the invoice’s proportion. Reduces what the customer owes and reverses that revenue and tax.
+The amount includes tax, split in the invoice’s proportion. Reduces what the customer owes and reverses that revenue and tax. On a paid invoice, what goes beyond the outstanding comes off its latest payments and is held for the customer as an advance. At most the invoice total less what is already credited.
 
 **Who can call it:** People and API clients · **Scope:** `invoice:issue` · **Idempotency-Key:** required
 
@@ -114,7 +120,13 @@ The amount includes tax, split in the invoice’s proportion. Reduces what the c
 | `total.amount` | string | may be null |
 | `total.currency` | string (one of 155) | may be null |
 | `total.id` | string | 24 characters |
+| `advance` | object | may be null |
+| `advance.amount` | string | may be null |
+| `advance.currency` | string (one of 155) | may be null |
+| `advance.id` | string | 24 characters |
 | `reason` | string | may be null |
+| `disputeId` | string | 24 characters, may be null |
+| `returnId` | string | 24 characters, may be null |
 | `createdBy` | string | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |

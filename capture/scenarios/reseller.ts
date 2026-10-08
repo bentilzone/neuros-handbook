@@ -54,7 +54,7 @@ const invoice: Scenario = {
   persona: 'reseller',
   path: '/buying/invoices',
   title: 'An invoice from a supplier',
-  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).first().click(); },
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Lagos Industrial' }).filter({ hasText: 'Part paid' }).first().click(); },
   callouts: [
     { n: 1, target: { text: /^Outstanding$/, nth: 1 }, text: 'What you still owe, and below, when it is due.', side: 'left' },
     { n: 2, target: { text: /^Payment RCT-/ }, text: 'Payments the supplier has recorded from you.', side: 'left' },
@@ -104,4 +104,6 @@ export default [...walk({
   stock: false,
   journalWaiting: 'Shop rent, October',
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
+  basketFilled: true,
+  disputes: 'buying',
 }), quotation, order, shipment, invoice, edit, escrow];

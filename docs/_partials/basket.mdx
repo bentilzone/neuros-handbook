@@ -1,0 +1,40 @@
+{/* Shared by the buying guides: <Basket who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="cart:manage" />
+
+The basket holds what you are about to buy from several suppliers at once: each open draft order, one per supplier, built with **Add to order** in the <PageLink who={props.who} page="marketplace">Marketplace</PageLink> or **New order** under <PageLink who={props.who} page="buying-orders">Orders</PageLink>. **Check out** sends them together. Each then becomes its own order with its supplier: accepted, paid, delivered and invoiced on its own, and never netted against another. See [basket](../01-glossary/30-selling-and-pricing.mdx#basket-and-split-checkout).
+
+The basket button in the header shows how many lines are waiting, and opens this page.
+
+<Shot id={`${props.who}/basket/list`} />
+
+## What is in it
+One card per supplier: its lines at your price, the total, and the way you pay. **Edit** opens the draft under Orders, to change quantities or remove a line; every save prices it again. A supplier whose account with you no longer allows ordering is shown, and left out of checkout.
+
+## Check out
+Tick the orders to send, choose how you pay each one, and optionally where to deliver them all, then **Check out**.
+
+<FieldTable fields={[
+  { name: 'Check out (per supplier)', meaning: 'Whether this supplier’s draft goes in this checkout.', implications: 'Unticked drafts stay in your basket.', rules: 'Only suppliers whose account allows ordering.' },
+  { name: 'How you pay', meaning: 'How you will pay this supplier for this order.', others: 'The supplier sees it.', implications: 'On credit uses your credit with them; paying first reserves stock only once paid; escrow ships only once funded.', rules: 'One of the ways this supplier accepts from you; starts at the draft’s own.' },
+  { name: 'Deliver to', meaning: 'Where every order in this checkout should go.', others: 'Each supplier sees it on its own order.', rules: 'Blank keeps each draft’s own address.' },
+]} />
+
+Each order is submitted on its own, exactly as **Submit** on the draft does: prices are checked again, your purchase limit applies, and each supplier accepts or rejects its own. One supplier refusing does not stop the others.
+
+## If one is not sent
+The checkout lists each order and what happened: **Sent to the seller**, **Waiting for your approval** (over your purchase limit), **Accepted** (the supplier accepts automatically), or **Not sent** with the reason, such as prices that changed since you drafted or a payment way the supplier no longer takes. What was not sent stays in your basket: fix it and check it out again.
+
+## Checkouts
+The **Checkouts** tab lists every checkout with each of its orders and where each stands now: accepted, paid, reserved, delivered. Each order opens under Orders. Suppliers never see your checkout, or who else you bought from.
+
+## Live
+The basket, its count in the header and the Checkouts tab update as your orders change, from your team or the suppliers.
+
+## Common questions
+
+**Can I pay several suppliers in one payment?** No. Each order is paid to its own supplier, by its own arrangement.
+
+**I checked out twice by accident.** A retried checkout sends nothing twice: the same orders, the same answer.
+
+**Why is a supplier missing from the basket?** You have no open draft with them. Use **Add to order** on one of their offers.

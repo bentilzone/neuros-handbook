@@ -18,6 +18,10 @@ export interface Walk {
   journalWaiting: string;
   /** A seller whose card in the marketplace shows a price worked out for this persona. */
   marketplaceSeller?: string;
+  /** seed:trade left drafts with several sellers in this persona's basket. */
+  basketFilled?: boolean;
+  /** seed:trade left an open dispute and a return request on this persona's orders, on this side. */
+  disputes?: 'selling' | 'buying';
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -105,6 +109,27 @@ export function walk(w: Walk): Scenario[] {
       callouts: [{ n: 1, target: { role: 'button', name: 'Record payment' }, text: 'Record money a customer paid; it goes to their oldest invoices first.', side: 'left' }],
     }),
     shot('invoices/ageing', '/selling/invoices?tab=ageing', 'Invoices: ageing'),
+    shot('disputes/list', '/selling/disputes', 'Disputes and returns', {
+      callouts: w.disputes !== 'selling' ? [] : [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Disputes customers raised, and goods they want to send back.', side: 'right' },
+        { n: 2, target: { text: /^Answer by/, nth: 0 }, text: 'Answer within 3 working days, or it goes to your administrators.', side: 'bottom' },
+        { n: 3, target: { text: /^Held$/ }, text: 'Only the disputed part is held; the rest of the order goes on.', side: 'top' },
+      ],
+    }),
+    ...(w.disputes === 'selling' ? [
+      shot('disputes/detail', '/selling/disputes', 'A dispute', {
+        steps: firstRow, fullPage: true,
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Decide' }, text: 'Credit, replace, take it back, or reject, with a reason the customer reads.', side: 'left' },
+          { n: 2, target: { role: 'textbox', name: 'Message' }, text: 'Ask the customer something; it waits on them until they answer.', side: 'top' },
+        ],
+      }),
+      shot('disputes/returns', '/selling/disputes?tab=returns', 'Disputes and returns: returns'),
+      shot('disputes/return', '/selling/disputes?tab=returns', 'A return', {
+        steps: firstRow,
+        callouts: [{ n: 1, target: { role: 'button', name: 'Authorise' }, text: 'Authorise it before anything travels; reject it with a reason.', side: 'left' }],
+      }),
+    ] : []),
     shot('customers/list', '/selling/customers', 'Customers', {
       callouts: [
         { n: 1, target: { text: /waiting for approval/i, nth: 0 }, text: 'Requests waiting for your answer.', side: 'bottom' },
@@ -142,10 +167,25 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     shot('buying-quotes/new', '/buying/quotes', 'Request a quote', { steps: click('Request a quote') }),
+    shot('basket/list', '/buying/basket', 'Basket', {
+      fullPage: true,
+      callouts: !w.basketFilled ? [] : [
+        { n: 1, target: { role: 'link', name: /Edit$/, nth: 0 }, text: 'One card per supplier, at your price: Edit opens the draft; untick its box to leave it in the basket.', side: 'left' },
+        { n: 2, target: { role: 'textbox', name: 'How you pay', nth: 0 }, text: 'How you pay each supplier, from the ways they accept from you.', side: 'right' },
+        { n: 3, target: { role: 'button', name: /^Check out/ }, text: 'Sends each order to its supplier on its own: one refusing never stops the others.', side: 'left' },
+      ],
+    }),
     shot('buying-orders/list', '/buying/orders', 'Orders', {
       callouts: [{ n: 1, target: { role: 'button', name: 'New order' }, text: 'Draft an order to one supplier, at your price.', side: 'left' }],
     }),
     shot('buying-orders/new', '/buying/orders', 'New order', { steps: click('New order'), fullPage: true }),
+    shot('buying-disputes/list', '/buying/disputes', 'Disputes and returns', {
+      callouts: w.disputes !== 'buying' ? [] : [{ n: 1, target: { text: /^Held$/ }, text: 'What each dispute holds back from the order; the rest goes on.', side: 'top' }],
+    }),
+    ...(w.disputes === 'buying' ? [shot('buying-disputes/detail', '/buying/disputes', 'A dispute you raised', {
+      steps: firstRow, fullPage: true,
+      callouts: [{ n: 1, target: { role: 'button', name: 'Add a photo or document' }, text: 'Photos, documents or a short video; the seller can open each one.', side: 'left' }],
+    })] : []),
     shot('buying-invoices/list', '/buying/invoices', 'Invoices', {
       callouts: [{ n: 1, target: { text: /^Due$/ }, text: 'When each invoice is due; overdue ones show in red.', side: 'bottom' }],
     }),
@@ -184,11 +224,12 @@ export function walk(w: Walk): Scenario[] {
     shot('inventory/valuation', '/inventory?tab=valuation', 'Inventory: valuation'),
     shot('fulfilment/list', '/fulfilment', 'Fulfilment', {
       callouts: [
-        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, and what to pick in each warehouse.', side: 'right' },
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, what to pick in each warehouse, and returns to receive.', side: 'right' },
         { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Picking, packed, on its way, delivered or cancelled.', side: 'bottom' },
       ],
     }),
     shot('fulfilment/pick', '/fulfilment?tab=pick', 'Fulfilment: pick list'),
+    shot('fulfilment/returns', '/fulfilment?tab=returns', 'Fulfilment: returns'),
   ];
 
   const ledger: Scenario[] = [

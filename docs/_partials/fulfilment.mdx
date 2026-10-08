@@ -53,6 +53,12 @@ The **Pick list** tab shows, for one warehouse, every shipment being picked: eac
 
 The delivery note PDF opens from the shipment's header. Every step needs `shipment:manage`; adding proof also needs `document:upload`.
 
+## Returns
+
+{props.who === 'distributor' && <Shot id="distributor/fulfilment/returns" />}
+
+The **Returns** tab lists returns still open: authorised ones to receive when the goods arrive, and received ones to inspect. Opening one gives the same steps as under <PageLink who={props.who} page="disputes">Disputes and returns</PageLink>: **Receive** brings the goods into quarantine in a warehouse, not free to sell; **Inspect** puts each line back on sale, into damaged stock, aside, or back to its supplier. The tab shows to people who can see returns.
+
 ## Live
 
 A colleague packing or dispatching, and the customer confirming receipt, appear on their own.

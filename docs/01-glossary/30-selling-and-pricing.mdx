@@ -68,6 +68,12 @@ One buyer buying from one seller, with a snapshot of what was agreed: both compa
 ### Draft order (basket)
 An order the buyer is still building with one seller: lines can be added (**Add to order** in the marketplace), changed or removed, and each save prices them at the buyer's price now. Only the buyer's company sees it. Submitting sends it to the seller. A draft placed from a quotation keeps the quotation's lines.
 
+### Basket and split checkout
+The buyer's open draft orders, one per seller, sent together by **Check out**. Each draft is submitted on its own and becomes an independent order with its seller: its own acceptance, payment, delivery, invoices and any dispute. One seller refusing leaves that draft in the basket and the others go ahead; orders with different sellers are never netted.
+
+### Checkout
+One sending of the basket (*CO-2026-000001*): which orders it sent, what happened to each (sent, waiting for approval, accepted, or not sent with the reason) and where each stands now. Only the buyer sees it.
+
 ### Order statuses
 An order carries three statuses that move separately, so one never implies another:
 - **Order:** draft, waiting for approval, waiting for the seller, accepted, rejected, cancelled, completed.
@@ -114,8 +120,22 @@ Money a seller records as received from a customer, applied to their invoices: t
 Money received from a customer beyond what they owe. It is held for them and applied to their next invoices.
 
 ### Credit note
-A reduction of what a customer owes on one invoice, tax included: a price correction, or something no longer charged for. It reverses that revenue and tax in the seller's books.
+A reduction of what a customer owes on one invoice, tax included: a price correction, something no longer charged for, a decided dispute or a closed return. It reverses that revenue and tax in the seller's books. On an invoice already paid, the part beyond what is still owed is held for the customer as their [advance](#customer-advance).
 
 ### Ageing
 What each customer owes, split by how far past due: not yet due, 1–30 days, 31–60, 61–90 and over 90.
 
+### Dispute
+A buyer's claim that part of a delivered order is wrong: short, damaged, the wrong item, not the quality agreed, or never delivered. It names the lines and quantities in question, and only those and their value are held, on an escrow order only that much of the escrow; the rest of the order goes on. The seller answers within 3 working days or it is escalated to the seller's administrators, and decides it: a credit, a replacement shipped at no charge, a return, or a rejection with reasons.
+
+### Dispute window
+How long after delivery a buyer may raise a dispute: 7 days unless the seller sets another on the customer's account. "Not delivered" counts from dispatch.
+
+### Evidence
+Photos, documents or a short video either side adds to a dispute. Both sides can open every piece.
+
+### Return (RMA)
+A buyer's request to send goods back, numbered RMA-. The seller authorises or rejects it, receives what comes back into quarantine, inspects it and closes it with a credit note for what it accepted.
+
+### Disposition
+Where an inspected returned item goes: back on sale, damaged stock, kept aside in quarantine, or back to its own supplier. Returned goods are not free to sell until inspected.
