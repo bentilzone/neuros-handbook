@@ -1002,6 +1002,45 @@
     "title": "A supplier account",
     "callouts": []
   },
+  "distributor/suppliers/external": {
+    "file": "distributor/suppliers/external.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Suppliers: external",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Sellers on Neuros you have accounts with, and suppliers outside Neuros."
+      },
+      {
+        "n": 2,
+        "text": "Add a supplier you buy from outside Neuros; only your company sees it."
+      },
+      {
+        "n": 3,
+        "text": "The currency its prices and invoices come in."
+      }
+    ]
+  },
+  "distributor/suppliers/external-detail": {
+    "file": "distributor/suppliers/external-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An external supplier",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only people who manage bank accounts, after two-step sign-in, with a reason."
+      }
+    ]
+  },
+  "distributor/suppliers/external-new": {
+    "file": "distributor/suppliers/external-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an external supplier",
+    "callouts": []
+  },
   "distributor/suppliers/find": {
     "file": "distributor/suppliers/find.png",
     "width": 1440,
@@ -2064,6 +2103,20 @@
     "width": 1440,
     "height": 900,
     "title": "A supplier account",
+    "callouts": []
+  },
+  "reseller/suppliers/external": {
+    "file": "reseller/suppliers/external.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Suppliers: external",
+    "callouts": []
+  },
+  "reseller/suppliers/external-new": {
+    "file": "reseller/suppliers/external-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an external supplier",
     "callouts": []
   },
   "reseller/suppliers/find": {

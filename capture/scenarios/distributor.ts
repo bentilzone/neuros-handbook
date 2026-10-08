@@ -107,4 +107,5 @@ export default [...walk({
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
   disputes: 'selling',
+  externalSuppliers: true,
 }), credit, newQuotation, draft, order, shipment, invoice, payment];
