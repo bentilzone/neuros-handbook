@@ -53,6 +53,8 @@ Some event types:
 | `return.requested`, `return.authorised`, `return.rejected`, `return.received`, `return.inspected`, `return.closed` | A return moves |
 | `requisition.updated`, `requisition.submitted`, `requisition.approved`, `requisition.rejected`, `requisition.ordered` | A requisition changes, waits for approval, is decided or ordered (your company only) |
 | `purchase_order.updated`, `purchase_order.issued` | A purchase order to an external supplier changes or is sent (your company only) |
+| `goods_receipt.updated`, `goods_receipt.substitute`, `goods_receipt.posted`, `goods_receipt.voided`, `landed_cost.updated` | A goods receipt or landed cost changes, waits for a substitute to be accepted, is posted or voided (your company only) |
+| `supplier_invoice.updated`, `supplier_invoice.exception`, `supplier_invoice.approved`, `supplier_payment.scheduled`, `supplier_payment.paid`, `supplier_payment.updated` | A supplier invoice or payment changes, does not match, is approved, scheduled or paid (your company only) |
 
 Trading events go to both companies once the other side can see the record; a draft's go to its owner only.
 

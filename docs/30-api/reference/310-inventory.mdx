@@ -1,6 +1,6 @@
 ---
 title: "Inventory"
-sidebar_position: 270
+sidebar_position: 310
 description: "Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation."
 ---
 
@@ -382,7 +382,7 @@ Excludes quarantined, damaged and expired stock.
 | Field | Type | Notes |
 |---|---|---|
 | `out` * | object |  |
-| `out.type` | string (one of 15) | may be null |
+| `out.type` | string (one of 16) | may be null |
 | `out.direction` | `1` · `-1` | may be null |
 | `out.productId` | string | 24 characters, may be null |
 | `out.warehouseId` | string | 24 characters, may be null |
@@ -404,7 +404,7 @@ Excludes quarantined, damaged and expired stock.
 | `out.__v` | number | may be null |
 | `out.id` | string | 24 characters |
 | `in` * | object |  |
-| `in.type` | string (one of 15) | may be null |
+| `in.type` | string (one of 16) | may be null |
 | `in.direction` | `1` · `-1` | may be null |
 | `in.productId` | string | 24 characters, may be null |
 | `in.warehouseId` | string | 24 characters, may be null |
@@ -825,7 +825,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `productId` | query | string | 24 characters |
 | `warehouseId` | query | string | 24 characters |
-| `type` | query | string (one of 15) |  |
+| `type` | query | string (one of 16) |  |
 | `sourceType` | query | string | at most 40 characters |
 | `sourceId` | query | string | at most 64 characters |
 | `from` | query | string (date-time) |  |
@@ -837,7 +837,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `type` | string (one of 15) | may be null |
+| `type` | string (one of 16) | may be null |
 | `direction` | `1` · `-1` | may be null |
 | `productId` | string | 24 characters, may be null |
 | `warehouseId` | string | 24 characters, may be null |
@@ -915,7 +915,7 @@ Lot-controlled products need a lot; serial products need one serial per unit. A 
 |---|---|---|
 | `reference` * | string |  |
 | `movements` * | object[] |  |
-| `movements[].type` | string (one of 15) | may be null |
+| `movements[].type` | string (one of 16) | may be null |
 | `movements[].direction` | `1` · `-1` | may be null |
 | `movements[].productId` | string | 24 characters, may be null |
 | `movements[].warehouseId` | string | 24 characters, may be null |

@@ -89,6 +89,8 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.unpaidCancelDays` | number | may be null |
+| `settings.matchPriceTolerancePercent` | number | may be null |
+| `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -187,6 +189,8 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.unpaidCancelDays` | number | may be null |
+| `settings.matchPriceTolerancePercent` | number | may be null |
+| `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
@@ -217,6 +221,8 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `shortfall` | `backorder` · `hold` · `reject` |  |
 | `invoiceTiming` | `on_dispatch` · `on_acceptance` |  |
 | `unpaidCancelDays` | integer | ≥ 1, ≤ 90 |
+| `matchPriceTolerancePercent` | number | How far a supplier invoice’s unit price may differ from the purchase order’s and still match (2 if never set). ≥ 0, ≤ 50 |
+| `matchQuantityTolerancePercent` | number | How far an invoiced quantity may exceed what was received and still match (0: exact). ≥ 0, ≤ 50 |
 | `timezone` | string (one of 418) | IANA zone, e.g. Africa/Accra |
 
 **Response** `200`
@@ -276,6 +282,8 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
 | `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
 | `settings.unpaidCancelDays` | number | may be null |
+| `settings.matchPriceTolerancePercent` | number | may be null |
+| `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `createdAt` | string (date-time) | may be null |
