@@ -78,6 +78,9 @@ Confirming needs `payment:initiate`; refunding escrow needs `escrow:release_appr
 
 An accepted order lists its **invoices** under its shipments. They are issued as it ships, or when you accept it, by your **Invoice orders** setting; see <PageLink who={props.who} page="invoices">Invoices</PageLink>. Its **Payment** status follows them, and an order that is paid and delivered is **Completed**. An invoiced order cannot be cancelled or changed until its invoices are void.
 
+## Disputes and returns
+A customer may dispute part of a delivered order or ask to return goods. Both are listed on the order under **Disputes and returns**, and handled under <PageLink who={props.who} page="disputes">Disputes and returns</PageLink>. A dispute holds only its lines and value; the rest of the order is invoiced and paid as usual.
+
 ## Live
 
 A new order, an approval, a cancellation or a proposed change appears on its own, on both sides.

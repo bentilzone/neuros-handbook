@@ -1,0 +1,41 @@
+{/* Shared by the buying guides: <DisputesBuying who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="dispute:read" />
+
+Disputes and returns lists the parts of orders you disputed and the goods you asked to send back. Raise either from the order, under <PageLink who={props.who} page="buying-orders">Orders</PageLink>. Only the part in question is held: the rest of the order goes on. See [dispute](../01-glossary/30-selling-and-pricing.mdx#dispute) and [return](../01-glossary/30-selling-and-pricing.mdx#return-rma).
+
+<Shot id={`${props.who}/buying-disputes/list`} />
+
+## Dispute part of an order
+Open a delivered order and choose **Dispute part of it**.
+
+<FieldTable fields={[
+  { name: 'Quantity (per line)', meaning: 'How much of each line is in question, in its base unit.', others: 'The supplier sees exactly these lines and quantities.', implications: 'Only these and their value, at the order’s price with tax, are held. On escrow only that much of the escrow waits.', rules: 'Up to what has shipped and is not already under an open dispute.' },
+  { name: 'What is wrong', required: true, meaning: 'Not delivered, fewer than sent, damaged, wrong item, not the quality agreed, or something else.' },
+  { name: 'What happened', required: true, meaning: 'Your account of it.', others: 'The supplier reads it first.' },
+]} />
+
+You can dispute within the supplier's [dispute window](../01-glossary/30-selling-and-pricing.mdx#dispute-window), 7 days after delivery unless they set another; "not delivered" counts from dispatch.
+
+## Follow it
+{props.who === 'reseller' && <Shot id="reseller/buying-disputes/detail" />}
+
+The supplier answers within 3 working days, or it is escalated to their administrators. Add photos, documents or a short video (up to 25 MB each) with **Add a photo or document**, and answer the supplier's questions under Messages. **Escalate** asks their administrators to step in sooner; **Withdraw** ends it, and what it held goes on.
+
+When the supplier decides, you see the outcome and their reason:
+- **Credit:** a credit note off what you owe; on a paid invoice it is held as your advance with them, on escrow that much is refunded to you.
+- **Replace:** the goods are shipped again at no charge.
+- **Take it back:** a return is authorised; send the goods back quoting its RMA number.
+- **Reject:** nothing changes.
+
+## Return goods
+Open a delivered order and choose **Return goods**: the lines and quantities, serial numbers where the item has them, a reason and details. The supplier authorises it before you send anything, receives and inspects what arrives, and closes it with a credit note for what they accepted. The **Returns** tab follows each one: asked, authorised, received, inspected, closed or rejected.
+
+## Live
+Both tabs and an open dispute update as the supplier writes, decides, or receives your goods.
+
+## Common questions
+
+**Can I still pay the rest of the order?** Yes. On escrow, **Release** pays the supplier everything not under dispute.
+
+**The window has closed.** Ask the supplier: they can extend it on your account.

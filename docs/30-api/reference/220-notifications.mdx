@@ -1,6 +1,6 @@
 ---
 title: "Notifications"
-sidebar_position: 190
+sidebar_position: 220
 description: "Your own notifications in a company: list, unread counts, mark read."
 ---
 
@@ -41,7 +41,7 @@ The same in every company you work in. A category you have not changed shows in 
 | Field | Type | Notes |
 |---|---|---|
 | `categories` * | object[] |  |
-| `categories[].category` * | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `categories[].category` * | string (one of 13) |  |
 | `categories[].inApp` * | boolean |  |
 | `categories[].email` * | boolean |  |
 | `categories[].emailAvailable` * | boolean |  |
@@ -62,7 +62,7 @@ Out of the app: kept, but already read and without a note. Something that needs 
 | Field | Type | Notes |
 |---|---|---|
 | `categories` | object[] |  |
-| `categories[].category` * | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `categories[].category` * | string (one of 13) |  |
 | `categories[].inApp` * | boolean |  |
 | `categories[].email` * | boolean |  |
 | `digest` | boolean |  |
@@ -72,7 +72,7 @@ Out of the app: kept, but already read and without a note. Something that needs 
 | Field | Type | Notes |
 |---|---|---|
 | `categories` * | object[] |  |
-| `categories[].category` * | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `categories[].category` * | string (one of 13) |  |
 | `categories[].inApp` * | boolean |  |
 | `categories[].email` * | boolean |  |
 | `categories[].emailAvailable` * | boolean |  |
@@ -92,7 +92,7 @@ Only your own. Each says what happened, who did it and where it opens; the live 
 | `page` | query | integer | ≥ 1, default `1` |
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `unread` | query | boolean |  |
-| `category` | query | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `category` | query | string (one of 13) |  |
 
 **Response** `200`
 
@@ -103,7 +103,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `userId` | string | 24 characters, may be null |
 | `eventId` | string | may be null |
 | `type` | string | may be null |
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` | may be null |
+| `category` | string (one of 13) | may be null |
 | `priority` | `action` · `info` | may be null |
 | `title` | string | may be null |
 | `body` | string | may be null |
@@ -144,7 +144,7 @@ object
 | `userId` | string | 24 characters, may be null |
 | `eventId` | string | may be null |
 | `type` | string | may be null |
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` | may be null |
+| `category` | string (one of 13) | may be null |
 | `priority` | `action` · `info` | may be null |
 | `title` | string | may be null |
 | `body` | string | may be null |
@@ -173,7 +173,7 @@ object
 
 | Field | Type | Notes |
 |---|---|---|
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `category` | string (one of 13) |  |
 
 **Response** `200`
 
@@ -208,7 +208,7 @@ object
 | `page` | query | integer | ≥ 1, default `1` |
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `unread` | query | boolean |  |
-| `category` | query | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `category` | query | string (one of 13) |  |
 
 **Response** `200`
 
@@ -219,7 +219,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `userId` | string | 24 characters, may be null |
 | `eventId` | string | may be null |
 | `type` | string | may be null |
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` | may be null |
+| `category` | string (one of 13) | may be null |
 | `priority` | `action` · `info` | may be null |
 | `title` | string | may be null |
 | `body` | string | may be null |
@@ -258,7 +258,7 @@ object
 | `userId` | string | 24 characters, may be null |
 | `eventId` | string | may be null |
 | `type` | string | may be null |
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` | may be null |
+| `category` | string (one of 13) | may be null |
 | `priority` | `action` · `info` | may be null |
 | `title` | string | may be null |
 | `body` | string | may be null |
@@ -287,7 +287,7 @@ object
 
 | Field | Type | Notes |
 |---|---|---|
-| `category` | `quotes` · `orders` · `fulfilment` · `payments` · `invoices` · `accounts` · `approvals` · `stock` · `books` · `catalogue` · `billing` · `support` |  |
+| `category` | string (one of 13) |  |
 
 **Response** `200`
 

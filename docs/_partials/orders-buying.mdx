@@ -80,6 +80,9 @@ Saying you paid needs `order:create`; funding escrow needs `escrow:manage`; rele
 
 The supplier's invoices for the order are listed on it; see <PageLink who={props.who} page="buying-invoices">Invoices</PageLink>. Its **Payment** status follows them.
 
+## Something wrong with the delivery
+Once goods have shipped, the order offers **Dispute part of it**, for the lines and quantities in question, and **Return goods**, to send some back. Only the disputed part is held; the rest of the order goes on. Both are listed on the order and under <PageLink who={props.who} page="buying-disputes">Disputes and returns</PageLink>.
+
 ## Live
 
 The supplier accepting, rejecting, proposing a change or shipping appears on its own.

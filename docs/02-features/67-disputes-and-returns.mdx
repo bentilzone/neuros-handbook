@@ -1,0 +1,55 @@
+---
+title: Disputes and returns
+sidebar_label: Disputes and returns
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['dispute:raise', 'dispute:respond', 'return:request', 'return:manage']} />
+
+When part of a delivery is wrong, the buyer disputes that part, or asks to send goods back. Only what is in question is held: the rest of the order is paid, delivered and closed as usual. The seller decides, and every outcome ends in a document both sides can see.
+
+## Dispute part of an order
+On a delivered order, the buyer chooses **Dispute part of it** and names the lines and quantities in question, with a reason: short, damaged, the wrong item, not the quality agreed, never delivered, or something else. See [dispute](../01-glossary/30-selling-and-pricing.mdx#dispute).
+
+- **Within the window.** 7 days after delivery unless the seller set another on the account ([dispute window](../01-glossary/30-selling-and-pricing.mdx#dispute-window)). "Not delivered" counts from dispatch.
+- **Only that part is held.** The value of the disputed quantities, at the order's price with tax. On an escrow order only that much of the escrow waits; releasing the escrow pays the seller everything else.
+- **The same goods once.** A quantity under an open dispute cannot be disputed again until it ends.
+
+## Talk it through
+Both sides write in the dispute and add photos, documents or a short video ([evidence](../01-glossary/30-selling-and-pricing.mdx#evidence)). The seller writing puts it to *Waiting for the buyer*; the buyer answering puts it back with the seller.
+
+The seller answers within **3 working days** in its own timezone. Unanswered, the dispute is **escalated** to the seller's administrators, and both sides are told. Either side may escalate sooner. Neuros staff do not decide disputes; they can help only through a support grant the company gives.
+
+## The seller decides
+| Outcome | What happens |
+|---|---|
+| Credit | A credit note for the amount (up to the disputed value) across the order's invoices. On a paid invoice the excess is held as the buyer's advance; on escrow that much is refunded from it. Posted once, whatever happens next. |
+| Replace | The disputed quantities are reserved again and shipped at no charge. The shipment is never invoiced. |
+| Take it back | A return is opened, already authorised, for the disputed lines; the credit follows when it closes. |
+| Reject | Nothing changes. The buyer reads the reason. |
+
+The buyer may withdraw a dispute instead. When it ends, what it held goes on: an escrow the buyer had already released pays out the rest.
+
+## Returns
+The buyer asks to return goods from the order: lines, quantities, a reason, and serial numbers where the item has them. See [return](../01-glossary/30-selling-and-pricing.mdx#return-rma).
+
+1. **Authorise or reject.** The seller authorises it before anything travels, or rejects it with a reason; a rejected line can be asked for again.
+2. **Receive.** Under Fulfilment, Returns, the seller receives what came back into a warehouse. It lands in **quarantine**, at what it cost when it left, and is not free to sell. Serialised items must be units shipped on this order.
+3. **Inspect.** Each line gets a [disposition](../01-glossary/30-selling-and-pricing.mdx#disposition): back on sale, damaged stock, kept aside, or back to its own supplier, and how much of it is credited.
+4. **Close.** A credit note for exactly what inspection accepted, at the order's price with tax. On escrow that much is refunded.
+
+## In each company's books
+In the seller's books only; the buyer's own payables arrive with procurement.
+
+| Step | Posts |
+|---|---|
+| Credit note | Off sales and output tax, off what the customer owes; the part beyond what was owed to customer advances |
+| Escrow refund | Off customer advances and escrow receivable |
+| Return received | Into inventory (quarantine), off cost of goods sold |
+| Inspected as damaged | Moves to damaged stock; inventory value unchanged |
+
+## Notifications
+A new dispute and a new return request go to the seller's people who answer them, by email too; messages to the other side; escalation to both; the decision and an authorised or closed return to the buyer. See [notifications](../11-distributor/95-notifications.mdx).
+
+## In the guides
+- Seller: <PageLink who="distributor" page="disputes">Disputes and returns</PageLink>, <PageLink who="distributor" page="fulfilment">Fulfilment</PageLink>, <PageLink who="distributor" page="customers">Customers</PageLink> (the dispute window).
+- Buyer: <PageLink who="reseller" page="buying-disputes">Disputes and returns</PageLink>, <PageLink who="reseller" page="buying-orders">Orders</PageLink>.

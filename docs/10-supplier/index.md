@@ -13,9 +13,9 @@ This guide walks the app as **Kumasi Pump Works Ltd**, a demo supplier in Ghana 
 | Section | Pages |
 |---|---|
 | Main | [Dashboard](./10-dashboard.mdx), [Catalogue](./20-catalogue.mdx) |
-| Sell | [Offers](./30-offers.mdx), [Pricing](./40-pricing.mdx), [Customers](./50-customers.mdx) |
-| Stock & finance | [Inventory](./80-inventory.mdx), [Ledger](./90-ledger.mdx) |
-| System | [Members](./100-members.mdx), [Roles](./110-roles.mdx), [API clients](./120-api-clients.mdx), [Audit log](./130-audit-log.mdx) |
+| Sell | [Offers](./30-offers.mdx), [Pricing](./40-pricing.mdx), [Quotes](./55-quotes.mdx), [Orders](./57-orders.mdx), [Disputes and returns](./59-disputes.mdx), [Invoices](./58-invoices.mdx), [Customers](./50-customers.mdx) |
+| Stock & finance | [Inventory](./80-inventory.mdx), [Fulfilment](./85-fulfilment.mdx), [Ledger](./90-ledger.mdx) |
+| System | [Notifications](./95-notifications.mdx), [Members](./100-members.mdx), [Roles](./110-roles.mdx), [API clients](./120-api-clients.mdx), [Audit log](./130-audit-log.mdx) |
 | You | [Settings](./140-settings.mdx), every tab |
 
 Your customers are distributors. They find your offers in their marketplace, ask you for an account, and buy at the price list and terms you set them under [Customers](./50-customers.mdx).
