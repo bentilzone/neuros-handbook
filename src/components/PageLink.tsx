@@ -5,7 +5,7 @@ import type { ReactNode } from 'react';
 
 const PAGES: Record<string, string[]> = {
   supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'requisitions', 'purchase-orders', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
   reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
 };
 

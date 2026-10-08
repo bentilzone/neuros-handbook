@@ -1,0 +1,42 @@
+{/* Shared by the buying guides: <PurchaseOrders who="distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="po:read" />
+
+Purchase orders are what you order from <PageLink who={props.who} page="suppliers" hash="suppliers-outside-neuros">suppliers outside Neuros</PageLink>: in the supplier’s currency, prices before tax (their invoice adds it), sent by email with a PDF, and confirmed. Orders to sellers on Neuros are under <PageLink who={props.who} page="buying-orders">Orders</PageLink>. See [purchase order](../01-glossary/40-relationships.mdx#purchase-order).
+
+<Shot id={`${props.who}/purchase-orders/list`} />
+
+## Draft one
+**New purchase order** opens the form beside the list. An approved requisition’s external lines also become drafts here when its orders are placed.
+
+<Shot id={`${props.who}/purchase-orders/new`} />
+
+<FieldTable fields={[
+  { name: 'Supplier', meaning: 'Who you order from.', implications: 'Sets the currency and the payment terms.', rules: 'An active external supplier. It cannot change after the draft is saved.' },
+  { name: 'Deliver to', meaning: 'Your warehouse the goods go to.', others: 'Printed on the order the supplier receives.' },
+  { name: 'Product and quantity', meaning: 'What to buy, in the product’s base unit.', rules: 'At least one line.' },
+  { name: 'Unit price', meaning: 'The agreed price per unit, before tax.', others: 'The supplier sees it on the order.', implications: 'Line amounts and the total follow from it; the supplier’s invoice is later matched to it.', rules: 'In the supplier’s currency.' },
+  { name: 'Supplier’s code', meaning: 'The supplier’s own code for the item.', others: 'Printed beside the item, so they pick the right one.' },
+  { name: 'Deliver by', meaning: 'When you expect delivery.', rules: 'Today plus the supplier’s lead time if left empty.' },
+  { name: 'Notes to the supplier', meaning: 'Shipping or packing instructions.', others: 'Printed on the order and in the email.' },
+]} />
+
+## Approve and send
+**Send to supplier** issues it:
+
+- **Over your purchase limit**, it needs approving first, unless it came from an approved requisition. Someone who approves purchase orders, other than who drafted it, clicks **Approve**, within their approval limit. Editing an approved draft withdraws the approval.
+- **Sent**, it is emailed to the supplier’s order email with every line and the total, and the supplier’s details are kept as they were when it was sent. The PDF (the icon at the top of the panel) is the same order, to send another way when the supplier has no email.
+
+<Shot id={`${props.who}/purchase-orders/detail`} />
+
+## Confirmation and cancelling
+When the supplier confirms, click **Supplier confirmed** and record their reference and the delivery date they promised. **Cancel** takes a reason and is possible only while nothing has been received against the order. If it was already sent, tell the supplier yourself.
+
+## Live
+The list and an open purchase order update as your team approves, sends and confirms them.
+
+## Common questions
+
+**Does the supplier get a login?** No. External suppliers are not on Neuros: they receive the email and the PDF, and confirm to you directly.
+
+**Can I order from a seller on Neuros here?** No, order from them under Orders or the Marketplace, so they receive it in Neuros.
