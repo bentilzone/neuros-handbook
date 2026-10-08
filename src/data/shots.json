@@ -836,6 +836,45 @@
     "title": "Pricing: promotions",
     "callouts": []
   },
+  "distributor/purchase-orders/detail": {
+    "file": "distributor/purchase-orders/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A purchase order, confirmed",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The order as the supplier received it, to download or send another way."
+      },
+      {
+        "n": 2,
+        "text": "The supplier’s confirmation, recorded with their own reference."
+      }
+    ]
+  },
+  "distributor/purchase-orders/list": {
+    "file": "distributor/purchase-orders/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Purchase orders",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Order from a supplier outside Neuros."
+      },
+      {
+        "n": 2,
+        "text": "In the supplier’s currency, before tax."
+      }
+    ]
+  },
+  "distributor/purchase-orders/new": {
+    "file": "distributor/purchase-orders/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Draft a purchase order",
+    "callouts": []
+  },
   "distributor/quotes/draft": {
     "file": "distributor/quotes/draft.png",
     "width": 1440,
@@ -888,6 +927,45 @@
     "width": 1440,
     "height": 900,
     "title": "Quotes: requests received",
+    "callouts": []
+  },
+  "distributor/requisitions/detail": {
+    "file": "distributor/requisitions/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A requisition, ordered",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The purchase order this line went into."
+      }
+    ]
+  },
+  "distributor/requisitions/list": {
+    "file": "distributor/requisitions/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Requisitions",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Draft a line for each product at or below its reorder point."
+      },
+      {
+        "n": 2,
+        "text": "Raise one by hand."
+      },
+      {
+        "n": 3,
+        "text": "Fixed at submit, in your company’s currency: what the approval is measured against."
+      }
+    ]
+  },
+  "distributor/requisitions/new": {
+    "file": "distributor/requisitions/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Raise a requisition",
     "callouts": []
   },
   "distributor/roles/detail": {
@@ -1000,6 +1078,45 @@
     "width": 1440,
     "height": 900,
     "title": "A supplier account",
+    "callouts": []
+  },
+  "distributor/suppliers/external": {
+    "file": "distributor/suppliers/external.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Suppliers: external",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Sellers on Neuros you have accounts with, and suppliers outside Neuros."
+      },
+      {
+        "n": 2,
+        "text": "Add a supplier you buy from outside Neuros; only your company sees it."
+      },
+      {
+        "n": 3,
+        "text": "The currency its prices and invoices come in."
+      }
+    ]
+  },
+  "distributor/suppliers/external-detail": {
+    "file": "distributor/suppliers/external-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An external supplier",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only people who manage bank accounts, after two-step sign-in, with a reason."
+      }
+    ]
+  },
+  "distributor/suppliers/external-new": {
+    "file": "distributor/suppliers/external-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an external supplier",
     "callouts": []
   },
   "distributor/suppliers/find": {
@@ -2064,6 +2181,20 @@
     "width": 1440,
     "height": 900,
     "title": "A supplier account",
+    "callouts": []
+  },
+  "reseller/suppliers/external": {
+    "file": "reseller/suppliers/external.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Suppliers: external",
+    "callouts": []
+  },
+  "reseller/suppliers/external-new": {
+    "file": "reseller/suppliers/external-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an external supplier",
     "callouts": []
   },
   "reseller/suppliers/find": {

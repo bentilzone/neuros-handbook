@@ -33,6 +33,9 @@ const AREAS = [
   ['Payments', 'payments', 'Paying for orders: payment notices and confirmation, and escrow funding, release and refund.'],
   ['Disputes', 'disputes', 'Disputing part of a delivered order: evidence, messages, escalation, and the seller\'s decision.'],
   ['Returns', 'returns', 'Returning goods: request, authorise, receive into quarantine, inspect and credit.'],
+  ['Suppliers', 'suppliers', 'Your suppliers outside Neuros, and where each is paid.'],
+  ['Requisitions', 'requisitions', 'Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it.'],
+  ['Purchase orders', 'purchase-orders', 'Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed.'],
   ['Notifications', 'notifications', 'Your own notifications in a company: list, unread counts, mark read.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
@@ -144,9 +147,6 @@ function operation(path, method, op) {
   return out.join('\n');
 }
 
-rmSync(OUT, { recursive: true, force: true });
-mkdirSync(OUT, { recursive: true });
-
 const byTag = new Map();
 for (const [path, item] of Object.entries(spec.paths)) {
   for (const [method, op] of Object.entries(item)) {
@@ -159,6 +159,10 @@ for (const [path, item] of Object.entries(spec.paths)) {
 // The operator console's own API (Platform …) is not part of the public reference.
 const unplaced = [...byTag.keys()].filter((t) => !t.startsWith('Platform') && !AREAS.some(([tag]) => tag === t));
 if (unplaced.length) throw new Error(`Tags with no area in tools/api-reference.mjs: ${unplaced.join(', ')}`);
+
+// Only now replace the pages, so a refused run leaves the last good reference in place.
+rmSync(OUT, { recursive: true, force: true });
+mkdirSync(OUT, { recursive: true });
 
 const index = [];
 AREAS.forEach(([tag, slug, intro], i) => {

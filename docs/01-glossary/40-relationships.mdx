@@ -52,5 +52,17 @@ The record of one order's escrow (*ESC-2026-000001*): the amount held, in the or
 ### Supplier code
 The buyer's own reference for a seller, such as their supplier number in their own system. Only the buyer sees it.
 
+### External supplier
+A supplier you buy from outside Neuros, kept as your own record under Suppliers, External: its codes and names, the currency it sells in, its payment terms and lead time. Only your company sees it. A seller on Neuros is reached through your account with them instead, never copied.
+
+### Supplier bank details
+Where an external supplier is paid. They change only by someone who may manage bank accounts, after two-step verification and with a reason; others see the last four digits of the account number.
+
+### Requisition
+A request inside your company to buy (*REQ-2026-000001*): products, quantities, the warehouse each goes to, and where each is bought — a seller's offer on Neuros, or an external supplier at an estimated price. Submitted within the requester's purchase limit it approves itself; above it, someone else approves it within their approval limit. Approved, it becomes an order to each seller on Neuros and a draft purchase order to each external supplier.
+
+### Purchase order
+An order to an external supplier (*PO-2026-000001*), in its currency and before tax: approved when it is over the issuer's purchase limit, sent to the supplier by email with a PDF, and confirmed with the supplier's reference. Orders to sellers on Neuros are ordinary orders, not purchase orders.
+
 ### Seller directory
 The list of selling companies a buyer can ask for an account with, under **Suppliers → Find sellers**.
