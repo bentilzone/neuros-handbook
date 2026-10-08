@@ -63,6 +63,10 @@
       "11-distributor/75-buying-quotes.mdx",
       "12-reseller/75-buying-quotes.mdx"
     ],
+    "/buying/basket": [
+      "11-distributor/76-basket.mdx",
+      "12-reseller/76-basket.mdx"
+    ],
     "/buying/orders": [
       "11-distributor/77-buying-orders.mdx",
       "12-reseller/77-buying-orders.mdx"

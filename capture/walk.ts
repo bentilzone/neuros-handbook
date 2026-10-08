@@ -18,6 +18,8 @@ export interface Walk {
   journalWaiting: string;
   /** A seller whose card in the marketplace shows a price worked out for this persona. */
   marketplaceSeller?: string;
+  /** seed:trade left drafts with several sellers in this persona's basket. */
+  basketFilled?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -142,6 +144,14 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     shot('buying-quotes/new', '/buying/quotes', 'Request a quote', { steps: click('Request a quote') }),
+    shot('basket/list', '/buying/basket', 'Basket', {
+      fullPage: true,
+      callouts: !w.basketFilled ? [] : [
+        { n: 1, target: { role: 'link', name: /Edit$/, nth: 0 }, text: 'One card per supplier, at your price: Edit opens the draft; untick its box to leave it in the basket.', side: 'left' },
+        { n: 2, target: { role: 'textbox', name: 'How you pay', nth: 0 }, text: 'How you pay each supplier, from the ways they accept from you.', side: 'right' },
+        { n: 3, target: { role: 'button', name: /^Check out/ }, text: 'Sends each order to its supplier on its own: one refusing never stops the others.', side: 'left' },
+      ],
+    }),
     shot('buying-orders/list', '/buying/orders', 'Orders', {
       callouts: [{ n: 1, target: { role: 'button', name: 'New order' }, text: 'Draft an order to one supplier, at your price.', side: 'left' }],
     }),

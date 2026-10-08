@@ -27,6 +27,13 @@
     "title": "Audit log",
     "callouts": []
   },
+  "distributor/basket/list": {
+    "file": "distributor/basket/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Basket",
+    "callouts": []
+  },
   "distributor/buying-invoices/list": {
     "file": "distributor/buying-invoices/list.png",
     "width": 1440,
@@ -1462,6 +1469,26 @@
     "height": 900,
     "title": "Audit log",
     "callouts": []
+  },
+  "reseller/basket/list": {
+    "file": "reseller/basket/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Basket",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "One card per supplier, at your price: Edit opens the draft; untick its box to leave it in the basket."
+      },
+      {
+        "n": 2,
+        "text": "How you pay each supplier, from the ways they accept from you."
+      },
+      {
+        "n": 3,
+        "text": "Sends each order to its supplier on its own: one refusing never stops the others."
+      }
+    ]
   },
   "reseller/buying-invoices/detail": {
     "file": "reseller/buying-invoices/detail.png",
