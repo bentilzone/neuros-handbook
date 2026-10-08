@@ -71,7 +71,7 @@ const invoice: Scenario = {
   persona: 'distributor',
   path: '/selling/invoices',
   title: 'An invoice part paid',
-  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).first().click(); },
+  steps: async (page: Page) => { await page.getByRole('row').filter({ hasText: 'Ikeja Hardware' }).filter({ hasText: 'Part paid' }).first().click(); },
   callouts: [
     { n: 1, target: { text: /^Outstanding$/, nth: 1 }, text: 'What the customer still owes on it.', side: 'left' },
     { n: 2, target: { text: /^Payment RCT-/ }, text: 'Each payment and credit note that settled part of it.', side: 'left' },
@@ -106,4 +106,5 @@ export default [...walk({
   priceList: 'Gold resellers',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
+  disputes: 'selling',
 }), credit, newQuotation, draft, order, shipment, invoice, payment];

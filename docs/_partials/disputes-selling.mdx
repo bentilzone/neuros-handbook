@@ -1,0 +1,80 @@
+{/* Shared by the selling guides: <DisputesSelling who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="dispute:read" />
+
+Disputes and returns is where you answer customers who say part of a delivery is wrong, and handle goods they want to send back. Only the part in question is held: the rest of the order is paid and closed as usual. See [dispute](../01-glossary/30-selling-and-pricing.mdx#dispute) and [return](../01-glossary/30-selling-and-pricing.mdx#return-rma).
+
+<Shot id={`${props.who}/disputes/list`} />
+
+| Status | What it means |
+|---|---|
+| Waiting for the seller | Yours to answer, by the date shown |
+| Waiting for the buyer | You asked the customer something |
+| Escalated | Not answered in time, or either side asked: an administrator decides |
+| Decided | You decided it; the outcome is on the dispute |
+| Withdrawn | The customer withdrew it |
+
+## Answer a dispute
+{props.who === 'distributor' && <Shot id="distributor/disputes/detail" />}
+
+A dispute shows the lines and quantities in question, what they are worth at the order's price with tax (**Held**), the customer's reason and description, their photos and documents, and the messages between you. Open a piece of evidence to see it; add your own with **Add a photo or document**.
+
+Answer within **3 working days** of it being raised or of the customer's last answer, in your company's timezone. Unanswered, it is escalated to your administrators, and both sides are told. Writing to the customer puts it to *Waiting for the buyer* until they answer.
+
+## Decide
+Someone with the right to respond to disputes chooses **Decide**.
+
+<FieldTable fields={[
+  { name: 'Outcome', required: true, meaning: 'Credit, Replace, Take it back or Reject.', others: 'The customer sees the outcome and your reason.', implications: 'Credit issues a credit note across the order’s invoices and, on escrow, refunds that much. Replace reserves the disputed quantities again for a shipment at no charge, never invoiced. Take it back opens a return, already authorised; the credit follows when it closes. Reject changes nothing.', rules: 'Replace needs the stock free to reserve.' },
+  { name: 'Amount', meaning: 'For a credit: how much, tax included.', implications: 'On a paid invoice the part beyond what is still owed is held as the customer’s advance.', rules: 'Positive, up to the disputed value. Blank credits all of it.' },
+  { name: 'Reason', required: true, meaning: 'Why you decided as you did.', others: 'The customer reads it.' },
+]} />
+
+A decision is final and posts once. Whatever the dispute held on an escrow is then released if the customer had already released the rest.
+
+## Returns
+{props.who === 'distributor' && <Shot id="distributor/disputes/returns" />}
+
+The **Returns** tab lists what customers asked to send back, and returns opened by a dispute you decided as *Take it back*.
+
+| Status | What it means |
+|---|---|
+| Asked | Waiting for you to authorise or reject |
+| Authorised | The customer may send the goods, quoting its RMA number |
+| Received | In quarantine: not free to sell |
+| Inspected | Each line has its disposition and credit |
+| Closed | Credited |
+| Rejected | Refused, with your reason |
+
+{props.who === 'distributor' && <Shot id="distributor/disputes/return" />}
+
+**Authorise** before anything travels, or **Reject** with a reason; the customer may ask again for rejected lines. When the goods arrive, **Receive** them, here or under <PageLink who={props.who} page="fulfilment" hash="returns">Fulfilment, Returns</PageLink>:
+
+<FieldTable fields={[
+  { name: 'Warehouse', required: true, meaning: 'Where the goods come in.', implications: 'They land in quarantine there, at what they cost when they left: inventory up, cost of goods sold down. Not free to sell until inspected.' },
+  { name: 'Received (per line)', meaning: 'How much of each line arrived.', rules: 'Up to what was asked for. Blank or the full amount takes it all.' },
+  { name: 'Serial numbers', meaning: 'For a serialised item: each unit that came back.', rules: 'Each must be a unit shipped on this order, one per unit received.' },
+]} />
+
+Then **Inspect**:
+
+<FieldTable fields={[
+  { name: 'Where it goes', required: true, meaning: 'Back on sale, Damaged stock, Keep aside, or Back to its supplier.', implications: 'Back on sale makes it free to sell; Damaged stock moves it to damaged; the other two leave it in quarantine.' },
+  { name: 'Credit', meaning: 'How much of the line you credit.', rules: 'Up to what was received; all of it unless you lower it.' },
+]} />
+
+**Close and credit** issues one credit note for what you accepted, at the order's price with tax. On a paid invoice it is held for the customer as an advance; on escrow that much is refunded.
+
+## The dispute window
+How long after delivery a customer may dispute part of it is set on their account: **Days to dispute a delivery** under <PageLink who={props.who} page="customers">Customers</PageLink>, 7 unless you change it.
+
+## Live
+The list and an open dispute or return update as the customer writes, adds evidence or withdraws, and as your team acts.
+
+## Common questions
+
+**Does a dispute stop the whole order?** No. Only the disputed quantities and their value are held. The rest is invoiced, paid and delivered as usual, and on escrow the customer can release everything else.
+
+**Can I undo a decision?** No, a decision is final. A replacement shipment can still be cancelled before it is dispatched; its stock is freed.
+
+**Who decides an escalated dispute?** Your administrators, or anyone with the right to respond to disputes. Neuros does not decide for you.

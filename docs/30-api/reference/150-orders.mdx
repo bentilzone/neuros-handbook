@@ -86,6 +86,8 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -240,6 +242,8 @@ Needs an approved trading relationship. Offer lines are priced as your price now
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -381,6 +385,8 @@ The seller never sees the buyer’s draft. Commercial, payment and fulfilment st
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -537,6 +543,8 @@ Only while it is a draft. Lines given replace the draft’s lines (keep a line�
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -684,6 +692,8 @@ On credit it claims the buyer’s credit (an approved override may lift the limi
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -829,6 +839,8 @@ object
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -984,6 +996,8 @@ On a submitted or accepted order. The other side approves or rejects it; a quant
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1130,6 +1144,8 @@ object
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1276,6 +1292,8 @@ object
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1421,6 +1439,8 @@ object
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1568,6 +1588,8 @@ The buyer before acceptance; either side after it, while nothing has shipped. Gi
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1717,6 +1739,8 @@ The offer must be the same seller’s (OTHER_SELLER otherwise). The same offer i
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -1875,6 +1899,8 @@ The offer must be the same seller’s (OTHER_SELLER otherwise). The same offer i
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |
@@ -2020,6 +2046,8 @@ object
 | `lines[].allocated` | string | may be null |
 | `lines[].backordered` | string | may be null |
 | `lines[].dispatched` | string | may be null |
+| `lines[].disputed` | string | may be null |
+| `lines[].returned` | string | may be null |
 | `lines[].id` | string | 24 characters |
 | `freight` | object | may be null |
 | `freight.amount` | string | may be null |

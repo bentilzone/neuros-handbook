@@ -1,6 +1,6 @@
 ---
 title: "Payments"
-sidebar_position: 180
+sidebar_position: 190
 description: "Paying for orders: payment notices and confirmation, and escrow funding, release and refund."
 ---
 
@@ -88,6 +88,10 @@ Agrees what releases it (your instruction, or a number of days after delivery wi
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -184,6 +188,10 @@ Before release. The funding is undone in your books and its invoices are owed ag
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -278,6 +286,10 @@ object
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -368,6 +380,10 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -463,6 +479,10 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -585,6 +605,10 @@ From the buyer’s notice, or without one. Records a receipt that pays the order
 | `escrow.releasedAt` | string (date-time) | may be null |
 | `escrow.refundedAt` | string (date-time) | may be null |
 | `escrow.hold` | object | may be null |
+| `escrow.holds` | object[] |  |
+| `escrow.released` | object | may be null |
+| `escrow.refunded` | object | may be null |
+| `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |

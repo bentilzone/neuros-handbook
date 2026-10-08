@@ -27,9 +27,12 @@ const AREAS = [
   ['Relationships', 'relationships', 'Accounts between sellers and buyers, and their terms.'],
   ['Quotations', 'quotations', 'Requests for quotation and quotations: ask, price, send, revise, accept.'],
   ['Orders', 'orders', 'Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel.'],
+  ['Basket', 'basket', 'The buyer\'s open drafts, one per seller, checked out together; each order goes on its own.'],
   ['Fulfilment', 'fulfilment', 'Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt.'],
   ['Receivables', 'receivables', 'Sales invoices, payments received, credit notes and ageing; the buyer\'s purchase invoices.'],
   ['Payments', 'payments', 'Paying for orders: payment notices and confirmation, and escrow funding, release and refund.'],
+  ['Disputes', 'disputes', 'Disputing part of a delivered order: evidence, messages, escalation, and the seller\'s decision.'],
+  ['Returns', 'returns', 'Returning goods: request, authorise, receive into quarantine, inspect and credit.'],
   ['Notifications', 'notifications', 'Your own notifications in a company: list, unread counts, mark read.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
@@ -151,6 +154,11 @@ for (const [path, item] of Object.entries(spec.paths)) {
     for (const tag of op.tags ?? []) byTag.set(tag, [...(byTag.get(tag) ?? []), { path, method, op }]);
   }
 }
+
+// Every public tag has a page: a new engine tag must be placed here, never silently left out.
+// The operator console's own API (Platform …) is not part of the public reference.
+const unplaced = [...byTag.keys()].filter((t) => !t.startsWith('Platform') && !AREAS.some(([tag]) => tag === t));
+if (unplaced.length) throw new Error(`Tags with no area in tools/api-reference.mjs: ${unplaced.join(', ')}`);
 
 const index = [];
 AREAS.forEach(([tag, slug, intro], i) => {

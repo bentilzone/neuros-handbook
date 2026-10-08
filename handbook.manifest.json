@@ -51,6 +51,10 @@
       "10-supplier/57-orders.mdx",
       "11-distributor/57-orders.mdx"
     ],
+    "/selling/disputes": [
+      "10-supplier/59-disputes.mdx",
+      "11-distributor/59-disputes.mdx"
+    ],
     "/selling/customers": [
       "10-supplier/50-customers.mdx",
       "11-distributor/50-customers.mdx"
@@ -70,6 +74,10 @@
     "/buying/orders": [
       "11-distributor/77-buying-orders.mdx",
       "12-reseller/77-buying-orders.mdx"
+    ],
+    "/buying/disputes": [
+      "11-distributor/79-buying-disputes.mdx",
+      "12-reseller/79-buying-disputes.mdx"
     ],
     "/suppliers": [
       "11-distributor/70-suppliers.mdx",

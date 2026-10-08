@@ -34,6 +34,13 @@
     "title": "Basket",
     "callouts": []
   },
+  "distributor/buying-disputes/list": {
+    "file": "distributor/buying-disputes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Disputes and returns",
+    "callouts": []
+  },
   "distributor/buying-invoices/list": {
     "file": "distributor/buying-invoices/list.png",
     "width": 1440,
@@ -221,6 +228,61 @@
       }
     ]
   },
+  "distributor/disputes/detail": {
+    "file": "distributor/disputes/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A dispute",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Credit, replace, take it back, or reject, with a reason the customer reads."
+      },
+      {
+        "n": 2,
+        "text": "Ask the customer something; it waits on them until they answer."
+      }
+    ]
+  },
+  "distributor/disputes/list": {
+    "file": "distributor/disputes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Disputes and returns",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Disputes customers raised, and goods they want to send back."
+      },
+      {
+        "n": 2,
+        "text": "Answer within 3 working days, or it goes to your administrators."
+      },
+      {
+        "n": 3,
+        "text": "Only the disputed part is held; the rest of the order goes on."
+      }
+    ]
+  },
+  "distributor/disputes/return": {
+    "file": "distributor/disputes/return.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A return",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Authorise it before anything travels; reject it with a reason."
+      }
+    ]
+  },
+  "distributor/disputes/returns": {
+    "file": "distributor/disputes/returns.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Disputes and returns: returns",
+    "callouts": []
+  },
   "distributor/fulfilment/detail": {
     "file": "distributor/fulfilment/detail.png",
     "width": 1440,
@@ -253,7 +315,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, and what to pick in each warehouse."
+        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
       },
       {
         "n": 2,
@@ -266,6 +328,13 @@
     "width": 1440,
     "height": 900,
     "title": "Fulfilment: pick list",
+    "callouts": []
+  },
+  "distributor/fulfilment/returns": {
+    "file": "distributor/fulfilment/returns.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: returns",
     "callouts": []
   },
   "distributor/inventory/adjustment-new": {
@@ -466,7 +535,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1453,
+    "height": 1611,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -894,7 +963,7 @@
   "distributor/settings/notifications": {
     "file": "distributor/settings/notifications.png",
     "width": 1440,
-    "height": 1213,
+    "height": 1274,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -1490,6 +1559,30 @@
       }
     ]
   },
+  "reseller/buying-disputes/detail": {
+    "file": "reseller/buying-disputes/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A dispute you raised",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Photos, documents or a short video; the seller can open each one."
+      }
+    ]
+  },
+  "reseller/buying-disputes/list": {
+    "file": "reseller/buying-disputes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Disputes and returns",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What each dispute holds back from the order; the rest goes on."
+      }
+    ]
+  },
   "reseller/buying-invoices/detail": {
     "file": "reseller/buying-invoices/detail.png",
     "width": 1440,
@@ -1585,7 +1678,7 @@
   "reseller/buying-orders/new": {
     "file": "reseller/buying-orders/new.png",
     "width": 1440,
-    "height": 900,
+    "height": 927,
     "title": "New order",
     "callouts": []
   },
@@ -1934,7 +2027,7 @@
   "reseller/settings/notifications": {
     "file": "reseller/settings/notifications.png",
     "width": 1440,
-    "height": 1213,
+    "height": 1274,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2141,6 +2234,13 @@
       }
     ]
   },
+  "supplier/disputes/list": {
+    "file": "supplier/disputes/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Disputes and returns",
+    "callouts": []
+  },
   "supplier/fulfilment/list": {
     "file": "supplier/fulfilment/list.png",
     "width": 1440,
@@ -2149,7 +2249,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, and what to pick in each warehouse."
+        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
       },
       {
         "n": 2,
@@ -2162,6 +2262,13 @@
     "width": 1440,
     "height": 900,
     "title": "Fulfilment: pick list",
+    "callouts": []
+  },
+  "supplier/fulfilment/returns": {
+    "file": "supplier/fulfilment/returns.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: returns",
     "callouts": []
   },
   "supplier/inventory/adjustment-new": {
@@ -2659,7 +2766,7 @@
   "supplier/settings/notifications": {
     "file": "supplier/settings/notifications.png",
     "width": 1440,
-    "height": 1213,
+    "height": 1274,
     "title": "Settings: notifications",
     "callouts": []
   },
