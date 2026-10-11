@@ -337,6 +337,41 @@
     "title": "Fulfilment: returns",
     "callouts": []
   },
+  "distributor/imports/detail": {
+    "file": "distributor/imports/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An import with rows to fix",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The rows that did not pass, as you wrote them, with what is wrong: fix and import again."
+      },
+      {
+        "n": 2,
+        "text": "Import the rows that passed. The rest are left out."
+      }
+    ]
+  },
+  "distributor/imports/list": {
+    "file": "distributor/imports/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Imports",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Offers, products or opening stock, from the template."
+      }
+    ]
+  },
+  "distributor/imports/new": {
+    "file": "distributor/imports/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Import from a file",
+    "callouts": []
+  },
   "distributor/inventory/adjustment-new": {
     "file": "distributor/inventory/adjustment-new.png",
     "width": 1440,
@@ -676,7 +711,7 @@
   "distributor/offers/detail": {
     "file": "distributor/offers/detail.png",
     "width": 1440,
-    "height": 900,
+    "height": 978,
     "title": "An offer",
     "callouts": []
   },
@@ -707,7 +742,7 @@
   "distributor/offers/new": {
     "file": "distributor/offers/new.png",
     "width": 1440,
-    "height": 900,
+    "height": 978,
     "title": "New offer",
     "callouts": []
   },
@@ -1003,6 +1038,33 @@
     "title": "Receive goods",
     "callouts": []
   },
+  "distributor/reports/inventory-valuation": {
+    "file": "distributor/reports/inventory-valuation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: inventory valuation",
+    "callouts": []
+  },
+  "distributor/reports/profit-and-loss": {
+    "file": "distributor/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
   "distributor/requisitions/detail": {
     "file": "distributor/requisitions/detail.png",
     "width": 1440,
@@ -1066,7 +1128,7 @@
   "distributor/settings/billing": {
     "file": "distributor/settings/billing.png",
     "width": 1440,
-    "height": 1188,
+    "height": 1213,
     "title": "Settings: billing",
     "callouts": []
   },
@@ -1219,6 +1281,45 @@
         "text": "How each supplier lets you pay."
       }
     ]
+  },
+  "distributor/webhooks/detail": {
+    "file": "distributor/webhooks/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A test receiver and what it received",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "A webhook.test delivery, signed like every other."
+      },
+      {
+        "n": 2,
+        "text": "The test receiver checked the signature with the endpoint’s secret."
+      }
+    ]
+  },
+  "distributor/webhooks/list": {
+    "file": "distributor/webhooks/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Webhooks",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your receiver’s URL, or a test receiver inside Neuros."
+      },
+      {
+        "n": 2,
+        "text": "Paused with a reason: nothing is sent until it is resumed."
+      }
+    ]
+  },
+  "distributor/webhooks/new": {
+    "file": "distributor/webhooks/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add a webhook endpoint",
+    "callouts": []
   },
   "operator/applications/list": {
     "file": "operator/applications/list.png",
@@ -1598,7 +1699,7 @@
   "operator/settings/notifications": {
     "file": "operator/settings/notifications.png",
     "width": 1440,
-    "height": 900,
+    "height": 1139,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2142,6 +2243,26 @@
       {
         "n": 1,
         "text": "Clear them all, or only the category you filtered."
+      }
+    ]
+  },
+  "reseller/reports/profit-and-loss": {
+    "file": "reseller/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
       }
     ]
   },
@@ -2898,6 +3019,33 @@
     "title": "Quotes: requests received",
     "callouts": []
   },
+  "supplier/reports/inventory-valuation": {
+    "file": "supplier/reports/inventory-valuation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: inventory valuation",
+    "callouts": []
+  },
+  "supplier/reports/profit-and-loss": {
+    "file": "supplier/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
   "supplier/roles/detail": {
     "file": "supplier/roles/detail.png",
     "width": 1440,
@@ -2957,7 +3105,7 @@
   "supplier/settings/company-policies": {
     "file": "supplier/settings/company-policies.png",
     "width": 1440,
-    "height": 1110,
+    "height": 1206,
     "title": "My company: operating policies",
     "callouts": []
   },

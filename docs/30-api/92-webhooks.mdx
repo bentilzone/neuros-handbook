@@ -1,0 +1,133 @@
+---
+title: Webhooks and your ERP
+sidebar_position: 92
+description: Receive signed webhooks, verify them, act on each event once, and import records in bulk.
+---
+
+Webhooks push events to your system as they happen; the [live stream](./90-live-updates.mdx) does the same for a connected client. Use webhooks for a server that should hear about changes even when nothing is connected, such as an ERP.
+
+A delivery carries the event, never the record. Your system reads the record with its API client, so what it learns is limited by the client’s scopes, and nothing private travels to a URL that might change hands.
+
+## Set up
+
+1. Under **System → Webhooks**, add an endpoint with your receiver’s URL and the events it needs (or `POST /v1/webhooks`). It must be HTTPS and reachable from the internet. Neuros does not follow redirects.
+2. Keep the **signing secret** shown once in your receiver’s configuration, for example in an environment variable. It cannot be shown again; rotate it if it is lost.
+3. Create an [API client](./10-get-access.mdx) with read scopes for the records the events name.
+4. Send a test event (`POST /v1/webhooks/:id/test`) and check the delivery under the endpoint.
+
+To try it before your receiver exists, add a **test receiver** instead of a URL: Neuros keeps what it received and whether the signature checked out.
+
+## What a delivery looks like
+
+```http
+POST /neuros/webhooks HTTP/1.1
+Content-Type: application/json
+User-Agent: Neuros-Webhooks/1
+Neuros-Event-Id: 66f1c0e2a4b5c6d7e8f90123
+Neuros-Event-Type: order.accepted
+Neuros-Delivery-Attempt: 1
+Neuros-Signature: t=1760000000,v1=5f2b…
+
+{"id":"66f1c0e2a4b5c6d7e8f90123","type":"order.accepted","occurredAt":"2026-10-08T09:30:00.000Z","organizationId":"…","resource":{"type":"order","id":"…"}}
+```
+
+| Field | Means |
+|---|---|
+| `id` | The event id. The same on every attempt and when sent again: deduplicate by it |
+| `type` | The event, as in [live updates](./90-live-updates.mdx#messages), plus `webhook.test` |
+| `occurredAt` | When it happened |
+| `organizationId` | Your company |
+| `resource` | The record’s type and id: read it with the API |
+
+`GET /v1/webhooks/event-types` lists every event a webhook can carry.
+
+## Verify the signature
+
+`Neuros-Signature` is `t=<unix seconds>,v1=<signature>`. The signature is the hex HMAC-SHA256 of `<t>.<raw body>` keyed with your signing secret. Check it against the **raw** body, before parsing the JSON, and refuse a timestamp more than 5 minutes from your clock, so an old delivery cannot be replayed. For 24 hours after a rotation there are two `v1` values, one per secret: accept the delivery if either matches.
+
+```js title="Node.js (Express)"
+import crypto from 'node:crypto';
+import express from 'express';
+
+const SECRET = process.env.NEUROS_WEBHOOK_SECRET;
+
+function verify(header, rawBody, now = Math.floor(Date.now() / 1000)) {
+  const parts = header.split(',').map((p) => p.trim().split('='));
+  const t = Number(parts.find(([k]) => k === 't')?.[1]);
+  const signatures = parts.filter(([k]) => k === 'v1').map(([, v]) => v);
+  if (!Number.isInteger(t) || Math.abs(now - t) > 300) return false;
+  const expected = crypto.createHmac('sha256', SECRET).update(`${t}.${rawBody}`).digest('hex');
+  return signatures.some((s) => s.length === expected.length && crypto.timingSafeEqual(Buffer.from(s), Buffer.from(expected)));
+}
+
+const app = express();
+app.post('/neuros/webhooks', express.raw({ type: 'application/json' }), async (req, res) => {
+  const raw = req.body.toString('utf8');
+  if (!verify(req.get('Neuros-Signature') ?? '', raw)) return res.sendStatus(401);
+  const event = JSON.parse(raw);
+  if (await alreadyHandled(event.id)) return res.sendStatus(200);
+  await queue.add(event);      // do the work after answering
+  res.sendStatus(200);
+});
+```
+
+```python title="Python (Flask)"
+import hashlib, hmac, os, time
+from flask import Flask, request
+
+SECRET = os.environ["NEUROS_WEBHOOK_SECRET"].encode()
+
+def verify(header: str, raw: bytes, now: int | None = None) -> bool:
+    parts = [p.strip().split("=", 1) for p in header.split(",")]
+    t = next((v for k, v in parts if k == "t"), None)
+    signatures = [v for k, v in parts if k == "v1"]
+    if t is None or not t.isdigit() or abs((now or int(time.time())) - int(t)) > 300:
+        return False
+    expected = hmac.new(SECRET, f"{t}.".encode() + raw, hashlib.sha256).hexdigest()
+    return any(hmac.compare_digest(s, expected) for s in signatures)
+
+app = Flask(__name__)
+
+@app.post("/neuros/webhooks")
+def receive():
+    raw = request.get_data()
+    if not verify(request.headers.get("Neuros-Signature", ""), raw):
+        return "", 401
+    event = request.get_json()
+    if not already_handled(event["id"]):
+        enqueue(event)
+    return "", 200
+```
+
+## Answer quickly, act once
+
+- **Answer within 10 seconds** with any 2xx status. Anything else, or no answer, is a failed attempt. Do the work in a queue after answering.
+- **Deduplicate by event id.** A delivery can arrive more than once: after a timeout your server did not notice, or when someone sends it again. Record each id you handled and skip repeats.
+- **Order is not guaranteed.** Read the record and act on its current state, not on the order events arrived in.
+- **Retries:** after 1 minute, 5 minutes, 30 minutes, 2 hours and 12 hours; after the sixth failed attempt the delivery gives up. List them with `GET /v1/webhooks/:id/deliveries?status=dead` and send them again with `POST /v1/webhook-deliveries/:id/replay`.
+
+## An ERP order flow
+
+A seller’s ERP that books Neuros orders:
+
+| Event | The ERP |
+|---|---|
+| `order.submitted` | Reads `GET /v1/orders/:id` and shows it to the sales desk |
+| `order.accepted` | Creates the sales order with the accepted lines and prices |
+| `shipment.dispatched` | Marks the order shipped; `GET /v1/shipments/:id` has the carrier and tracking |
+| `sales_invoice.issued` | Books the receivable from `GET /v1/sales-invoices/:id` |
+| `payment.confirmed` | Matches the receipt in the ERP’s bank ledger |
+| `stock.changed` | Rereads the balance if the ERP mirrors stock |
+
+A buyer’s ERP follows the same pattern with `quotation.sent`, `order.accepted`, `shipment.dispatched` and `sales_invoice.issued` from its sellers, and the procurement events (`purchase_order.issued`, `goods_receipt.posted`, `supplier_invoice.approved`) for its own side.
+
+## Bulk import through the API
+
+The same imports as the app:
+
+1. `POST /v1/imports` with `kind` (`offers`, `products` or `opening_stock`) and `filename`. The answer has the import and an `upload` with a signed `url`, `method` and `headers`.
+2. Send the CSV to that URL with that method and those headers, `Content-Type: text/csv`.
+3. `POST /v1/imports/:id/validate`, then read `counts` and `GET /v1/imports/:id/rows?status=invalid`.
+4. `POST /v1/imports/:id/confirm`. Follow `GET /v1/imports/:id` (or the `import.updated` and `import.finished` live events) until it is `done`.
+
+`GET /v1/imports/templates/:kind` returns the template and `GET /v1/imports/columns/:kind` what each column means. See the [Imports reference](./reference/300-imports.mdx).

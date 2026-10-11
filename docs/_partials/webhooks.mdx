@@ -1,0 +1,50 @@
+{/* Shared by every guide that has this page: <Webhooks who="supplier|distributor|reseller" />. The screens are the same for every company, so the shots are the distributor's. */}
+
+<PersonaBadge who={['everyone']} permission={['webhook:read', 'webhook:manage']} />
+
+**Webhooks** tell your own systems (an ERP, a shop, a warehouse system) when something happens in Neuros: an order accepted, an invoice issued, stock changed. Neuros sends an HTTPS POST to your endpoint for each event it carries. Each delivery is signed, and it names only the event and its record: your system reads the record with its [API client](../30-api/10-get-access.mdx). See [webhook](../01-glossary/85-integrations.mdx#webhook).
+
+Your plan must include the Webhooks add-on. For the code your receiver needs, see [Webhooks in the API guide](../30-api/92-webhooks.mdx).
+
+<Shot id="distributor/webhooks/list" />
+
+## Add an endpoint
+
+<Shot id="distributor/webhooks/new" />
+
+<FieldTable fields={[
+  { name: 'Your receiver / Test receiver', meaning: 'Send to your own URL, or to a test receiver inside Neuros that shows what arrived.', implications: 'A test receiver lets you see real deliveries, signature checked, before your server is ready.' },
+  { name: 'URL', required: true, meaning: 'Where deliveries are POSTed.', rules: 'https, reachable from the internet. Private and local addresses are refused, and redirects are not followed.' },
+  { name: 'Description', meaning: 'What the endpoint is for, so your team recognises it.' },
+  { name: 'Every event / Events', required: true, meaning: 'Which events it receives: every event a webhook can carry, or the ones you choose.', implications: 'Events about orders, quotes, shipments, invoices, payments, disputes and returns, procurement, your offers, price lists, stock and accounts.' },
+]} />
+
+Once added, the **signing secret** is shown once. Copy it to where your receiver can read it; Neuros keeps it only to sign, and it cannot be shown again.
+
+## An endpoint
+
+<Shot id="distributor/webhooks/detail" />
+
+- **Send a test event** sends a `webhook.test` delivery, signed like any other.
+- **Rotate secret** issues a new secret, shown once. For 24 hours each delivery carries two signatures, one per secret, so your receiver can switch without missing any.
+- **Pause** takes a reason; nothing is sent until you **Resume**. Deliveries already queued give up, and you can send them again afterwards.
+- **Edit** changes the URL, description and events.
+
+## Deliveries
+
+Each event the endpoint receives is one delivery, with every attempt: when, what your receiver answered, and how long it took.
+
+| Status | Means |
+|---|---|
+| Queued | Waiting to be sent |
+| Delivered | Your receiver answered with a 2xx status within 10 seconds |
+| Retrying | It did not; Neuros tries again after 1 minute, 5 minutes, 30 minutes, 2 hours and 12 hours |
+| Gave up | Six attempts failed, or the endpoint was paused |
+
+**Send again** on a delivered or given-up delivery sends it once more with the same event id, so a receiver that deduplicates by id handles it once.
+
+## Common questions
+
+**Why does a delivery hold no order details?** So nothing private travels to a URL you may later change. Your system reads the record with its API client, which also checks its scopes.
+
+**What if my receiver is down for a day?** Deliveries retry for about 15 hours and then give up. Filter the deliveries by **Gave up** and send them again once it is back.

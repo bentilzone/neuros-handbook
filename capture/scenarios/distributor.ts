@@ -108,4 +108,5 @@ export default [...walk({
   marketplaceSeller: 'Kumasi Pump Works Ltd',
   disputes: 'selling',
   externalSuppliers: true,
+  integrations: true,
 }), credit, newQuotation, draft, order, shipment, invoice, payment];
