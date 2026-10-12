@@ -30,26 +30,28 @@ Neuros' own platform operations are not listed: no company can call them.
 | [Orders](./150-orders.mdx) | Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel. | 15 |
 | [Basket](./160-basket.mdx) | The buyer's open drafts, one per seller, checked out together; each order goes on its own. | 4 |
 | [Fulfilment](./170-fulfilment.mdx) | Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt. | 13 |
-| [Receivables](./180-receivables.mdx) | Sales invoices, payments received, credit notes and ageing; the buyer's purchase invoices. | 16 |
-| [Payments](./190-payments.mdx) | Paying for orders: payment notices and confirmation, and escrow funding, release and refund. | 8 |
-| [Disputes](./200-disputes.mdx) | Disputing part of a delivered order: evidence, messages, escalation, and the seller's decision. | 9 |
-| [Returns](./210-returns.mdx) | Returning goods: request, authorise, receive into quarantine, inspect and credit. | 8 |
-| [Suppliers](./220-suppliers.mdx) | Your suppliers outside Neuros, and where each is paid. | 5 |
-| [Requisitions](./230-requisitions.mdx) | Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it. | 10 |
-| [Purchase orders](./240-purchase-orders.mdx) | Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed. | 9 |
-| [Goods receipts](./250-goods-receipts.mdx) | Receiving against purchase orders and orders on Neuros: exceptions, substitutes, posting into stock, voiding. | 8 |
-| [Landed costs](./260-landed-costs.mdx) | Freight, duty and other charges spread over receipts, capitalised or expensed. | 6 |
-| [Supplier invoices](./270-supplier-invoices.mdx) | Supplier invoices typed in or taken in from Neuros, three-way matched and approved. | 7 |
-| [Supplier payments](./280-supplier-payments.mdx) | Payments to suppliers, scheduled or recorded, advances, and payables ageing. | 8 |
-| [Webhooks](./290-webhooks.mdx) | Endpoints that receive signed, id-only deliveries of events; deliveries, retries, replay, secret rotation and the test receiver. | 11 |
-| [Imports](./300-imports.mdx) | CSV imports of offers, products and opening stock: templates, signed upload, validation, rows, confirm. | 10 |
-| [Reports](./310-reports.mdx) | The dashboard, financial and operational reports as JSON, CSV or PDF, and the year-end close. | 3 |
-| [Notifications](./320-notifications.mdx) | Your own notifications in a company: list, unread counts, mark read. | 10 |
-| [Agents](./330-agents.mdx) | Your AI agents, the numbers they answer on, and their secrets. | 9 |
-| [Messaging](./340-messaging.mdx) | Messages to resellers’ chat: settings and the messaging secret, texts, sent messages, consent, and the inbox for receipts and replies. | 12 |
-| [Collections](./350-collections.mdx) | The partner bank: collection settings, customers’ virtual accounts, the credits the bank reports and how they matched, returns, daily reconciliation, and the bank’s webhook. | 12 |
-| [Agent tools](./360-agent-tools.mdx) | What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP. | 10 |
-| [Marketplace](./370-marketplace.mdx) | Searching offers and pricing them for your company. | 3 |
-| [Inventory](./380-inventory.mdx) | Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation. | 37 |
-| [Ledger](./390-ledger.mdx) | Accounts, posting rules, periods, journals and the trial balance. | 22 |
-| [Audit](./400-audit.mdx) | The audit trail of changes and API requests. | 2 |
+| [Deliveries](./180-deliveries.mdx) | Your own drivers and their delivery runs: plan, send out (the delivery codes and the driver’s link), new link, cancel, and a new code for a shipment. | 10 |
+| [Driver](./190-driver.mdx) | The driver’s page, public with the run’s link token in X-Driver-Token: the run and its stops, a photo, delivered with the customer’s code, not delivered. | 4 |
+| [Receivables](./200-receivables.mdx) | Sales invoices, payments received, credit notes and ageing; the buyer's purchase invoices. | 16 |
+| [Payments](./210-payments.mdx) | Paying for orders: payment notices and confirmation, and escrow funding, release and refund. | 8 |
+| [Disputes](./220-disputes.mdx) | Disputing part of a delivered order: evidence, messages, escalation, and the seller's decision. | 9 |
+| [Returns](./230-returns.mdx) | Returning goods: request, authorise, receive into quarantine, inspect and credit. | 8 |
+| [Suppliers](./240-suppliers.mdx) | Your suppliers outside Neuros, and where each is paid. | 5 |
+| [Requisitions](./250-requisitions.mdx) | Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it. | 10 |
+| [Purchase orders](./260-purchase-orders.mdx) | Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed. | 9 |
+| [Goods receipts](./270-goods-receipts.mdx) | Receiving against purchase orders and orders on Neuros: exceptions, substitutes, posting into stock, voiding. | 8 |
+| [Landed costs](./280-landed-costs.mdx) | Freight, duty and other charges spread over receipts, capitalised or expensed. | 6 |
+| [Supplier invoices](./290-supplier-invoices.mdx) | Supplier invoices typed in or taken in from Neuros, three-way matched and approved. | 7 |
+| [Supplier payments](./300-supplier-payments.mdx) | Payments to suppliers, scheduled or recorded, advances, and payables ageing. | 8 |
+| [Webhooks](./310-webhooks.mdx) | Endpoints that receive signed, id-only deliveries of events; deliveries, retries, replay, secret rotation and the test receiver. | 11 |
+| [Imports](./320-imports.mdx) | CSV imports of offers, products and opening stock: templates, signed upload, validation, rows, confirm. | 10 |
+| [Reports](./330-reports.mdx) | The dashboard, financial and operational reports as JSON, CSV or PDF, and the year-end close. | 3 |
+| [Notifications](./340-notifications.mdx) | Your own notifications in a company: list, unread counts, mark read. | 10 |
+| [Agents](./350-agents.mdx) | Your AI agents, the numbers they answer on, and their secrets. | 9 |
+| [Messaging](./360-messaging.mdx) | Messages to resellers’ chat: settings and the messaging secret, texts, sent messages, consent, and the inbox for receipts and replies. | 12 |
+| [Collections](./370-collections.mdx) | The partner bank: collection settings, customers’ virtual accounts, the credits the bank reports and how they matched, returns, daily reconciliation, and the bank’s webhook. | 12 |
+| [Agent tools](./380-agent-tools.mdx) | What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP. | 10 |
+| [Marketplace](./390-marketplace.mdx) | Searching offers and pricing them for your company. | 3 |
+| [Inventory](./400-inventory.mdx) | Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation. | 37 |
+| [Ledger](./410-ledger.mdx) | Accounts, posting rules, periods, journals and the trial balance. | 22 |
+| [Audit](./420-audit.mdx) | The audit trail of changes and API requests. | 2 |

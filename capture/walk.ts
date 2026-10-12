@@ -2,7 +2,7 @@
 // drawers and forms it opens. A persona keeps the sections its company can see (selling, buying,
 // stock) and names its own demo records; ids are `persona/page/state` either way.
 import type { Page } from 'playwright';
-import type { Persona } from './personas';
+import { VIEWPORT, type Persona } from './personas';
 import type { Scenario, Shot } from './scenario';
 
 export interface Walk {
@@ -355,12 +355,47 @@ export function walk(w: Walk): Scenario[] {
     shot('inventory/valuation', '/inventory?tab=valuation', 'Inventory: valuation'),
     shot('fulfilment/list', '/fulfilment', 'Fulfilment', {
       callouts: [
-        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, what to pick in each warehouse, and returns to receive.', side: 'right' },
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs.', side: 'right' },
         { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Picking, packed, on its way, delivered or cancelled.', side: 'bottom' },
       ],
     }),
     shot('fulfilment/pick', '/fulfilment?tab=pick', 'Fulfilment: pick list'),
     shot('fulfilment/returns', '/fulfilment?tab=returns', 'Fulfilment: returns'),
+    shot('fulfilment/runs', '/fulfilment?tab=runs', 'Fulfilment: delivery runs', w.agents ? {
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Plan a run' }, text: 'One driver, one day, the stops in order.', side: 'left' },
+        { n: 2, target: { text: /^Stops$/ }, text: 'How many stops are done, as the driver records them.', side: 'bottom' },
+      ],
+    } : {}),
+    shot('fulfilment/run-new', '/fulfilment?tab=runs', 'Plan a run', { steps: click('Plan a run') }),
+    ...(w.agents ? [
+      shot('fulfilment/run', '/fulfilment?tab=runs', 'A run out today', {
+        steps: firstRow, fullPage: true,
+        callouts: [
+          { n: 1, target: { text: 'Code sent' }, text: 'Where the customer’s code stands. You never see the code itself.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New link' }, text: 'A new link for the driver, shown once; the old one stops.', side: 'top' },
+        ],
+      }),
+    ] : []),
+    shot('fulfilment/drivers', '/fulfilment?tab=drivers', 'Fulfilment: drivers', w.agents ? {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Add a driver' }, text: 'The people who deliver for you. They never sign in.', side: 'left' }],
+    } : {}),
+    ...(w.agents ? [
+      // The driver's phone page: a new link from the run's panel, opened as the driver would.
+      shot('driver/run', '/fulfilment?tab=runs', 'The driver’s page', {
+        viewport: { width: 420, height: 860 },
+        steps: async (page) => {
+          // The run's panel at desktop size; the driver's page at the phone's.
+          await page.setViewportSize(VIEWPORT);
+          await firstRow(page);
+          await page.getByRole('button', { name: 'New link' }).click();
+          const link = (await page.getByText(/\/driver#[A-Za-z0-9_-]+/).first().innerText()).trim();
+          await page.setViewportSize({ width: 420, height: 860 });
+          await page.goto(new URL(`/driver#${link.split('#')[1]}`, page.url()).href);
+          await page.getByText('Keep this link to yourself').waitFor();
+        },
+      }),
+    ] : []),
   ];
 
   const ledger: Scenario[] = [

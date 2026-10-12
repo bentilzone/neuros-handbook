@@ -29,6 +29,8 @@ const AREAS = [
   ['Orders', 'orders', 'Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel.'],
   ['Basket', 'basket', 'The buyer\'s open drafts, one per seller, checked out together; each order goes on its own.'],
   ['Fulfilment', 'fulfilment', 'Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt.'],
+  ['Deliveries', 'deliveries', 'Your own drivers and their delivery runs: plan, send out (the delivery codes and the driver’s link), new link, cancel, and a new code for a shipment.'],
+  ['Driver', 'driver', 'The driver’s page, public with the run’s link token in X-Driver-Token: the run and its stops, a photo, delivered with the customer’s code, not delivered.'],
   ['Receivables', 'receivables', 'Sales invoices, payments received, credit notes and ageing; the buyer\'s purchase invoices.'],
   ['Payments', 'payments', 'Paying for orders: payment notices and confirmation, and escrow funding, release and refund.'],
   ['Disputes', 'disputes', 'Disputing part of a delivered order: evidence, messages, escalation, and the seller\'s decision.'],

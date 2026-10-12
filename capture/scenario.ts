@@ -17,6 +17,8 @@ export interface Shot {
   callouts?: Callout[];
   /** Grow the picture to the page's full height (long settings pages). */
   fullPage?: boolean;
+  /** Shoot at this size instead of the desktop one (the driver's phone page); restored after. */
+  viewport?: { width: number; height: number };
 }
 
 export interface Video {
