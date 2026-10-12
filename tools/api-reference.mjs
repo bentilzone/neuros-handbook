@@ -44,6 +44,8 @@ const AREAS = [
   ['Imports', 'imports', 'CSV imports of offers, products and opening stock: templates, signed upload, validation, rows, confirm.'],
   ['Reports', 'reports', 'The dashboard, financial and operational reports as JSON, CSV or PDF, and the year-end close.'],
   ['Notifications', 'notifications', 'Your own notifications in a company: list, unread counts, mark read.'],
+  ['Agents', 'agents', 'Your AI agents, the numbers they answer on, and their secrets.'],
+  ['Agent tools', 'agent-tools', 'What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],
   ['Ledger', 'ledger', 'Accounts, posting rules, periods, journals and the trial balance.'],

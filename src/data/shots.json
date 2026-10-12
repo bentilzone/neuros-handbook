@@ -1,4 +1,38 @@
 {
+  "distributor/agents/list": {
+    "file": "distributor/agents/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The account your agent gives for transfers, with the order number as the reference."
+      },
+      {
+        "n": 2,
+        "text": "An agent gets a client ID and secret, shown once, for your agent platform."
+      },
+      {
+        "n": 3,
+        "text": "How much each agent was used, and how often it asked for something it may not do."
+      }
+    ]
+  },
+  "distributor/agents/new": {
+    "file": "distributor/agents/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an AI agent",
+    "callouts": []
+  },
+  "distributor/agents/numbers": {
+    "file": "distributor/agents/numbers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents: numbers",
+    "callouts": []
+  },
   "distributor/api-clients/list": {
     "file": "distributor/api-clients/list.png",
     "width": 1440,
@@ -150,6 +184,22 @@
     "title": "A catalogue product",
     "callouts": []
   },
+  "distributor/customers/agent": {
+    "file": "distributor/customers/agent.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A reseller invited by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The numbers your agent answers this customer on."
+      },
+      {
+        "n": 2,
+        "text": "Another code, if the last ran out or was mistyped too often."
+      }
+    ]
+  },
   "distributor/customers/approve": {
     "file": "distributor/customers/approve.png",
     "width": 1440,
@@ -183,6 +233,18 @@
     "height": 900,
     "title": "A customer’s account",
     "callouts": []
+  },
+  "distributor/customers/invite": {
+    "file": "distributor/customers/invite.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invite a reseller by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The number they write to your agent from. A local number takes your country code."
+      }
+    ]
   },
   "distributor/customers/list": {
     "file": "distributor/customers/list.png",
@@ -2419,6 +2481,27 @@
       }
     ]
   },
+  "supplier/agents/list": {
+    "file": "supplier/agents/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents",
+    "callouts": []
+  },
+  "supplier/agents/new": {
+    "file": "supplier/agents/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an AI agent",
+    "callouts": []
+  },
+  "supplier/agents/numbers": {
+    "file": "supplier/agents/numbers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents: numbers",
+    "callouts": []
+  },
   "supplier/api-clients/list": {
     "file": "supplier/api-clients/list.png",
     "width": 1440,
@@ -2515,6 +2598,18 @@
     "height": 900,
     "title": "A customer’s account",
     "callouts": []
+  },
+  "supplier/customers/invite": {
+    "file": "supplier/customers/invite.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invite a reseller by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The number they write to your agent from. A local number takes your country code."
+      }
+    ]
   },
   "supplier/customers/list": {
     "file": "supplier/customers/list.png",

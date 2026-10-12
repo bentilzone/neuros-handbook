@@ -8,7 +8,7 @@ description: "Accounts between sellers and buyers, and their terms."
 
 Accounts between sellers and buyers, and their terms.
 
-This page lists the 19 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 22 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -26,13 +26,16 @@ This page lists the 19 operations in this area, generated from the engine's Open
 | [GET `/v1/relationships/{id}/credit-overrides`](#seller-one-off-credit-overrides-approved-for-this-buyer) | Seller: one-off credit overrides approved for this buyer | `credit:read` |
 | [POST `/v1/relationships/{id}/credit-overrides`](#seller-approve-a-one-off-lift-of-the-limit-for-the-next-order-that-needs-it) | Seller: approve a one-off lift of the limit for the next order that needs it | `credit:override` |
 | [POST `/v1/relationships/{id}/hold`](#seller-put-the-account-on-hold--no-new-credit-orders) | Seller: put the account on hold — no new credit orders | `credit:manage` |
+| [POST `/v1/relationships/{id}/invite-code`](#seller-a-new-invitation-code-when-the-last-ran-out-or-was-mistyped-too-often) | Seller: a new invitation code, when the last ran out or was mistyped too often | `relationship:manage` |
 | [POST `/v1/relationships/{id}/reinstate`](#seller-reinstate-the-relationship) | Seller: reinstate the relationship | `relationship:manage` |
 | [POST `/v1/relationships/{id}/reject`](#seller-reject-the-relationship) | Seller: reject the relationship | `relationship:manage` |
 | [POST `/v1/relationships/{id}/release-hold`](#seller-lift-the-account-hold) | Seller: lift the account hold | `credit:manage` |
+| [PUT `/v1/relationships/{id}/reseller-profile`](#seller-the-numbers-this-customer-writes-to-your-agent-from-its-tier-zone-and-your-code-for-it) | Seller: the numbers this customer writes to your agent from, its tier, zone and your code for it | `relationship:manage` |
 | [POST `/v1/relationships/{id}/revoke`](#end-the-relationship-either-side-existing-obligations-stand) | End the relationship (either side). Existing obligations stand | `relationship:read` |
 | [POST `/v1/relationships/{id}/suspend`](#seller-suspend-the-relationship--blocks-new-orders-keeps-history) | Seller: suspend the relationship — blocks new orders, keeps history | `relationship:manage` |
 | [PATCH `/v1/relationships/{id}/terms`](#seller-change-price-list-payment-terms-credit-eligibility-restrictions) | Seller: change price list, payment terms, credit eligibility, restrictions | `relationship:manage` |
 | [POST `/v1/relationships/invite`](#seller-open-an-approved-account-for-a-buyer-with-terms) | Seller: open an approved account for a buyer, with terms | `relationship:manage` |
+| [POST `/v1/relationships/invite-by-phone`](#seller-invite-a-reseller-by-phone-to-order-through-your-ai-agent) | Seller: invite a reseller by phone, to order through your AI agent | `relationship:manage` |
 
 ## Details
 
@@ -69,7 +72,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `capabilities.purchasing` * | boolean |  |
 | `relationship` * | object | may be null |
 | `relationship.id` * | string |  |
-| `relationship.status` * | `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
+| `relationship.status` * | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
 
 
 ### Find active sellers to request an account with
@@ -105,7 +108,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `capabilities.purchasing` * | boolean |  |
 | `relationship` * | object | may be null |
 | `relationship.id` * | string |  |
-| `relationship.status` * | `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
+| `relationship.status` * | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
 
 
 ### My trading relationships, as seller and as buyer
@@ -119,7 +122,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `page` | query | integer | ≥ 1, default `1` |
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `side` | query | `selling` · `buying` |  |
-| `status` | query | `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
+| `status` | query | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
 
 **Response** `200`
 
@@ -127,7 +130,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -155,6 +158,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -213,7 +223,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -241,6 +251,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -295,7 +312,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -323,6 +340,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -393,7 +417,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -421,6 +445,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -481,7 +512,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -509,6 +540,13 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -748,6 +786,58 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `reservations[].createdAt` * | string (date-time) |  |
 
 
+### Seller: a new invitation code, when the last ran out or was mistyped too often
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/invite-code`
+
+**Who can call it:** People and API clients · **Scope:** `relationship:manage`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationship` * | object |  |
+| `relationship.status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `relationship.requestedBy` | `seller` · `buyer` | may be null |
+| `relationship.requestMessage` | string | may be null |
+| `relationship.priceListId` | string | 24 characters, may be null |
+| `relationship.paymentTerms` | object | may be null |
+| `relationship.allowedPaymentModes` | object[] |  |
+| `relationship.creditEligible` | boolean | may be null |
+| `relationship.autoAccept` | boolean | may be null |
+| `relationship.disputeWindowDays` | number | may be null |
+| `relationship.credit` | object | may be null |
+| `relationship.hold` | object | may be null |
+| `relationship.restrictions` | object | may be null |
+| `relationship.effectiveFrom` | string (date-time) | may be null |
+| `relationship.effectiveTo` | string (date-time) | may be null |
+| `relationship.statusReason` | string | may be null |
+| `relationship.sellerNotes` | string | may be null |
+| `relationship.buyerReference` | string | may be null |
+| `relationship.callers` | object[] |  |
+| `relationship.tier` | string | may be null |
+| `relationship.zone` | string | may be null |
+| `relationship.externalRef` | string | may be null |
+| `relationship.invite` | object | may be null |
+| `relationship.history` | object[] |  |
+| `relationship.createdAt` | string (date-time) | may be null |
+| `relationship.updatedAt` | string (date-time) | may be null |
+| `relationship.sellerOrganizationId` | string | 24 characters, may be null |
+| `relationship.buyerOrganizationId` | string | 24 characters, may be null |
+| `relationship.__v` | number | may be null |
+| `relationship.id` | string | 24 characters |
+| `relationship.viewerSide` * | `seller` · `buyer` | may be null |
+| `relationship.seller` * | object | may be null |
+| `relationship.buyer` * | object | may be null |
+| `relationship.priceList` * | object | may be null |
+| `inviteCode` * | string | Shown once: the reseller gives it to your agent to accept. 6 characters |
+| `expiresAt` * | string (date-time) |  |
+
+
 ### Seller: reinstate the relationship
 
 <span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/reinstate`
@@ -768,7 +858,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -796,6 +886,13 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -856,7 +953,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -884,6 +981,13 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -965,11 +1069,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `reservations[].createdAt` * | string (date-time) |  |
 
 
-### End the relationship (either side). Existing obligations stand
+### Seller: the numbers this customer writes to your agent from, its tier, zone and your code for it
 
-<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/revoke`
+<span className="nh-method nh-method--put">PUT</span> `/v1/relationships/{id}/reseller-profile`
 
-**Who can call it:** People and API clients · **Scope:** `relationship:read`
+**Who can call it:** People and API clients · **Scope:** `relationship:manage`
 
 | Parameter | In | Type | Notes |
 |---|---|---|---|
@@ -979,13 +1083,18 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `reason` * | string | at least 3 characters, at most 1000 characters |
+| `callers` | object[] | Replaces the list; your agent answers this customer when it writes from one of them |
+| `callers[].channel` * | `whatsapp` · `sms` · `email` |  |
+| `callers[].address` * | string | at least 3 characters, at most 120 characters |
+| `tier` | string | Your grouping of this reseller, e.g. A, B or Gold. at most 40 characters, may be null |
+| `zone` | string | The delivery zone this reseller is in. at most 60 characters, may be null |
+| `externalRef` | string | This reseller’s code in your own books or ERP. at most 60 characters, may be null |
 
 **Response** `200`
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -1013,6 +1122,108 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `sellerOrganizationId` | string | 24 characters, may be null |
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+| `viewerSide` * | `seller` · `buyer` | may be null |
+| `seller` * | object | may be null |
+| `seller.id` * | string |  |
+| `seller.name` * | string |  |
+| `seller.legalName` * | string |  |
+| `seller.slug` | string | may be null |
+| `seller.jurisdiction` | string | may be null |
+| `seller.status` | string |  |
+| `buyer` * | object | may be null |
+| `buyer.id` * | string |  |
+| `buyer.name` * | string |  |
+| `buyer.legalName` * | string |  |
+| `buyer.slug` | string | may be null |
+| `buyer.jurisdiction` | string | may be null |
+| `buyer.status` | string |  |
+| `priceList` * | object | may be null |
+| `priceList.id` * | string |  |
+| `priceList.name` * | string |  |
+| `priceList.currency` * | string |  |
+
+
+### End the relationship (either side). Existing obligations stand
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/{id}/revoke`
+
+**Who can call it:** People and API clients · **Scope:** `relationship:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `reason` * | string | at least 3 characters, at most 1000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `requestedBy` | `seller` · `buyer` | may be null |
+| `requestMessage` | string | may be null |
+| `priceListId` | string | 24 characters, may be null |
+| `paymentTerms` | object | may be null |
+| `paymentTerms.defaultMode` | `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` | may be null |
+| `paymentTerms.termsDays` | number | may be null |
+| `allowedPaymentModes` | object[] |  |
+| `creditEligible` | boolean | may be null |
+| `autoAccept` | boolean | may be null |
+| `disputeWindowDays` | number | may be null |
+| `credit` | object | may be null |
+| `credit.limit` | object | may be null |
+| `credit.expiresAt` | string (date-time) | may be null |
+| `credit.used` | string | may be null |
+| `hold` | object | may be null |
+| `hold.active` | boolean | may be null |
+| `hold.reason` | string | may be null |
+| `hold.at` | string (date-time) | may be null |
+| `hold.byUserId` | string | 24 characters, may be null |
+| `restrictions` | object | may be null |
+| `restrictions.maxOrderValue` | object | may be null |
+| `restrictions.categoryIds` | object[] |  |
+| `effectiveFrom` | string (date-time) | may be null |
+| `effectiveTo` | string (date-time) | may be null |
+| `statusReason` | string | may be null |
+| `sellerNotes` | string | may be null |
+| `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1073,7 +1284,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -1101,6 +1312,13 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1174,7 +1392,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -1202,6 +1420,13 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1270,7 +1495,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 
 | Field | Type | Notes |
 |---|---|---|
-| `status` | `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
 | `requestedBy` | `seller` · `buyer` | may be null |
 | `requestMessage` | string | may be null |
 | `priceListId` | string | 24 characters, may be null |
@@ -1298,6 +1523,13 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `statusReason` | string | may be null |
 | `sellerNotes` | string | may be null |
 | `buyerReference` | string | may be null |
+| `callers` | object[] |  |
+| `tier` | string | may be null |
+| `zone` | string | may be null |
+| `externalRef` | string | may be null |
+| `invite` | object | may be null |
+| `invite.expiresAt` | string (date-time) | may be null |
+| `invite.attempts` | number | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1336,4 +1568,77 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `priceList.id` * | string |  |
 | `priceList.name` * | string |  |
 | `priceList.currency` * | string |  |
+
+
+### Seller: invite a reseller by phone, to order through your AI agent
+
+<span className="nh-method nh-method--post">POST</span> `/v1/relationships/invite-by-phone`
+
+The number becomes a reseller account that never signs in. The relationship stays invited until the reseller gives your agent the code, which is shown once and lasts 7 days.
+
+**Who can call it:** People and API clients · **Scope:** `relationship:manage`
+
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `phone` * | string | With its country code (+234…), or a local number in your country. at least 6 characters, at most 30 characters |
+| `name` * | string | The reseller’s business name. at least 2 characters, at most 120 characters |
+| `channels` | array of `whatsapp` · `sms` | Where it writes from (default both) |
+| `terms` | object | default `&#123;&#125;` |
+| `terms.priceListId` | string | 24 characters, may be null |
+| `terms.paymentTerms` | object |  |
+| `terms.allowedPaymentModes` | array of `prepay` · `bank_transfer` · `credit` · `deposit` · `milestone` · `escrow` |  |
+| `terms.creditEligible` | boolean |  |
+| `terms.autoAccept` | boolean | Accept this buyer’s orders automatically when submitted |
+| `terms.disputeWindowDays` | integer | Days after delivery this buyer may dispute part of it (default 7). ≥ 0, ≤ 90 |
+| `terms.restrictions` | object |  |
+| `terms.effectiveFrom` | string (date-time) |  |
+| `terms.effectiveTo` | string (date-time) | may be null |
+| `terms.sellerNotes` | string | at most 2000 characters |
+| `tier` | string | Your grouping of this reseller, e.g. A, B or Gold. at most 40 characters, may be null |
+| `zone` | string | The delivery zone this reseller is in. at most 60 characters, may be null |
+| `externalRef` | string | This reseller’s code in your own books or ERP. at most 60 characters, may be null |
+
+**Response** `201`
+
+| Field | Type | Notes |
+|---|---|---|
+| `relationship` * | object |  |
+| `relationship.status` | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` | may be null |
+| `relationship.requestedBy` | `seller` · `buyer` | may be null |
+| `relationship.requestMessage` | string | may be null |
+| `relationship.priceListId` | string | 24 characters, may be null |
+| `relationship.paymentTerms` | object | may be null |
+| `relationship.allowedPaymentModes` | object[] |  |
+| `relationship.creditEligible` | boolean | may be null |
+| `relationship.autoAccept` | boolean | may be null |
+| `relationship.disputeWindowDays` | number | may be null |
+| `relationship.credit` | object | may be null |
+| `relationship.hold` | object | may be null |
+| `relationship.restrictions` | object | may be null |
+| `relationship.effectiveFrom` | string (date-time) | may be null |
+| `relationship.effectiveTo` | string (date-time) | may be null |
+| `relationship.statusReason` | string | may be null |
+| `relationship.sellerNotes` | string | may be null |
+| `relationship.buyerReference` | string | may be null |
+| `relationship.callers` | object[] |  |
+| `relationship.tier` | string | may be null |
+| `relationship.zone` | string | may be null |
+| `relationship.externalRef` | string | may be null |
+| `relationship.invite` | object | may be null |
+| `relationship.history` | object[] |  |
+| `relationship.createdAt` | string (date-time) | may be null |
+| `relationship.updatedAt` | string (date-time) | may be null |
+| `relationship.sellerOrganizationId` | string | 24 characters, may be null |
+| `relationship.buyerOrganizationId` | string | 24 characters, may be null |
+| `relationship.__v` | number | may be null |
+| `relationship.id` | string | 24 characters |
+| `relationship.viewerSide` * | `seller` · `buyer` | may be null |
+| `relationship.seller` * | object | may be null |
+| `relationship.buyer` * | object | may be null |
+| `relationship.priceList` * | object | may be null |
+| `inviteCode` * | string | Shown once: the reseller gives it to your agent to accept. 6 characters |
+| `expiresAt` * | string (date-time) |  |
 

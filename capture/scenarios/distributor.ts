@@ -109,4 +109,5 @@ export default [...walk({
   disputes: 'selling',
   externalSuppliers: true,
   integrations: true,
+  agents: true,
 }), credit, newQuotation, draft, order, shipment, invoice, payment];
