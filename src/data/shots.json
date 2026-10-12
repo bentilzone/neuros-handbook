@@ -742,6 +742,72 @@
     "title": "Members",
     "callouts": []
   },
+  "distributor/messages/detail": {
+    "file": "distributor/messages/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A message",
+    "callouts": []
+  },
+  "distributor/messages/inbox": {
+    "file": "distributor/messages/inbox.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: inbox",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Each receipt or reply, kept once however often it arrived, and what it changed."
+      }
+    ]
+  },
+  "distributor/messages/list": {
+    "file": "distributor/messages/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Waiting, sent, delivered and read, from the provider’s receipts; or why it was not sent."
+      },
+      {
+        "n": 2,
+        "text": "Only the failed ones, to try them again."
+      }
+    ]
+  },
+  "distributor/messages/settings": {
+    "file": "distributor/messages/settings.png",
+    "width": 1440,
+    "height": 960,
+    "title": "Messages: settings",
+    "callouts": []
+  },
+  "distributor/messages/template-edit": {
+    "file": "distributor/messages/template-edit.png",
+    "width": 1440,
+    "height": 983,
+    "title": "Your text for a message",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only these placeholders: Neuros fills them from the order."
+      }
+    ]
+  },
+  "distributor/messages/templates": {
+    "file": "distributor/messages/templates.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: texts",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your own text, once approved, goes out instead of Neuros’s."
+      }
+    ]
+  },
   "distributor/notifications/bell": {
     "file": "distributor/notifications/bell.png",
     "width": 1440,
@@ -1183,7 +1249,7 @@
   "distributor/settings/access": {
     "file": "distributor/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },
@@ -2345,7 +2411,7 @@
   "reseller/settings/access": {
     "file": "reseller/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },
@@ -2936,6 +3002,39 @@
     "title": "Members",
     "callouts": []
   },
+  "supplier/messages/list": {
+    "file": "supplier/messages/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages",
+    "callouts": []
+  },
+  "supplier/messages/settings": {
+    "file": "supplier/messages/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: settings",
+    "callouts": []
+  },
+  "supplier/messages/template-edit": {
+    "file": "supplier/messages/template-edit.png",
+    "width": 1440,
+    "height": 983,
+    "title": "Your text for a message",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only these placeholders: Neuros fills them from the order."
+      }
+    ]
+  },
+  "supplier/messages/templates": {
+    "file": "supplier/messages/templates.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: texts",
+    "callouts": []
+  },
   "supplier/notifications/bell": {
     "file": "supplier/notifications/bell.png",
     "width": 1440,
@@ -3158,7 +3257,7 @@
   "supplier/settings/access": {
     "file": "supplier/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },

@@ -39,7 +39,7 @@ Neuros finds the seller’s account with that caller and runs the tool as that r
 | `get_delivery` | `GET /v1/agent/v1/orders/:ref/delivery` | Shipments, dispatch and delivery |
 | `get_statement` | `GET /v1/agent/v1/statement` | What the reseller owes, what is overdue, credit left |
 
-The [reference](./reference/340-agent-tools.mdx) has every field.
+The [reference](./reference/350-agent-tools.mdx) has every field.
 
 ## An order over REST
 
@@ -94,3 +94,59 @@ A refusal is a tool result with `isError: true` and `{ "error": { "code", "messa
 | `RATE_LIMITED` | More than 600 calls a minute from this agent | Slow down |
 
 Other errors follow [Errors](./70-errors.mdx).
+
+## Messages to resellers
+
+When the seller chooses **Your agent platform sends** under **Messages → Settings**, Neuros posts each message for a reseller to the address the seller gave, and your platform sends it in its conversation with that reseller. Neuros decides the text, the reseller and the time. Your platform sends it.
+
+```http
+POST <your agent platform address>
+Content-Type: application/json
+Neuros-Event-Id: 66f1c0a2e4b0d1a2b3c4d5e6
+Neuros-Signature: t=1760263200,v1=5d41402abc4b2a76b9719d911017c592…
+```
+
+```json
+{
+  "id": "66f1c0a2e4b0d1a2b3c4d5e6",
+  "type": "message.send",
+  "occurredAt": "2026-10-12T10:00:00.000Z",
+  "message": {
+    "id": "66f1c0a2e4b0d1a2b3c4d5e6",
+    "channel": "whatsapp",
+    "to": "+2348012345678",
+    "from": "+2349010000001",
+    "templateKey": "order_received",
+    "category": "utility",
+    "text": "Eastline has your order SO-2026-00482 for ₦294,000.00. We will tell you when it is accepted.",
+    "variables": { "name": "Chidi & Sons Provisions", "seller": "Eastline", "orderNumber": "SO-2026-00482", "total": "₦294,000.00" },
+    "relationshipId": "66f1b9e0e4b0d1a2b3c4d5e1"
+  }
+}
+```
+
+- **Verify it.** `Neuros-Signature` is made with the seller’s **messaging secret**, exactly as a [webhook signature](./92-webhooks.mdx#verify-the-signature) is made with an endpoint’s secret. Refuse anything that does not verify.
+- **Send `text` as it is.** If your platform sends WhatsApp templates by name, `templateKey` and `variables` fill them. `category` is WhatsApp’s pricing category: `authentication` for the invitation code, `utility` for order news.
+- **Answer 2xx** once you have taken it, optionally with `{ "providerRef": "<your id for the message>" }`. Any other answer, or none within 10 seconds, is a failed try. Neuros tries five times over about an hour. `id` is the same on every try: send each message once.
+
+### Receipts and replies
+
+Post delivery receipts, and what resellers write, to the seller’s **inbox**: the address shown under **Messages → Settings → Connection** (`$NEUROS_API/v1/inbound/messaging/<inbox key>`). Sign each body with the messaging secret, in the same format:
+
+```bash
+BODY='{"id":"evt-0001","type":"message.status","messageId":"66f1c0a2e4b0d1a2b3c4d5e6","status":"delivered","at":"2026-10-12T10:00:04Z"}'
+T=$(date +%s)
+SIG=$(printf '%s.%s' "$T" "$BODY" | openssl dgst -sha256 -hmac "$MESSAGING_SECRET" -hex | sed 's/^.* //')
+curl -s "$INBOX_URL" -H "Content-Type: application/json" -H "Neuros-Signature: t=$T,v1=$SIG" -d "$BODY"
+```
+
+| `type` | Fields | What Neuros does |
+|---|---|---|
+| `message.status` | `messageId` (Neuros’s `id`) or `providerRef`; `status`: `sent`, `delivered`, `read` or `failed`; `error` when failed; `at` | Moves the message forward. A late `sent` never undoes `read` |
+| `message.inbound` | `channel`, `from` (the reseller’s number), `text`, `at` | `STOP` (or unsubscribe, cancel, end, quit) stops messages to that reseller; `START` (or resume, subscribe, unstop) turns them back on. Anything else is left for your agent |
+
+- `id` is your event id. A body with an `id` already received is answered `"duplicate": true` and changes nothing, so retry freely.
+- The answer is `202 { "received": true, "duplicate": false }` once the body is stored. Neuros acts on it within seconds.
+- The timestamp must be within 5 minutes. A wrong or stale signature is `401 SIGNATURE_INVALID`; an unknown inbox is `404`; a body that is not one of the shapes above is `422 INBOUND_INVALID`.
+
+The seller sees every message, receipt and reply under **Messages**. The [reference](./reference/index.mdx) lists the seller’s own messaging routes under *Messaging*.

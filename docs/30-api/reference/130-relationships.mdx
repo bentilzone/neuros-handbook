@@ -165,6 +165,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -258,6 +263,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -347,6 +357,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -452,6 +467,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -547,6 +567,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -823,6 +848,7 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `relationship.zone` | string | may be null |
 | `relationship.externalRef` | string | may be null |
 | `relationship.invite` | object | may be null |
+| `relationship.messaging` | object | may be null |
 | `relationship.history` | object[] |  |
 | `relationship.createdAt` | string (date-time) | may be null |
 | `relationship.updatedAt` | string (date-time) | may be null |
@@ -836,6 +862,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `relationship.priceList` * | object | may be null |
 | `inviteCode` * | string | Shown once: the reseller gives it to your agent to accept. 6 characters |
 | `expiresAt` * | string (date-time) |  |
+| `message` * | object | The code by chat, when messaging is on (N-037); null when you pass it on yourself. may be null |
+| `message.id` * | string |  |
+| `message.channel` * | `whatsapp` · `sms` · `email` |  |
+| `message.to` * | string |  |
+| `message.status` * | `queued` · `sent` · `delivered` · `read` · `failed` · `suppressed` |  |
 
 
 ### Seller: reinstate the relationship
@@ -893,6 +924,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -988,6 +1024,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1129,6 +1170,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1224,6 +1270,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1319,6 +1370,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1427,6 +1483,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1530,6 +1591,11 @@ Records the approver, amount, reason and expiry (§9.6). Used once, then spent.
 | `invite` | object | may be null |
 | `invite.expiresAt` | string (date-time) | may be null |
 | `invite.attempts` | number | may be null |
+| `messaging` | object | may be null |
+| `messaging.optedOut` | boolean | may be null |
+| `messaging.marketingOptIn` | boolean | may be null |
+| `messaging.changedAt` | string (date-time) | may be null |
+| `messaging.changedBy` | `seller` · `reseller` | may be null |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -1628,6 +1694,7 @@ The number becomes a reseller account that never signs in. The relationship stay
 | `relationship.zone` | string | may be null |
 | `relationship.externalRef` | string | may be null |
 | `relationship.invite` | object | may be null |
+| `relationship.messaging` | object | may be null |
 | `relationship.history` | object[] |  |
 | `relationship.createdAt` | string (date-time) | may be null |
 | `relationship.updatedAt` | string (date-time) | may be null |
@@ -1641,4 +1708,9 @@ The number becomes a reseller account that never signs in. The relationship stay
 | `relationship.priceList` * | object | may be null |
 | `inviteCode` * | string | Shown once: the reseller gives it to your agent to accept. 6 characters |
 | `expiresAt` * | string (date-time) |  |
+| `message` * | object | The code by chat, when messaging is on (N-037); null when you pass it on yourself. may be null |
+| `message.id` * | string |  |
+| `message.channel` * | `whatsapp` · `sms` · `email` |  |
+| `message.to` * | string |  |
+| `message.status` * | `queued` · `sent` · `delivered` · `read` · `failed` · `suppressed` |  |
 

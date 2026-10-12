@@ -60,11 +60,13 @@ The same form sets the terms when you approve, when you open an account yourself
   { name: 'Terms', meaning: 'The same terms as for any account (see Terms above).', implications: 'They apply as soon as the reseller accepts.' },
 ]} />
 
-Neuros then shows a **six-digit code**, once. Send it to the reseller; they send it to your agent, which accepts the invitation and the account turns **Approved**. The code lasts 7 days and allows five tries. **New code** on the account issues another; the old one stops working.
+Neuros then shows a **six-digit code**, once. When <PageLink who={props.who} page="messages">messages</PageLink> are on, Neuros also sends it to the reseller’s chat, and says so; otherwise send it yourself. They send it to your agent, which accepts the invitation and the account turns **Approved**. The code lasts 7 days and allows five tries. **New code** on the account issues another; the old one stops working.
 
 ## Your agent and a customer
 
 Every account that is invited, approved or suspended has a **Your agent** section: the numbers the customer writes from, their tier and zone, and your code for them. **Edit** changes them, including for a customer who also uses Neuros in the app, so they can order by chat too. See <PageLink who={props.who} page="agents">AI agents</PageLink>.
+
+For a customer with numbers, **Messages to their chat** and **Marketing** say whether Neuros may message them, and **Messages sent** lists what it did. See <PageLink who={props.who} page="messages">Messages</PageLink>.
 
 {props.who === 'distributor' && <Shot id="distributor/customers/agent" />}
 

@@ -65,6 +65,12 @@
       "02-features/45-selling-through-agents.mdx",
       "30-api/94-agents.mdx"
     ],
+    "/selling/messages": [
+      "10-supplier/53-messages.mdx",
+      "11-distributor/53-messages.mdx",
+      "02-features/46-messages-to-resellers.mdx",
+      "30-api/94-agents.mdx"
+    ],
     "/marketplace": [
       "11-distributor/60-marketplace.mdx",
       "12-reseller/60-marketplace.mdx"
