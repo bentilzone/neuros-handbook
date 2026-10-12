@@ -22,7 +22,7 @@ Who is writing to your agent, as a channel and an address: a WhatsApp number, an
 A reseller account created when a seller invites a number by phone, for a shop that orders through an agent and never signs in. It has no users. A second seller that invites the same number trades with the same account, and each seller sees only its own business with it.
 
 ### Invitation code
-The six-digit code a seller gets when it invites a reseller by phone, shown once. The reseller sends it to the seller’s agent to accept the invitation. It lasts 7 days and allows five tries; the seller can issue a new one.
+The six-digit code a seller gets when it invites a reseller by phone, shown once. The reseller sends it to the seller’s agent to accept the invitation. It lasts 7 days and allows five tries; the seller can issue a new one. When the seller’s [messages](#messages-to-resellers) are on, Neuros also sends it to the reseller’s chat.
 
 ### Cart quote
 What an agent gives a reseller before ordering: each line at the reseller’s own price with promotions and tax, and the total. Its prices hold for 30 minutes: an order placed within them pays the quoted prices even if a price changes meanwhile. After that, the cart is priced again and the agent reads out the new total.
@@ -32,3 +32,21 @@ How an order an agent placed is marked in the seller’s orders. It follows the 
 
 ### Collection account
 The bank account a seller’s agent gives to resellers who pay by transfer, with the order number as the reference. Set under **AI agents → Where resellers pay**.
+
+### Messages to resellers
+What Neuros sends to a reseller’s chat for a seller: the invitation code and news of their orders. They go from the seller’s own numbers, through Neuros’s messaging provider or through the seller’s agent platform, and only to customers whose numbers the seller’s agent knows. Set under **Messages**.
+
+### Message text
+The words of one message, with placeholders such as `{{orderNumber}}` that Neuros fills from the record. Each message has Neuros’s text; a seller may write its own, which WhatsApp approves first when Neuros sends directly.
+
+### Quiet hours
+Local hours, such as 21:00 to 07:00, in which a seller’s order updates wait and go when they end. An invitation code is not held.
+
+### Message consent
+Whether a reseller gets messages at all, and whether they agreed to marketing. The seller sets it on the customer’s account; the reseller can send STOP or START.
+
+### Messaging secret
+The secret, shown once, that signs what Neuros sends a seller’s agent platform and what comes back to the seller’s inbox.
+
+### Inbox
+The address a seller’s messaging provider or agent platform posts delivery receipts and replies to. Each is kept once, however often it arrives, and then acted on: a receipt marks a message delivered or read; STOP and START change consent.

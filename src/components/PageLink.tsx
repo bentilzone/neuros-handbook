@@ -4,8 +4,8 @@ import Link from '@docusaurus/Link';
 import type { ReactNode } from 'react';
 
 const PAGES: Record<string, string[]> = {
-  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'agents', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
-  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'agents', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'requisitions', 'purchase-orders', 'receiving', 'payables', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
+  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'agents', 'messages', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
+  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'agents', 'messages', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'requisitions', 'purchase-orders', 'receiving', 'payables', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
   reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
 };
 

@@ -168,6 +168,28 @@ export function walk(w: Walk): Scenario[] {
     } : {}),
     shot('agents/new', '/selling/agents', 'Add an AI agent', { steps: click('Add an agent'), fullPage: true }),
     shot('agents/numbers', '/selling/agents?tab=numbers', 'AI agents: numbers'),
+    shot('messages/list', '/selling/messages', 'Messages', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Status$/ }, text: 'Waiting, sent, delivered and read, from the provider’s receipts; or why it was not sent.', side: 'bottom' },
+        { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Only the failed ones, to try them again.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('messages/detail', '/selling/messages', 'A message', { steps: firstRow, fullPage: true }),
+    ] : []),
+    shot('messages/templates', '/selling/messages?tab=templates', 'Messages: texts', w.agents ? {
+      callouts: [{ n: 1, target: { text: /^Your text$/ }, text: 'Your own text, once approved, goes out instead of Neuros’s.', side: 'bottom' }],
+    } : {}),
+    shot('messages/template-edit', '/selling/messages?tab=templates', 'Your text for a message', {
+      steps: async (p) => { await p.getByRole('button', { name: 'Edit Order received' }).click(); }, fullPage: true,
+      callouts: [{ n: 1, target: { text: /^\{\{orderNumber\}\}$/, nth: 0 }, text: 'Only these placeholders: Neuros fills them from the order.', side: 'bottom' }],
+    }),
+    shot('messages/settings', '/selling/messages?tab=settings', 'Messages: settings', { fullPage: true }),
+    ...(w.agents ? [
+      shot('messages/inbox', '/selling/messages?tab=inbox', 'Messages: inbox', {
+        callouts: [{ n: 1, target: { text: /^What Neuros did$/ }, text: 'Each receipt or reply, kept once however often it arrived, and what it changed.', side: 'bottom' }],
+      }),
+    ] : []),
   ];
 
   const buy: Scenario[] = [

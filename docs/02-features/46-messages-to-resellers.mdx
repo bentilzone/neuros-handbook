@@ -1,0 +1,59 @@
+---
+title: Messages to resellers
+sidebar_label: Messages to resellers
+---
+
+<PersonaBadge who={['supply', 'distribution']} permission={['message:manage', 'relationship:manage']} />
+
+A reseller who orders by chat should hear back in the chat: the code to accept your invitation, then that you have the order, that you accepted it, that the money arrived, that it is on its way and delivered. Neuros sends these [messages](../01-glossary/45-ai-agents.mdx#messages-to-resellers) for you, from your own WhatsApp number or SMS sender.
+
+## Two ways to send
+
+- **Neuros sends.** Neuros passes each message to its messaging provider, which sends it from your number. On WhatsApp every business text is approved before use; Neuros’s own texts are, and yours go for approval when you write them.
+- **Your agent platform sends.** Neuros posts each message, signed, to your agent platform, which sends it in the conversation it already holds with the reseller. Use this when your agent platform owns your WhatsApp number.
+
+Either way, Neuros decides what is said, to whom and when, and keeps the record.
+
+## Set it up
+
+1. Make sure your agent knows your resellers’ numbers (see [Selling through AI agents](./45-selling-through-agents.mdx)), and that you have an active number on the channel.
+2. Under **Messages → Settings**, choose how messages go out. Neuros shows your **messaging secret** once: give it, with **your inbox** address, to your agent platform or provider.
+3. Choose your quiet hours and the order updates resellers get.
+4. Under **Texts**, write your own words for any message, or keep Neuros’s.
+
+See <PageLink who="distributor" page="messages">Messages</PageLink>.
+
+## What a reseller hears
+
+| When | Message | Waits for quiet hours |
+|---|---|---|
+| You invite them by phone, or give a new code | The code, and how long it works | No |
+| They place an order | Order received, with its number and total | Yes |
+| You accept or reject it | Accepted, with what to pay now; or rejected, with your reason | Yes |
+| You confirm their payment | Payment received | Yes |
+| The delivery leaves, then arrives | On its way; delivered | Yes |
+| You invoice them | The invoice, its total and due date | Yes |
+
+## Before each message goes
+
+Neuros checks, each time:
+
+- that messaging is on and the reseller has not opted out;
+- that it is not quiet hours (except for a code);
+- that you have an active number on that channel.
+
+If any check fails, the message is kept as **not sent**, with the reason. A send that fails is tried five times over about an hour before it shows as **failed**; you can try it again.
+
+## Back from the reseller’s phone
+
+Your provider or agent platform posts **receipts** (delivered, read, failed) and **replies** to your inbox. Neuros keeps each one once, however often it is sent, and acts on it:
+
+- a receipt moves the message forward, never back;
+- **STOP** stops all messages to that reseller, and **START** turns them back on;
+- any other reply is your agent’s to answer.
+
+## Consent
+
+A reseller can stop your messages at any time by sending STOP, and you can switch them off on their account. Marketing messages need the reseller’s agreement, which you record on their account; Neuros sends none yet.
+
+Every change of settings, texts and consent is in the [audit trail](../01-glossary/10-companies-and-people.mdx#audit-trail).
