@@ -65,7 +65,7 @@ object
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -83,7 +83,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 
 | Parameter | In | Type | Notes |
 |---|---|---|---|
-| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 
 **Request body**
 
@@ -96,7 +96,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -112,14 +112,14 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 
 | Parameter | In | Type | Notes |
 |---|---|---|---|
-| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 
 **Response** `200`
 
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -139,7 +139,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `status` | query | `queued` · `sent` · `delivered` · `read` · `failed` · `suppressed` |  |
 | `relationshipId` | query | string | 24 characters |
-| `templateKey` | query | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
+| `templateKey` | query | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` |  |
 
 **Response** `200`
 
@@ -152,7 +152,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |
@@ -203,7 +203,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |
@@ -254,7 +254,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `order_delivered` · `invoice_issued` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |
@@ -304,7 +304,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 | Field | Type | Notes |
 |---|---|---|
-| `source` | `messaging` | may be null |
+| `source` | `messaging` · `bank` | may be null |
 | `externalId` | string | may be null |
 | `kind` | string | may be null |
 | `body` | string | may be null |
@@ -342,7 +342,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `quietHours` * | object |  |
 | `quietHours.start` * | string | may be null |
 | `quietHours.end` * | string | may be null |
-| `chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
+| `chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `escrow.funded` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
 
 
 ### Change how messages go out, quiet hours and which order updates go to chat
@@ -363,7 +363,7 @@ Switching messaging on the first time makes the messaging secret and returns it 
 | `quietHours` | object | Order updates wait while these local hours last; an invitation code does not |
 | `quietHours.start` | string | may be null |
 | `quietHours.end` | string | may be null |
-| `chatEvents` | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` | The order updates that go to the reseller’s chat |
+| `chatEvents` | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `escrow.funded` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` | The order updates that go to the reseller’s chat |
 
 **Response** `200`
 
@@ -377,7 +377,7 @@ Switching messaging on the first time makes the messaging secret and returns it 
 | `settings.rotatedAt` * | string (date-time) | may be null |
 | `settings.inboxUrl` * | string | Where your provider or agent platform posts receipts and replies. may be null |
 | `settings.quietHours` * | object |  |
-| `settings.chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
+| `settings.chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `escrow.funded` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
 | `secret` * | string | Shown once, when messaging is first switched on or the secret is rotated. may be null |
 
 
@@ -402,7 +402,7 @@ The old one stops at once: change it in your agent platform at the same time.
 | `settings.rotatedAt` * | string (date-time) | may be null |
 | `settings.inboxUrl` * | string | Where your provider or agent platform posts receipts and replies. may be null |
 | `settings.quietHours` * | object |  |
-| `settings.chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
+| `settings.chatEvents` * | array of `order.submitted` · `order.accepted` · `order.rejected` · `payment.confirmed` · `escrow.funded` · `shipment.dispatched` · `shipment.delivered` · `sales_invoice.issued` |  |
 | `secret` * | string | Shown once, when messaging is first switched on or the secret is rotated. may be null |
 
 

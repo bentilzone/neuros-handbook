@@ -46,6 +46,7 @@ const AREAS = [
   ['Notifications', 'notifications', 'Your own notifications in a company: list, unread counts, mark read.'],
   ['Agents', 'agents', 'Your AI agents, the numbers they answer on, and their secrets.'],
   ['Messaging', 'messaging', 'Messages to resellers’ chat: settings and the messaging secret, texts, sent messages, consent, and the inbox for receipts and replies.'],
+  ['Collections', 'collections', 'The partner bank: collection settings, customers’ virtual accounts, the credits the bank reports and how they matched, returns, daily reconciliation, and the bank’s webhook.'],
   ['Agent tools', 'agent-tools', 'What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP.'],
   ['Marketplace', 'marketplace', 'Searching offers and pricing them for your company.'],
   ['Inventory', 'inventory', 'Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation.'],

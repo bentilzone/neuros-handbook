@@ -43,6 +43,8 @@ Some event types:
 | `relationship.invited`, `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes; `invited` when you invite a reseller by phone or issue a new code |
 | `agent.caller_unrecognised` | Someone not among your customers wrote to one of your AI agents (your company only) |
 | `message.sent`, `message.delivered`, `message.failed` | A message to one of your resellers was sent, reached their phone, or failed (your company only) |
+| `bank_credit.received`, `bank_credit.updated`, `fee.charged`, `bank_reconciliation.completed` | A customer paid into their virtual account, a credit was matched or returned, a release paid the platform fee, a day was reconciled (your company only) |
+| `virtual_account.opened` | A customer’s virtual account was opened (both companies) |
 | `stock.changed` | Stock moved |
 | `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
 | `quote_request.*`, `quotation.sent`, `quotation.accepted`, `quotation.declined`, `quotation.expired` | A request for quotation or a quotation changes |

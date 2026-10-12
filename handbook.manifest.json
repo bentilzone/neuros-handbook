@@ -71,6 +71,12 @@
       "02-features/46-messages-to-resellers.mdx",
       "30-api/94-agents.mdx"
     ],
+    "/selling/collections": [
+      "10-supplier/54-collections.mdx",
+      "11-distributor/54-collections.mdx",
+      "02-features/47-collections-and-escrow.mdx",
+      "30-api/94-partner-bank.mdx"
+    ],
     "/marketplace": [
       "11-distributor/60-marketplace.mdx",
       "12-reseller/60-marketplace.mdx"
@@ -185,6 +191,9 @@
     ],
     "/platform/billing-settings": [
       "20-operator/90-billing-settings.mdx"
+    ],
+    "/platform/partner-bank": [
+      "20-operator/95-partner-bank.mdx"
     ],
     "/platform/schedulers": [
       "20-operator/100-schedulers.mdx"

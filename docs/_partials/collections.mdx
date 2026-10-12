@@ -1,0 +1,63 @@
+{/* Shared by every guide that has this page: <Collections who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="payment:read" />
+
+**Collections** is how your customers pay you through Neuros’s partner bank. Each customer gets its own [virtual account](../01-glossary/47-partner-bank.mdx#virtual-account) at the bank. They pay it by ordinary transfer, with the order number as the reference. The bank tells Neuros about every [credit](../01-glossary/47-partner-bank.mdx#bank-credit) at once, and Neuros puts it against the order it pays. An escrow order is held by the bank until the [dispute window](../01-glossary/47-partner-bank.mdx#dispute-window) after delivery has passed. See [Collections and escrow](../02-features/47-collections-and-escrow.mdx) for the whole flow.
+
+<Shot id={`${props.who}/collections/credits`} />
+
+## Credits
+
+Every payment into your customers’ accounts, newest first: who paid, how much, the order it paid and what became of it.
+
+| Status | Means |
+|---|---|
+| Matched | It paid the order in full. An escrow order is now funded, held by the bank |
+| Short | It paid less than the order needs. The customer is told in chat what remains; the next payment adds to it |
+| More than due | It paid more. On an escrow order the bank sends the excess back to the payer; on another order it is kept as the customer’s advance |
+| To match | Neuros could not tell which order it pays. It waits for you |
+| Returned | You sent it back to the payer |
+
+Neuros finds the order by the order number in the payment’s narration. With no number, it takes the customer’s only accepted, unpaid order of exactly that amount. A credit for an order you have not accepted yet stays **To match** until you accept the order and match it.
+
+Open a credit to see its narration, who paid, the bank’s reference, and why it matched or did not.
+
+{props.who === 'distributor' && <Shot id={`${props.who}/collections/credit`} />}
+
+- **Match to an order**: choose one of that customer’s accepted, unpaid orders. An escrow order collects the money, and is funded once it is covered. Any other order gets a receipt for it, as if you had confirmed the transfer yourself. Needs `payment:initiate`.
+- **Send back**: the bank returns the money to the account it came from, with your reason. It cannot be undone. Needs `payment:approve` and a session signed in with two-step verification.
+
+## Accounts
+
+Your customers’ virtual accounts: the account number, the name the bank shows to a payer, and the bank’s identity checks on the holder.
+
+<Shot id={`${props.who}/collections/accounts`} />
+
+While collection is on, approving a customer opens its account. A customer approved earlier gets one when you click **Open one** in its panel under <PageLink who={props.who} page="customers">Customers</PageLink>, or when your AI agent first gives them payment instructions. The customer sees the same account on their supplier page and on each unpaid order.
+
+## Reconciliation
+
+Each night Neuros compares the day’s statement from the bank with what it recorded. Each day shows **Agreed**, or **Differences** to look at.
+
+<Shot id={`${props.who}/collections/reconciliation`} />
+
+| Difference | Means | What Neuros did |
+|---|---|---|
+| Taken in from the statement | The bank shows a payment its webhook never reported | Recorded it and matched it like any other credit |
+| Not on the bank’s statement | Neuros recorded a credit the bank does not show | Nothing: ask the bank |
+| Paid out, not asked by Neuros | Money left an account without a return from Neuros | Nothing: ask the bank |
+| Return not on the statement | A return the bank confirmed is not on its statement | Nothing: ask the bank |
+
+**Reconcile a day** runs one day again now; its result replaces the earlier one.
+
+## Settings
+
+<Shot id={`${props.who}/collections/settings`} />
+
+<FieldTable fields={[
+  { name: 'Collect through the partner bank', meaning: 'Give each customer its own account at the partner bank, and match what they pay into it to their orders.', others: 'Your customers see their account on their supplier page and on unpaid orders; your AI agent gives it in its payment instructions.', implications: 'Turning it on opens accounts for customers you approve from then on. Turning it off stops new accounts; existing ones still receive and match money.' },
+  { name: 'An escrow order paid into an account releases', required: true, meaning: 'After the dispute window: the bank pays you once the window after delivery passes with no dispute. When the buyer confirms: the bank pays you when the buyer releases it in Neuros.', others: 'The buyer sees when their money will be released, on the order.', implications: 'A reseller who orders by chat has no app in which to release, so prefer the window.' },
+  { name: 'Dispute window, in hours', required: true, meaning: 'How long after delivery the buyer has to dispute before the escrow releases.', implications: 'The window starts when the order is delivered in full, or when it is paid, if it was delivered first. A dispute raised in the window keeps only its value held; the rest releases when the window ends.', rules: '1 to 168 hours (a week). 24 by default.' },
+]} />
+
+The partner bank takes the platform’s fee from each escrow release, and you receive the rest. The order shows the fee, and your books record it as an expense (**Platform fees**). Changing these settings needs `bank_account:manage` and a session signed in with two-step verification.

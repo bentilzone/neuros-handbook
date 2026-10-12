@@ -65,6 +65,7 @@ How you pay is the order's **payment mode**:
 - **Bank transfer or prepay:** pay the supplier by transfer, then **I have paid** with the bank reference and the slip. It counts once the supplier confirms the money arrived; if they say it did not, their reason is shown. A prepay order is only reserved and shipped once paid, and one left unpaid too long is cancelled.
 - **Credit:** pay each invoice by its due date. What you pay comes back to your available credit.
 - **Escrow:** **Pay into escrow** sends the money to the escrow partner, who holds it. The supplier ships once the partner confirms it. **Release to the seller** when you are satisfied; delivery alone never releases it. A dispute holds it.
+- **Paying into your account:** when the supplier collects through its partner bank, an unpaid order shows your own account with them: transfer to it with the order number as the reference, and the payment is matched to the order as soon as the bank reports it. On escrow, the order then shows when the money will be released: a set number of hours after delivery, unless you dispute in time.
 
 <FieldTable fields={[
   { name: 'Amount paid', required: true, meaning: 'What you transferred for this order.', others: 'The supplier sees it waiting for their confirmation.', rules: 'In the order’s currency.' },

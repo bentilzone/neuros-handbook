@@ -184,6 +184,60 @@
     "title": "A catalogue product",
     "callouts": []
   },
+  "distributor/collections/accounts": {
+    "file": "distributor/collections/accounts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: accounts",
+    "callouts": []
+  },
+  "distributor/collections/credit": {
+    "file": "distributor/collections/credit.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A payment to match",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Choose the order it pays; or send it back to the payer."
+      }
+    ]
+  },
+  "distributor/collections/credits": {
+    "file": "distributor/collections/credits.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The order each payment paid, found by the order number in its narration."
+      },
+      {
+        "n": 2,
+        "text": "Only the ones to match, to match or send back."
+      }
+    ]
+  },
+  "distributor/collections/reconciliation": {
+    "file": "distributor/collections/reconciliation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: reconciliation",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What the bank’s statement and Neuros disagree on; open the day to see each one."
+      }
+    ]
+  },
+  "distributor/collections/settings": {
+    "file": "distributor/collections/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: settings",
+    "callouts": []
+  },
   "distributor/customers/agent": {
     "file": "distributor/customers/agent.png",
     "width": 1440,
@@ -787,7 +841,7 @@
   "distributor/messages/template-edit": {
     "file": "distributor/messages/template-edit.png",
     "width": 1440,
-    "height": 983,
+    "height": 1049,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -1720,6 +1774,13 @@
       }
     ]
   },
+  "operator/partner-bank": {
+    "file": "operator/partner-bank.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Partner bank",
+    "callouts": []
+  },
   "operator/plans/add-on-new": {
     "file": "operator/plans/add-on-new.png",
     "width": 1440,
@@ -2651,6 +2712,34 @@
     "title": "A catalogue product",
     "callouts": []
   },
+  "supplier/collections/accounts": {
+    "file": "supplier/collections/accounts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: accounts",
+    "callouts": []
+  },
+  "supplier/collections/credits": {
+    "file": "supplier/collections/credits.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections",
+    "callouts": []
+  },
+  "supplier/collections/reconciliation": {
+    "file": "supplier/collections/reconciliation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: reconciliation",
+    "callouts": []
+  },
+  "supplier/collections/settings": {
+    "file": "supplier/collections/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: settings",
+    "callouts": []
+  },
   "supplier/customers/approve": {
     "file": "supplier/customers/approve.png",
     "width": 1440,
@@ -3019,7 +3108,7 @@
   "supplier/messages/template-edit": {
     "file": "supplier/messages/template-edit.png",
     "width": 1440,
-    "height": 983,
+    "height": 1049,
     "title": "Your text for a message",
     "callouts": [
       {
