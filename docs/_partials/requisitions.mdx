@@ -1,0 +1,50 @@
+{/* Shared by the buying guides: <Requisitions who="distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="po:read" />
+
+A requisition asks to buy: what, how many, for which warehouse, and from where. Each line is bought either from a seller on Neuros, through one of their offers, or from one of your <PageLink who={props.who} page="suppliers" hash="suppliers-outside-neuros">external suppliers</PageLink> at a price you estimate. Within your purchase limit a requisition approves itself when you submit it; above it, someone else approves it. Approved, it becomes orders. See [requisition](../01-glossary/40-relationships.mdx#requisition).
+
+<Shot id={`${props.who}/requisitions/list`} />
+
+## Raise one
+**New requisition** opens the form beside the list. **From reorder suggestions** drafts one line for each product at or below its reorder point (see <PageLink who={props.who} page="inventory" hash="reorder">Inventory → Reorder</PageLink>), with the suggested quantity for that rule's warehouse; you then choose where to buy each line.
+
+<Shot id={`${props.who}/requisitions/new`} />
+
+<FieldTable fields={[
+  { name: 'Product', meaning: 'What to buy, from the shared catalogue.', rules: 'A published product.' },
+  { name: 'Quantity', meaning: 'How many, in the product’s base unit.', rules: 'More than zero.' },
+  { name: 'Where to buy it', meaning: '**On Neuros**: a seller’s offer for this product. **External supplier**: one of your own suppliers, at an estimated unit price in its currency.', implications: 'Decides what the line becomes: an order to that seller, or a purchase order to that supplier.', rules: 'Can be left until before you submit. An offer must be one you can see, at your terms with that seller.' },
+  { name: 'Warehouse', meaning: 'Where the goods go.', others: 'A seller on Neuros receives it as the delivery address; a purchase order prints it.', rules: 'Needed before you submit. Lines for different warehouses become separate orders.' },
+  { name: 'Estimated unit price', meaning: 'What you expect the external supplier to charge, before tax.', implications: 'Becomes the purchase order’s price, which you can change before sending it.', rules: 'External lines only, in the supplier’s currency.' },
+  { name: 'Needed by', meaning: 'When the goods are needed.', others: 'Becomes the requested delivery date on each order.' },
+  { name: 'Notes', meaning: 'Why it is needed.', others: 'The approver reads it; it is also copied to each order.' },
+]} />
+
+## Submit and approval
+**Submit** prices every line: Neuros lines as each seller prices them for you now, with tax; external lines at your estimate. Each is converted into your company’s currency at today’s rate, and the total is the requisition’s **estimate**.
+
+- **Within your purchase limit**, it is approved at once.
+- **Above it**, it waits for someone who approves requisitions: they are told in their notifications, and approve it within their own approval limit. The person who submitted it cannot approve it, unless your company turned separation of duties off.
+- **Rejected**, it carries the reason. **Reopen as a draft** to change it and submit again.
+
+<Shot id={`${props.who}/requisitions/detail`} />
+
+## Place the orders
+Once approved, someone who manages purchase orders clicks **Place the orders**:
+
+- the lines for each seller on Neuros, per warehouse, become one order, submitted to the seller at once. The requisition already approved it, so your order approval is not asked again. The seller sees an ordinary order; the requisition number is your own reference, which they do not see;
+- the lines for each external supplier, per warehouse, become one draft purchase order at your estimated prices, to check and send under <PageLink who={props.who} page="purchase-orders">Purchase orders</PageLink>.
+
+The panel lists what was created. An order a seller cannot take now (prices changed, your credit with them is used up) stays a draft under <PageLink who={props.who} page="buying-orders">Orders</PageLink> with the reason: fix it and submit it there. Each line then shows the order it went into.
+
+## Live
+The list and an open requisition update as your team submits, approves and orders them.
+
+## Common questions
+
+**I clicked Place the orders twice.** Nothing is ordered twice: once every line is ordered, it says so.
+
+**Why can I not edit a requisition someone else raised?** Only the person who raised a draft changes it. Approvers approve or reject it.
+
+**What is my purchase limit?** Your administrator sets it on your membership, under <PageLink who={props.who} page="members">Members</PageLink>. No limit set means no limit.

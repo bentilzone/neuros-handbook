@@ -2,7 +2,7 @@
 
 <PersonaBadge who={['distribution', 'purchasing']} permission="relationship:read" />
 
-Suppliers are the sellers you buy from: the terms each one gave you, and your requests for new accounts. It is the buyer's side of the same account your supplier sees under their <PageLink who={props.who} page="customers">Customers</PageLink>.
+Suppliers are the companies you buy from. **On Neuros** lists the sellers you have accounts with: the terms each one gave you, and your requests for new accounts. It is the buyer's side of the same account your supplier sees under their <PageLink who={props.who} page="customers">Customers</PageLink>. **External** lists the suppliers you buy from outside Neuros.
 
 <Shot id={`${props.who}/suppliers/list`} />
 
@@ -35,3 +35,54 @@ When the supplier offers you credit, a **Credit** section shows your **limit**, 
 | Suspended | The supplier blocked new orders; open orders continue |
 | Declined | The supplier said no, with a reason; you may ask again later |
 | Ended | Trading has ended |
+
+## Suppliers outside Neuros
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="supplier:read" />
+
+The **External** tab keeps the suppliers you buy from outside Neuros: a manufacturer abroad, a local wholesaler. They are your own records: only your company sees them, and nobody on Neuros is told. See [external supplier](../01-glossary/40-relationships.mdx#external-supplier). A seller on Neuros is never added here: it is your account with them, on the other tab.
+
+<Shot id={`${props.who}/suppliers/external`} />
+
+**Add supplier** (needs `supplier:manage`) opens the form beside the list.
+
+<Shot id={`${props.who}/suppliers/external-new`} />
+
+<FieldTable fields={[
+  { name: 'Code', required: true, meaning: 'Your own short code for the supplier.', rules: 'Letters, digits, dot, dash or underscore, up to 20; stored in capitals. Unique in your company; another company may use the same code.' },
+  { name: 'Name', required: true, meaning: 'The name you know it by.' },
+  { name: 'Legal name', meaning: 'Its registered name, as on its invoices.' },
+  { name: 'Tax id', meaning: 'Its tax or VAT number.' },
+  { name: 'Country', meaning: 'Where it is based.' },
+  { name: 'Buys in', required: true, meaning: 'The currency its prices and invoices come in.', implications: 'Purchase orders and its invoices are in this currency; your books carry them at the rate on the day.', rules: 'Your own currency unless you choose another.' },
+  { name: 'Days to pay', meaning: 'How long after its invoice payment is due.', implications: 'Sets the due date of its invoices and where they fall in payables ageing.', rules: '0 to 365; 30 unless you change it.' },
+  { name: 'Lead time (days)', meaning: 'How long it usually takes from order to delivery.', implications: 'Used when suggesting when to reorder.' },
+  { name: 'Order email', meaning: 'Where purchase orders to it are sent.' },
+  { name: 'Phone', meaning: 'Its main number.' },
+  { name: 'Address', meaning: 'Street, city and country of its main address.' },
+  { name: 'Contact', meaning: 'The person you deal with: name, email and phone.' },
+  { name: 'Notes', meaning: 'Anything your team should know.', others: 'Only your company sees these.' },
+]} />
+
+{props.who === 'distributor' && <Shot id="distributor/suppliers/external-detail" />}
+
+**Deactivate** stops new orders to a supplier you no longer use; its orders and invoices stay. **Reactivate** brings it back.
+
+### Where it is paid
+
+A supplier's bank details are kept apart from the rest. Only people who may manage bank accounts (`bank_account:manage`) change them, after signing in with two-step verification, and with a reason that goes into the audit log. Everyone else sees the last four digits of the account number. See [supplier bank details](../01-glossary/40-relationships.mdx#supplier-bank-details).
+
+<FieldTable fields={[
+  { name: 'Account name', required: true, meaning: 'The name on the account.', rules: 'Starts as the supplier’s legal name.' },
+  { name: 'Account number', required: true, meaning: 'The account payments go to.', others: 'People without the right to see bank accounts see only its last four digits.' },
+  { name: 'Bank', required: true, meaning: 'The bank and branch.' },
+  { name: 'Bank or sort code', meaning: 'The bank’s local code, where its country uses one.' },
+  { name: 'SWIFT / BIC', meaning: 'The bank’s international code, for payments abroad.', rules: '8 or 11 letters and digits.' },
+  { name: 'IBAN', meaning: 'The international account number, where its country uses one.' },
+  { name: 'Reason', required: true, meaning: 'Why the details changed, and how you confirmed them.', implications: 'Kept in the audit log with your name, the time, and the old and new last four digits.' },
+]} />
+
+:::warning[Confirm every change]
+A message asking you to pay a supplier into a new account is the most common way payments are stolen. Before saving new bank details, call the supplier on a number you already had, not one in the message.
+:::
+

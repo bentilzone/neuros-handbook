@@ -230,6 +230,11 @@ async function main() {
       console.log(`${who}:`);
       const { ctx, page } = await signedIn(browser, appUrl, who);
       track(page);
+      // Let the landing page finish its own navigation first: a redirect still in flight from the
+      // sign-in would otherwise land after the first shot's navigation and take the page back to the
+      // dashboard (an --only run, where that shot is first, failed every time on it).
+      await page.waitForLoadState('networkidle').catch(() => undefined);
+      await settle(page);
       for (const s of list) await attempt(s, () => shoot(page, s, manifest, report));
       await ctx.close();
     }

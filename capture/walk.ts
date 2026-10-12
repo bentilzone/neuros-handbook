@@ -22,6 +22,8 @@ export interface Walk {
   basketFilled?: boolean;
   /** seed:trade left an open dispute and a return request on this persona's orders, on this side. */
   disputes?: 'selling' | 'buying';
+  /** seed:trade gave this persona external suppliers, requisitions, purchase orders, a receipt with landed cost, supplier invoices and payments (P4). */
+  externalSuppliers?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -198,6 +200,70 @@ export function walk(w: Walk): Scenario[] {
     }),
     shot('suppliers/find', '/suppliers', 'Find suppliers', { steps: click('Find suppliers') }),
     shot('suppliers/detail', '/suppliers', 'A supplier account', { steps: firstRow }),
+    shot('suppliers/external', '/suppliers?tab=external', 'Suppliers: external', {
+      callouts: !w.externalSuppliers ? [] : [
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Sellers on Neuros you have accounts with, and suppliers outside Neuros.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'Add supplier' }, text: 'Add a supplier you buy from outside Neuros; only your company sees it.', side: 'left' },
+        { n: 3, target: { text: /^Buys in$/ }, text: 'The currency its prices and invoices come in.', side: 'bottom' },
+      ],
+    }),
+    shot('suppliers/external-new', '/suppliers?tab=external', 'Add an external supplier', { steps: click('Add supplier'), fullPage: true }),
+    ...(w.externalSuppliers ? [shot('suppliers/external-detail', '/suppliers?tab=external', 'An external supplier', {
+      steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Shenzhen Pump Co' }).first().click(); }, fullPage: true,
+      callouts: [{ n: 1, target: { role: 'button', name: 'Change bank details' }, text: 'Only people who manage bank accounts, after two-step sign-in, with a reason.', side: 'top' }],
+    })] : []),
+    ...(w.externalSuppliers ? [
+      shot('requisitions/list', '/buying/requisitions', 'Requisitions', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'From reorder suggestions' }, text: 'Draft a line for each product at or below its reorder point.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New requisition' }, text: 'Raise one by hand.', side: 'bottom' },
+          { n: 3, target: { text: /^Estimate$/ }, text: 'Fixed at submit, in your company’s currency: what the approval is measured against.', side: 'left' },
+        ],
+      }),
+      shot('requisitions/new', '/buying/requisitions', 'Raise a requisition', { steps: click('New requisition'), fullPage: true }),
+      shot('requisitions/detail', '/buying/requisitions', 'A requisition, ordered', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Ordered' }).first().click(); }, fullPage: true,
+        callouts: [{ n: 1, target: { text: /^PO PO-/ }, text: 'The purchase order this line went into.', side: 'left' }],
+      }),
+      shot('purchase-orders/list', '/buying/purchase-orders', 'Purchase orders', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'New purchase order' }, text: 'Order from a supplier outside Neuros.', side: 'left' },
+          { n: 2, target: { text: /^Total$/ }, text: 'In the supplier’s currency, before tax.', side: 'left' },
+        ],
+      }),
+      shot('purchase-orders/new', '/buying/purchase-orders', 'Draft a purchase order', { steps: click('New purchase order'), fullPage: true }),
+      shot('purchase-orders/detail', '/buying/purchase-orders', 'A purchase order, received', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Received' }).first().click(); }, fullPage: true,
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Open the purchase order PDF' }, text: 'The order as the supplier received it, to download or send another way.', side: 'left' },
+          { n: 2, target: { text: /^Their reference$/ }, text: 'The supplier’s confirmation, recorded with their own reference.', side: 'right' },
+        ],
+      }),
+      shot('receiving/list', '/buying/receiving', 'Receiving', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Receive goods' }, text: 'Against a purchase order or an order on Neuros.', side: 'left' },
+          { n: 2, target: { text: /^Value$/ }, text: 'At the ordered price, in your company’s currency.', side: 'left' },
+        ],
+      }),
+      shot('receiving/new', '/buying/receiving', 'Receive goods', { steps: click('Receive goods'), fullPage: true }),
+      shot('receiving/detail', '/buying/receiving', 'A receipt, posted', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Posted' }).first().click(); }, fullPage: true,
+      }),
+      shot('receiving/landed', '/buying/receiving?tab=landed', 'A landed cost, allocated', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Allocated' }).first().click(); }, fullPage: true,
+      }),
+      shot('payables/list', '/buying/payables', 'Payables', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Take in from Neuros' }, text: 'An invoice a seller on Neuros issued you, as they issued it.', side: 'left' },
+          { n: 2, target: { text: /^Owed$/ }, text: 'What is still to pay on an approved invoice.', side: 'bottom' },
+        ],
+      }),
+      shot('payables/new', '/buying/payables', 'Record a supplier invoice', { steps: click('Record invoice'), fullPage: true }),
+      shot('payables/detail', '/buying/payables', 'A supplier invoice, matched and approved', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'SZP-INV-24-0917' }).first().click(); }, fullPage: true,
+      }),
+      shot('payables/ageing', '/buying/payables?tab=ageing', 'Payables by age'),
+    ] : []),
   ];
 
   const stock: Scenario[] = [
