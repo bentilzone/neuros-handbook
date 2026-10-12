@@ -22,7 +22,7 @@ export interface Walk {
   basketFilled?: boolean;
   /** seed:trade left an open dispute and a return request on this persona's orders, on this side. */
   disputes?: 'selling' | 'buying';
-  /** seed:trade gave this persona external suppliers, requisitions and purchase orders (P4.1, P4.2). */
+  /** seed:trade gave this persona external suppliers, requisitions, purchase orders, a receipt with landed cost, supplier invoices and payments (P4). */
   externalSuppliers?: boolean;
 }
 
@@ -232,13 +232,37 @@ export function walk(w: Walk): Scenario[] {
         ],
       }),
       shot('purchase-orders/new', '/buying/purchase-orders', 'Draft a purchase order', { steps: click('New purchase order'), fullPage: true }),
-      shot('purchase-orders/detail', '/buying/purchase-orders', 'A purchase order, confirmed', {
-        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Confirmed' }).first().click(); }, fullPage: true,
+      shot('purchase-orders/detail', '/buying/purchase-orders', 'A purchase order, received', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Received' }).first().click(); }, fullPage: true,
         callouts: [
           { n: 1, target: { role: 'button', name: 'Open the purchase order PDF' }, text: 'The order as the supplier received it, to download or send another way.', side: 'left' },
           { n: 2, target: { text: /^Their reference$/ }, text: 'The supplier’s confirmation, recorded with their own reference.', side: 'right' },
         ],
       }),
+      shot('receiving/list', '/buying/receiving', 'Receiving', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Receive goods' }, text: 'Against a purchase order or an order on Neuros.', side: 'left' },
+          { n: 2, target: { text: /^Value$/ }, text: 'At the ordered price, in your company’s currency.', side: 'left' },
+        ],
+      }),
+      shot('receiving/new', '/buying/receiving', 'Receive goods', { steps: click('Receive goods'), fullPage: true }),
+      shot('receiving/detail', '/buying/receiving', 'A receipt, posted', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Posted' }).first().click(); }, fullPage: true,
+      }),
+      shot('receiving/landed', '/buying/receiving?tab=landed', 'A landed cost, allocated', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Allocated' }).first().click(); }, fullPage: true,
+      }),
+      shot('payables/list', '/buying/payables', 'Payables', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Take in from Neuros' }, text: 'An invoice a seller on Neuros issued you, as they issued it.', side: 'left' },
+          { n: 2, target: { text: /^Owed$/ }, text: 'What is still to pay on an approved invoice.', side: 'bottom' },
+        ],
+      }),
+      shot('payables/new', '/buying/payables', 'Record a supplier invoice', { steps: click('Record invoice'), fullPage: true }),
+      shot('payables/detail', '/buying/payables', 'A supplier invoice, matched and approved', {
+        steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'SZP-INV-24-0917' }).first().click(); }, fullPage: true,
+      }),
+      shot('payables/ageing', '/buying/payables?tab=ageing', 'Payables by age'),
     ] : []),
   ];
 

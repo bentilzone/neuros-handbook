@@ -1,0 +1,57 @@
+{/* Shared by the buying guides: <Receiving who="distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing', 'warehouse']} permission="grn:read" />
+
+**Receiving** records what arrived against a <PageLink who={props.who} page="purchase-orders">purchase order</PageLink> or an <PageLink who={props.who} page="buying-orders">order on Neuros</PageLink>: counted into stock at the price you ordered at, with whatever was short, over, damaged or swapped. Freight, duty and the like are added on the **Landed costs** tab. See [goods receipt](../01-glossary/40-relationships.mdx#goods-receipt).
+
+<Shot id={`${props.who}/receiving/list`} />
+
+## Receive goods
+**Receive goods** opens the form beside the list; a sent purchase order has the same button in its panel. Choose the purchase order or order, and each line shows what is still expected.
+
+<Shot id={`${props.who}/receiving/new`} />
+
+<FieldTable fields={[
+  { name: 'Purchase order / Order', meaning: 'What the goods were ordered on.', implications: 'Sets the supplier, the currency and the price each line is valued at.', rules: 'A purchase order that was sent, or an order on Neuros the seller accepted.' },
+  { name: 'Arrived at', meaning: 'Your warehouse the goods went into.', implications: 'Stock rises there when the receipt is posted.' },
+  { name: 'Delivery note', meaning: 'The supplier’s delivery note number.', implications: 'Kept with the receipt, to find it again.' },
+  { name: 'Shipment', meaning: 'For an order on Neuros, the seller’s shipment that arrived.', others: 'Posting confirms the shipment as received: the seller sees it delivered.' },
+  { name: 'Quantity', meaning: 'How many arrived, in the product’s base unit.', rules: 'No more than still expected, unless the exception is Over.' },
+  { name: 'Hold', meaning: 'Keep it off sale until it is checked.', implications: 'It goes into quarantine; release it under Inventory → Change condition.' },
+  { name: 'Exception', meaning: 'Over: more than expected. Short: less, and no more will come for this line. Substitute: another product came. Damaged: it arrived damaged.', implications: 'Short closes the line, so the order can be complete. Damaged goes into stock as damaged.' },
+  { name: 'What came instead', meaning: 'For a substitute, the product that arrived.', rules: 'Someone who approves purchase orders, other than who recorded it, accepts it before it is posted.' },
+]} />
+
+## Post into stock
+A saved receipt is a draft. **Post into stock** counts it in: stock rises at the warehouse, valued at the ordered price in your company’s currency at the day’s rate, and the books record it as received but not yet invoiced. The purchase order shows what was received, and is **Received** once every line is in or closed short.
+
+A substitute waits for **Accept substitute** first, and the people who can accept it are notified.
+
+<Shot id={`${props.who}/receiving/detail`} />
+
+**Void** takes a reason and takes the goods back out at exactly the cost they came in at. It is refused once the receipt is invoiced, carries landed cost, or some of what it brought in has already left the warehouse.
+
+## Landed costs
+Freight, duty, insurance and handling belong in the cost of what you bought. **New landed cost** on the **Landed costs** tab adds them to one or more posted receipts.
+
+<Shot id={`${props.who}/receiving/landed`} />
+
+<FieldTable fields={[
+  { name: 'Receipts', meaning: 'The posted receipts the charges are for.', rules: 'At least one.' },
+  { name: 'Spread', meaning: 'How the charges are shared between the lines: by value, by quantity, or by weight.', rules: 'Weight uses each product’s weight in the catalogue, and is refused if a product has none.' },
+  { name: 'Billed by', meaning: 'The supplier who bills the charges, if it is one invoice.', implications: 'Their invoice is matched to these charges under Payables.' },
+  { name: 'Reference', meaning: 'The bill of lading, customs entry or similar.' },
+  { name: 'Charge', meaning: 'Its type, a description and the amount, in any currency.', implications: 'Converted to your company’s currency at the day’s rate when allocated.' },
+  { name: 'Capitalise', meaning: 'Add it to the stock’s cost (ticked), or treat it as an expense.', implications: 'Capitalised, it raises the cost of what is still on hand, and what has already been sold takes its share as cost of sales. Expensed, it goes to freight in the books.' },
+]} />
+
+**Allocate and post** spreads the charges and posts them. The panel then shows each line’s share. **Void** takes a reason and is possible only while it is a draft.
+
+## Live
+The lists and an open receipt or landed cost update as your team receives, posts and allocates.
+
+## Common questions
+
+**At what price is stock valued?** At the purchase order’s or order’s price. If the supplier’s invoice differs, approving it adjusts the cost of what is still on hand; see <PageLink who={props.who} page="payables">Payables</PageLink>.
+
+**Can I receive more than I ordered?** Only with the exception Over, so it is never by accident.

@@ -535,7 +535,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1611,
+    "height": 1967,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -767,6 +767,43 @@
       }
     ]
   },
+  "distributor/payables/ageing": {
+    "file": "distributor/payables/ageing.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Payables by age",
+    "callouts": []
+  },
+  "distributor/payables/detail": {
+    "file": "distributor/payables/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A supplier invoice, matched and approved",
+    "callouts": []
+  },
+  "distributor/payables/list": {
+    "file": "distributor/payables/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Payables",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "An invoice a seller on Neuros issued you, as they issued it."
+      },
+      {
+        "n": 2,
+        "text": "What is still to pay on an approved invoice."
+      }
+    ]
+  },
+  "distributor/payables/new": {
+    "file": "distributor/payables/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Record a supplier invoice",
+    "callouts": []
+  },
   "distributor/pricing/check": {
     "file": "distributor/pricing/check.png",
     "width": 1440,
@@ -840,7 +877,7 @@
     "file": "distributor/purchase-orders/detail.png",
     "width": 1440,
     "height": 900,
-    "title": "A purchase order, confirmed",
+    "title": "A purchase order, received",
     "callouts": [
       {
         "n": 1,
@@ -927,6 +964,43 @@
     "width": 1440,
     "height": 900,
     "title": "Quotes: requests received",
+    "callouts": []
+  },
+  "distributor/receiving/detail": {
+    "file": "distributor/receiving/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A receipt, posted",
+    "callouts": []
+  },
+  "distributor/receiving/landed": {
+    "file": "distributor/receiving/landed.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A landed cost, allocated",
+    "callouts": []
+  },
+  "distributor/receiving/list": {
+    "file": "distributor/receiving/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Receiving",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Against a purchase order or an order on Neuros."
+      },
+      {
+        "n": 2,
+        "text": "At the ordered price, in your company’s currency."
+      }
+    ]
+  },
+  "distributor/receiving/new": {
+    "file": "distributor/receiving/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Receive goods",
     "callouts": []
   },
   "distributor/requisitions/detail": {
@@ -1027,7 +1101,7 @@
   "distributor/settings/company-policies": {
     "file": "distributor/settings/company-policies.png",
     "width": 1440,
-    "height": 1110,
+    "height": 1206,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -2130,7 +2204,7 @@
   "reseller/settings/company-policies": {
     "file": "reseller/settings/company-policies.png",
     "width": 1440,
-    "height": 1110,
+    "height": 1206,
     "title": "My company: operating policies",
     "callouts": []
   },
