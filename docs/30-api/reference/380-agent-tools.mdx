@@ -1,6 +1,6 @@
 ---
 title: "Agent tools"
-sidebar_position: 360
+sidebar_position: 380
 description: "What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP."
 ---
 
@@ -244,6 +244,7 @@ Each shipment of the order, oldest first. Every tool names who is writing in the
 | `shipments[].trackingRef` * | string | may be null |
 | `shipments[].dispatchedAt` * | string (date-time) | may be null |
 | `shipments[].deliveredAt` * | string (date-time) | may be null |
+| `shipments[].codeActive` * | boolean | A delivery code was sent and the driver will ask for it |
 | `say` * | string | Read this to the reseller as it is |
 
 

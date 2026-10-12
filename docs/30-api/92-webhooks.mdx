@@ -130,4 +130,4 @@ The same imports as the app:
 3. `POST /v1/imports/:id/validate`, then read `counts` and `GET /v1/imports/:id/rows?status=invalid`.
 4. `POST /v1/imports/:id/confirm`. Follow `GET /v1/imports/:id` (or the `import.updated` and `import.finished` live events) until it is `done`.
 
-`GET /v1/imports/templates/:kind` returns the template and `GET /v1/imports/columns/:kind` what each column means. See the [Imports reference](./reference/300-imports.mdx).
+`GET /v1/imports/templates/:kind` returns the template and `GET /v1/imports/columns/:kind` what each column means. See the [Imports reference](./reference/320-imports.mdx).

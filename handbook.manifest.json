@@ -24,6 +24,11 @@
       "00-start/20-signing-in.mdx",
       "02-features/20-people-and-access.mdx"
     ],
+    "/driver": [
+      "00-start/30-for-drivers.mdx",
+      "02-features/48-delivery-code.mdx",
+      "30-api/94-driver-api.mdx"
+    ],
     "/": [
       "10-supplier/10-dashboard.mdx",
       "11-distributor/10-dashboard.mdx",
@@ -221,7 +226,9 @@
     ],
     "/fulfilment": [
       "10-supplier/85-fulfilment.mdx",
-      "11-distributor/85-fulfilment.mdx"
+      "11-distributor/85-fulfilment.mdx",
+      "02-features/48-delivery-code.mdx",
+      "30-api/94-driver-api.mdx"
     ],
     "/selling/invoices": [
       "10-supplier/58-invoices.mdx",

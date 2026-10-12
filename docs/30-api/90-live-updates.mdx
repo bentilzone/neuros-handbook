@@ -45,6 +45,7 @@ Some event types:
 | `message.sent`, `message.delivered`, `message.failed` | A message to one of your resellers was sent, reached their phone, or failed (your company only) |
 | `bank_credit.received`, `bank_credit.updated`, `fee.charged`, `bank_reconciliation.completed` | A customer paid into their virtual account, a credit was matched or returned, a release paid the platform fee, a day was reconciled (your company only) |
 | `virtual_account.opened` | A customer’s virtual account was opened (both companies) |
+| `driver.updated`, `delivery_run.updated`, `delivery_run.started`, `delivery_run.completed`, `shipment.code_locked` | A driver or a delivery run changed, a run went out or finished, a delivery code locked after three wrong entries (your company only) |
 | `stock.changed` | Stock moved |
 | `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
 | `quote_request.*`, `quotation.sent`, `quotation.accepted`, `quotation.declined`, `quotation.expired` | A request for quotation or a quotation changes |

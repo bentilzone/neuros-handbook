@@ -399,6 +399,13 @@
     "title": "Disputes and returns: returns",
     "callouts": []
   },
+  "distributor/driver/run": {
+    "file": "distributor/driver/run.png",
+    "width": 420,
+    "height": 860,
+    "title": "The driver’s page",
+    "callouts": []
+  },
   "distributor/fulfilment/detail": {
     "file": "distributor/fulfilment/detail.png",
     "width": 1440,
@@ -423,6 +430,18 @@
       }
     ]
   },
+  "distributor/fulfilment/drivers": {
+    "file": "distributor/fulfilment/drivers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: drivers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The people who deliver for you. They never sign in."
+      }
+    ]
+  },
   "distributor/fulfilment/list": {
     "file": "distributor/fulfilment/list.png",
     "width": 1440,
@@ -431,7 +450,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
+        "text": "Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs."
       },
       {
         "n": 2,
@@ -452,6 +471,45 @@
     "height": 900,
     "title": "Fulfilment: returns",
     "callouts": []
+  },
+  "distributor/fulfilment/run": {
+    "file": "distributor/fulfilment/run.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A run out today",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Where the customer’s code stands. You never see the code itself."
+      },
+      {
+        "n": 2,
+        "text": "A new link for the driver, shown once; the old one stops."
+      }
+    ]
+  },
+  "distributor/fulfilment/run-new": {
+    "file": "distributor/fulfilment/run-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plan a run",
+    "callouts": []
+  },
+  "distributor/fulfilment/runs": {
+    "file": "distributor/fulfilment/runs.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: delivery runs",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "One driver, one day, the stops in order."
+      },
+      {
+        "n": 2,
+        "text": "How many stops are done, as the driver records them."
+      }
+    ]
   },
   "distributor/imports/detail": {
     "file": "distributor/imports/detail.png",
@@ -841,7 +899,7 @@
   "distributor/messages/template-edit": {
     "file": "distributor/messages/template-edit.png",
     "width": 1440,
-    "height": 1049,
+    "height": 1114,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -2817,6 +2875,13 @@
     "title": "Disputes and returns",
     "callouts": []
   },
+  "supplier/fulfilment/drivers": {
+    "file": "supplier/fulfilment/drivers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: drivers",
+    "callouts": []
+  },
   "supplier/fulfilment/list": {
     "file": "supplier/fulfilment/list.png",
     "width": 1440,
@@ -2825,7 +2890,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
+        "text": "Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs."
       },
       {
         "n": 2,
@@ -2845,6 +2910,20 @@
     "width": 1440,
     "height": 900,
     "title": "Fulfilment: returns",
+    "callouts": []
+  },
+  "supplier/fulfilment/run-new": {
+    "file": "supplier/fulfilment/run-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plan a run",
+    "callouts": []
+  },
+  "supplier/fulfilment/runs": {
+    "file": "supplier/fulfilment/runs.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: delivery runs",
     "callouts": []
   },
   "supplier/inventory/adjustment-new": {
@@ -3108,7 +3187,7 @@
   "supplier/messages/template-edit": {
     "file": "supplier/messages/template-edit.png",
     "width": 1440,
-    "height": 1049,
+    "height": 1114,
     "title": "Your text for a message",
     "callouts": [
       {

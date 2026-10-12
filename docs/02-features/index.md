@@ -13,11 +13,12 @@ Each feature followed across everyone it touches: the seller, the buyer, your te
 5. [Selling through AI agents](./45-selling-through-agents.mdx): agents on WhatsApp, SMS and email, resellers invited by phone, orders by chat.
 6. [Messages to resellers](./46-messages-to-resellers.mdx): invitation codes and order news in the reseller’s chat, directly or through your agent platform.
 7. [Collections and escrow](./47-collections-and-escrow.mdx): a virtual account per customer, payments matched to orders, escrow released after the dispute window, less the platform fee.
-8. [Accounts between companies](./50-accounts-between-companies.mdx): requests, terms, suspension and ending.
-9. [Buying](./60-buying.mdx): the marketplace and your price.
-10. [Quote to cash](./65-quote-to-cash.mdx): one order from the price to the money, on both sides and in the books.
-11. [Stock](./70-stock.mdx): receipts, conditions, adjustments, transfers, counts, reorder, valuation.
-12. [Your books](./80-books.mdx): accounts, automatic and manual journals, periods, reports.
-13. [Integrations, dashboards and reports](./85-integrations-and-reports.mdx): webhooks, imports, the dashboard, reports and the year-end close.
-14. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
-15. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.
+8. [Delivery runs and the delivery code](./48-delivery-code.mdx): each driver’s day, a code only the customer has, and the delivery recorded at the door.
+9. [Accounts between companies](./50-accounts-between-companies.mdx): requests, terms, suspension and ending.
+10. [Buying](./60-buying.mdx): the marketplace and your price.
+11. [Quote to cash](./65-quote-to-cash.mdx): one order from the price to the money, on both sides and in the books.
+12. [Stock](./70-stock.mdx): receipts, conditions, adjustments, transfers, counts, reorder, valuation.
+13. [Your books](./80-books.mdx): accounts, automatic and manual journals, periods, reports.
+14. [Integrations, dashboards and reports](./85-integrations-and-reports.mdx): webhooks, imports, the dashboard, reports and the year-end close.
+15. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
+16. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.

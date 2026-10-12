@@ -9,6 +9,8 @@ Neuros is where distributors, suppliers and resellers trade with each other and 
 
 New here? [Signing in](./20-signing-in.mdx) covers creating an account, two-step verification and choosing your company.
 
+Delivering for a company on Neuros? [For drivers](./30-for-drivers.mdx) explains the link you were sent.
+
 This handbook explains Neuros in three passes:
 
 1. **[Glossary](/glossary).** Every word Neuros uses, defined once. When a page says *offer*, *price list* or *period*, it means exactly what the glossary says.

@@ -12,6 +12,7 @@ Every term Neuros uses, defined once. When a page says *offer*, *price list* or 
 - [Accounts between companies](./40-relationships.mdx): account status, terms, payment modes, supplier code, invited
 - [AI agents](./45-ai-agents.mdx): AI agent, agent platform, agent tool, channel endpoint, caller, managed reseller, invitation code, cart quote, by chat, collection account, messages to resellers, message text, quiet hours, message consent, messaging secret, inbox
 - [Collections and the partner bank](./47-partner-bank.mdx): partner bank, collections, virtual account, identity checks, bank credit, dispute window, platform fee, bank reconciliation
+- [Delivery runs and the delivery code](./48-deliveries.mdx): driver, delivery run, driver’s link, delivery code, locked code, door record
 - [Marketplace](./50-marketplace.mdx): listing, availability, your price, filters
 - [Inventory](./60-inventory.mdx): warehouse, conditions, free to sell, receipt, movement, adjustment, transfer, count, reorder, valuation
 - [Ledger](./70-ledger.mdx): chart of accounts, journal, automatic and manual postings, reversal, control account, posting rule, period, trial balance, FX revaluation, opening balance equity, retained earnings, year-end close

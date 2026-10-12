@@ -1,0 +1,57 @@
+---
+title: The driver’s page
+sidebar_position: 94.7
+description: "The public operations behind a driver's link, for a seller building its own driver app: the run, a photo, delivered with the customer's code, not delivered."
+---
+
+When a seller sends a [delivery run](../01-glossary/48-deliveries.mdx#delivery-run) out, Neuros returns a driver’s link once: `<app address>/driver#<token>`. Neuros’s own page reads the token from the part after `#`, which a browser never sends to a server, and calls the operations on this page with it. A seller that gives its drivers its own app can call them the same way. The seller’s side (drivers, runs, sending out, new links and codes) is in [Deliveries](./reference/180-deliveries.mdx); this side is in [Driver](./reference/190-driver.mdx).
+
+## The token
+
+Send the token in the `X-Driver-Token` header, never in a path or query string, so it stays out of logs. There is no bearer token and no idempotency key. The token is the run’s only credential, so keep it on the driver’s device.
+
+| Answer | When |
+|---|---|
+| `401 LINK_INVALID` | No token, or not this run’s current one: the seller asked for a new link, or it was never valid |
+| `410 RUN_ENDED` | The run is completed or cancelled |
+| `410 LINK_EXPIRED` | The run’s day has ended |
+
+The operations share the inbound rate limit: `429` with a `RateLimit` header when it is reached.
+
+## The operations
+
+All are under `$NEUROS_API/v1/driver/v1`, where `$NEUROS_API` is <ApiBase />.
+
+| Operation | What it does |
+|---|---|
+| `GET /run` | The run (number, day, driver, seller, status, when the link expires) and its stops in order: who, the address, the customer’s phone, each line with its quantity, how the stop ended, the code’s status and the tries left |
+| `POST /stops/{shipmentId}/photo` | Registers a photo (`name`, `contentType` of `image/jpeg` or `image/png`, `size`) and returns a signed URL to upload the file to, with the method and headers to use. The seller and the customer see it as the shipment’s proof |
+| `POST /stops/{shipmentId}/deliver` | Delivered, with the customer’s `code` (six digits). Optional: `lines` (`lineId`, `delivered`, and a `reason` of `short`, `damaged` or `wrong_item` for anything less than shipped), `location` (`lat`, `lng`, `accuracy` in metres) and a `note` |
+| `POST /stops/{shipmentId}/fail` | Not delivered, with a `reason`. The shipment goes back to packed for another run |
+
+`deliver` and `fail` answer with the stop’s `outcome` (`delivered`, `partial` or `failed`) and the run’s `status`. The run completes with its last stop, and the link stops working then.
+
+```bash title="Delivered, one carton short"
+curl -X POST "$NEUROS_API/v1/driver/v1/stops/$SHIPMENT/deliver" \
+  -H "X-Driver-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d '{ "code": "482913", "lines": [{ "lineId": "l1", "delivered": "9", "reason": "damaged" }], "location": { "lat": 6.6018, "lng": 3.3515, "accuracy": 12 } }'
+```
+
+## The code
+
+A line you leave out of `lines` counts as delivered in full. A line delivered short needs its reason, and becomes the customer’s dispute for that line’s value. A correct code records the delivery and confirms the customer’s receipt. Nothing else does.
+
+| Answer | When |
+|---|---|
+| `422 CODE_WRONG` | Wrong code. `details.attemptsLeft` says how many tries remain |
+| `422 CODE_LOCKED` | Three wrong entries. The seller must send the customer a new code (`POST /shipments/{id}/delivery-code`) |
+| `422 CODE_EXPIRED` | The code’s day has ended |
+| `422 NO_CODE` | The shipment has no code |
+| `422 REASON_REQUIRED`, `422 INVALID_QUANTITY`, `422 UNKNOWN_LINE` | A line delivered short without a reason, more than shipped or below zero, or not on the shipment |
+| `409 STOP_ENDED` | The stop is already delivered or failed |
+
+A wrong code is counted even though the request is refused, so sending the same wrong code again uses another try.
+
+## Live
+
+The seller’s app hears each stop as `delivery_run.updated` (and `delivery_run.completed` with the last), plus `shipment.delivered` or `shipment.failed`, on its [live updates](./90-live-updates.mdx). A locked code is `shipment.code_locked`.

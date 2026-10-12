@@ -1,0 +1,52 @@
+---
+title: Delivery runs and the delivery code
+sidebar_label: Delivery runs and the delivery code
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['shipment:manage', 'shipment:read']} />
+
+When you deliver in your own vehicles, Neuros plans each driver’s day, tells each customer the goods are coming, and records the delivery at the door with a [delivery code](../01-glossary/48-deliveries.mdx#delivery-code) only the customer has. The code is the customer’s word that the goods arrived. On an escrow order it starts the [dispute window](../01-glossary/47-partner-bank.mdx#dispute-window), so the money moves on proof, not on the seller’s say-so.
+
+## Set it up
+
+1. Add your [drivers](../01-glossary/48-deliveries.mdx#driver) under **Fulfilment → Drivers**: a name, the phone you send their link to, the vehicle.
+2. Pack the shipments as usual. A packed shipment, or one already dispatched with your own delivery, can go on a run.
+
+See <PageLink who="distributor" page="fulfilment">Fulfilment</PageLink>.
+
+## A run, end to end
+
+| Step | Who | What happens |
+|---|---|---|
+| Plan | You | Under **Fulfilment → Delivery runs**, **Plan a run**: a driver, the day, the stops in the order the driver goes |
+| Send out | You, on the day | **Send the run out** dispatches every packed shipment on it (the stock leaves inventory), sends each customer a code, and shows the [driver’s link](../01-glossary/48-deliveries.mdx#drivers-link) once. Send it to the driver by message |
+| Message | Neuros | Each customer gets your name, the order number, the day, the driver’s name and the six digits, in their chat or by text |
+| At the door | Driver | The driver opens the stop on the link, records what was handed over, adds a photo, and enters the code the customer gives |
+| Delivered | Neuros | The shipment is delivered and the customer’s receipt is confirmed. On escrow, the dispute window starts |
+| Short or damaged | Neuros | A line handed over short, damaged or wrong becomes the customer’s dispute for that line’s value only. The rest releases as usual |
+| Not delivered | Driver | Nobody there, refused, the wrong address: the shipment goes back to packed for another run, and you and the customer see why |
+
+The run completes on its own when every stop is done, and its link stops working.
+
+## The code
+
+- **Six digits, one shipment, one day.** It expires at the end of the run’s day.
+- **Only the customer sees it**, in their message and on the shipment in their orders. You see only whether it is sent, given, locked or expired.
+- **Three tries.** After three wrong entries it is [locked](../01-glossary/48-deliveries.mdx#locked-code). Check with the customer, then **Send a new code** from the run or the shipment. The new code has three tries again.
+- **Nothing else counts as the code.** Marking a shipment delivered yourself, with proof, still works, but it is your record, not the customer’s.
+
+If the customer cannot be messaged (messages off, no number, or they said stop), the run still goes out and the stop says why the code was not sent. A customer who uses Neuros still finds the code on the shipment. For one who does not, deliver with your own proof.
+
+## The driver’s link
+
+The link works on any phone, with no app and no sign-in, until the end of the day. Neuros keeps only a fingerprint of it, so it is shown once. If it is lost or sent to the wrong person, **New link** stops the old one at once and shows a new one. See [For drivers](../00-start/30-for-drivers.mdx) for what the driver sees.
+
+## For the buyer
+
+The code arrives in your chat or by text when the run leaves, and is on the shipment under <PageLink who="reseller" page="buying-orders">Orders</PageLink>. Give it to the driver when the goods are in front of you, not before: giving it confirms you received what the driver records. If something is short or damaged, say so before you give the code. The driver records it, and that part becomes your dispute.
+
+## Live
+
+Each stop the driver records appears on the run and the shipment as it happens, for you and for the customer.
+
+Every run, code sent, wrong entry, lock and door record is in the [audit trail](../01-glossary/10-companies-and-people.mdx#audit-trail).

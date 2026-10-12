@@ -1,0 +1,22 @@
+---
+title: Delivery runs and the delivery code
+sidebar_label: Delivery runs and the delivery code
+---
+
+### Driver
+Someone who delivers for a seller in the seller’s own vehicles. A driver has a name, a phone number and a vehicle, and never signs in to Neuros: each day’s work reaches them as a [driver’s link](#drivers-link). An inactive driver keeps their past runs but gets no new ones.
+
+### Delivery run
+One driver’s deliveries on one day: the [shipments](./30-selling-and-pricing.mdx#shipment) they carry, in the order they go. A run is **planned**, then **out** once the seller sends it out, and **completed** when every stop is delivered or not. A planned run can be **cancelled**, which frees its shipments for another run. A shipment is on one live run at a time, and only shipments the seller delivers itself go on a run.
+
+### Driver’s link
+The web address that opens a run on the driver’s phone, with no sign-in. Neuros shows it once, when the run goes out. It works until the end of the run’s day or until the seller asks for a new one, which stops the old one at once. Neuros keeps only a fingerprint of it, so nobody, Neuros staff included, can show it again. Anyone holding it can see the run’s stops, so it goes to the driver only.
+
+### Delivery code
+Six digits Neuros sends the buyer when a run carrying their shipment goes out, by message to their chat or phone. The buyer gives it to the driver when the goods arrive, and only then. Entering it at the door records the delivery and confirms the buyer received what the driver recorded, which starts the [dispute window](./47-partner-bank.mdx#dispute-window) for an escrow order. Only the buyer can see the code. The seller sees where it stands: **sent**, **given**, **locked** or **expired**. A code works on its day only.
+
+### Locked code
+A delivery code after three wrong entries at the door. It can no longer be used. The seller checks with the buyer and sends a new code, which starts again with three tries.
+
+### Door record
+What the driver recorded at the door: when, whether the code was given, the place if the phone shared it, a photo, and how much of each line was handed over. A line handed over short, damaged or wrong opens the buyer’s [dispute](./30-selling-and-pricing.mdx#dispute) for that line’s value only, so only that value stays held in escrow.
