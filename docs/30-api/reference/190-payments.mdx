@@ -80,7 +80,7 @@ Agrees what releases it (your instruction, or a number of days after delivery wi
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -92,6 +92,10 @@ Agrees what releases it (your instruction, or a number of days after delivery wi
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -180,7 +184,7 @@ Before release. The funding is undone in your books and its invoices are owed ag
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -192,6 +196,10 @@ Before release. The funding is undone in your books and its invoices are owed ag
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -278,7 +286,7 @@ object
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -290,6 +298,10 @@ object
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -372,7 +384,7 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -384,6 +396,10 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -471,7 +487,7 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -483,6 +499,10 @@ Payment notices, the escrow agreement and, for the seller, the receipts that pai
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |
@@ -597,7 +617,7 @@ From the buyer’s notice, or without one. Records a receipt that pays the order
 | `escrow.version` | number | may be null |
 | `escrow.status` | `none` · `awaiting_funding` · `funded` · `released` · `refunded` | may be null |
 | `escrow.amount` | object | may be null |
-| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` | may be null |
+| `escrow.releaseCondition` | `buyer_confirms` · `days_after_delivery` · `after_dispute_window` | may be null |
 | `escrow.releaseDays` | number | may be null |
 | `escrow.provider` | string | may be null |
 | `escrow.instructions` | object[] |  |
@@ -609,6 +629,10 @@ From the buyer’s notice, or without one. Records a receipt that pays the order
 | `escrow.released` | object | may be null |
 | `escrow.refunded` | object | may be null |
 | `escrow.releaseAuthorisedAt` | string (date-time) | may be null |
+| `escrow.collected` | object | may be null |
+| `escrow.disputeWindowHours` | number | may be null |
+| `escrow.releaseAt` | string (date-time) | may be null |
+| `escrow.fees` | object | may be null |
 | `escrow.receiptId` | string | 24 characters, may be null |
 | `escrow.history` | object[] |  |
 | `escrow.createdAt` | string (date-time) | may be null |

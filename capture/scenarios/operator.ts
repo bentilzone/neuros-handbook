@@ -111,6 +111,7 @@ const scenarios: Scenario[] = [
   shot('billing-settings/terms', '/platform/billing-settings?tab=terms', 'Billing settings: terms and reminders', { fullPage: true }),
   shot('billing-settings/payment', '/platform/billing-settings?tab=payment', 'Billing settings: payment details', { fullPage: true }),
   shot('billing-settings/tax', '/platform/billing-settings?tab=tax', 'Billing settings: tax', { fullPage: true }),
+  shot('partner-bank', '/platform/partner-bank', 'Partner bank', { fullPage: true }),
 
   // System
   shot('schedulers/list', '/platform/schedulers', 'Schedulers', {

@@ -1,0 +1,19 @@
+---
+title: Partner bank
+sidebar_position: 95
+---
+
+<PersonaBadge who={['operator']} permission="platform:fees:read" />
+
+The [partner bank](../01-glossary/47-partner-bank.mdx#partner-bank) holds every seller’s escrow and opens their customers’ virtual accounts. Here you name the partner and set the [platform fee](../01-glossary/47-partner-bank.mdx#platform-fee) taken from each escrow release. Saving needs `platform:fees:manage` and a session signed in with two-step verification; every change is in the audit log.
+
+<Shot id="operator/partner-bank" />
+
+<FieldTable fields={[
+  { name: 'Partner', required: true, meaning: 'The bank’s name.', others: 'Sellers and their customers see it on every virtual account.', rules: '2 to 100 characters.' },
+  { name: 'Currency', required: true, meaning: 'The currency a fee rule applies to.', implications: 'A release in a currency with no rule pays no fee.', rules: 'One rule per currency.' },
+  { name: 'Percent', required: true, meaning: 'The share of each release the platform takes, such as 1.5.', others: 'Sellers see the fee on each released order, and in their books under Platform fees.', implications: 'Applies to releases from the next one; releases already sent keep their fee.', rules: '0 to 100.' },
+  { name: 'At least, At most', meaning: 'The smallest and largest fee per release, in that currency.', implications: 'The fee is never more than the release itself.', rules: 'Optional. At least may not be above at most.' },
+]} />
+
+**Bank’s webhook** shows whether the server has the secret the bank signs its reports with. It is set with the deployment, never on this page. While it is missing, the bank’s reports are refused, so no payment reaches a seller’s **Collections**.

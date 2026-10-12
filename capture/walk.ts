@@ -190,6 +190,23 @@ export function walk(w: Walk): Scenario[] {
         callouts: [{ n: 1, target: { text: /^What Neuros did$/ }, text: 'Each receipt or reply, kept once however often it arrived, and what it changed.', side: 'bottom' }],
       }),
     ] : []),
+    shot('collections/credits', '/selling/collections', 'Collections', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Order$/ }, text: 'The order each payment paid, found by the order number in its narration.', side: 'bottom' },
+        { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Only the ones to match, to match or send back.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('collections/credit', '/selling/collections?status=unmatched', 'A payment to match', {
+        steps: firstRow, fullPage: true,
+        callouts: [{ n: 1, target: { role: 'button', name: 'Match to an order' }, text: 'Choose the order it pays; or send it back to the payer.', side: 'left' }],
+      }),
+    ] : []),
+    shot('collections/accounts', '/selling/collections?tab=accounts', 'Collections: accounts'),
+    shot('collections/reconciliation', '/selling/collections?tab=reconciliation', 'Collections: reconciliation', w.agents ? {
+      callouts: [{ n: 1, target: { text: /^Differences$/, nth: 0 }, text: 'What the bank’s statement and Neuros disagree on; open the day to see each one.', side: 'bottom' }],
+    } : {}),
+    shot('collections/settings', '/selling/collections?tab=settings', 'Collections: settings', { fullPage: true }),
   ];
 
   const buy: Scenario[] = [

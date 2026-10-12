@@ -117,9 +117,11 @@ async function shoot(page: Page, s: Shot, manifest: Record<string, unknown>, rep
     const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
       const t = n.nodeValue ?? '';
-      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ ms\b/g, '12 ms').replace(/\bGood (afternoon|evening)\b/g, 'Good morning')
+      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ (sec|min|hr)s? ago\b/g, '5 min ago').replace(/\b\d+ ms\b/g, '12 ms').replace(/\bGood (afternoon|evening)\b/g, 'Good morning')
         // The stack's own API address and a messaging inbox's random key and secret ending (N-037): never a real host, never a run's key.
-        .replace(/https?:\/\/localhost:\d+\/v1\/inbound\/messaging\/[A-Za-z0-9_-]+/g, '$NEUROS_API/v1/inbound/messaging/<inbox key>').replace(/^…[A-Za-z0-9_-]{4}$/, '…k2Ab').replace(/\bFAKE-MSG-[0-9a-f]{8}\b/g, 'FAKE-MSG-0c4e21a7');
+        .replace(/https?:\/\/localhost:\d+\/v1\/inbound\/messaging\/[A-Za-z0-9_-]+/g, '$NEUROS_API/v1/inbound/messaging/<inbox key>').replace(/^…[A-Za-z0-9_-]{4}$/, '…k2Ab').replace(/\bFAKE-MSG-[0-9a-f]{8}\b/g, 'FAKE-MSG-0c4e21a7')
+        // A virtual account's number is derived from its relationship's id (N-038): one fixed demo number per shot.
+        .replace(/\b9\d{9}\b/g, '9204817365');
       if (next !== t) n.nodeValue = next;
     }
   });
