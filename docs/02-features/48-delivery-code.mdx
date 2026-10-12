@@ -32,7 +32,7 @@ The run completes on its own when every stop is done, and its link stops working
 
 - **Six digits, one shipment, one day.** It expires at the end of the run’s day.
 - **Only the customer sees it**, in their message and on the shipment in their orders. You see only whether it is sent, given, locked or expired.
-- **Three tries.** After three wrong entries it is [locked](../01-glossary/48-deliveries.mdx#locked-code). Check with the customer, then **Send a new code** from the run or the shipment. The new code has three tries again.
+- **Three tries.** After three wrong entries it is [locked](../01-glossary/48-deliveries.mdx#locked-code), and Neuros opens a delivery [case](../01-glossary/49-service-cases.mdx#service-case) for you, holding any escrow. Check with the customer, then **Send a new code** from the run or the shipment. The new code has three tries again; once the delivery is made, the case resolves on its own.
 - **Nothing else counts as the code.** Marking a shipment delivered yourself, with proof, still works, but it is your record, not the customer’s.
 
 If the customer cannot be messaged (messages off, no number, or they said stop), the run still goes out and the stop says why the code was not sent. A customer who uses Neuros still finds the code on the shipment. For one who does not, deliver with your own proof.

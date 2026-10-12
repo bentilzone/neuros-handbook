@@ -1,0 +1,41 @@
+---
+title: Service cases
+sidebar_label: Service cases
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['case:respond', 'case:open']} />
+
+A reseller with a problem should not have to call around. They raise a [service case](../01-glossary/49-service-cases.mdx#service-case) in the app, or tell your AI agent in chat. You answer it from one inbox, against your own times. The money on the order waits while it is open. When Neuros's own records already settle the matter (the payment arrived, the goods were delivered), it closes the case and tells the reseller why.
+
+## Set it up
+
+1. Under **Service cases → Settings**, set your hours to a first answer and to resolve for each type, or keep Neuros's (4 and 24 hours for payment and delivery, 24 and 72 for the others).
+2. Give the people who answer cases a role with `case:respond`. The Sales officer role has it.
+3. To let resellers open cases by chat, tick **Open cases**, **Case status** and **Write on cases** for your agent under <PageLink who="distributor" page="agents">AI agents</PageLink>.
+
+See <PageLink who="distributor" page="cases">Service cases</PageLink>.
+
+## A case, end to end
+
+| Step | Who | What happens |
+|---|---|---|
+| Open | Reseller, in the app or by chat | They choose what it is about and the order. A goods case also names the lines, and raises a [dispute](../01-glossary/30-selling-and-pricing.mdx#dispute) on them |
+| Settled already? | Neuros | A payment case on a paid order, or a delivery case on a delivered one, comes back resolved at once, with the reason |
+| Hold | Neuros | On an escrow order, a payment, delivery or other case holds the whole escrow. A goods case's dispute holds only its lines |
+| Answer | You | Everyone who answers cases is told. Someone takes it, or it is given to them. The first message stops the clock for a first answer, and reaches the reseller's chat if they order by chat |
+| Overdue | Neuros | Past either of your times, the case is marked overdue and your team is told, once for each |
+| Resolve | You, or Neuros | You say what was done; or Neuros resolves it once the order is paid or delivered, or the goods case's dispute is decided. The reseller reads why. The hold ends, and anything the buyer already released goes to you |
+
+## Opened by Neuros
+
+When three wrong delivery codes lock a stop at the door, Neuros opens a delivery case for you. On an escrow order it holds the escrow. Send the customer a new code. Once the delivery is made, the case resolves from the records.
+
+## By chat
+
+Your AI agent opens cases for the reseller (`open_case`), reads where one stands with your latest answer (`get_case`), and passes on the reseller's replies (`reply_case`). For goods it names the items as the order lists them, in the ordered unit. A case it opens shows as *By chat, through your AI agent*. See the [agent guide](../30-api/94-agents.mdx).
+
+## For the buyer
+
+<PageLink who="reseller" page="buying-cases">Cases</PageLink> lists what you raised, with each supplier's answers. You never see who on their team has it, or their times.
+
+Every case opened, message, assignment, missed time and resolution is in the [audit trail](../01-glossary/10-companies-and-people.mdx#audit-trail).

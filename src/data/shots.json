@@ -68,6 +68,25 @@
     "title": "Basket",
     "callouts": []
   },
+  "distributor/buying-cases/list": {
+    "file": "distributor/buying-cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Raise a payment, delivery, goods or account matter with a supplier."
+      }
+    ]
+  },
+  "distributor/buying-cases/new": {
+    "file": "distributor/buying-cases/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Open a case",
+    "callouts": []
+  },
   "distributor/buying-disputes/list": {
     "file": "distributor/buying-disputes/list.png",
     "width": 1440,
@@ -127,6 +146,49 @@
     "width": 1440,
     "height": 900,
     "title": "Request a quote",
+    "callouts": []
+  },
+  "distributor/cases/detail": {
+    "file": "distributor/cases/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An overdue case",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Take it, or give it to a colleague who answers cases."
+      },
+      {
+        "n": 2,
+        "text": "The times it missed: your team was told once for each."
+      },
+      {
+        "n": 3,
+        "text": "Say what was done; the customer reads it."
+      }
+    ]
+  },
+  "distributor/cases/list": {
+    "file": "distributor/cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only the cases past your time to answer or to resolve."
+      },
+      {
+        "n": 2,
+        "text": "Who on your team has each case."
+      }
+    ]
+  },
+  "distributor/cases/settings": {
+    "file": "distributor/cases/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases: settings",
     "callouts": []
   },
   "distributor/catalogue/browse": {
@@ -899,7 +961,7 @@
   "distributor/messages/template-edit": {
     "file": "distributor/messages/template-edit.png",
     "width": 1440,
-    "height": 1114,
+    "height": 1262,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -1417,7 +1479,7 @@
   "distributor/settings/notifications": {
     "file": "distributor/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1352,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -1946,7 +2008,7 @@
   "operator/settings/notifications": {
     "file": "operator/settings/notifications.png",
     "width": 1440,
-    "height": 1139,
+    "height": 1217,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2097,6 +2159,37 @@
         "text": "Sends each order to its supplier on its own: one refusing never stops the others."
       }
     ]
+  },
+  "reseller/buying-cases/detail": {
+    "file": "reseller/buying-cases/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A case answered by the supplier",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Answer the supplier; it goes back to them."
+      }
+    ]
+  },
+  "reseller/buying-cases/list": {
+    "file": "reseller/buying-cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Raise a payment, delivery, goods or account matter with a supplier."
+      }
+    ]
+  },
+  "reseller/buying-cases/new": {
+    "file": "reseller/buying-cases/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Open a case",
+    "callouts": []
   },
   "reseller/buying-disputes/detail": {
     "file": "reseller/buying-disputes/detail.png",
@@ -2586,7 +2679,7 @@
   "reseller/settings/notifications": {
     "file": "reseller/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1352,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2713,6 +2806,20 @@
     "width": 1440,
     "height": 900,
     "title": "Audit log",
+    "callouts": []
+  },
+  "supplier/cases/list": {
+    "file": "supplier/cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases",
+    "callouts": []
+  },
+  "supplier/cases/settings": {
+    "file": "supplier/cases/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases: settings",
     "callouts": []
   },
   "supplier/catalogue/browse": {
@@ -3187,7 +3294,7 @@
   "supplier/messages/template-edit": {
     "file": "supplier/messages/template-edit.png",
     "width": 1440,
-    "height": 1114,
+    "height": 1262,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -3481,7 +3588,7 @@
   "supplier/settings/notifications": {
     "file": "supplier/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1352,
     "title": "Settings: notifications",
     "callouts": []
   },

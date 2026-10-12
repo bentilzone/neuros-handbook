@@ -1,0 +1,42 @@
+{/* Shared by the buying guides: <CasesBuying who="distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['distribution', 'purchasing']} permission="case:read" />
+
+Cases is where you raise anything with a supplier: a payment that is not showing, a delivery that is late, goods that are not right, a question about your account. See [service case](../01-glossary/49-service-cases.mdx#service-case).
+
+<Shot id={`${props.who}/buying-cases/list`} />
+
+| Status | What it means |
+|---|---|
+| With the supplier | Waiting for their answer |
+| Waiting on you | The supplier wrote to you |
+| Resolved | Ended, with what was done |
+| Withdrawn | You withdrew it |
+
+## Open a case
+
+<Shot id={`${props.who}/buying-cases/new`} />
+
+**Open a case**, choose what it is about and the supplier, and say what happened.
+
+<FieldTable fields={[
+  { name: 'What it is about', required: true, meaning: 'Payment, delivery, goods, account or other.', implications: 'Goods opens a dispute on the lines you name.' },
+  { name: 'Supplier', required: true, meaning: 'Who the case is with.', rules: 'A supplier you have an account with.' },
+  { name: 'Order', meaning: 'The order it is about.', implications: 'On an escrow order, a payment, delivery or other case holds your payment until the case ends.', rules: 'Required for payment, delivery and goods.' },
+  { name: 'Quantity (per line)', meaning: 'For goods: how much of each line is wrong, in its base unit.', implications: 'Only those and their value are held, as a dispute.', rules: 'Up to what shipped and is not already disputed.' },
+  { name: 'What is wrong', required: true, meaning: 'For goods: not delivered, short, damaged, wrong item, quality or other.' },
+  { name: 'Subject', required: true, meaning: 'The case in a few words.', others: 'The supplier sees it in their list.', rules: '3 to 140 characters.' },
+  { name: 'What happened', required: true, meaning: 'The details.', others: 'The supplier reads this first.', rules: '5 to 4,000 characters.' },
+]} />
+
+If Neuros's records already settle it (the order is paid, or delivered), the case comes back resolved with the reason.
+
+## Follow a case
+
+{props.who === 'reseller' && <Shot id="reseller/buying-cases/detail" />}
+
+Open a case to read the supplier's answers and write back. Your answer puts it back with them. **Withdraw** ends it. A goods case's dispute stays open until you withdraw it under <PageLink who={props.who} page="buying-disputes">Disputes and returns</PageLink>.
+
+If you order by chat, the supplier's AI agent can open and follow cases for you, and the supplier's answers reach your chat.
+
+Opening and writing need `case:open`.

@@ -1,6 +1,6 @@
 ---
 title: "Agent tools"
-sidebar_position: 380
+sidebar_position: 390
 description: "What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP."
 ---
 
@@ -8,7 +8,7 @@ description: "What an AI agent calls for a reseller: who is writing, products, c
 
 What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP.
 
-This page lists the 10 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 13 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -16,6 +16,9 @@ This page lists the 10 operations in this area, generated from the engine's Open
 |---|---|---|
 | [POST `/v1/agent/mcp`](#the-agent-tools-over-mcp-streamable-http-stateless-json-rpc) | The agent tools over MCP (streamable HTTP, stateless JSON-RPC) | `agent:act` |
 | [POST `/v1/agent/v1/carts/quote`](#quote_cart-price-the-cart-for-this-reseller-and-hold-the-prices-for-30-minutes) | quote_cart: Price the cart for this reseller and hold the prices for 30 minutes | `agent:act` |
+| [POST `/v1/agent/v1/cases`](#open_case-open-a-case-with-the-seller-for-the-reseller-a-payment-not-showing-a-late-delivery-damaged-goods-a-question) | open_case: Open a case with the seller for the reseller: a payment not showing, a late delivery, damaged goods, a question | `agent:act` |
+| [GET `/v1/agent/v1/cases/{ref}`](#get_case-where-one-of-the-resellers-cases-with-this-seller-stands-and-the-sellers-latest-answer) | get_case: Where one of the reseller’s cases with this seller stands, and the seller’s latest answer | `agent:act` |
+| [POST `/v1/agent/v1/cases/{ref}/messages`](#reply_case-pass-the-resellers-words-to-the-seller-on-an-open-case) | reply_case: Pass the reseller’s words to the seller on an open case | `agent:act` |
 | [POST `/v1/agent/v1/invites/accept`](#accept_invite-accept-the-sellers-invitation-with-the-six-digit-code-the-reseller-was-given) | accept_invite: Accept the seller’s invitation with the six-digit code the reseller was given | `agent:act` |
 | [POST `/v1/agent/v1/orders`](#place_order-place-the-quoted-cart-once-the-reseller-says-yes) | place_order: Place the quoted cart once the reseller says yes | `agent:act` |
 | [GET `/v1/agent/v1/orders/{ref}`](#get_order-where-one-of-the-resellers-orders-with-this-seller-stands) | get_order: Where one of the reseller’s orders with this seller stands | `agent:act` |
@@ -107,6 +110,103 @@ Replaces the reseller’s open cart with this seller. Prices, account terms, off
 | `total.currency` * | string | 3 characters |
 | `currency` * | string |  |
 | `reseller` * | string |  |
+| `say` * | string | Read this to the reseller as it is |
+
+
+### open_case: Open a case with the seller for the reseller: a payment not showing, a late delivery, damaged goods, a question
+
+<span className="nh-method nh-method--post">POST</span> `/v1/agent/v1/cases`
+
+A payment, delivery or goods case names the order. For damaged, short or wrong goods give `items` as get_order names them, with the quantity in the ordered unit, and a `reason`: they are held as a dispute. If the facts already settle it (the order is paid, or delivered), the case comes back closed with the reason: read it out. Every tool names who is writing in the x-agent-caller header, as &lt;channel&gt;:&lt;address&gt; (whatsapp:+2348012345678). Only an agent's own token is accepted.
+
+**Who can call it:** People and API clients · **Scope:** `agent:act`
+
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `type` * | `payment` · `delivery` · `goods` · `account` · `other` |  |
+| `subject` * | string | In a few words, as the reseller put it. at least 3 characters, at most 140 characters |
+| `description` * | string | What the reseller said, in full. at least 5 characters, at most 4000 characters |
+| `orderRef` | string | The order number. at most 40 characters |
+| `items` | object[] |  |
+| `items[].name` * | string | at most 200 characters |
+| `items[].quantity` * | string |  |
+| `reason` | `not_delivered` · `short` · `damaged` · `wrong_item` · `quality` · `other` | For goods: what is wrong with the items |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `caseRef` * | string |  |
+| `type` * | `payment` · `delivery` · `goods` · `account` · `other` |  |
+| `status` * | `open` · `awaiting_customer` · `resolved` · `withdrawn` |  |
+| `subject` * | string |  |
+| `orderRef` * | string | may be null |
+| `lastReply` * | object | The seller’s latest words on the case. may be null |
+| `lastReply.text` * | string |  |
+| `lastReply.at` * | string (date-time) |  |
+| `say` * | string | Read this to the reseller as it is |
+
+
+### get_case: Where one of the reseller’s cases with this seller stands, and the seller’s latest answer
+
+<span className="nh-method nh-method--get">GET</span> `/v1/agent/v1/cases/{ref}`
+
+Only this seller’s cases are found. Every tool names who is writing in the x-agent-caller header, as &lt;channel&gt;:&lt;address&gt; (whatsapp:+2348012345678). Only an agent's own token is accepted.
+
+**Who can call it:** People and API clients · **Scope:** `agent:act`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `ref` * | path | string | The case number, e.g. CASE-2026-000014. at most 40 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `caseRef` * | string |  |
+| `type` * | `payment` · `delivery` · `goods` · `account` · `other` |  |
+| `status` * | `open` · `awaiting_customer` · `resolved` · `withdrawn` |  |
+| `subject` * | string |  |
+| `orderRef` * | string | may be null |
+| `lastReply` * | object | The seller’s latest words on the case. may be null |
+| `lastReply.text` * | string |  |
+| `lastReply.at` * | string (date-time) |  |
+| `say` * | string | Read this to the reseller as it is |
+
+
+### reply_case: Pass the reseller’s words to the seller on an open case
+
+<span className="nh-method nh-method--post">POST</span> `/v1/agent/v1/cases/{ref}/messages`
+
+A closed case cannot be written on: open a new one. Every tool names who is writing in the x-agent-caller header, as &lt;channel&gt;:&lt;address&gt; (whatsapp:+2348012345678). Only an agent's own token is accepted.
+
+**Who can call it:** People and API clients · **Scope:** `agent:act`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `ref` * | path | string | The case number, e.g. CASE-2026-000014. at most 40 characters |
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `text` * | string | at least 1 characters, at most 4000 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `caseRef` * | string |  |
+| `type` * | `payment` · `delivery` · `goods` · `account` · `other` |  |
+| `status` * | `open` · `awaiting_customer` · `resolved` · `withdrawn` |  |
+| `subject` * | string |  |
+| `orderRef` * | string | may be null |
+| `lastReply` * | object | The seller’s latest words on the case. may be null |
+| `lastReply.text` * | string |  |
+| `lastReply.at` * | string (date-time) |  |
 | `say` * | string | Read this to the reseller as it is |
 
 

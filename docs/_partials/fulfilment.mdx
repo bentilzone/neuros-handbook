@@ -76,7 +76,7 @@ Open a run to follow it. Each stop shows how it ended and where its [delivery co
 
 - **Send the run out**, on its day, dispatches every packed shipment on it, sends each customer a code and shows the [driver’s link](../01-glossary/48-deliveries.mdx#drivers-link). The link is shown only this once: copy it and send it to the driver by message. Asking twice sends it out once.
 - **New link** stops the driver’s link at once and shows a new one, for a lost link or one sent to the wrong person.
-- **New code** on a stop sends the customer a fresh code with three tries, for a [locked](../01-glossary/48-deliveries.mdx#locked-code) or expired one.
+- **New code** on a stop sends the customer a fresh code with three tries, for a [locked](../01-glossary/48-deliveries.mdx#locked-code) or expired one. A locked code also opens a delivery case under <PageLink who={props.who} page="cases">Service cases</PageLink>, which resolves once the delivery is made.
 - **Cancel run** stops a run that has not gone out, with a reason. Its shipments are free for another run.
 
 The run completes on its own when the driver has delivered, or not delivered, every stop. A stop not delivered puts its shipment back to *Packed*, with the driver’s reason.
