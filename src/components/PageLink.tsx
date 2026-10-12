@@ -4,9 +4,9 @@ import Link from '@docusaurus/Link';
 import type { ReactNode } from 'react';
 
 const PAGES: Record<string, string[]> = {
-  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'requisitions', 'purchase-orders', 'receiving', 'payables', 'inventory', 'fulfilment', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
-  reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'ledger', 'notifications', 'members', 'roles', 'api-clients', 'audit-log', 'settings'],
+  supplier: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
+  distributor: ['dashboard', 'catalogue', 'offers', 'pricing', 'quotes', 'orders', 'invoices', 'disputes', 'customers', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'requisitions', 'purchase-orders', 'receiving', 'payables', 'inventory', 'fulfilment', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
+  reseller: ['dashboard', 'catalogue', 'marketplace', 'buying-quotes', 'basket', 'buying-orders', 'buying-invoices', 'buying-disputes', 'suppliers', 'ledger', 'reports', 'notifications', 'members', 'roles', 'api-clients', 'webhooks', 'imports', 'audit-log', 'settings'],
 };
 
 export default function PageLink({ who, page, hash, children }: { who: string; page: string; hash?: string; children: ReactNode }) {

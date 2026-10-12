@@ -1,8 +1,8 @@
 {/* Shared by every guide that has this page: <Dashboard who="supplier|distributor|reseller" />. Shots are the persona's own. */}
 
-<PersonaBadge who={['everyone']} />
+<PersonaBadge who={['everyone']} permission="dashboard:read" />
 
-The first page after you sign in. It names the company you are working in and, as trading arrives, the money settled, locked and disputed across your orders.
+The first page after you sign in. It shows where things stand in the company you are working in: what waits for you, then selling, buying and stock. Each card opens the page it counts.
 
 <Shot id={`${props.who}/dashboard`} />
 
@@ -10,9 +10,21 @@ The first page after you sign in. It names the company you are working in and, a
 
 - **The company you are in.** People who work for more than one company switch here. Everything you see and do applies to this company only. See [companies and people](../01-glossary/10-companies-and-people.mdx).
 - **The sidebar.** Grouped into Main, Sell, Buy, Stock & finance and System. A distributor sees all of them. A supplier has no Buy section and a reseller has no Sell or Inventory. Pages you lack the permission for are hidden, not greyed out.
-- **Live.** The green dot means your browser is receiving live updates. Lists across the app refresh on their own when a colleague, customer or supplier changes something. If it goes grey, reload the page.
-- **Settled, Locked, Disputed.** These fill in once orders and settlement arrive. Until then they show a dash.
+- **Live.** The green dot means your browser is receiving live updates. The dashboard and lists across the app refresh on their own when a colleague, customer or supplier changes something. If it goes grey, reload the page.
+
+## The cards
+
+Cards follow what your company does and what your role allows: a buyer sees no selling cards, and someone who cannot approve journals is not asked to. A card with something to act on has an orange edge. Amounts are in your company’s currency.
+
+| Group | Cards |
+|---|---|
+| Waiting for your approval | Requisitions, orders over a purchase limit, journals, stock adjustments and counts, supplier invoice exceptions and substitutes you may decide; nothing you submitted yourself |
+| Selling | Requests to quote, orders to accept, shipments to pick, packed to dispatch, overdue from customers, invoiced this month (before tax, against the same days last month), disputes to answer |
+| Buying | On the way to you, invoices from sellers due this week, supplier invoices due this week, your disputes open |
+| Stock | At or below the reorder point, lots expiring within 30 days, stock value by warehouse |
 
 ## Common questions
 
-**Why don't I see a page a colleague sees?** Pages follow your roles. Ask a company administrator to check yours under <PageLink who={props.who} page="members">Members</PageLink>.
+**Why don't I see a page or card a colleague sees?** Pages and cards follow your roles. Ask a company administrator to check yours under <PageLink who={props.who} page="members">Members</PageLink>.
+
+**Why is “invoiced this month” different from my profit?** It counts invoices issued, before tax. Profit comes from the books: see <PageLink who={props.who} page="reports">Reports</PageLink>.

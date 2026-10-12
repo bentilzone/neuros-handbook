@@ -1,0 +1,46 @@
+---
+title: Integrations and reports
+sidebar_label: Integrations and reports
+---
+
+### Webhook
+A message Neuros sends to your own system when something happens, as an HTTPS POST to a URL you give. It names the event and its record only; your system reads the record with its API client. Needs webhooks in your plan.
+
+### Webhook endpoint
+A URL that receives webhooks, with the events it is sent and its signing secret. It is active or paused; a paused endpoint is sent nothing.
+
+### Test receiver
+An endpoint inside Neuros instead of at your URL. It shows each delivery it received and whether its signature checked out, so you can try webhooks before your own receiver is ready.
+
+### Delivery
+One event sent to one endpoint, with every attempt and what the receiver answered.
+- **Queued:** waiting to be sent.
+- **Delivered:** the receiver answered with a 2xx status.
+- **Retrying:** it did not; Neuros tries again after 1 minute, 5 minutes, 30 minutes, 2 hours and 12 hours.
+- **Gave up:** six attempts failed, or the endpoint was paused.
+
+A delivery can be sent again by hand, with the same event id.
+
+### Signing secret
+The key Neuros signs each delivery with, shown once when the endpoint is added or the secret rotated. The receiver recomputes the signature with it to know the delivery came from Neuros and was not changed. After a rotation, both secrets sign for 24 hours.
+
+### Event id
+The id of the event a delivery carries. It is the same on every attempt and when sent again, so a receiver that records the ids it has handled acts on each event once.
+
+### Import
+Records brought in from a CSV file: offers, products or opening stock. Every row is checked against the same rules as the form first; after you confirm, each valid row goes in whole or not at all, and the rest are left out with what is wrong.
+
+### Import template
+The CSV file to start an import from: the columns of that kind of import and one example row.
+
+### Problems file
+The rows of an import that did not go in, as they were written, with a column saying what is wrong with each. Fix them and import the file again.
+
+### Dashboard card
+One figure on the dashboard, such as orders to accept or supplier invoices due this week. A card shows only to a company and a person it applies to, and opens the page it counts.
+
+### Report
+A table from your books or your trading over a period or at a date: statements such as profit and loss, or operational reports such as supplier performance. Every report downloads as a CSV or a PDF.
+
+### Financial and operational reports
+Financial reports read your journals and need report:financial: profit and loss, balance sheet, cash flow, the ageings and gross margin. Operational reports read your stock, sales and receipts and need report:operational.

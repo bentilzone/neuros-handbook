@@ -12,7 +12,8 @@ Every term Neuros uses, defined once. When a page says *offer*, *price list* or 
 - [Accounts between companies](./40-relationships.mdx): account status, terms, payment modes, supplier code
 - [Marketplace](./50-marketplace.mdx): listing, availability, your price, filters
 - [Inventory](./60-inventory.mdx): warehouse, conditions, free to sell, receipt, movement, adjustment, transfer, count, reorder, valuation
-- [Ledger](./70-ledger.mdx): chart of accounts, journal, automatic and manual postings, reversal, control account, posting rule, period, trial balance, FX revaluation
+- [Ledger](./70-ledger.mdx): chart of accounts, journal, automatic and manual postings, reversal, control account, posting rule, period, trial balance, FX revaluation, opening balance equity, retained earnings, year-end close
+- [Integrations and reports](./85-integrations.mdx): webhook, endpoint, test receiver, delivery, signing secret, event id, import, template, problems file, dashboard card, report
 - [Plans and billing](./80-plans-and-billing.mdx): plan, add-on, limit, trial, subscription status
 - [The platform](./90-platform.mdx): operator, application, support grant, scheduler
 

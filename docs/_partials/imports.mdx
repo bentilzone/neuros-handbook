@@ -1,0 +1,83 @@
+{/* Shared by every guide that has this page: <Imports who="supplier|distributor|reseller" />. The screens are the same for every company, so the shots are the distributor's. */}
+
+<PersonaBadge who={['everyone']} permission="import:run" />
+
+**Imports** bring records in from a CSV file instead of one form at a time: your offers, products for the catalogue, or the stock you held when you started. Every row is checked against the same rules as the form before anything goes in. You confirm, and each row goes in whole or not at all. See [import](../01-glossary/85-integrations.mdx#import).
+
+Your plan must include Bulk import. At most 10,000 rows per file.
+
+<Shot id="distributor/imports/list" />
+
+## What you can import
+
+| Kind | Needs | Each row becomes |
+|---|---|---|
+| Offers | A company that sells, offer:manage | An offer, as a draft or published |
+| Products | catalogue:contribute | A product contribution, sent to Neuros for review |
+| Opening stock | A company that holds stock, stock:receive | Stock received into a warehouse at its cost, against opening balance equity |
+
+## Import a file
+
+<Shot id="distributor/imports/new" />
+
+1. Choose the kind and **Download the template**: the columns, then one example row in your company’s currency. The table under it says what each column means; the starred ones are required.
+2. Fill in one row per record. Keep the header row.
+3. Choose the file and **Upload and check**. Nothing is imported yet.
+
+<FieldTable fields={[
+  { name: 'File', required: true, meaning: 'A CSV file with the template’s columns.', rules: 'Missing or unknown columns refuse the whole file, as does more than 10,000 rows.' },
+  { name: 'Publish each offer as it goes in', meaning: 'Offers only: publish each offer as it is created.', implications: 'Left unticked, they arrive as drafts. Your plan’s published-offer limit still applies; an offer over it is not imported.' },
+]} />
+
+### Offer columns
+
+| Column | Means |
+|---|---|
+| `product` * | The product’s Neuros code (NEU-PROD-…) or its GTIN; it must be published in the catalogue |
+| `sku` * | Your own code for the offer, unique among your offers |
+| `title` | The name buyers see; the product’s name if empty |
+| `price` * | Price per unit, before tax |
+| `currency` | Three-letter code; your company’s currency if empty |
+| `unit` | The unit the price is per; the product’s base unit if empty |
+| `min_order_qty`, `order_increment` | The least a buyer may order, and the multiple orders must be in |
+| `lead_time_days` | Days from order to dispatch |
+| `visibility` | `public`, `relationship` (your customers only) or `invite_only`; `relationship` if empty |
+
+### Product columns
+
+| Column | Means |
+|---|---|
+| `name` * | The product’s name, as the maker gives it |
+| `category` * | The category’s name, exactly as in the catalogue |
+| `base_unit` * | The unit stock is counted in |
+| `brand`, `manufacturer`, `mpn` | The brand, who makes it, and the maker’s part number |
+| `gtin` | GTIN-8, 12, 13 or 14 (the barcode number) |
+| `weight_kg`, `description` | Shipping weight in kilograms; what it is, for buyers |
+
+### Opening stock columns
+
+| Column | Means |
+|---|---|
+| `product` * | The product’s Neuros code or its GTIN |
+| `warehouse` * | Your warehouse’s code |
+| `quantity` * | How many you hold, in the unit given |
+| `unit` | The unit counted in; the product’s base unit if empty |
+| `unit_cost` * | What each cost you, in your company’s currency; sets the stock’s value in the books |
+| `lot_number`, `expires_at` | For a lot-controlled product, and its expiry date (YYYY-MM-DD) |
+| `serial_numbers` | For a serial-numbered product: one per unit, separated by `|` |
+
+## Check and confirm
+
+<Shot id="distributor/imports/detail" />
+
+The import shows how many rows are **Ready** and how many are **To fix**, with what is wrong with each. **Problems file** downloads the rows to fix as you wrote them, with a `problems` column. Correct them and import that file afterwards.
+
+**Import _n_ rows** imports the ready rows in the background; the rows to fix are left out. The counts update as they go in. A row that fails at that point, for example because a limit was reached in the meantime, is **Not imported**, with the reason, and is in the problems file too.
+
+**Cancel import** ends an import that has not been confirmed. Nothing from it is imported.
+
+## Common questions
+
+**Can I undo an import?** Not as a whole. Imported offers can be withdrawn, and opening stock corrected with a stock adjustment.
+
+**Who is recorded as having made the records?** The person who confirmed the import, with the permissions they held then.

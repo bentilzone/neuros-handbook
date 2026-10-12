@@ -104,6 +104,12 @@
       "11-distributor/90-ledger.mdx",
       "12-reseller/90-ledger.mdx"
     ],
+    "/reports": [
+      "10-supplier/92-reports.mdx",
+      "11-distributor/92-reports.mdx",
+      "12-reseller/92-reports.mdx",
+      "02-features/85-integrations-and-reports.mdx"
+    ],
     "/organization": [
       "10-supplier/140-settings.mdx",
       "11-distributor/140-settings.mdx",
@@ -123,6 +129,18 @@
       "10-supplier/120-api-clients.mdx",
       "11-distributor/120-api-clients.mdx",
       "12-reseller/120-api-clients.mdx"
+    ],
+    "/integrations/webhooks": [
+      "10-supplier/122-webhooks.mdx",
+      "11-distributor/122-webhooks.mdx",
+      "12-reseller/122-webhooks.mdx",
+      "02-features/85-integrations-and-reports.mdx"
+    ],
+    "/integrations/imports": [
+      "10-supplier/124-imports.mdx",
+      "11-distributor/124-imports.mdx",
+      "12-reseller/124-imports.mdx",
+      "02-features/85-integrations-and-reports.mdx"
     ],
     "/audit": [
       "10-supplier/130-audit-log.mdx",

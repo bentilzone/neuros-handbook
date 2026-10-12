@@ -15,5 +15,6 @@ Each feature followed across everyone it touches: the seller, the buyer, your te
 7. [Quote to cash](./65-quote-to-cash.mdx): one order from the price to the money, on both sides and in the books.
 8. [Stock](./70-stock.mdx): receipts, conditions, adjustments, transfers, counts, reorder, valuation.
 9. [Your books](./80-books.mdx): accounts, automatic and manual journals, periods, reports.
-10. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
-11. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.
+10. [Integrations, dashboards and reports](./85-integrations-and-reports.mdx): webhooks, imports, the dashboard, reports and the year-end close.
+11. [Plans and billing](./90-plans-and-billing.mdx): plans, limits, invoices, late payment.
+12. [Support access](./95-support-access.mdx): how Neuros staff look in, and only with a grant.

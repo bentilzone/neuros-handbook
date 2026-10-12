@@ -1,0 +1,46 @@
+{/* Shared by every guide that has this page: <Reports who="supplier|distributor|reseller" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['everyone']} permission={['report:financial', 'report:operational']} />
+
+**Reports** are your statements from the posted journals, and what your stock, sales and suppliers did. Every report is one table: headings, lines and totals, in your company’s currency. Download any of them as a CSV or a PDF.
+
+<Shot id={`${props.who}/reports/profit-and-loss`} />
+
+## The reports
+
+| Report | Shows | Needs |
+|---|---|---|
+| Profit and loss | Revenue less cost of sales (gross profit), then expenses, other income and finance costs (net profit), for a period | report:financial |
+| Balance sheet | Assets, liabilities and equity at a date; checks that they balance | report:financial |
+| Cash flow | From net profit to the change in cash and bank: operating, investing and financing activities | report:financial |
+| Receivables ageing | What each customer owes at a date, by days past due, in each invoice’s currency | report:financial |
+| Payables ageing | What you owe each supplier at a date, by days past due, in each invoice’s currency | report:financial |
+| Gross margin | Sales less their cost, by product or by customer | report:financial |
+| Inventory valuation | Quantity, cost per unit and value of each product on hand now, by your valuation method | report:operational |
+| Inventory movement | Per product: opening, in, out, transfers and holds, closing, and the value in and out over a period | report:operational |
+| Sales by customer | Per customer: invoices, sales before tax less credit notes, tax, share of the total, still owed | report:operational |
+| Supplier performance | Per supplier, from receipts posted in the period: on time, days late when late, lines short, over, damaged or swapped, disputes | report:operational |
+
+Finance roles hold both permissions. Purchasing, sales and warehouse roles hold the operational one. A company without the selling or stock side sees only the reports that apply to it.
+
+<FieldTable fields={[
+  { name: 'Report', meaning: 'Which report to run.' },
+  { name: 'Period', meaning: 'The days a period report covers, in your company’s time zone.', implications: 'Profit and loss, cash flow, movement, margin, sales and supplier performance read this range.' },
+  { name: 'At', meaning: 'For the balance sheet and the ageings: the date the figures stand at.', rules: 'Empty means today. Inventory valuation is always as of now.' },
+  { name: 'Compare with', meaning: 'A second column: for profit and loss, the period before or the same period last year; for the balance sheet, a year earlier.' },
+  { name: 'By', meaning: 'Gross margin only: per product or per customer.' },
+]} />
+
+## Checks
+
+Two reports check themselves: the balance sheet that assets equal liabilities and equity, and cash flow that its movements explain the change in cash. The result shows above the table, red with both figures if it fails.
+
+## Year-end
+
+Profit and loss for a period ignores the year-end close journal, so a closed year still shows its profit. See <PageLink who={props.who} page="ledger" hash="close-the-year">close the year</PageLink>.
+
+## Common questions
+
+**Why doesn’t gross margin match profit and loss?** Gross margin counts invoiced sales and their cost of sales only. Profit and loss also has your other income and every expense.
+
+**Why is a report empty?** It reads posted journals and posted stock movements. Drafts and anything waiting for approval are not in it yet.
