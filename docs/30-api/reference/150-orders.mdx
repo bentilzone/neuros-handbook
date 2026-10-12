@@ -56,6 +56,9 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -212,6 +215,9 @@ Needs an approved trading relationship. Offer lines are priced as your price now
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -355,6 +361,9 @@ The seller never sees the buyer’s draft. Commercial, payment and fulfilment st
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -513,6 +522,9 @@ Only while it is a draft. Lines given replace the draft’s lines (keep a line�
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -662,6 +674,9 @@ On credit it claims the buyer’s credit (an approved override may lift the limi
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -809,6 +824,9 @@ object
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -966,6 +984,9 @@ On a submitted or accepted order. The other side approves or rejects it; a quant
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1114,6 +1135,9 @@ object
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1262,6 +1286,9 @@ object
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1409,6 +1436,9 @@ object
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1558,6 +1588,9 @@ The buyer before acceptance; either side after it, while nothing has shipped. Gi
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1709,6 +1742,9 @@ The offer must be the same seller’s (OTHER_SELLER otherwise). The same offer i
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -1869,6 +1905,9 @@ The offer must be the same seller’s (OTHER_SELLER otherwise). The same offer i
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |
@@ -2016,6 +2055,9 @@ object
 | `buyerReference` | string | may be null |
 | `quotationId` | string | 24 characters, may be null |
 | `checkoutId` | string | 24 characters, may be null |
+| `channel` | `app` · `agent` | may be null |
+| `agentId` | string | 24 characters, may be null |
+| `priceLockedUntil` | string (date-time) | may be null |
 | `relationshipId` | string | 24 characters, may be null |
 | `status` | `draft` · `submitted` · `pending_approval` · `accepted` · `rejected` · `cancelled` · `completed` | may be null |
 | `paymentStatus` | `not_required` · `awaiting` · `partially_paid` · `paid` · `refunded` | may be null |

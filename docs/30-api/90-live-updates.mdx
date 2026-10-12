@@ -40,7 +40,8 @@ Some event types:
 | `offer.created`, `offer.updated`, `offer.published`, `offer.withdrawn` | Your offers change |
 | `marketplace.listing_changed` | An offer anyone can see changed in the marketplace |
 | `price_list.changed`, `contract_price.changed`, `promotion.changed` | Your pricing changes |
-| `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes |
+| `relationship.invited`, `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes; `invited` when you invite a reseller by phone or issue a new code |
+| `agent.caller_unrecognised` | Someone not among your customers wrote to one of your AI agents (your company only) |
 | `stock.changed` | Stock moved |
 | `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
 | `quote_request.*`, `quotation.sent`, `quotation.accepted`, `quotation.declined`, `quotation.expired` | A request for quotation or a quotation changes |

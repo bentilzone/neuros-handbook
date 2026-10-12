@@ -9,7 +9,8 @@ Every term Neuros uses, defined once. When a page says *offer*, *price list* or 
 - [Companies, people and access](./10-companies-and-people.mdx): company, capability, functional currency, member, role, permission, two-step verification, segregation of duties, audit trail, live updates
 - [Catalogue](./20-catalogue.mdx): product, category, attribute, units, contributing and review, tracking
 - [Selling and pricing](./30-selling-and-pricing.mdx): offer, visibility, supply, price list, contract price, promotion, pricing precedence
-- [Accounts between companies](./40-relationships.mdx): account status, terms, payment modes, supplier code
+- [Accounts between companies](./40-relationships.mdx): account status, terms, payment modes, supplier code, invited
+- [AI agents](./45-ai-agents.mdx): AI agent, agent platform, agent tool, channel endpoint, caller, managed reseller, invitation code, cart quote, by chat, collection account
 - [Marketplace](./50-marketplace.mdx): listing, availability, your price, filters
 - [Inventory](./60-inventory.mdx): warehouse, conditions, free to sell, receipt, movement, adjustment, transfer, count, reorder, valuation
 - [Ledger](./70-ledger.mdx): chart of accounts, journal, automatic and manual postings, reversal, control account, posting rule, period, trial balance, FX revaluation, opening balance equity, retained earnings, year-end close

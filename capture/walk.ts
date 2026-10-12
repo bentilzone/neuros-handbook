@@ -26,6 +26,8 @@ export interface Walk {
   externalSuppliers?: boolean;
   /** seed:trade gave this persona a test receiver and a paused ERP endpoint, and two imports (P5). */
   integrations?: boolean;
+  /** seed:trade gave this persona an AI agent on a WhatsApp number, a reseller who ordered by chat and one still invited (K1). */
+  agents?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -144,6 +146,28 @@ export function walk(w: Walk): Scenario[] {
     }),
     shot('customers/approve', '/selling/customers', 'Approve a customer, with terms', { steps: click(/^Approve /), fullPage: true }),
     shot('customers/detail', '/selling/customers', 'A customer’s account', { steps: firstRow, fullPage: true }),
+    shot('customers/invite', '/selling/customers', 'Invite a reseller by phone', {
+      steps: click('Invite by phone'), fullPage: true,
+      callouts: [{ n: 1, target: { role: 'textbox', name: /Phone/ }, text: 'The number they write to your agent from. A local number takes your country code.', side: 'left' }],
+    }),
+    ...(w.agents ? [
+      shot('customers/agent', '/selling/customers?status=invited', 'A reseller invited by phone', {
+        steps: firstRow,
+        callouts: [
+          { n: 1, target: { text: 'Writes from', nth: 0 }, text: 'The numbers your agent answers this customer on.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New code' }, text: 'Another code, if the last ran out or was mistyped too often.', side: 'right' },
+        ],
+      }),
+    ] : []),
+    shot('agents/list', '/selling/agents', 'AI agents', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: 'Where resellers pay' }, text: 'The account your agent gives for transfers, with the order number as the reference.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'Add an agent' }, text: 'An agent gets a client ID and secret, shown once, for your agent platform.', side: 'left' },
+        { n: 3, target: { text: /^Calls, 30 days$/ }, text: 'How much each agent was used, and how often it asked for something it may not do.', side: 'bottom' },
+      ],
+    } : {}),
+    shot('agents/new', '/selling/agents', 'Add an AI agent', { steps: click('Add an agent'), fullPage: true }),
+    shot('agents/numbers', '/selling/agents?tab=numbers', 'AI agents: numbers'),
   ];
 
   const buy: Scenario[] = [

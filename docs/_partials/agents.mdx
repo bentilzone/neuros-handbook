@@ -1,0 +1,65 @@
+{/* Shared by every guide that has this page: <Agents who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="agent:read" />
+
+An **AI agent** takes your resellers’ orders where they already talk to you: WhatsApp, SMS and email. The agent runs on an agent platform you choose and holds the conversation. Neuros gives it every fact and does every action: the reseller’s own price, the promotions they qualify for, the total, how to pay, where the order is. An agent never works out a figure itself. See [Selling through AI agents](../02-features/45-selling-through-agents.mdx) for the whole flow.
+
+<Shot id={`${props.who}/agents/list`} />
+
+## Where resellers pay
+
+The card at the top is the bank account your agent gives to resellers who pay by transfer, with the order number as the reference. Until it is set, the agent tells them you will send the account.
+
+<FieldTable fields={[
+  { name: 'Bank', required: true, meaning: 'The bank the account is with.', others: 'Resellers read it in the payment instructions.' },
+  { name: 'Account name', required: true, meaning: 'The name on the account.', others: 'Resellers check it before they transfer.' },
+  { name: 'Account number', required: true, meaning: 'Where transfers go.', others: 'Resellers transfer to it.', implications: 'Changing it changes the instructions for every order from then on, including unpaid ones.', rules: '6 to 34 letters or digits. Needs a sign-in made with [two-step verification](../01-glossary/10-companies-and-people.mdx#two-step-verification-mfa) and the bank accounts permission.' },
+  { name: 'Sort code', meaning: 'Your bank’s branch or routing code, if it uses one.' },
+]} />
+
+## Agents
+
+Each agent is listed with the numbers it answers on, its calls and refused calls in the last 30 days, and when it was last used.
+
+**Add an agent** needs two-step verification:
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'How your team knows the agent.', others: 'Resellers never see it. Orders it places show it in their history.' },
+  { name: 'What it may do', required: true, meaning: 'The tools the agent may call (see below).', implications: 'A tool not ticked is refused, and the refusal is counted. Untick Place orders to let an agent quote but not order.', rules: 'At least one.' },
+  { name: 'Answers on', meaning: 'Your numbers and addresses this agent speaks for, from the Numbers tab.', rules: 'Only active numbers.' },
+]} />
+
+When you save it, Neuros shows the agent’s **client ID** and **secret** once. Put both in your agent platform; it exchanges them for a token and calls the tools with it. If the secret is lost, **rotate** it: the old one stops working at once. **Switch off** ends the agent for good.
+
+<Shot id={`${props.who}/agents/new`} />
+
+### What an agent may do
+
+| Tool | What it does for the reseller |
+|---|---|
+| Know who is writing | Recognises the number as one of your customers, an invited reseller, or a stranger, and greets them |
+| Accept invitations | Accepts your invitation when the reseller sends the code |
+| Find products and prices | Finds your products from how the reseller describes them, at their own price |
+| Quote a cart | Prices the cart with their terms, promotions and tax, and holds the prices for 30 minutes |
+| Place orders | Places the quoted cart once the reseller says yes |
+| Order status | Says where an order is |
+| How to pay | Gives the amount, the account and the reference |
+| Delivery status | Says whether it has left, with whom, and when it arrived |
+| Statement and credit | Says what they owe you, what is overdue and the credit left |
+
+An agent sees only your side: it never finds what a reseller buys from another seller, even one that uses Neuros and the same reseller.
+
+## Numbers
+
+The **Numbers** tab lists your WhatsApp numbers, SMS senders and email addresses. **Add a number** with its country code, or a local number in your country (Neuros writes it in full). A number belongs to one company on Neuros. Switch a number off to stop agents answering on it without removing it.
+
+<Shot id={`${props.who}/agents/numbers`} />
+
+## Resellers for your agent
+
+Your agent answers customers whose numbers it knows. On <PageLink who={props.who} page="customers">Customers</PageLink>:
+
+- **Invite by phone** brings on a shop that orders by chat and never signs in. You get a six-digit code to send them; they send it to your agent to accept.
+- On any customer’s account, **Your agent → Edit** sets the numbers they write from, their tier and zone, and your code for them.
+
+Orders an agent places arrive on <PageLink who={props.who} page="orders">Orders</PageLink> like any other, marked **By chat**.
