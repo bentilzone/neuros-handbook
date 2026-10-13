@@ -8,7 +8,7 @@ description: "Registering a company and its application to Neuros."
 
 Registering a company and its application to Neuros.
 
-This page lists the 7 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 9 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -21,6 +21,8 @@ This page lists the 7 operations in this area, generated from the engine's OpenA
 | [POST `/v1/onboarding/applications/{id}/documents`](#register-a-supporting-document-and-get-a-signed-upload-url) | Register a supporting document and get a signed upload URL | — |
 | [DELETE `/v1/onboarding/applications/{id}/documents/{documentId}`](#remove-a-document-from-an-editable-application) | Remove a document from an editable application | — |
 | [POST `/v1/onboarding/applications/{id}/submit`](#submit-or-resubmit-an-application-for-review) | Submit (or resubmit) an application for review | — |
+| [POST `/v1/onboarding/claims`](#enter-the-code-ask-neuros-to-make-you-the-shops-administrator) | Enter the code: ask Neuros to make you the shop’s administrator | — |
+| [POST `/v1/onboarding/claims/code`](#send-a-code-to-a-shops-number-to-take-it-over) | Send a code to a shop’s number, to take it over | — |
 
 ## Details
 
@@ -42,6 +44,11 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -120,6 +127,11 @@ A person can apply for (and belong to) several organisations.
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -181,6 +193,11 @@ A person can apply for (and belong to) several organisations.
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -260,6 +277,11 @@ A person can apply for (and belong to) several organisations.
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -360,6 +382,11 @@ A person can apply for (and belong to) several organisations.
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -421,6 +448,11 @@ A person can apply for (and belong to) several organisations.
 | Field | Type | Notes |
 |---|---|---|
 | `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
 | `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
 | `organization` | object | may be null |
 | `organization.legalName` | string | may be null |
@@ -465,4 +497,102 @@ A person can apply for (and belong to) several organisations.
 | `updatedAt` | string (date-time) | may be null |
 | `__v` | number | may be null |
 | `id` | string | 24 characters |
+
+
+### Enter the code: ask Neuros to make you the shop’s administrator
+
+<span className="nh-method nh-method--post">POST</span> `/v1/onboarding/claims`
+
+Files a claim application, already submitted; Neuros reviews it in the applications queue.
+
+**Who can call it:** People signed in (not API clients)
+
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `phone` * | string | at least 6 characters, at most 24 characters |
+| `country` | string | ISO 3166-1 alpha-2. 2 characters |
+| `code` * | string |  |
+
+**Response** `201`
+
+| Field | Type | Notes |
+|---|---|---|
+| `applicantUserAuthId` | string | 24 characters, may be null |
+| `kind` | `register` · `claim` | may be null |
+| `claim` | object | may be null |
+| `claim.organizationId` | string | 24 characters, may be null |
+| `claim.phone` | string | may be null |
+| `claim.verifiedAt` | string (date-time) | may be null |
+| `status` | `draft` · `submitted` · `under_review` · `resubmission_requested` · `approved` · `rejected` | may be null |
+| `organization` | object | may be null |
+| `organization.legalName` | string | may be null |
+| `organization.tradingName` | string | may be null |
+| `organization.jurisdiction` | string | may be null |
+| `organization.registrationNumber` | string | may be null |
+| `organization.taxIds` | object[] |  |
+| `organization.addresses` | object[] |  |
+| `organization.contacts` | object[] |  |
+| `organization.website` | string | may be null |
+| `intendedCapabilities` | object | may be null |
+| `intendedCapabilities.supply` | boolean | may be null |
+| `intendedCapabilities.distribution` | boolean | may be null |
+| `intendedCapabilities.purchasing` | boolean | may be null |
+| `documents` | object[] |  |
+| `documents[].type` | string | may be null |
+| `documents[].name` | string | may be null |
+| `documents[].storageKey` | string | may be null |
+| `documents[].contentType` | string | may be null |
+| `documents[].size` | number | may be null |
+| `documents[].uploadedAt` | string (date-time) | may be null |
+| `documents[].id` | string | 24 characters |
+| `submittedAt` | string (date-time) | may be null |
+| `reviewerId` | string | may be null |
+| `decisionReason` | string | may be null |
+| `decidedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `history` | object[] |  |
+| `history[].at` | string (date-time) | may be null |
+| `history[].actorId` | string | may be null |
+| `history[].actorName` | string | may be null |
+| `history[].actorEmail` | string | may be null |
+| `history[].organizationId` | string | may be null |
+| `history[].machine` | string | may be null |
+| `history[].event` | string | may be null |
+| `history[].from` | string | may be null |
+| `history[].to` | string | may be null |
+| `history[].reason` | string | may be null |
+| `history[].data` | object |  |
+| `history[].id` | string | 24 characters |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+
+
+### Send a code to a shop’s number, to take it over
+
+<span className="nh-method nh-method--post">POST</span> `/v1/onboarding/claims/code`
+
+For a shop a seller brought on by phone, with no administrator yet (N-044). The code goes to the number through one of its suppliers’ messages and works for 15 minutes. People who work for one of its suppliers are refused.
+
+**Who can call it:** People signed in (not API clients)
+
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `phone` * | string | at least 6 characters, at most 24 characters |
+| `country` | string | ISO 3166-1 alpha-2. 2 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `phone` * | string |  |
+| `channel` * | `whatsapp` · `sms` · `email` |  |
+| `expiresAt` * | string (date-time) |  |
 

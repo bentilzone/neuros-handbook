@@ -5,7 +5,7 @@ sidebar_position: 20
 
 <PersonaBadge who={['operator']} permission="platform:org:review" />
 
-A business that wants to trade on Neuros applies with its details, what it intends to do, and its documents. Applications is where reviewers decide. See [joining Neuros](../02-features/10-joining-neuros.mdx).
+A business that wants to trade on Neuros applies with its details, what it intends to do, and its documents. Someone taking over a shop a seller set up by phone files a **claim** here too, marked *Taking over a shop*. Applications is where reviewers decide. See [joining Neuros](../02-features/10-joining-neuros.mdx).
 
 <Shot id="operator/applications/list" />
 
@@ -40,3 +40,9 @@ Approving creates the company's workspace and its standard roles, and makes the 
 ]} />
 
 Approving needs a session signed in with two-step verification.
+
+## Approve a claim
+
+A claim is someone taking over a [managed reseller](../01-glossary/45-ai-agents.mdx#managed-reseller): a shop a seller invited by phone, which has orders and suppliers but no users. The claim shows the shop's number and when the code Neuros sent to it was entered. The code went through one of the shop's suppliers' chats, so check who the applicant is before you approve: Neuros already refuses anyone who works for one of those suppliers.
+
+Approving a claim creates nothing new. The applicant becomes the shop's system administrator, the shop keeps its orders, suppliers and history, and any other claim on it is declined. There are no capabilities to choose. Like any company, the shop then chooses a plan before its menu opens.
