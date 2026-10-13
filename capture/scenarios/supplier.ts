@@ -9,5 +9,6 @@ export default walk({
   buy: false,
   stock: true,
   priceList: 'Distributors',
+  promotion: 'Dry season valve offer',
   journalWaiting: 'Workshop rent, October',
 });

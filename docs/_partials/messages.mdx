@@ -41,6 +41,9 @@ Each message has Neuros’s text. You can write your own for any of them.
 | On its way | The delivery is dispatched | Update |
 | Delivered | The delivery is recorded as delivered | Update |
 | Invoice issued | You invoice them | Update |
+| Case update | You write on a case they opened | Update |
+| Case resolved | You, or Neuros from the records, resolve a case they opened | Update |
+| An offer | You choose **Tell resellers** on a promotion (Pricing → Promotions) | Marketing |
 
 The category is the one WhatsApp prices messages by.
 
@@ -76,4 +79,4 @@ Every receipt and reply that reached your inbox, and what Neuros did with it. Ea
 On <PageLink who={props.who} page="customers">Customers</PageLink>, a customer your agent knows has two switches under **Your agent**:
 
 - **Messages to their chat**: off stops every message to them, the invitation code included. It also shows when the reseller turned it off or on themselves.
-- **Marketing**: whether they agreed to marketing messages. Neuros sends none yet; campaigns will need it.
+- **Marketing**: whether they agreed to marketing messages. Only then do they get your promotions when you choose **Tell resellers**, and never more than one marketing message from you a week.

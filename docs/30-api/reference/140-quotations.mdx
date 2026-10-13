@@ -65,7 +65,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -185,7 +185,7 @@ For a buyer you have an approved relationship with, or in answer to its request 
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -291,7 +291,7 @@ For a buyer you have an approved relationship with, or in answer to its request 
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -417,7 +417,7 @@ Only a draft. Changing lines or freight prices the whole quotation again.
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -529,7 +529,7 @@ Only the latest sent revision, before it expires. The request it answers closes.
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -641,7 +641,7 @@ The seller sees your reason and may send a revision.
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -764,7 +764,7 @@ object
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |
@@ -876,7 +876,7 @@ Fixes its validity (your quote validity days unless set) and supersedes the revi
 | `lines[].quantity` | string | may be null |
 | `lines[].unit` | string | may be null |
 | `lines[].unitPrice` | object | may be null |
-| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` | may be null |
+| `lines[].priceSource` | `quotation` · `contract` · `price_list` · `standard` · `promotion` | may be null |
 | `lines[].net` | object | may be null |
 | `lines[].taxCodeId` | string | 24 characters, may be null |
 | `lines[].taxCode` | string | may be null |

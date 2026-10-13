@@ -30,7 +30,18 @@ A draft is your basket with one supplier; drafts with several suppliers can be s
 
 {props.who === 'reseller' && <Shot id="reseller/buying-orders/edit" />}
 
-The draft is yours alone until you **Submit** it. Submitting checks again that your account is open, that the offers are still on sale, and their prices. If a price changed, the draft shows the new price and asks you to submit again, so you never buy at a price you did not see.
+### Offers on your order
+
+Your supplier's promotions apply as the draft is priced:
+- line offers in each unit price;
+- an order discount spread over the lines, shown under each line's amount;
+- free goods as a line marked **Free**, at zero.
+
+**Offers applied** lists each one in words, with what it saves. When a draft is close to an order discount, it says how much more you need to add to get it. A free line is the offer's: you cannot edit it. It comes back, or goes, when the draft is priced again.
+
+{props.who === 'reseller' && <Shot id="reseller/buying-orders/offers" />}
+
+The draft is yours alone until you **Submit** it. Submitting checks again that your account is open, that the offers are still on sale, and their prices and offers. If a price changed, or an offer ran out of budget meanwhile, the draft shows the new total and asks you to submit again, so you never buy at a price you did not see. A promotion counts against its budget only once you submit; if your order is rejected or cancelled, its share goes back.
 
 ## Approval above your limit
 

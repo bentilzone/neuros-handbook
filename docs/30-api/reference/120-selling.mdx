@@ -8,7 +8,7 @@ description: "Offers, price lists, contract prices, promotions and the price che
 
 Offers, price lists, contract prices, promotions and the price check.
 
-This page lists the 21 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 24 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -32,8 +32,11 @@ This page lists the 21 operations in this area, generated from the engine's Open
 | [POST `/v1/selling/pricing/preview`](#what-would-this-buyer-pay--with-every-step-explained) | What would this buyer pay? — with every step explained | `pricelist:read` |
 | [GET `/v1/selling/promotions`](#promotions) | Promotions | `pricelist:read` |
 | [POST `/v1/selling/promotions`](#create-a-promotion) | Create a promotion | `pricelist:manage` |
+| [GET `/v1/selling/promotions/{id}`](#a-promotion-with-what-its-budget-has-given) | A promotion, with what its budget has given | `pricelist:read` |
+| [POST `/v1/selling/promotions/{id}/announce`](#tell-resellers-who-qualify-by-chat) | Tell resellers who qualify, by chat | `pricelist:manage` |
 | [POST `/v1/selling/promotions/{id}/end`](#end-a-promotion) | End a promotion | `pricelist:manage` |
 | [POST `/v1/selling/promotions/{id}/pause`](#pause-a-promotion) | Pause a promotion | `pricelist:manage` |
+| [GET `/v1/selling/promotions/{id}/redemptions`](#the-orders-a-promotion-went-on) | The orders a promotion went on | `pricelist:read` |
 | [POST `/v1/selling/promotions/{id}/resume`](#resume-a-promotion) | Resume a promotion | `pricelist:manage` |
 
 ## Details
@@ -815,6 +818,10 @@ Precedence: quotation override &gt; contract price &gt; relationship price list 
 | `priceListEntryId` * | string | may be null |
 | `contractPriceId` * | string | may be null |
 | `promotionIds` * | string[] |  |
+| `promotions` * | object[] |  |
+| `promotions[].promotionId` * | string |  |
+| `promotions[].name` * | string |  |
+| `promotions[].unitSaving` * | string |  |
 | `taxCodeId` * | string | may be null |
 | `steps` * | object[] |  |
 | `steps[].step` * | string |  |
@@ -845,13 +852,41 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `name` | string | may be null |
 | `offerIds` | object[] |  |
 | `audience` | `all` · `relationship_buyers` | may be null |
-| `kind` | `percent_off` · `amount_off` · `fixed_price` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
 | `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
 | `validFrom` | string (date-time) | may be null |
 | `validTo` | string (date-time) | may be null |
 | `stackable` | boolean | may be null |
 | `priority` | number | may be null |
 | `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `organizationId` | string | 24 characters, may be null |
@@ -863,6 +898,8 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 
 <span className="nh-method nh-method--post">POST</span> `/v1/selling/promotions`
 
+Line kinds change a unit price: percent_off, amount_off, fixed_price (value per offer unit) and volume_tiers (percent off from each quantity). Cart kinds look at the whole order, before tax: order_discount (a percent or an amount once the order reaches minOrderValue), buy_x_get_y (getQty of getOfferId free for every buyQty of the offers) and bundle (percent off offers bought together, at least buyQty of each). Eligibility narrows who gets it by your tier and zone for a customer, named customers, first order or dormant days; budget caps orders in all, per customer, per day and the discount given. Amounts on a cart kind are in your functional currency unless you name another (N-041).
+
 **Who can call it:** People and API clients · **Scope:** `pricelist:manage`
 
 
@@ -871,10 +908,31 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | Field | Type | Notes |
 |---|---|---|
 | `name` * | string | at most 100 characters |
+| `kind` * | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` |  |
 | `offerIds` | string[] |  |
 | `audience` | `all` · `relationship_buyers` |  |
-| `kind` * | `percent_off` · `amount_off` · `fixed_price` |  |
-| `value` * | string | Decimal as a string, e.g. "250000.00" |
+| `value` | string | Decimal as a string, e.g. "250000.00". may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string (one of 155) | ISO 4217 currency code. may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` * | number | ≥ 1 |
+| `tiers[].percent` * | string | Decimal as a string, e.g. "250000.00" |
+| `minOrderValue` | string | Decimal as a string, e.g. "250000.00". may be null |
+| `buyQty` | number | ≥ 1, may be null |
+| `getQty` | number | ≥ 1, may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | ≥ 1, may be null |
+| `eligibility` | object |  |
+| `eligibility.tiers` | string[] |  |
+| `eligibility.zones` | string[] |  |
+| `eligibility.buyerOrganizationIds` | string[] |  |
+| `eligibility.firstOrder` | boolean |  |
+| `eligibility.dormantDays` | integer | ≥ 1, ≤ 3650, may be null |
+| `budget` | object |  |
+| `budget.maxRedemptions` | integer | ≥ 1, ≤ 1000000, may be null |
+| `budget.maxPerBuyer` | integer | ≥ 1, ≤ 1000000, may be null |
+| `budget.maxPerDay` | integer | ≥ 1, ≤ 1000000, may be null |
+| `budget.maxDiscount` | string | Decimal as a string, e.g. "250000.00". may be null |
 | `validFrom` * | string (date-time) |  |
 | `validTo` * | string (date-time) |  |
 | `stackable` | boolean |  |
@@ -887,18 +945,127 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `name` | string | may be null |
 | `offerIds` | object[] |  |
 | `audience` | `all` · `relationship_buyers` | may be null |
-| `kind` | `percent_off` · `amount_off` · `fixed_price` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
 | `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
 | `validFrom` | string (date-time) | may be null |
 | `validTo` | string (date-time) | may be null |
 | `stackable` | boolean | may be null |
 | `priority` | number | may be null |
 | `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `organizationId` | string | 24 characters, may be null |
 | `__v` | number | may be null |
 | `id` | string | 24 characters |
+
+
+### A promotion, with what its budget has given
+
+<span className="nh-method nh-method--get">GET</span> `/v1/selling/promotions/{id}`
+
+**Who can call it:** People and API clients · **Scope:** `pricelist:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `name` | string | may be null |
+| `offerIds` | object[] |  |
+| `audience` | `all` · `relationship_buyers` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
+| `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
+| `validFrom` | string (date-time) | may be null |
+| `validTo` | string (date-time) | may be null |
+| `stackable` | boolean | may be null |
+| `priority` | number | may be null |
+| `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+
+
+### Tell resellers who qualify, by chat
+
+<span className="nh-method nh-method--post">POST</span> `/v1/selling/promotions/{id}/announce`
+
+Queues the promotion_offer marketing message to each reseller your agent knows who agreed to marketing and qualifies: once per promotion each, and not to one who had a marketing message from you in the last 7 days. Quiet hours and consent apply when each is sent (N-037).
+
+**Who can call it:** People and API clients · **Scope:** `pricelist:manage`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `promotionId` * | string |  |
+| `queued` * | number |  |
+| `notEligible` * | number |  |
+| `recentlyMessaged` * | number |  |
 
 
 ### End a promotion
@@ -918,13 +1085,41 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `name` | string | may be null |
 | `offerIds` | object[] |  |
 | `audience` | `all` · `relationship_buyers` | may be null |
-| `kind` | `percent_off` · `amount_off` · `fixed_price` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
 | `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
 | `validFrom` | string (date-time) | may be null |
 | `validTo` | string (date-time) | may be null |
 | `stackable` | boolean | may be null |
 | `priority` | number | may be null |
 | `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `organizationId` | string | 24 characters, may be null |
@@ -949,13 +1144,80 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `name` | string | may be null |
 | `offerIds` | object[] |  |
 | `audience` | `all` · `relationship_buyers` | may be null |
-| `kind` | `percent_off` · `amount_off` · `fixed_price` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
 | `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
 | `validFrom` | string (date-time) | may be null |
 | `validTo` | string (date-time) | may be null |
 | `stackable` | boolean | may be null |
 | `priority` | number | may be null |
 | `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `organizationId` | string | 24 characters, may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+
+
+### The orders a promotion went on
+
+<span className="nh-method nh-method--get">GET</span> `/v1/selling/promotions/{id}/redemptions`
+
+One row per order, written when the order is placed; `reversed` once the order was rejected or cancelled and the budget given back.
+
+**Who can call it:** People and API clients · **Scope:** `pricelist:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+| `page` | query | integer | ≥ 1, default `1` |
+| `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
+
+**Response** `200`
+
+A page: `data` holds the items below, `meta` the page, limit, total and total pages.
+
+| Field | Type | Notes |
+|---|---|---|
+| `promotionId` | string | 24 characters, may be null |
+| `orderId` | string | 24 characters, may be null |
+| `orderNumber` | string | may be null |
+| `buyerOrganizationId` | string | 24 characters, may be null |
+| `discount` | object | may be null |
+| `discount.amount` | string | may be null |
+| `discount.currency` | string (one of 155) | may be null |
+| `discount.id` | string | 24 characters |
+| `freeQuantity` | string | may be null |
+| `day` | string | may be null |
+| `status` | `redeemed` · `reversed` | may be null |
+| `reversedAt` | string (date-time) | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `organizationId` | string | 24 characters, may be null |
@@ -980,13 +1242,41 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `name` | string | may be null |
 | `offerIds` | object[] |  |
 | `audience` | `all` · `relationship_buyers` | may be null |
-| `kind` | `percent_off` · `amount_off` · `fixed_price` | may be null |
+| `kind` | `percent_off` · `amount_off` · `fixed_price` · `volume_tiers` · `order_discount` · `buy_x_get_y` · `bundle` | may be null |
 | `value` | string | may be null |
+| `valueType` | `percent` · `amount` | may be null |
+| `currency` | string | may be null |
+| `tiers` | object[] |  |
+| `tiers[].minQty` | number | may be null |
+| `tiers[].percent` | string | may be null |
+| `tiers[].id` | string | 24 characters |
+| `minOrderValue` | string | may be null |
+| `buyQty` | number | may be null |
+| `getQty` | number | may be null |
+| `getOfferId` | string | 24 characters, may be null |
+| `maxFreePerOrder` | number | may be null |
+| `eligibility` | object | may be null |
+| `eligibility.tiers` | object[] |  |
+| `eligibility.zones` | object[] |  |
+| `eligibility.buyerOrganizationIds` | object[] |  |
+| `eligibility.firstOrder` | boolean | may be null |
+| `eligibility.dormantDays` | number | may be null |
+| `budget` | object | may be null |
+| `budget.maxRedemptions` | number | may be null |
+| `budget.maxPerBuyer` | number | may be null |
+| `budget.maxPerDay` | number | may be null |
+| `budget.maxDiscount` | string | may be null |
+| `redemptions` | number | may be null |
+| `discountGiven` | string | may be null |
+| `exhaustedAt` | string (date-time) | may be null |
+| `explanation` | string | may be null |
 | `validFrom` | string (date-time) | may be null |
 | `validTo` | string (date-time) | may be null |
 | `stackable` | boolean | may be null |
 | `priority` | number | may be null |
 | `status` | `active` · `paused` · `ended` | may be null |
+| `announcedAt` | string (date-time) | may be null |
+| `announcedTo` | number | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `organizationId` | string | 24 characters, may be null |
