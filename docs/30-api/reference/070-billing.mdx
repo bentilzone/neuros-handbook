@@ -8,7 +8,7 @@ description: "Your plan, usage, invoices and payments to Neuros."
 
 Your plan, usage, invoices and payments to Neuros.
 
-This page lists the 11 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 12 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -18,6 +18,7 @@ This page lists the 11 operations in this area, generated from the engine's Open
 | [PATCH `/v1/billing/contact`](#who-receives-invoices-and-reminders-and-the-reference-to-quote) | Who receives invoices and reminders, and the reference to quote | `billing:manage` |
 | [GET `/v1/billing/invoices`](#your-invoices-from-neuros) | Your invoices from Neuros | `billing:read` |
 | [GET `/v1/billing/invoices/{id}`](#one-of-your-invoices) | One of your invoices | `billing:read` |
+| [POST `/v1/billing/invoices/{id}/pay-online`](#pay-one-of-your-invoices-online-a-checkout-link-at-the-payment-provider) | Pay one of your invoices online: a checkout link at the payment provider | `billing:manage` |
 | [GET `/v1/billing/invoices/{id}/pdf`](#one-of-your-invoices-as-a-pdf) | One of your invoices as a PDF | `billing:read` |
 | [GET `/v1/billing/payments`](#payments-neuros-has-received-from-you) | Payments Neuros has received from you | `billing:read` |
 | [GET `/v1/billing/payments/{id}/pdf`](#a-receipt-for-one-of-your-payments-as-a-pdf) | A receipt for one of your payments, as a PDF | `billing:read` |
@@ -135,6 +136,7 @@ This page lists the 11 operations in this area, generated from the engine's Open
 | `recentInvoices[].__v` | number | may be null |
 | `recentInvoices[].id` | string | 24 characters |
 | `recentInvoices[].organizationName` | string | may be null |
+| `onlinePayment` * | boolean | Whether invoices can be paid online (N-047); false until a payment provider is connected |
 
 
 ### Who receives invoices and reminders, and the reference to quote
@@ -348,6 +350,31 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `creditNotes[].amount` * | object |  |
 | `creditNotes[].reason` * | string |  |
 | `creditNotes[].issueDate` * | string (date-time) |  |
+
+
+### Pay one of your invoices online: a checkout link at the payment provider
+
+<span className="nh-method nh-method--post">POST</span> `/v1/billing/invoices/{id}/pay-online`
+
+For the invoice’s balance. The link works for an hour; asking again while it works returns the same one. The payment is recorded only when the provider confirms it (N-047), then shows under your payments. 503 `ONLINE_PAYMENT_OFF` until a payment provider is connected: pay by transfer to the account on the invoice.
+
+**Who can call it:** People and API clients · **Scope:** `billing:manage`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `id` * | path | string | 24 characters |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `reference` * | string |  |
+| `url` * | string |  |
+| `status` * | `open` · `paid` · `failed` · `expired` |  |
+| `amount` * | object |  |
+| `amount.amount` * | string |  |
+| `amount.currency` * | string | 3 characters |
+| `expiresAt` * | string (date-time) |  |
 
 
 ### One of your invoices as a PDF

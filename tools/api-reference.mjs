@@ -42,6 +42,7 @@ const AREAS = [
   ['Goods receipts', 'goods-receipts', 'Receiving against purchase orders and orders on Neuros: exceptions, substitutes, posting into stock, voiding.'],
   ['Landed costs', 'landed-costs', 'Freight, duty and other charges spread over receipts, capitalised or expensed.'],
   ['Supplier invoices', 'supplier-invoices', 'Supplier invoices typed in or taken in from Neuros, three-way matched and approved.'],
+  ['Supplier credit notes', 'supplier-credit-notes', 'What suppliers take off their approved invoices: lowering what is owed, or held as an advance.'],
   ['Supplier payments', 'supplier-payments', 'Payments to suppliers, scheduled or recorded, advances, and payables ageing.'],
   ['Webhooks', 'webhooks', 'Endpoints that receive signed, id-only deliveries of events; deliveries, retries, replay, secret rotation and the test receiver.'],
   ['Imports', 'imports', 'CSV imports of offers, products and opening stock: templates, signed upload, validation, rows, confirm.'],

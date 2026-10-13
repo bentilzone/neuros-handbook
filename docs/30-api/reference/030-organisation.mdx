@@ -92,12 +92,15 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | `settings.unpaidCancelDays` | number | may be null |
 | `settings.matchPriceTolerancePercent` | number | may be null |
 | `settings.matchQuantityTolerancePercent` | number | may be null |
+| `settings.financialYearStartMonth` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `managed` | object | may be null |
 | `managed.byOrganizationId` | string | 24 characters, may be null |
 | `managed.phone` | string | may be null |
 | `managed.claimedAt` | string (date-time) | may be null |
+| `managed.claimedBy` | string | 24 characters, may be null |
+| `managed.claim` | object | may be null |
 | `collectionAccount` | object | may be null |
 | `collectionAccount.bankName` | string | may be null |
 | `collectionAccount.accountName` | string | may be null |
@@ -201,12 +204,15 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | `settings.unpaidCancelDays` | number | may be null |
 | `settings.matchPriceTolerancePercent` | number | may be null |
 | `settings.matchQuantityTolerancePercent` | number | may be null |
+| `settings.financialYearStartMonth` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `managed` | object | may be null |
 | `managed.byOrganizationId` | string | 24 characters, may be null |
 | `managed.phone` | string | may be null |
 | `managed.claimedAt` | string (date-time) | may be null |
+| `managed.claimedBy` | string | 24 characters, may be null |
+| `managed.claim` | object | may be null |
 | `collectionAccount` | object | may be null |
 | `collectionAccount.bankName` | string | may be null |
 | `collectionAccount.accountName` | string | may be null |
@@ -295,12 +301,15 @@ Your AI agent gives it to resellers with the order number as the reference. Chan
 | `settings.unpaidCancelDays` | number | may be null |
 | `settings.matchPriceTolerancePercent` | number | may be null |
 | `settings.matchQuantityTolerancePercent` | number | may be null |
+| `settings.financialYearStartMonth` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `managed` | object | may be null |
 | `managed.byOrganizationId` | string | 24 characters, may be null |
 | `managed.phone` | string | may be null |
 | `managed.claimedAt` | string (date-time) | may be null |
+| `managed.claimedBy` | string | 24 characters, may be null |
+| `managed.claim` | object | may be null |
 | `collectionAccount` | object | may be null |
 | `collectionAccount.bankName` | string | may be null |
 | `collectionAccount.accountName` | string | may be null |
@@ -337,6 +346,7 @@ Your AI agent gives it to resellers with the order number as the reference. Chan
 | `matchPriceTolerancePercent` | number | How far a supplier invoice’s unit price may differ from the purchase order’s and still match (2 if never set). ≥ 0, ≤ 50 |
 | `matchQuantityTolerancePercent` | number | How far an invoiced quantity may exceed what was received and still match (0: exact). ≥ 0, ≤ 50 |
 | `timezone` | string (one of 418) | IANA zone, e.g. Africa/Accra |
+| `financialYearStartMonth` | integer | The month your financial year starts in: 1 (January, the calendar year) unless set; 4 runs April to March. A year is named by the calendar year it ends in. Fixed once a year has been closed. ≥ 1, ≤ 12 |
 
 **Response** `200`
 
@@ -397,12 +407,15 @@ Your AI agent gives it to resellers with the order number as the reference. Chan
 | `settings.unpaidCancelDays` | number | may be null |
 | `settings.matchPriceTolerancePercent` | number | may be null |
 | `settings.matchQuantityTolerancePercent` | number | may be null |
+| `settings.financialYearStartMonth` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
 | `managed` | object | may be null |
 | `managed.byOrganizationId` | string | 24 characters, may be null |
 | `managed.phone` | string | may be null |
 | `managed.claimedAt` | string (date-time) | may be null |
+| `managed.claimedBy` | string | 24 characters, may be null |
+| `managed.claim` | object | may be null |
 | `collectionAccount` | object | may be null |
 | `collectionAccount.bankName` | string | may be null |
 | `collectionAccount.accountName` | string | may be null |
