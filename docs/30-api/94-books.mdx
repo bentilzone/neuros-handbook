@@ -1,0 +1,56 @@
+---
+title: The books (Zoho Billing)
+sidebar_position: 94.6
+description: How Neuros copies its invoices and payments to Zoho Billing, and how Zoho reports a payment taken there.
+---
+
+Neuros keeps its own accounting outside Neuros, in Zoho Billing. Neuros stays the record: it meters usage, issues the invoices and records the payments, and the books get a copy of each. This page is for whoever connects the operator's Zoho Billing organisation to Neuros.
+
+## What Neuros sends
+
+When an invoice is issued or a payment recorded, Neuros copies it to Zoho Billing. A background job copies anything still waiting every 5 minutes. A failure is tried again, waiting longer each time, up to 10 times. The operator can then **Send again** from the console.
+
+- **Customer:** one per company, by its legal name. Neuros keeps Zoho's customer id once it has it.
+- **Invoice:** Neuros's number goes in Zoho's `reference_number`. Each line goes at its net amount, and tax as a line of its own, so Zoho's total is Neuros's. Before creating one, Neuros looks for an invoice with that reference, so a retry never makes a second.
+- **Payment:** applied to the invoices it paid, with Neuros's receipt number as its reference. It waits until those invoices are in Zoho.
+
+Voids and credit notes are not copied yet.
+
+## Where Zoho posts
+
+`POST $NEUROS_API/v1/inbound/books`, where `$NEUROS_API` is <ApiBase />. Set up in Zoho Billing as a webhook on the payment event, with a secret.
+
+The request is signed: `X-Zoho-Webhook-Signature` is the hex HMAC-SHA256 of the raw body with the books webhook secret. A missing or wrong signature gets `401`. Until the secret is set on the server, every request gets `503 BOOKS_NOT_CONFIGURED`.
+
+A valid request is stored before anything else happens and answered `202` with `{ "received": true, "duplicate": false }`. The same `event_id` sent again is not stored twice: the answer says `"duplicate": true`. A background job processes stored events in order and retries failures.
+
+```json title="A payment taken in Zoho"
+{
+  "event_id": "2000000123456",
+  "event_type": "payment_thankyou",
+  "data": {
+    "payment": {
+      "payment_id": "2000000654321",
+      "amount": 48375,
+      "currency_code": "NGN",
+      "date": "2026-10-13",
+      "payment_mode": "banktransfer",
+      "invoices": [{ "invoice_id": "2000000111111", "amount_applied": 48375 }]
+    }
+  }
+}
+```
+
+What Neuros does with it:
+- It finds the company by the invoices paid: each must be one Neuros copied there.
+- It records the payment once per `payment_id`, applied to those invoices, never more than each still owes. Anything over is kept as the company's credit.
+- A payment Neuros copied to Zoho, reported back, changes nothing.
+- A company that was read-only for non-payment is restored at once, as with any payment.
+
+| Answer | Why |
+|---|---|
+| `202` | Stored (or already stored) |
+| `401 SIGNATURE_INVALID` | The signature is missing or does not match |
+| `422 INBOUND_INVALID` | Not JSON, or a field is missing |
+| `422 UNKNOWN_INVOICE` | None of the invoices paid is one Neuros copied |
+| `503 BOOKS_NOT_CONFIGURED` | The books webhook secret is not set |

@@ -30,6 +30,22 @@ Each plan shows its prices, how many companies hold it, and what it includes. **
   { name: 'Reason', required: true, meaning: 'Why you made the change.', implications: 'Kept in the audit log.' },
 ]} />
 
+### Usage prices
+
+<Shot id="operator/plans/usage-prices" />
+
+What usage costs on the plan, one rate card per currency (**Usage prices** on a plan's row). It applies from the next month's close; months already closed keep their statements. See [usage](../02-features/90-plans-and-billing.mdx#usage).
+
+<FieldTable fields={[
+  { name: 'Price usage in …', meaning: 'Adds a rate card in one of the plan’s currencies. **Another currency** adds one more.', implications: 'A company is billed for usage in its subscription’s currency. Without a card in it, its usage is shown, not billed.' },
+  { name: 'Add a meter', meaning: 'Orders, active resellers, agent tool calls, order, marketing or code messages, escrow releases.', implications: 'A meter left out is counted and shown on the company’s bill, never charged.' },
+  { name: 'Included a month', meaning: 'How many are free each month.', implications: 'Companies are told at 80% and 100% of it.' },
+  { name: 'Price each, over the allowance', meaning: 'What each one over costs. **Add a tier** for a different price past a number over the allowance.', rules: 'Only the last tier takes the rest; each tier reaches further than the one before.' },
+  { name: 'Transaction fee: Percent, Plus, At least, At most', meaning: 'On each accepted order not paid through escrow: a percent of its total plus a flat amount, kept between the two bounds.', others: 'The company sees each month’s fees on its usage.', implications: 'Escrow orders pay the bank’s fee at release instead (Partner bank).' },
+  { name: 'Monthly minimum', meaning: 'The least a month’s usage invoice comes to.', rules: 'Blank for none.' },
+  { name: 'Reason', required: true, meaning: 'Why you changed the prices.', implications: 'Kept in the audit log.' },
+]} />
+
 ## Add-ons
 
 <Shot id="operator/plans/add-ons" />

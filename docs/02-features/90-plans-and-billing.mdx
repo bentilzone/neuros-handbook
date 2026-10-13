@@ -25,6 +25,28 @@ The first plan can start with a [trial](../01-glossary/80-plans-and-billing.mdx#
 
 When you reach a limit, Neuros tells you which add-on would lift it.
 
+## Usage
+
+Besides its plan, a company can pay for what it uses: orders, agent tool calls, messages to resellers. It also pays a [transaction fee](../01-glossary/80-plans-and-billing.mdx#transaction-fee) on orders not paid through escrow. What is charged, and from how many, is set on the plan's [rate card](../01-glossary/80-plans-and-billing.mdx#rate-card). A meter with no price there is counted and shown, never billed.
+
+| Meter | Counts |
+|---|---|
+| Orders | Orders your customers placed with you |
+| Active resellers | Customers who placed at least one order in the month |
+| Agent tool calls | Calls your [AI agents](./45-selling-through-agents.mdx) made to Neuros |
+| Order, marketing and code messages | [Messages to resellers](./46-messages-to-resellers.mdx), by kind |
+| Escrow releases | Escrow payments released to you |
+| Order value | What the orders you accepted came to (for information) |
+| Transaction fees | The fee on each accepted order not paid through escrow |
+| Escrow fees | What the bank took at each [escrow release](./47-collections-and-escrow.mdx): shown, never billed again |
+
+How usage is counted and billed:
+- **Once.** Each order, message or release counts once, when it happens, and the record is never changed. A correction by Neuros is a separate record with its reason.
+- **Allowances.** Your plan includes so many of a meter each month. Past 80% and again at 100%, your billing managers are told once.
+- **Prices over the allowance.** A price can fall in steps, for example ₦150 each for the first 600 over and ₦100 after that.
+- **At the end of each month** Neuros writes the month's statement. If anything is owed, it issues one **usage invoice**, taxed and paid like any other. A trial is not billed for usage.
+- **Monthly minimum.** A plan can set one; the invoice is topped up to it.
+
 ## If payment is late
 An unpaid invoice makes the subscription **past due**, then **lapsed**: everything stays visible, but nothing can change until it is paid. Nothing is ever deleted for non-payment or a downgrade.
 
@@ -33,6 +55,7 @@ Under **Platform → Billing**, staff:
 - assign or change a company's plan, add add-ons, cancel at period end;
 - issue invoices, record payments and issue credit notes;
 - maintain the plans and add-ons (prices per currency, limits, features), including custom plans for one company;
-- set billing details: who sells Neuros, tax by country, payment terms, reminders.
+- set billing details: who sells Neuros, tax by country, payment terms, reminders;
+- price usage on each plan, give one company its own prices, see each company's usage and correct it.
 
-Reports give revenue by month, receivables ageing and an export for the operator's own accounting system.
+Reports give revenue by month, receivables ageing and an export for the operator's own accounting system. When Neuros' books are connected (Zoho Billing), every invoice and payment is copied there as it is made. A payment taken in Zoho comes back and is recorded on the invoice once. The invoice in Neuros stays the one that counts.

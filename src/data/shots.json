@@ -1446,8 +1446,15 @@
   "distributor/settings/billing": {
     "file": "distributor/settings/billing.png",
     "width": 1440,
-    "height": 1213,
+    "height": 1275,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "distributor/settings/billing-usage": {
+    "file": "distributor/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1804,
+    "title": "Billing: usage",
     "callouts": []
   },
   "distributor/settings/company": {
@@ -1788,6 +1795,36 @@
     "title": "Billing: reports",
     "callouts": []
   },
+  "operator/billing/usage": {
+    "file": "operator/billing/usage.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: usage",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "This month so far, or one of the eleven before it."
+      },
+      {
+        "n": 2,
+        "text": "What each company’s usage comes to at its rates, the largest first."
+      }
+    ]
+  },
+  "operator/billing/usage-adjust": {
+    "file": "operator/billing/usage-adjust.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Adjust usage",
+    "callouts": []
+  },
+  "operator/billing/usage-company": {
+    "file": "operator/billing/usage-company.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A company’s usage",
+    "callouts": []
+  },
   "operator/catalogue/categories": {
     "file": "operator/catalogue/categories.png",
     "width": 1440,
@@ -1954,6 +1991,13 @@
       }
     ]
   },
+  "operator/plans/usage-prices": {
+    "file": "operator/plans/usage-prices.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Usage prices",
+    "callouts": []
+  },
   "operator/roles/detail": {
     "file": "operator/roles/detail.png",
     "width": 1440,
@@ -2099,6 +2143,13 @@
     "width": 1440,
     "height": 900,
     "title": "New subscription",
+    "callouts": []
+  },
+  "operator/subscriptions/own-prices": {
+    "file": "operator/subscriptions/own-prices.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Own usage prices",
     "callouts": []
   },
   "operator/support/list": {
@@ -2664,6 +2715,13 @@
     "width": 1440,
     "height": 1187,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "reseller/settings/billing-usage": {
+    "file": "reseller/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1396,
+    "title": "Billing: usage",
     "callouts": []
   },
   "reseller/settings/company": {
@@ -3580,6 +3638,13 @@
     "width": 1440,
     "height": 1276,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "supplier/settings/billing-usage": {
+    "file": "supplier/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1729,
+    "title": "Billing: usage",
     "callouts": []
   },
   "supplier/settings/company": {

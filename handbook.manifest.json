@@ -196,7 +196,8 @@
       "20-operator/50-support-access.mdx"
     ],
     "/platform/billing": [
-      "20-operator/60-billing.mdx"
+      "20-operator/60-billing.mdx",
+      "30-api/94-books.mdx"
     ],
     "/platform/subscriptions": [
       "20-operator/70-subscriptions.mdx"
