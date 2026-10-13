@@ -1111,11 +1111,18 @@
     "title": "Payables by age",
     "callouts": []
   },
+  "distributor/payables/credit": {
+    "file": "distributor/payables/credit.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Record a supplier’s credit note",
+    "callouts": []
+  },
   "distributor/payables/detail": {
     "file": "distributor/payables/detail.png",
     "width": 1440,
     "height": 900,
-    "title": "A supplier invoice, matched and approved",
+    "title": "A supplier invoice, approved, part paid and credited",
     "callouts": []
   },
   "distributor/payables/list": {

@@ -35,6 +35,8 @@ A matched invoice is approved with **Approve for payment**. An exception is appr
 ## Record a supplier’s credit note
 When a supplier takes money off an approved invoice (a price corrected, goods sent back, damaged or short), open the invoice and choose **Record a credit note**. It needs supplier_invoice:approve.
 
+<Shot id={`${props.who}/payables/credit`} />
+
 <FieldTable fields={[
   { name: 'Their credit note number', required: true, meaning: 'The number on the supplier’s credit note.', rules: 'The same number from the same supplier is refused a second time.' },
   { name: 'Amount, tax included', required: true, meaning: 'What the supplier takes off, in the invoice’s currency.', rules: 'Up to what the invoice has left to credit.', implications: 'The tax comes off in the invoice’s proportion.' },
