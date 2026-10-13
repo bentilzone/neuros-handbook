@@ -961,7 +961,7 @@
   "distributor/messages/template-edit": {
     "file": "distributor/messages/template-edit.png",
     "width": 1440,
-    "height": 1262,
+    "height": 1324,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -1193,6 +1193,22 @@
       {
         "n": 3,
         "text": "Click a list to add, change or remove its prices."
+      }
+    ]
+  },
+  "distributor/pricing/promotion-detail": {
+    "file": "distributor/pricing/promotion-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A promotion",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Each order it went on and what it gave; a cancelled order gives its share back."
+      },
+      {
+        "n": 2,
+        "text": "To resellers who qualify and agreed to marketing, once each."
       }
     ]
   },
@@ -1479,7 +1495,7 @@
   "distributor/settings/notifications": {
     "file": "distributor/settings/notifications.png",
     "width": 1440,
-    "height": 1352,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2008,7 +2024,7 @@
   "operator/settings/notifications": {
     "file": "operator/settings/notifications.png",
     "width": 1440,
-    "height": 1217,
+    "height": 1278,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2143,7 +2159,7 @@
   "reseller/basket/list": {
     "file": "reseller/basket/list.png",
     "width": 1440,
-    "height": 900,
+    "height": 980,
     "title": "Basket",
     "callouts": [
       {
@@ -2310,9 +2326,25 @@
   "reseller/buying-orders/new": {
     "file": "reseller/buying-orders/new.png",
     "width": 1440,
-    "height": 927,
+    "height": 1085,
     "title": "New order",
     "callouts": []
+  },
+  "reseller/buying-orders/offers": {
+    "file": "reseller/buying-orders/offers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Offers on your order",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Free goods an offer gave: a line at zero, delivered with the rest."
+      },
+      {
+        "n": 2,
+        "text": "Each offer in words, and what it saved you."
+      }
+    ]
   },
   "reseller/buying-orders/shipment": {
     "file": "reseller/buying-orders/shipment.png",
@@ -2679,7 +2711,7 @@
   "reseller/settings/notifications": {
     "file": "reseller/settings/notifications.png",
     "width": 1440,
-    "height": 1352,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -3294,7 +3326,7 @@
   "supplier/messages/template-edit": {
     "file": "supplier/messages/template-edit.png",
     "width": 1440,
-    "height": 1262,
+    "height": 1324,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -3447,6 +3479,13 @@
       }
     ]
   },
+  "supplier/pricing/promotion-detail": {
+    "file": "supplier/pricing/promotion-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A promotion",
+    "callouts": []
+  },
   "supplier/pricing/promotion-new": {
     "file": "supplier/pricing/promotion-new.png",
     "width": 1440,
@@ -3588,7 +3627,7 @@
   "supplier/settings/notifications": {
     "file": "supplier/settings/notifications.png",
     "width": 1440,
-    "height": 1352,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },

@@ -71,22 +71,51 @@ A contract price is one price agreed with one customer for one offer. It beats t
 
 <Shot id={`${props.who}/pricing/promotions`} />
 
+Each row shows the promotion's terms in words, who gets it, how many orders it has gone on (out of its cap) and when it runs. **Budget used** marks one whose cap is reached. See [Promotions](../02-features/41-promotions.mdx) for how each kind works.
+
 ### New promotion
 
 <Shot id={`${props.who}/pricing/promotion-new`} />
 
 <FieldTable fields={[
-  { name: 'Name', required: true, meaning: 'What you call it, for example "October pump sale".', others: 'Named in the price check when it applies.' },
-  { name: 'Kind', meaning: 'Percent off, amount off, or a fixed price.' },
-  { name: 'Percent / Amount', required: true, meaning: 'How much off, or the fixed price.', rules: "Percent is off the price; an amount is in each offer's currency." },
-  { name: 'Offers', meaning: 'Which offers it covers.', rules: 'Leave empty to cover all your offers.' },
-  { name: 'Who gets it', meaning: 'Every buyer, or approved customers only.' },
+  { name: 'Name', required: true, meaning: 'What you call it, for example "Big basket bonus".', others: 'Named on orders and in the price check when it applies.' },
+  { name: 'Kind', meaning: 'Percent off, amount off, fixed price, volume discount, order discount, buy X get Y free, or bundle.', implications: 'The first four change a unit price; the last three look at the whole order, before tax.' },
+  { name: 'Percent off', required: true, meaning: 'For percent off and bundles: how much off the price.', rules: 'More than 0, at most 100.' },
+  { name: 'Amount off a unit / Price a unit', required: true, meaning: 'For amount off and fixed price.', rules: "In each offer's own currency and unit." },
+  { name: 'Percent off from each quantity', required: true, meaning: 'For a volume discount: from which quantity on one line, how much off.', rules: "Quantities in each offer's selling unit; each quantity once." },
+  { name: 'A percent / An amount', meaning: 'For an order discount: whether it takes a percent of the order or an amount off.', rules: 'An amount starts in your company’s currency.' },
+  { name: 'Once the order reaches', meaning: 'For an order discount: the order value it starts at.', implications: 'Customers close to it are told how much more they need.', rules: 'Before tax, after each line’s own price. Empty for any order.' },
+  { name: 'Buy / Get free', required: true, meaning: 'For buy X get Y: for every so many bought of the offers, so many free.', implications: 'The free goods are a line on the order, at zero, reserved and delivered like the rest.' },
+  { name: 'Offers', meaning: 'Which offers it covers; for buy X get Y, the offers to buy; for a bundle, the offers bought together.', rules: 'Empty covers all your offers (not for buy X get Y or a bundle). A bundle needs at least two.' },
+  { name: 'At least, of each', meaning: 'For a bundle: how many of each offer must be on the order.', rules: 'Empty means one of each.' },
+  { name: 'Free offer', meaning: 'For buy X get Y: what is given.', rules: 'The offer bought if empty.' },
+  { name: 'Most free an order', meaning: 'For buy X get Y: a cap per order.', rules: 'Empty for no cap.' },
+  { name: 'Audience', meaning: 'Every buyer, or approved customers only.', implications: 'Naming any condition below makes it approved customers only.' },
+  { name: 'Only these tiers / zones', meaning: 'Your tier or delivery zone for a customer, as set on their profile under Customers.', others: 'Customers never see your tiers or zones.' },
+  { name: 'Only these customers', meaning: 'Named customers only.', rules: 'Customers with an account with you.' },
+  { name: 'First order only', meaning: 'A customer who has never placed an order with you.' },
+  { name: 'Quiet for at least', meaning: 'A customer with no order placed in that many days.' },
+  { name: 'Orders in all / Per customer / Per day', meaning: 'Caps on how many orders it goes on.', implications: 'An order counts when it is placed; a rejected or cancelled one gives its share back.', rules: 'Whole numbers; empty for no cap.' },
+  { name: 'Discount given, at most', meaning: 'A cap on what it takes off in all.', implications: 'Free goods count at the price the customer would have paid. A cart it cannot cover is priced without it.' },
   { name: 'Runs', required: true, meaning: 'The start and end dates.', implications: 'It starts and ends on its own.', rules: 'Both ends are needed.' },
-  { name: 'Stacks with others', meaning: 'Whether it combines with other running promotions.', rules: 'Off: only the best one applies.' },
+  { name: 'Stacks with others', meaning: 'Whether it combines with other running promotions of its sort.', rules: 'Off: only the best one applies.' },
   { name: 'Priority', meaning: 'When promotions stack, the higher priority applies first.' },
 ]} />
 
+Its terms are written out as a sentence when you create it. That is what customers read on their orders and what your AI agent says.
+
+### A promotion
+
+<Shot id={`${props.who}/pricing/promotion-detail`} />
+
+Click a row to open it:
+- its terms in words, who gets it and when it runs;
+- what its budget has given (orders and discount, against each cap);
+- the orders it went on, marked *Given back* once an order was rejected or cancelled.
+
 A running promotion can be **paused**, **resumed** or **ended**. An ended promotion cannot change.
+
+**Tell resellers** sends it to your resellers' chat, as a marketing message, for those who qualify, order through your AI agent and agreed to marketing. Each gets it once, and none more than one marketing message from you a week. See <PageLink who={props.who} page="messages">Messages</PageLink>.
 
 ## Price check
 

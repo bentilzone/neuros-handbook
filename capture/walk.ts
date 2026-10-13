@@ -15,6 +15,8 @@ export interface Walk {
   stock: boolean;
   /** Demo records the walk opens, from seed:trade. */
   priceList?: string;
+  /** A promotion the walk opens in Pricing → Promotions (K5b). */
+  promotion?: string;
   journalWaiting: string;
   /** A seller whose card in the marketplace shows a price worked out for this persona. */
   marketplaceSeller?: string;
@@ -90,6 +92,14 @@ export function walk(w: Walk): Scenario[] {
     shot('pricing/contract-new', '/selling/pricing?tab=contracts', 'New contract price', { steps: click('New contract price') }),
     shot('pricing/promotions', '/selling/pricing?tab=promotions', 'Pricing: promotions'),
     shot('pricing/promotion-new', '/selling/pricing?tab=promotions', 'New promotion', { steps: click('New promotion'), fullPage: true }),
+    ...(w.promotion ? [shot('pricing/promotion-detail', '/selling/pricing?tab=promotions', 'A promotion', {
+      steps: async (p) => { await p.getByText(w.promotion!, { exact: true }).first().click(); },
+      fullPage: true,
+      callouts: !w.agents ? [] : [
+        { n: 1, target: { text: /^Orders \(/ }, text: 'Each order it went on and what it gave; a cancelled order gives its share back.', side: 'left' },
+        { n: 2, target: { role: 'button', name: 'Tell resellers' }, text: 'To resellers who qualify and agreed to marketing, once each.', side: 'left' },
+      ],
+    })] : []),
     shot('pricing/check', '/selling/pricing?tab=check', 'Pricing: price check'),
     shot('quotes/list', '/selling/quotes', 'Quotes', {
       callouts: [
