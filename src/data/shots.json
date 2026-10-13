@@ -1653,6 +1653,18 @@
       }
     ]
   },
+  "distributor/webhooks/auth": {
+    "file": "distributor/webhooks/auth.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An endpoint that sends an API key",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "None by default; Basic, an API key or a Bearer token if your receiver wants one."
+      }
+    ]
+  },
   "distributor/webhooks/detail": {
     "file": "distributor/webhooks/detail.png",
     "width": 1440,
