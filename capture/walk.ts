@@ -30,6 +30,8 @@ export interface Walk {
   integrations?: boolean;
   /** seed:trade gave this persona an AI agent on a WhatsApp number, a reseller who ordered by chat and one still invited (K1). */
   agents?: boolean;
+  /** seed:trade gave this persona two scheduled reports and the trade its selling reports read (K7). */
+  sellingReports?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -461,6 +463,22 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     ...(w.stock ? [shot('reports/inventory-valuation', '/reports?report=inventory_valuation', 'Reports: inventory valuation', { fullPage: true })] : []),
+    ...(w.sellingReports ? [
+      shot('reports/order-funnel', '/reports?report=order_funnel', 'Reports: order funnel', {
+        fullPage: true,
+        callouts: [
+          { n: 1, target: { text: 'Through your AI agents' }, text: 'Orders your agents placed, from cart quote to delivered.', side: 'right' },
+          { n: 2, target: { role: 'tab', name: 'Scheduled' }, text: 'Reports emailed to your team every Monday or on the 1st.', side: 'right' },
+        ],
+      }),
+      shot('reports/scheduled', '/reports?view=scheduled', 'Reports: scheduled', {
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Schedule a report' }, text: 'A report, its period, when it is sent and to whom.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'Send now', nth: 1 }, text: 'Send it as it stands, without moving the next send.', side: 'bottom' },
+        ],
+      }),
+      shot('reports/schedule-new', '/reports?view=scheduled', 'Schedule a report', { steps: click('Schedule a report') }),
+    ] : []),
   ];
 
   const integrations: Scenario[] = [
