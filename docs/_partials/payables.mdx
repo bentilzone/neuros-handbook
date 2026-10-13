@@ -30,7 +30,20 @@ A matched invoice is approved with **Approve for payment**. An exception is appr
 
 <Shot id={`${props.who}/payables/detail`} />
 
-**Void** takes a reason and is possible only before approval.
+**Void** takes a reason and is possible only before approval. After approval, the supplier corrects an invoice with a credit note.
+
+## Record a supplier’s credit note
+When a supplier takes money off an approved invoice (a price corrected, goods sent back, damaged or short), open the invoice and choose **Record a credit note**. It needs supplier_invoice:approve.
+
+<FieldTable fields={[
+  { name: 'Their credit note number', required: true, meaning: 'The number on the supplier’s credit note.', rules: 'The same number from the same supplier is refused a second time.' },
+  { name: 'Amount, tax included', required: true, meaning: 'What the supplier takes off, in the invoice’s currency.', rules: 'Up to what the invoice has left to credit.', implications: 'The tax comes off in the invoice’s proportion.' },
+  { name: 'Why', required: true, meaning: 'Price corrected or discounted, goods sent back, damaged, short, or other.' },
+  { name: 'Dated', meaning: 'The date on the supplier’s credit note; today if left.' },
+  { name: 'Note', meaning: 'Anything worth keeping with it.' },
+]} />
+
+The credit comes off what you still owe on the invoice. If the invoice was already paid, the rest is taken back off its payment and held as an **advance** with the supplier, which you apply to its next invoice from the payment (**Apply the advance**). In the books it posts at the invoice’s own exchange rate: what you owe goes down, the input tax comes back off, and the cost of the goods the invoice billed goes down (the stock still on hand, then cost of sales for what has gone; freight for a charges invoice). A credit note cannot be voided.
 
 ## Pay
 **Pay a supplier** on the **Payments** tab either records a payment already made (**Already paid**), or schedules one for a date (**Schedule it**), which someone who approves payments marks paid when it goes out.

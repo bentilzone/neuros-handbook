@@ -2,7 +2,7 @@
 
 <PersonaBadge who={['everyone']} permission="import:run" />
 
-**Imports** bring records in from a CSV file instead of one form at a time: your offers, products for the catalogue, or the stock you held when you started. Every row is checked against the same rules as the form before anything goes in. You confirm, and each row goes in whole or not at all. See [import](../01-glossary/85-integrations.mdx#import).
+**Imports** bring records in from a CSV file instead of one form at a time: your offers, products for the catalogue, the stock you held when you started, your suppliers, resellers to invite by phone, or prices on a price list. Every row is checked against the same rules as the form before anything goes in. You confirm, and each row goes in whole or not at all. See [import](../01-glossary/85-integrations.mdx#import).
 
 Your plan must include Bulk import. At most 10,000 rows per file.
 
@@ -15,6 +15,9 @@ Your plan must include Bulk import. At most 10,000 rows per file.
 | Offers | A company that sells, offer:manage | An offer, as a draft or published |
 | Products | catalogue:contribute | A product contribution, sent to Neuros for review |
 | Opening stock | A company that holds stock, stock:receive | Stock received into a warehouse at its cost, against opening balance equity |
+| Suppliers | A company that buys, supplier:manage | An external supplier. Its bank details are added on the supplier afterwards |
+| Resellers by phone | A company that sells, relationship:manage | A reseller invited by phone to order through your AI agent, with its terms |
+| Price list prices | A company that sells, pricelist:manage | An offer’s prices on a price list, replacing any it had there |
 
 ## Import a file
 
@@ -65,6 +68,42 @@ Your plan must include Bulk import. At most 10,000 rows per file.
 | `unit_cost` * | What each cost you, in your company’s currency; sets the stock’s value in the books |
 | `lot_number`, `expires_at` | For a lot-controlled product, and its expiry date (YYYY-MM-DD) |
 | `serial_numbers` | For a serial-numbered product: one per unit, separated by `|` |
+
+### Supplier columns
+
+| Column | Means |
+|---|---|
+| `code` * | Your own short code for the supplier: letters, digits, dot, dash or underscore; unique in your company |
+| `name` * | The name you know it by |
+| `legal_name`, `tax_id` | Its registered name and tax number, for documents |
+| `country`, `email`, `phone` | Two-letter country code; where purchase orders are emailed; its phone |
+| `currency` | The currency its prices and invoices come in; your company’s currency if empty |
+| `payment_terms_days` | Days after its invoice that payment is due; 30 if empty |
+| `lead_time_days`, `notes` | Usual days from order to delivery; anything worth keeping |
+
+### Reseller columns
+
+| Column | Means |
+|---|---|
+| `phone` * | The shop’s number, with its country code or as a local number in your country. One shop per number across Neuros |
+| `name` * | The shop’s business name |
+| `channels` | `whatsapp`, `sms`, or both separated by `|`; both if empty |
+| `price_list` | The name of your price list it buys from |
+| `payment_mode`, `terms_days` | How it pays by default, and days to pay for credit |
+| `tier`, `zone`, `external_ref` | Your grouping of it, its delivery zone, and its code in your own books |
+
+Each row is an invitation by phone, as **Invite by phone** makes on Customers. The invitation code is not shown in an import: when your messages are on it goes to the reseller’s chat, otherwise give them a new code from their account.
+
+### Price list price columns
+
+| Column | Means |
+|---|---|
+| `price_list` * | The price list’s name, exactly as you named it |
+| `sku` * | Your offer’s SKU; the offer must be in the price list’s currency |
+| `unit` | The unit the price is per; the offer’s unit if empty |
+| `unit_price` * | Price per unit before tax, from a quantity of 1 |
+| `quantity_breaks` | Lower prices from a quantity up, as `quantity=price` separated by `|`, e.g. `10=178000.00|50=175000.00` |
+| `valid_from`, `valid_to` | The first and last day the prices apply (YYYY-MM-DD) |
 
 ## Check and confirm
 
