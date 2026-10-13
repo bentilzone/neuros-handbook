@@ -104,6 +104,7 @@ export default [...walk({
   buy: true,
   stock: true,
   priceList: 'Gold resellers',
+  promotion: 'Big basket bonus',
   journalWaiting: 'Office and warehouse rent, October',
   marketplaceSeller: 'Kumasi Pump Works Ltd',
   disputes: 'selling',

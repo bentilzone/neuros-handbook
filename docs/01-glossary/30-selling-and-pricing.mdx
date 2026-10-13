@@ -36,7 +36,25 @@ A set of prices you give a group of customers, like *Gold resellers*. It lists o
 A negotiated price for one customer on one offer, for a period, often with a minimum quantity and your contract reference. It beats the price list and the standard price, and promotions do not reduce it further.
 
 ### Promotion
-A temporary reduction: a percentage off, an amount off or a fixed price, on chosen offers, for every buyer or approved customers only, between two dates. It can be paused, resumed and ended. If several apply, the single best one is used, plus any marked as stackable.
+A temporary offer, between two dates, for every buyer, approved customers only, or the customers its conditions name (your tier or zone for them, named customers, first order, quiet for some days). It can be paused, resumed and ended, and is written out as a sentence customers read. Line promotions change a unit price: a percent off, an amount off, a fixed price or a [volume discount](#volume-discount). Cart promotions look at the whole order: an [order discount](#order-discount), [free goods](#free-goods) or a [bundle](#bundle). Of each sort, the single best one applies, plus any marked as stackable. See [Promotions](../02-features/41-promotions.mdx).
+
+### Volume discount
+A promotion taking a bigger percent off the more of an offer is on one line, for example 5% from 10 cartons and 8% from 50.
+
+### Order discount
+A promotion taking a percent or an amount off the whole order once it reaches a value, before tax. It is spread over the lines in proportion to their value and shows as each line's discount.
+
+### Free goods
+A promotion giving so many of an offer free for every so many bought ("buy 24, get 1 free"), up to a number per order. They come as a free line on the order, at zero, and are reserved and delivered like the rest.
+
+### Bundle
+A promotion taking a percent off offers bought together in one order, at least so many of each.
+
+### Promotion budget
+The caps a promotion cannot pass: orders in all, per customer, per day, and the discount given (free goods at the price the customer would have paid). Once a cap is reached the promotion stops applying.
+
+### Redemption
+One promotion on one placed order, with what it gave. It counts against the budget, and is given back if the order is rejected or cancelled.
 
 ### Pricing precedence
 The one rule Neuros uses to decide a buyer's price, in this order:
@@ -45,7 +63,7 @@ The one rule Neuros uses to decide a buyer's price, in this order:
 3. The buyer's price list, at the highest quantity break reached.
 4. The offer's standard price or its own quantity break.
 
-Promotions then apply to 3 or 4, never to a contract price. The result is rounded to the currency's precision.
+Line promotions then apply to 3 or 4, never to a contract or quotation price, and cart promotions to the whole order before tax. The result is rounded to the currency's precision.
 
 ### Price check
 A tool on the seller's Offers and Pricing pages that answers "what would this customer pay for this quantity?". It shows each step of the precedence and why it applied, exactly as Neuros will compute it.

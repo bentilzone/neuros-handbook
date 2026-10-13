@@ -65,7 +65,7 @@ initialize, tools/list, tools/call and ping, one message per request. Each tool 
 
 <span className="nh-method nh-method--post">POST</span> `/v1/agent/v1/carts/quote`
 
-Replaces the reseller’s open cart with this seller. Prices, account terms, offers and tax are the seller’s; read the total from the answer. Every tool names who is writing in the x-agent-caller header, as &lt;channel&gt;:&lt;address&gt; (whatsapp:+2348012345678). Only an agent's own token is accepted.
+Replaces the reseller’s open cart with this seller. Prices, account terms, offers (including order discounts and free goods) and tax are the seller’s; read the total from the answer. The offers hold with the prices for 30 minutes, within each offer’s budget. Every tool names who is writing in the x-agent-caller header, as &lt;channel&gt;:&lt;address&gt; (whatsapp:+2348012345678). Only an agent's own token is accepted.
 
 **Who can call it:** People and API clients · **Scope:** `agent:act`
 
@@ -96,9 +96,11 @@ Replaces the reseller’s open cart with this seller. Prices, account terms, off
 | `lines[].quantity` * | string |  |
 | `lines[].unit` * | string | may be null |
 | `lines[].unitPrice` * | object |  |
+| `lines[].discount` * | object | may be null |
 | `lines[].net` * | object |  |
 | `lines[].tax` * | object |  |
 | `lines[].priceSource` * | string |  |
+| `lines[].free` * | boolean | Given free by an offer |
 | `subtotal` * | object |  |
 | `subtotal.amount` * | string |  |
 | `subtotal.currency` * | string | 3 characters |
@@ -108,6 +110,16 @@ Replaces the reseller’s open cart with this seller. Prices, account terms, off
 | `total` * | object |  |
 | `total.amount` * | string |  |
 | `total.currency` * | string | 3 characters |
+| `discountTotal` * | object | may be null |
+| `discountTotal.amount` * | string |  |
+| `discountTotal.currency` * | string | 3 characters |
+| `promotions` * | object[] | Each offer applied and what it saved |
+| `promotions[].name` * | string |  |
+| `promotions[].explanation` * | string |  |
+| `promotions[].saving` * | object |  |
+| `hints` * | object[] | Offers the cart is close to |
+| `hints[].explanation` * | string |  |
+| `hints[].missing` * | object | How much more the cart needs |
 | `currency` * | string |  |
 | `reseller` * | string |  |
 | `say` * | string | Read this to the reseller as it is |
