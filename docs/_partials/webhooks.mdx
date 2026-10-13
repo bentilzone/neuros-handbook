@@ -6,15 +6,25 @@
 
 Your plan must include the Webhooks add-on. For the code your receiver needs, see [Webhooks in the API guide](../30-api/92-webhooks.mdx).
 
+:::note[Not in your plan]
+Without it, **Webhooks** shows a padlock in the sidebar. The page still opens, and endpoints set up under an earlier plan stay there with their deliveries, but nothing is sent: **Add endpoint**, **Send a test event** and **Resume** are off. Whoever manages billing can add it under **Settings → Billing**; events from then on are sent again.
+:::
+
 <Shot id="distributor/webhooks/list" />
 
 ## Add an endpoint
 
 <Shot id="distributor/webhooks/new" />
 
+<Shot id="distributor/webhooks/auth" />
+
 <FieldTable fields={[
   { name: 'Your receiver / Test receiver', meaning: 'Send to your own URL, or to a test receiver inside Neuros that shows what arrived.', implications: 'A test receiver lets you see real deliveries, signature checked, before your server is ready.' },
   { name: 'URL', required: true, meaning: 'Where deliveries are POSTed.', rules: 'https, reachable from the internet. Private and local addresses are refused, and redirects are not followed.' },
+  { name: 'Authentication', meaning: 'What your receiver needs to let Neuros in: None (open), Basic (username and password), an API key in a header, or a Bearer token.', rules: 'None is the default: the URL is open and only the signature shows the delivery came from Neuros. Not offered for a test receiver.', implications: 'Every delivery is signed whichever you choose. Neuros sends the credentials with each delivery.' },
+  { name: 'Username / Password', required: true, meaning: 'Basic only: the login your receiver checks.', rules: 'The username cannot contain a colon.', implications: 'Sent as Authorization: Basic. The password is stored encrypted and never shown again, only its last four characters.' },
+  { name: 'Header / Value', required: true, meaning: 'API key only: the header the key goes in (for example X-Api-Key) and the key itself.', rules: 'Letters, digits and hyphens. Authorization, the transport headers and Neuros-… headers are set by Neuros and refused.', implications: 'The value is stored encrypted and never shown again, only its last four characters.' },
+  { name: 'Token', required: true, meaning: 'Bearer only: the token your receiver expects.', implications: 'Sent as Authorization: Bearer. Stored encrypted and never shown again, only its last four characters.' },
   { name: 'Description', meaning: 'What the endpoint is for, so your team recognises it.' },
   { name: 'Every event / Events', required: true, meaning: 'Which events it receives: every event a webhook can carry, or the ones you choose.', implications: 'Events about orders, quotes, shipments, invoices, payments, disputes and returns, procurement, your offers, price lists, stock and accounts.' },
 ]} />
@@ -28,7 +38,8 @@ Once added, the **signing secret** is shown once. Copy it to where your receiver
 - **Send a test event** sends a `webhook.test` delivery, signed like any other.
 - **Rotate secret** issues a new secret, shown once. For 24 hours each delivery carries two signatures, one per secret, so your receiver can switch without missing any.
 - **Pause** takes a reason; nothing is sent until you **Resume**. Deliveries already queued give up, and you can send them again afterwards.
-- **Edit** changes the URL, description and events.
+- **Edit** changes the URL, authentication, description and events. A password, key value or token left blank keeps the one already set; choosing **None** removes it.
+- **Authentication** shows the type, the username or header, and the last four characters of the secret.
 
 ## Deliveries
 
@@ -46,5 +57,7 @@ Each event the endpoint receives is one delivery, with every attempt: when, what
 ## Common questions
 
 **Why does a delivery hold no order details?** So nothing private travels to a URL you may later change. Your system reads the record with its API client, which also checks its scopes.
+
+**Do I need authentication if deliveries are signed?** No: the signature already proves a delivery came from Neuros. Choose authentication when your receiver sits behind a gateway or a service that refuses any call without credentials.
 
 **What if my receiver is down for a day?** Deliveries retry for about 15 hours and then give up. Filter the deliveries by **Gave up** and send them again once it is back.

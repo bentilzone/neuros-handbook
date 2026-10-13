@@ -7,7 +7,10 @@ sidebar_label: Integrations and reports
 A message Neuros sends to your own system when something happens, as an HTTPS POST to a URL you give. It names the event and its record only; your system reads the record with its API client. Needs webhooks in your plan.
 
 ### Webhook endpoint
-A URL that receives webhooks, with the events it is sent and its signing secret. It is active or paused; a paused endpoint is sent nothing.
+A URL that receives webhooks, with the events it is sent, its signing secret and its authentication. It is active or paused; a paused endpoint is sent nothing.
+
+### Webhook authentication
+The credentials an endpoint sends with each delivery, for a receiver that refuses calls without them: none (open, the default), Basic (username and password), an API key in a header you name, or a Bearer token. Neuros keeps the secret encrypted and shows only its last four characters. Deliveries are signed either way.
 
 ### Test receiver
 An endpoint inside Neuros instead of at your URL. It shows each delivery it received and whether its signature checked out, so you can try webhooks before your own receiver is ready.
