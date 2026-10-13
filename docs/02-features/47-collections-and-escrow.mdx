@@ -23,7 +23,7 @@ See <PageLink who="distributor" page="collections">Collections</PageLink>.
 | Payment | Reseller | A transfer to their account. The bank tells Neuros about it at once |
 | Match | Neuros | The order number in the narration finds the order. Paid in full: the escrow is funded and the bank holds it. Short: the reseller is told in chat what remains. Too much: the excess goes back to them |
 | Delivery | You | Delivering the order in full starts the [dispute window](../01-glossary/47-partner-bank.mdx#dispute-window) |
-| Window | Reseller | They may dispute a line. Only that line’s value stays held |
+| Window | Reseller | They may dispute a line: only that line’s value stays held. Or they open a [case](../01-glossary/49-service-cases.mdx#case-hold) about a payment or the delivery: all of it waits until the case ends |
 | Release | Neuros and the bank | When the window passes, the bank pays you everything not held, less the [platform fee](../01-glossary/47-partner-bank.mdx#platform-fee) |
 
 Every step is idempotent. The same payment reported twice is one payment, and the same release asked twice is paid once.

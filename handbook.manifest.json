@@ -60,6 +60,11 @@
       "10-supplier/59-disputes.mdx",
       "11-distributor/59-disputes.mdx"
     ],
+    "/selling/cases": [
+      "10-supplier/59-cases.mdx",
+      "11-distributor/59-cases.mdx",
+      "02-features/49-service-cases.mdx"
+    ],
     "/selling/customers": [
       "10-supplier/50-customers.mdx",
       "11-distributor/50-customers.mdx"
@@ -113,6 +118,11 @@
     "/buying/disputes": [
       "11-distributor/79-buying-disputes.mdx",
       "12-reseller/79-buying-disputes.mdx"
+    ],
+    "/buying/cases": [
+      "11-distributor/79-buying-cases.mdx",
+      "12-reseller/79-buying-cases.mdx",
+      "02-features/49-service-cases.mdx"
     ],
     "/suppliers": [
       "11-distributor/70-suppliers.mdx",

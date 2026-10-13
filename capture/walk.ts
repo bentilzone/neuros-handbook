@@ -136,6 +136,24 @@ export function walk(w: Walk): Scenario[] {
         callouts: [{ n: 1, target: { role: 'button', name: 'Authorise' }, text: 'Authorise it before anything travels; reject it with a reason.', side: 'left' }],
       }),
     ] : []),
+    shot('cases/list', '/selling/cases', 'Service cases', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Overdue$/ }, text: 'Only the cases past your time to answer or to resolve.', side: 'bottom' },
+        { n: 2, target: { text: 'Nobody yet', nth: 0 }, text: 'Who on your team has each case.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('cases/detail', '/selling/cases', 'An overdue case', {
+        steps: async (page) => { await page.getByRole('row').filter({ hasText: 'Statement for September' }).first().click(); },
+        fullPage: true,
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Take the case' }, text: 'Take it, or give it to a colleague who answers cases.', side: 'left' },
+          { n: 2, target: { text: 'No answer in time' }, text: 'The times it missed: your team was told once for each.', side: 'left' },
+          { n: 3, target: { role: 'button', name: 'Resolve' }, text: 'Say what was done; the customer reads it.', side: 'top' },
+        ],
+      }),
+    ] : []),
+    shot('cases/settings', '/selling/cases?tab=settings', 'Service cases: settings', { fullPage: true }),
     shot('customers/list', '/selling/customers', 'Customers', {
       callouts: [
         { n: 1, target: { text: /waiting for approval/i, nth: 0 }, text: 'Requests waiting for your answer.', side: 'bottom' },
@@ -252,6 +270,15 @@ export function walk(w: Walk): Scenario[] {
     ...(w.disputes === 'buying' ? [shot('buying-disputes/detail', '/buying/disputes', 'A dispute you raised', {
       steps: firstRow, fullPage: true,
       callouts: [{ n: 1, target: { role: 'button', name: 'Add a photo or document' }, text: 'Photos, documents or a short video; the seller can open each one.', side: 'left' }],
+    })] : []),
+    shot('buying-cases/list', '/buying/cases', 'Cases', {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Open a case' }, text: 'Raise a payment, delivery, goods or account matter with a supplier.', side: 'left' }],
+    }),
+    shot('buying-cases/new', '/buying/cases', 'Open a case', { steps: click('Open a case'), fullPage: true }),
+    ...(w.disputes === 'buying' ? [shot('buying-cases/detail', '/buying/cases', 'A case answered by the supplier', {
+      steps: async (page) => { await page.getByRole('row').filter({ hasText: 'When does the order arrive?' }).first().click(); },
+      fullPage: true,
+      callouts: [{ n: 1, target: { role: 'textbox', name: 'Message' }, text: 'Answer the supplier; it goes back to them.', side: 'top' }],
     })] : []),
     shot('buying-invoices/list', '/buying/invoices', 'Invoices', {
       callouts: [{ n: 1, target: { text: /^Due$/ }, text: 'When each invoice is due; overdue ones show in red.', side: 'bottom' }],

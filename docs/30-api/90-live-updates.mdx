@@ -55,6 +55,7 @@ Some event types:
 | `sales_invoice.issued`, `sales_invoice.paid`, `sales_invoice.credited`, `sales_invoice.voided` | An invoice is issued or settled |
 | `payment.notified`, `payment.confirmed`, `payment.rejected`, `escrow.funded`, `escrow.released`, `escrow.refunded` | A payment or escrow moves |
 | `dispute.raised`, `dispute.updated`, `dispute.message`, `dispute.escalated`, `dispute.resolved`, `dispute.withdrawn` | A dispute is raised, answered, escalated or ends |
+| `case.opened`, `case.updated`, `case.message`, `case.assigned`, `case.resolved`, `case.withdrawn`, `case.sla_breached` | A service case is opened, written on, given to someone, resolved or withdrawn, or misses one of the seller’s times (`sla_breached`: the seller only) |
 | `return.requested`, `return.authorised`, `return.rejected`, `return.received`, `return.inspected`, `return.closed` | A return moves |
 | `requisition.updated`, `requisition.submitted`, `requisition.approved`, `requisition.rejected`, `requisition.ordered` | A requisition changes, waits for approval, is decided or ordered (your company only) |
 | `purchase_order.updated`, `purchase_order.issued` | A purchase order to an external supplier changes or is sent (your company only) |

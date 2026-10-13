@@ -1,6 +1,6 @@
 ---
 title: "Webhooks"
-sidebar_position: 310
+sidebar_position: 320
 description: "Endpoints that receive signed, id-only deliveries of events; deliveries, retries, replay, secret rotation and the test receiver."
 ---
 
@@ -163,7 +163,7 @@ Needs the Webhooks feature in your plan. A test endpoint (`sandbox: true`) has n
 | Field | Type | Notes |
 |---|---|---|
 | `description` | string | at most 200 characters |
-| `eventTypes` * | array of string (one of 92) | The event types to receive, or `*` for all of them |
+| `eventTypes` * | array of string (one of 99) | The event types to receive, or `*` for all of them |
 | `sandbox` | boolean | default `false` |
 | `url` | object | Where deliveries are POSTed. https; it must resolve to a public address. at most 2000 characters |
 
@@ -243,7 +243,7 @@ Disabling stops new deliveries; ones already queued die with “the endpoint is 
 |---|---|---|
 | `url` | string | Where deliveries are POSTed. https; it must resolve to a public address. at most 2000 characters |
 | `description` | string | at most 200 characters |
-| `eventTypes` | array of string (one of 92) | The event types to receive, or `*` for all of them |
+| `eventTypes` | array of string (one of 99) | The event types to receive, or `*` for all of them |
 | `status` | `active` · `disabled` |  |
 | `reason` | object | at least 3 characters, at most 500 characters |
 

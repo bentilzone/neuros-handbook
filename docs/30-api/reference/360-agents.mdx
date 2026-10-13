@@ -1,6 +1,6 @@
 ---
 title: "Agents"
-sidebar_position: 350
+sidebar_position: 360
 description: "Your AI agents, the numbers they answer on, and their secrets."
 ---
 
@@ -84,7 +84,7 @@ The agent platform exchanges the client id and secret for a token (POST /oauth/t
 | Field | Type | Notes |
 |---|---|---|
 | `name` * | string | at least 2 characters, at most 80 characters |
-| `tools` * | array of `resolve_caller` · `accept_invite` · `search_products` · `quote_cart` · `place_order` · `get_order` · `get_payment_instructions` · `get_delivery` · `get_statement` | The tools this agent may call |
+| `tools` * | array of `resolve_caller` · `accept_invite` · `search_products` · `quote_cart` · `place_order` · `get_order` · `get_payment_instructions` · `get_delivery` · `get_statement` · `open_case` · `get_case` · `reply_case` | The tools this agent may call |
 | `endpointIds` | string[] | The numbers and addresses it answers on |
 
 **Response** `201`
@@ -169,7 +169,7 @@ The agent platform exchanges the client id and secret for a token (POST /oauth/t
 | Field | Type | Notes |
 |---|---|---|
 | `name` | string | at least 2 characters, at most 80 characters |
-| `tools` | array of `resolve_caller` · `accept_invite` · `search_products` · `quote_cart` · `place_order` · `get_order` · `get_payment_instructions` · `get_delivery` · `get_statement` | The tools this agent may call |
+| `tools` | array of `resolve_caller` · `accept_invite` · `search_products` · `quote_cart` · `place_order` · `get_order` · `get_payment_instructions` · `get_delivery` · `get_statement` · `open_case` · `get_case` · `reply_case` | The tools this agent may call |
 | `endpointIds` | string[] | The numbers and addresses it answers on |
 
 **Response** `200`

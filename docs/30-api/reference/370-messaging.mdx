@@ -1,6 +1,6 @@
 ---
 title: "Messaging"
-sidebar_position: 360
+sidebar_position: 370
 description: "Messages to resellers’ chat: settings and the messaging secret, texts, sent messages, consent, and the inbox for receipts and replies."
 ---
 
@@ -65,7 +65,7 @@ object
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -83,7 +83,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 
 | Parameter | In | Type | Notes |
 |---|---|---|---|
-| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 
 **Request body**
 
@@ -96,7 +96,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -112,14 +112,14 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 
 | Parameter | In | Type | Notes |
 |---|---|---|---|
-| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `key` * | path | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 
 **Response** `200`
 
 | Field | Type | Notes |
 |---|---|---|
 | `data` * | object[] |  |
-| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `data[].key` * | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 | `data[].category` * | `authentication` · `utility` · `marketing` |  |
 | `data[].variables` * | string[] |  |
 | `data[].defaultText` * | string |  |
@@ -139,7 +139,7 @@ Only the message’s placeholders may be used (`&#123;&#123;orderNumber&#125;&#1
 | `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
 | `status` | query | `queued` · `sent` · `delivered` · `read` · `failed` · `suppressed` |  |
 | `relationshipId` | query | string | 24 characters |
-| `templateKey` | query | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` |  |
+| `templateKey` | query | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` |  |
 
 **Response** `200`
 
@@ -152,7 +152,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |
@@ -203,7 +203,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |
@@ -254,7 +254,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `channel` | `whatsapp` · `sms` · `email` | may be null |
 | `to` | string | may be null |
 | `from` | string | may be null |
-| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` | may be null |
+| `templateKey` | `invite_code` · `order_received` · `order_accepted` · `order_rejected` · `payment_confirmed` · `payment_short` · `order_dispatched` · `delivery_code` · `order_delivered` · `invoice_issued` · `case_update` · `case_resolved` | may be null |
 | `category` | `authentication` · `utility` · `marketing` | may be null |
 | `text` | string | may be null |
 | `resource` | object | may be null |

@@ -38,8 +38,11 @@ Neuros finds the seller’s account with that caller and runs the tool as that r
 | `get_payment_instructions` | `GET /v1/agent/v1/orders/:ref/payment` | Amount due, the account and the reference |
 | `get_delivery` | `GET /v1/agent/v1/orders/:ref/delivery` | Shipments, dispatch and delivery |
 | `get_statement` | `GET /v1/agent/v1/statement` | What the reseller owes, what is overdue, credit left |
+| `open_case` | `POST /v1/agent/v1/cases` | Open a service case: payment, delivery, goods (items named as `get_order` lists them, in the ordered unit, with a `reason`), account or other. Comes back closed if the records already settle it |
+| `get_case` | `GET /v1/agent/v1/cases/:ref` | Where a case stands, with the seller’s latest answer |
+| `reply_case` | `POST /v1/agent/v1/cases/:ref/messages` | Pass the reseller’s words to the seller on an open case (`text`) |
 
-The [reference](./reference/380-agent-tools.mdx) has every field.
+The [reference](./reference/390-agent-tools.mdx) has every field.
 
 ## An order over REST
 
