@@ -111,4 +111,5 @@ export default [...walk({
   externalSuppliers: true,
   integrations: true,
   agents: true,
+  sellingReports: true,
 }), credit, newQuotation, draft, order, shipment, invoice, payment];

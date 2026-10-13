@@ -2,7 +2,7 @@
 
 <PersonaBadge who={['everyone']} permission={['report:financial', 'report:operational']} />
 
-**Reports** are your statements from the posted journals, and what your stock, sales and suppliers did. Every report is one table: headings, lines and totals, in your company’s currency. Download any of them as a CSV or a PDF.
+**Reports** are your statements from the posted journals, and what your stock, sales and suppliers did. A company that sells also gets the selling reports: orders, AI agents, promotions, deliveries, escrow and service. Every report is one table: headings, lines and totals, in your company’s currency. Download any of them as a CSV or a PDF, or [schedule it](#scheduled-reports) to arrive by email.
 
 <Shot id={`${props.who}/reports/profit-and-loss`} />
 
@@ -22,6 +22,43 @@
 | Supplier performance | Per supplier, from receipts posted in the period: on time, days late when late, lines short, over, damaged or swapped, disputes | report:operational |
 
 Finance roles hold both permissions. Purchasing, sales and warehouse roles hold the operational one. A company without the selling or stock side sees only the reports that apply to it.
+
+## Selling reports
+
+A company that sells (a supplier or a distributor) has a **Selling** group in the report list. Each needs report:operational and covers a period.
+
+| Report | Shows |
+|---|---|
+| Order funnel | Orders placed in the period and how far each has got: accepted, paid in full, every line delivered. Shown for the app, for your AI agents, and for both, with the quotations you sent and your agents’ cart quotes in front |
+| AI agents | Per agent: tool calls, calls it refused, messages from numbers no customer of yours has, and the orders it placed with no staff involved, their value and how many you accepted |
+| Promotions | Per promotion: orders and customers it went on, the discount given, what those orders came to beside orders without it, and how much of its budget is used |
+| Deliveries | Shipments sent out and delivered, delivered the same day, delivery codes right first time, codes locked after three wrong tries, failed attempts and hours to deliver, overall and per driver |
+| Escrow and bank credits | Escrow funded and not yet released, by days since it was funded and by what holds it (a case, a dispute, the operator); the period’s bank credits that were short, over, found no order or were sent back; reconciliation days with differences |
+| Service cases | Per case type: opened, resolved, withdrawn, open now, median hours to the first answer and to resolution, and the times missed |
+
+Values count orders in your company’s currency. If an order was in another currency, the note under the table says how many were left out of the values.
+
+{props.who === 'distributor' && <Shot id="distributor/reports/order-funnel" />}
+
+## Scheduled reports
+
+The **Scheduled** tab emails a report to your team when it falls due, as a PDF or CSV attachment. Choose **Schedule** beside the download buttons to schedule the report on screen, or **Schedule a report** on the tab.
+
+{props.who === 'distributor' && <Shot id="distributor/reports/scheduled" />}
+
+<FieldTable fields={[
+  { name: 'Report', required: true, meaning: 'The report to send.', rules: 'One you can run yourself.' },
+  { name: 'Covering', required: true, meaning: 'The period each email covers: last week (Monday to Sunday), last month, or this month so far.', implications: 'Worked out in your company’s time zone at the moment it is sent.' },
+  { name: 'Sent', required: true, meaning: 'Every Monday or on the 1st of each month, at 07:00 in your company’s time zone.' },
+  { name: 'Attached as', meaning: 'A PDF to read, or a CSV for a spreadsheet.', rules: 'PDF unless you choose CSV.' },
+  { name: 'To', required: true, meaning: 'The people who receive it, by email.', others: 'They get the report as an attachment. The email says who scheduled it.', rules: 'Only members who can run the report: report:financial for the statements, ageings and gross margin, report:operational for the rest. Up to 20 people.' },
+]} />
+
+{props.who === 'distributor' && <Shot id="distributor/reports/schedule-new" />}
+
+A schedule runs with the access of the person who last set it up. Whoever changes or resumes it becomes its owner. On each send, anyone on the list who can no longer run the report is left out. If the owner can no longer run it, the schedule is **paused** and shows why; anyone who can run it may resume it and take it on.
+
+From each row you can **Send now** (the report as it stands, without moving the next send), **Pause** or **Resume**, and **Delete**. Open a row to change it. You see only the schedules of reports you can run yourself. A company keeps up to 25 schedules.
 
 <FieldTable fields={[
   { name: 'Report', meaning: 'Which report to run.' },
@@ -44,3 +81,7 @@ Profit and loss for a period ignores the year-end close journal, so a closed yea
 **Why doesn’t gross margin match profit and loss?** Gross margin counts invoiced sales and their cost of sales only. Profit and loss also has your other income and every expense.
 
 **Why is a report empty?** It reads posted journals and posted stock movements. Drafts and anything waiting for approval are not in it yet.
+
+**Why did a colleague not get the scheduled report?** They cannot run that report with their role, so it was left out for them. Give their role the permission, or send it to someone who has it.
+
+**Why is the agents report quiet this month?** It counts calls by day in your time zone, so today’s calls show as they happen. Orders count from the moment the agent placed them.

@@ -127,6 +127,13 @@ const scenarios: Scenario[] = [
   shot('billing-settings/payment', '/platform/billing-settings?tab=payment', 'Billing settings: payment details', { fullPage: true }),
   shot('billing-settings/tax', '/platform/billing-settings?tab=tax', 'Billing settings: tax', { fullPage: true }),
   shot('partner-bank', '/platform/partner-bank', 'Partner bank', { fullPage: true }),
+  shot('platform-reports', '/platform/reports', 'Platform reports', {
+    fullPage: true,
+    callouts: [
+      { n: 1, target: { role: 'textbox', name: 'Report' }, text: 'Order value and take rate, usage by meter, or reconciliation across sellers.', side: 'bottom' },
+      { n: 2, target: { text: /^Take rate$/ }, text: 'Escrow and transaction fees as a share of the order value.', side: 'bottom' },
+    ],
+  }),
 
   // System
   shot('schedulers/list', '/platform/schedulers', 'Schedulers', {
