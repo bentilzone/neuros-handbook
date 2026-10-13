@@ -110,6 +110,17 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -234,6 +245,17 @@ Goods lines name the purchase order line they bill; a charges invoice’s lines 
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -337,6 +359,17 @@ Goods lines name the purchase order line they bill; a charges invoice’s lines 
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -448,6 +481,17 @@ Matches again, then posts Dr goods received not invoiced and input tax, Cr accou
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -553,6 +597,17 @@ Three-way: each line’s price against the order (within your price tolerance, �
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -662,6 +717,17 @@ Three-way: each line’s price against the order (within your price tolerance, �
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |
@@ -770,6 +836,17 @@ Its lines, prices, tax and due date as the seller issued them, to match against 
 | `payments[].amount` | object | may be null |
 | `payments[].at` | string (date-time) | may be null |
 | `payments[].id` | string | 24 characters |
+| `credited` | object | may be null |
+| `credited.amount` | string | may be null |
+| `credited.currency` | string (one of 155) | may be null |
+| `credited.id` | string | 24 characters |
+| `creditNotes` | object[] |  |
+| `creditNotes[].creditNoteId` | string | 24 characters, may be null |
+| `creditNotes[].number` | string | may be null |
+| `creditNotes[].supplierCreditNoteNumber` | string | may be null |
+| `creditNotes[].amount` | object | may be null |
+| `creditNotes[].at` | string (date-time) | may be null |
+| `creditNotes[].id` | string | 24 characters |
 | `notes` | string | may be null |
 | `createdBy` | string | may be null |
 | `statusReason` | string | may be null |

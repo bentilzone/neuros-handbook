@@ -363,8 +363,18 @@ export function walk(w: Walk): Scenario[] {
         ],
       }),
       shot('payables/new', '/buying/payables', 'Record a supplier invoice', { steps: click('Record invoice'), fullPage: true }),
-      shot('payables/detail', '/buying/payables', 'A supplier invoice, matched and approved', {
+      shot('payables/detail', '/buying/payables', 'A supplier invoice, approved, part paid and credited', {
         steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'SZP-INV-24-0917' }).first().click(); }, fullPage: true,
+      }),
+      shot('payables/credit', '/buying/payables', 'Record a supplier’s credit note', {
+        steps: async (p: Page) => {
+          await p.getByRole('row').filter({ hasText: 'SZP-INV-24-0917' }).first().click();
+          await p.getByRole('button', { name: 'Record a credit note' }).click();
+          await p.getByLabel('Their credit note number').fill('SZP-CN-24-0044');
+          await p.getByLabel(/^Amount, tax included/).fill('59.50');
+          await p.getByRole('button', { name: 'Record', exact: true }).scrollIntoViewIfNeeded();
+        },
+        fullPage: true,
       }),
       shot('payables/ageing', '/buying/payables?tab=ageing', 'Payables by age'),
     ] : []),

@@ -45,6 +45,7 @@ Your tax identifiers, such as a TIN, each with its type and number.
 <FieldTable fields={[
   { name: 'Order acceptance', meaning: 'Review each order, or accept automatically.', others: 'With automatic acceptance, customers’ orders are confirmed without waiting for you.' },
   { name: 'Timezone', meaning: "Your company's time zone.", implications: 'Accounting periods are its calendar months.', rules: 'Locks once journals or valued stock movements exist.' },
+  { name: 'Financial year starts in', meaning: 'The month your financial year starts in: January for the calendar year, or another month, such as April for April to March.', implications: 'A year is named by the calendar year it ends in: with April, 2026 runs from 1 April 2025 to 31 March 2026. Closing the year on the Ledger’s Periods tab follows it.', rules: 'January by default. Locks once a year has been closed.' },
   { name: 'Stock valuation', meaning: 'Weighted average, or FIFO (first in, first out).', implications: 'Decides the cost of stock that leaves, and so the inventory value and cost of sales.', rules: 'Locks once journals or valued stock movements exist.' },
   { name: 'Rounding', meaning: 'Half up (commercial) or half even (banker’s).' },
   { name: 'Finance mode', meaning: 'Full books in Neuros, or books kept elsewhere.' },
@@ -81,6 +82,8 @@ Your plan, what it includes and how much of each you use (members, warehouses, A
   { name: 'Billing contact: Name, Email, Phone', meaning: 'Who receives invoices.', others: 'Invoices, receipts and reminders go to the email.' },
   { name: 'Purchase order reference', meaning: 'Your PO number for Neuros.', others: 'Printed on your invoices.' },
 ]} />
+
+**Pay online.** When Neuros has connected a payment provider, an open invoice has a **Pay online** button (it needs billing:manage). It opens the provider’s payment page for the invoice’s balance; the link works for an hour. The payment appears under your payments, with its receipt, once the provider confirms it, not when you come back to Neuros. Until a provider is connected, pay by transfer to the account shown on the invoice.
 
 ### Usage
 
