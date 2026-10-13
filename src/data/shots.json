@@ -1363,6 +1363,22 @@
     "title": "Reports: inventory valuation",
     "callouts": []
   },
+  "distributor/reports/order-funnel": {
+    "file": "distributor/reports/order-funnel.png",
+    "width": 1440,
+    "height": 1132,
+    "title": "Reports: order funnel",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Orders your agents placed, from cart quote to delivered."
+      },
+      {
+        "n": 2,
+        "text": "Reports emailed to your team every Monday or on the 1st."
+      }
+    ]
+  },
   "distributor/reports/profit-and-loss": {
     "file": "distributor/reports/profit-and-loss.png",
     "width": 1440,
@@ -1380,6 +1396,29 @@
       {
         "n": 3,
         "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
+  "distributor/reports/schedule-new": {
+    "file": "distributor/reports/schedule-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Schedule a report",
+    "callouts": []
+  },
+  "distributor/reports/scheduled": {
+    "file": "distributor/reports/scheduled.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: scheduled",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "A report, its period, when it is sent and to whom."
+      },
+      {
+        "n": 2,
+        "text": "Send it as it stands, without moving the next send."
       }
     ]
   },
@@ -1997,6 +2036,22 @@
     "height": 900,
     "title": "Usage prices",
     "callouts": []
+  },
+  "operator/platform-reports": {
+    "file": "operator/platform-reports.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Platform reports",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Order value and take rate, usage by meter, or reconciliation across sellers."
+      },
+      {
+        "n": 2,
+        "text": "Escrow and transaction fees as a share of the order value."
+      }
+    ]
   },
   "operator/roles/detail": {
     "file": "operator/roles/detail.png",

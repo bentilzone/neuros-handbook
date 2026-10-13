@@ -1,0 +1,23 @@
+---
+title: Platform reports
+sidebar_position: 97
+---
+
+<PersonaBadge who={['operator']} permission="platform:billing:read" />
+
+**Platform reports** show how trade on Neuros is going across companies, as counts and totals. A seller’s customers and orders stay with the seller. Each report is one table for a period, this month unless you choose another. Download it as a CSV.
+
+<Shot id="operator/platform-reports" />
+
+| Report | Shows |
+|---|---|
+| Order value and take rate | Per company and currency: orders placed, the value of orders accepted, the escrow fees taken at release, the transaction fees on orders not paid through escrow, and both fees as a share of the value (the take rate). A total per currency |
+| Usage by meter | Each [usage](../01-glossary/80-plans-and-billing.mdx#usage) meter across companies: the total, how many companies used it, and which used it most with its share |
+| Reconciliation across sellers | Per seller: days reconciled with the partner bank, days with differences, statement lines, credits the bank reported, credits that found no order, short or over, and returned |
+
+Amounts are per currency, so each money row names its own. The figures come from the [usage records](../01-glossary/80-plans-and-billing.mdx#usage) and each seller’s daily reconciliation. Agent tool calls and active resellers are recorded when a month closes, so the current month shows them only after it does. Subscriptions and invoices are in [Billing](./60-billing.mdx).
+
+<FieldTable fields={[
+  { name: 'Report', meaning: 'Which report to run.' },
+  { name: 'Period', meaning: 'The days it covers.', rules: 'From the start of this month in the billing time zone, to now, unless you choose another.' },
+]} />

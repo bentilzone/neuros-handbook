@@ -211,6 +211,9 @@
     "/platform/partner-bank": [
       "20-operator/95-partner-bank.mdx"
     ],
+    "/platform/reports": [
+      "20-operator/97-platform-reports.mdx"
+    ],
     "/platform/schedulers": [
       "20-operator/100-schedulers.mdx"
     ],
