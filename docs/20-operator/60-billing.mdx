@@ -13,6 +13,10 @@ What Neuros has billed, collected and is owed. Invoices, receipts and credit not
 
 Monthly recurring revenue, what is outstanding and overdue, trials ending this week, what was billed and collected this month, how many companies pay, and how many are cancelling. Amounts are shown per currency: each company is billed in its own.
 
+Below the figures, **Books** says whether Zoho Billing is connected and how many invoices and payments have not reached it.
+- **Connected:** every invoice and payment is copied there as it is made. A failed copy is tried again, up to 10 times.
+- **Not connected:** they wait, and go across once the server has the Zoho Billing settings.
+
 ## Invoices
 
 <Shot id="operator/billing/invoices" />
@@ -51,6 +55,9 @@ Click an invoice for its lines, tax, payments and credit notes, and the PDF to v
 - **Send reminder** emails the company's billing contact now.
 - **Credit note** reduces what is owed. Leave the amount blank to credit the whole balance.
 - **Void** cancels an unpaid invoice with a credit note for the whole of it.
+- **Zoho Billing** shows its copy in the books: **In Zoho**, **Waiting** or **Failed** with the reason. **Send again** retries one that failed. Zoho finds an earlier copy by the invoice number, so it is never copied twice.
+
+A usage invoice (kind **Usage**) is issued when a month closes; see [Usage](#usage) below.
 
 ## Payments
 
@@ -77,7 +84,37 @@ Paying up restores a read-only company at once. Opened from an invoice, the form
 
 <Shot id="operator/billing/payment" />
 
-The payment, its receipt, and the invoices it was applied to.
+The payment, its receipt, and the invoices it was applied to. A payment goes to Zoho Billing once the invoices it paid are there, with **Send again** if it failed. A payment taken in Zoho comes back on its own: it is recorded once, on the invoices it paid, with Zoho's id as its reference.
+
+## Usage
+
+<Shot id="operator/billing/usage" />
+
+Each company's usage in a month, at its rates: its own rates, its plan's, or none. Pick the month; this month is rated as it stands. See [usage](../02-features/90-plans-and-billing.mdx#usage).
+
+When a month ends, Neuros closes it within the hour, once for each subscription:
+- a statement with each meter;
+- if anything is owed and the company is not on trial, a usage invoice.
+
+### A company's usage
+
+<Shot id="operator/billing/usage-company" />
+
+- **Meters**: what was used, included and charged, with the allowances.
+- **Records**: each record and what it came from (an order, a message, a release, the month's close), and adjustments with their reason.
+- **Statements**: the months closed, with their usage invoice.
+
+### Adjust usage
+
+<Shot id="operator/billing/usage-adjust" />
+
+Records are never changed. An adjustment adds a signed record to this month.
+
+<FieldTable fields={[
+  { name: 'Meter', required: true, meaning: 'What you are correcting.' },
+  { name: 'By how many / By how much', required: true, meaning: 'The change: negative takes off, positive adds.', rules: 'A whole number for a count. An amount for order value and fees, with its currency.', implications: 'It counts in this month, so it is on this month’s usage invoice.' },
+  { name: 'Reason', required: true, meaning: 'Why, for example an order cancelled after it was accepted.', others: 'Kept with the record and in the audit log.' },
+]} />
 
 ## Reports
 

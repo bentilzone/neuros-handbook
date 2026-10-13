@@ -525,6 +525,7 @@ export function walk(w: Walk): Scenario[] {
     shot('settings/company-capabilities', '/settings?tab=company', 'My company: capabilities', { steps: tab(/Capabilities/) }),
     shot('settings/company-log', '/settings?tab=company', 'My company: change log', { steps: tab(/Change log/) }),
     shot('settings/billing', '/settings?tab=billing', 'Settings: billing', { fullPage: true }),
+    shot('settings/billing-usage', '/settings?tab=billing', 'Billing: usage', { steps: tab('Usage'), fullPage: true }),
     shot('settings/support', '/settings?tab=support', 'Settings: support access'),
   ];
 

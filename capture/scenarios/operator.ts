@@ -93,11 +93,25 @@ const scenarios: Scenario[] = [
   shot('billing/payment-new', '/platform/billing?tab=payments', 'Record payment', { steps: click('Record payment'), fullPage: true }),
   shot('billing/payment', '/platform/billing?tab=payments', 'A payment', { steps: firstRow }),
   shot('billing/reports', '/platform/billing?tab=reports', 'Billing: reports', { fullPage: true }),
+  shot('billing/usage', '/platform/billing?tab=usage', 'Billing: usage', {
+    callouts: [
+      { n: 1, target: { role: 'textbox', name: 'Month' }, text: 'This month so far, or one of the eleven before it.', side: 'bottom' },
+      { n: 2, target: { text: /^Usage charge$/ }, text: 'What each company’s usage comes to at its rates, the largest first.', side: 'bottom' },
+    ],
+  }),
+  shot('billing/usage-company', '/platform/billing?tab=usage', 'A company’s usage', { steps: row('Lagos Industrial Supplies Ltd'), fullPage: true }),
+  shot('billing/usage-adjust', '/platform/billing?tab=usage', 'Adjust usage', {
+    steps: async (page) => { await row('Lagos Industrial Supplies Ltd')(page); await page.getByRole('button', { name: 'Adjust', exact: true }).click(); },
+  }),
   shot('subscriptions/list', '/platform/subscriptions', 'Subscriptions', {
     callouts: [{ n: 1, target: { role: 'button', name: 'New subscription' }, text: 'Put a company on a plan.', side: 'left' }],
   }),
   shot('subscriptions/new', '/platform/subscriptions', 'New subscription', { steps: click('New subscription'), fullPage: true }),
   shot('subscriptions/detail', '/platform/subscriptions', 'A subscription', { steps: row('Lagos Industrial Supplies Ltd'), fullPage: true }),
+  shot('subscriptions/own-prices', '/platform/subscriptions', 'Own usage prices', {
+    steps: async (page) => { await row('Lagos Industrial Supplies Ltd')(page); await page.getByRole('button', { name: 'Own usage prices' }).click(); },
+    fullPage: true,
+  }),
   shot('plans/plans', '/platform/plans', 'Plans & add-ons: plans', {
     callouts: [
       { n: 1, target: { role: 'tab', name: 'Add-ons' }, text: 'Plans, and the add-ons a company can buy on top.', side: 'bottom' },
@@ -105,6 +119,7 @@ const scenarios: Scenario[] = [
     ],
   }),
   shot('plans/plan-new', '/platform/plans', 'New plan', { steps: click('New plan'), fullPage: true }),
+  shot('plans/usage-prices', '/platform/plans', 'Usage prices', { steps: click('Usage prices for Growth'), fullPage: true }),
   shot('plans/add-ons', '/platform/plans?tab=add-ons', 'Plans & add-ons: add-ons'),
   shot('plans/add-on-new', '/platform/plans?tab=add-ons', 'New add-on', { steps: click('New add-on'), fullPage: true }),
   shot('billing-settings/business', '/platform/billing-settings?tab=business', 'Billing settings: business details', { fullPage: true }),

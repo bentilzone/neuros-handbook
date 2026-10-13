@@ -82,6 +82,21 @@ Your plan, what it includes and how much of each you use (members, warehouses, A
   { name: 'Purchase order reference', meaning: 'Your PO number for Neuros.', others: 'Printed on your invoices.' },
 ]} />
 
+### Usage
+
+<Shot id={`${props.who}/settings/billing-usage`} />
+
+What your company has used this month, and the months already closed. See [usage](../02-features/90-plans-and-billing.mdx#usage).
+
+| Column | What it shows |
+|---|---|
+| Used | How many this month, against what your plan includes at no charge; or how much, for order value and fees |
+| Charge | What it comes to so far at your rates, and how many over the allowance it is for |
+
+- A bar for each allowance turns orange past 80% and red at 100%. Your billing managers are told at both.
+- A meter marked **Not priced on your plan** is counted and shown, never charged.
+- Once a month ends, its usage is billed on one **usage invoice** with your other invoices. The month then appears below with its invoice number, or **Nothing owed**.
+
 ## Support access
 
 <Shot id={`${props.who}/settings/support`} />
