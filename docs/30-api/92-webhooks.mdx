@@ -17,6 +17,25 @@ A delivery carries the event, never the record. Your system reads the record wit
 
 To try it before your receiver exists, add a **test receiver** instead of a URL: Neuros keeps what it received and whether the signature checked out.
 
+## Authentication
+
+An endpoint is open by default: anyone can POST to it, and the signature is how your receiver knows a delivery came from Neuros. If your receiver sits behind a gateway that wants credentials, give the endpoint an `auth`:
+
+| `auth.type` | Fields | Neuros sends |
+|---|---|---|
+| `none` | — | Nothing extra (the default) |
+| `basic` | `username`, `password` | `Authorization: Basic base64(username:password)` |
+| `api_key` | `headerName`, `value` | `<headerName>: <value>` |
+| `bearer` | `token` | `Authorization: Bearer <token>` |
+
+```bash
+curl -X PATCH "$NEUROS_API/v1/webhooks/$ENDPOINT_ID" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"auth":{"type":"api_key","headerName":"X-Api-Key","value":"'"$RECEIVER_KEY"'"}}'
+```
+
+The password, key value or token is write-only: reads return `authType`, `authUsername`, `authHeader` and `authHint` (its last four characters). On a change, leave it out to keep the one already set for that type; `{"type":"none"}` removes it. `Authorization`, the transport headers and `Neuros-*` cannot be used as an API key header. Keep verifying the signature as well: credentials can leak from a gateway's logs, a signature cannot be forged without the secret.
+
 ## What a delivery looks like
 
 ```http

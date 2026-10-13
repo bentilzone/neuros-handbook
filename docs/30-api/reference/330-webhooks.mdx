@@ -19,7 +19,7 @@ This page lists the 11 operations in this area, generated from the engine's Open
 | [GET `/v1/webhooks`](#list-webhook-endpoints) | List webhook endpoints | `webhook:read` |
 | [POST `/v1/webhooks`](#add-a-webhook-endpoint--the-signing-secret-is-returned-once) | Add a webhook endpoint — the signing secret is returned once | `webhook:manage` |
 | [GET `/v1/webhooks/{id}`](#one-webhook-endpoint) | One webhook endpoint | `webhook:read` |
-| [PATCH `/v1/webhooks/{id}`](#change-an-endpoints-url-events-or-description-or-disable--enable-it) | Change an endpoint’s URL, events or description, or disable / enable it | `webhook:manage` |
+| [PATCH `/v1/webhooks/{id}`](#change-an-endpoints-url-events-description-or-authentication-or-disable--enable-it) | Change an endpoint’s URL, events, description or authentication, or disable / enable it | `webhook:manage` |
 | [GET `/v1/webhooks/{id}/deliveries`](#an-endpoints-deliveries-newest-first) | An endpoint’s deliveries, newest first | `webhook:read` |
 | [POST `/v1/webhooks/{id}/rotate-secret`](#rotate-the-signing-secret--the-new-one-is-returned-once) | Rotate the signing secret — the new one is returned once | `webhook:manage` |
 | [GET `/v1/webhooks/{id}/sandbox`](#what-a-test-endpoint-received-with-whether-each-signature-verified) | What a test endpoint received, with whether each signature verified | `webhook:read` |
@@ -138,6 +138,10 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `previousSecretUntil` | string (date-time) | may be null |
 | `secretHint` | string | may be null |
 | `rotatedAt` | string (date-time) | may be null |
+| `authType` | `none` · `basic` · `api_key` · `bearer` | may be null |
+| `authUsername` | string | may be null |
+| `authHeader` | string | may be null |
+| `authHint` | string | may be null |
 | `lastDeliveryAt` | string (date-time) | may be null |
 | `lastDeliveryStatus` | string | may be null |
 | `createdBy` | string | may be null |
@@ -166,6 +170,13 @@ Needs the Webhooks feature in your plan. A test endpoint (`sandbox: true`) has n
 | `eventTypes` * | array of string (one of 99) | The event types to receive, or `*` for all of them |
 | `sandbox` | boolean | default `false` |
 | `url` | object | Where deliveries are POSTed. https; it must resolve to a public address. at most 2000 characters |
+| `auth` | object | Authentication your receiver expects. Default none. Secrets are stored encrypted and never shown again; only their last four characters |
+| `auth.type` * | `none` · `basic` · `api_key` · `bearer` | How your receiver checks the caller: `none` (open), `basic`, `api_key` or `bearer`. The signature is sent either way |
+| `auth.username` | object | Basic: the username. at most 200 characters |
+| `auth.password` | string | Basic: the password. Left out on a change, the one set stays. at most 1000 characters |
+| `auth.headerName` | object | API key: the header it goes in, e.g. `X-Api-Key` |
+| `auth.value` | string | API key: its value. Left out on a change, the one set stays. at most 1000 characters |
+| `auth.token` | string | Bearer: the token, sent as `Authorization: Bearer …`. Left out on a change, the one set stays. at most 1000 characters |
 
 **Response** `201`
 
@@ -180,6 +191,10 @@ Needs the Webhooks feature in your plan. A test endpoint (`sandbox: true`) has n
 | `endpoint.previousSecretUntil` | string (date-time) | may be null |
 | `endpoint.secretHint` | string | may be null |
 | `endpoint.rotatedAt` | string (date-time) | may be null |
+| `endpoint.authType` | `none` · `basic` · `api_key` · `bearer` | may be null |
+| `endpoint.authUsername` | string | may be null |
+| `endpoint.authHeader` | string | may be null |
+| `endpoint.authHint` | string | may be null |
 | `endpoint.lastDeliveryAt` | string (date-time) | may be null |
 | `endpoint.lastDeliveryStatus` | string | may be null |
 | `endpoint.createdBy` | string | may be null |
@@ -214,6 +229,10 @@ Needs the Webhooks feature in your plan. A test endpoint (`sandbox: true`) has n
 | `previousSecretUntil` | string (date-time) | may be null |
 | `secretHint` | string | may be null |
 | `rotatedAt` | string (date-time) | may be null |
+| `authType` | `none` · `basic` · `api_key` · `bearer` | may be null |
+| `authUsername` | string | may be null |
+| `authHeader` | string | may be null |
+| `authHint` | string | may be null |
 | `lastDeliveryAt` | string (date-time) | may be null |
 | `lastDeliveryStatus` | string | may be null |
 | `createdBy` | string | may be null |
@@ -225,7 +244,7 @@ Needs the Webhooks feature in your plan. A test endpoint (`sandbox: true`) has n
 | `id` | string | 24 characters |
 
 
-### Change an endpoint’s URL, events or description, or disable / enable it
+### Change an endpoint’s URL, events, description or authentication, or disable / enable it
 
 <span className="nh-method nh-method--patch">PATCH</span> `/v1/webhooks/{id}`
 
@@ -246,6 +265,13 @@ Disabling stops new deliveries; ones already queued die with “the endpoint is 
 | `eventTypes` | array of string (one of 99) | The event types to receive, or `*` for all of them |
 | `status` | `active` · `disabled` |  |
 | `reason` | object | at least 3 characters, at most 500 characters |
+| `auth` | object | Authentication your receiver expects. Default none. Secrets are stored encrypted and never shown again; only their last four characters |
+| `auth.type` * | `none` · `basic` · `api_key` · `bearer` | How your receiver checks the caller: `none` (open), `basic`, `api_key` or `bearer`. The signature is sent either way |
+| `auth.username` | object | Basic: the username. at most 200 characters |
+| `auth.password` | string | Basic: the password. Left out on a change, the one set stays. at most 1000 characters |
+| `auth.headerName` | object | API key: the header it goes in, e.g. `X-Api-Key` |
+| `auth.value` | string | API key: its value. Left out on a change, the one set stays. at most 1000 characters |
+| `auth.token` | string | Bearer: the token, sent as `Authorization: Bearer …`. Left out on a change, the one set stays. at most 1000 characters |
 
 **Response** `200`
 
@@ -259,6 +285,10 @@ Disabling stops new deliveries; ones already queued die with “the endpoint is 
 | `previousSecretUntil` | string (date-time) | may be null |
 | `secretHint` | string | may be null |
 | `rotatedAt` | string (date-time) | may be null |
+| `authType` | `none` · `basic` · `api_key` · `bearer` | may be null |
+| `authUsername` | string | may be null |
+| `authHeader` | string | may be null |
+| `authHint` | string | may be null |
 | `lastDeliveryAt` | string (date-time) | may be null |
 | `lastDeliveryStatus` | string | may be null |
 | `createdBy` | string | may be null |
@@ -342,6 +372,10 @@ For 24 hours deliveries carry two signatures, one per secret, so your receiver c
 | `endpoint.previousSecretUntil` | string (date-time) | may be null |
 | `endpoint.secretHint` | string | may be null |
 | `endpoint.rotatedAt` | string (date-time) | may be null |
+| `endpoint.authType` | `none` · `basic` · `api_key` · `bearer` | may be null |
+| `endpoint.authUsername` | string | may be null |
+| `endpoint.authHeader` | string | may be null |
+| `endpoint.authHint` | string | may be null |
 | `endpoint.lastDeliveryAt` | string (date-time) | may be null |
 | `endpoint.lastDeliveryStatus` | string | may be null |
 | `endpoint.createdBy` | string | may be null |

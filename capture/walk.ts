@@ -499,6 +499,17 @@ export function walk(w: Walk): Scenario[] {
       ],
     }),
     shot('webhooks/new', '/integrations/webhooks', 'Add a webhook endpoint', { steps: click('Add endpoint') }),
+    shot('webhooks/auth', '/integrations/webhooks', 'An endpoint that sends an API key', {
+      steps: async (p: Page) => {
+        await p.getByRole('button', { name: 'Add endpoint' }).click();
+        await p.getByRole('textbox', { name: 'URL' }).fill('https://erp.lagos-industrial.example/neuros/webhooks');
+        await p.getByRole('textbox', { name: 'Authentication' }).click();
+        await p.getByRole('option', { name: 'API key in a header' }).click();
+        await p.getByRole('textbox', { name: 'Header' }).fill('X-Api-Key');
+        await p.getByLabel(/^Value/).fill('demo-key-0042');
+      },
+      callouts: [{ n: 1, target: { role: 'textbox', name: 'Authentication' }, text: 'None by default; Basic, an API key or a Bearer token if your receiver wants one.', side: 'left' }],
+    }),
     shot('webhooks/detail', '/integrations/webhooks', 'A test receiver and what it received', {
       steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Test receiver' }).first().click(); }, fullPage: true,
       callouts: [
