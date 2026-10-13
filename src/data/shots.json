@@ -1,4 +1,38 @@
 {
+  "distributor/agents/list": {
+    "file": "distributor/agents/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The account your agent gives for transfers, with the order number as the reference."
+      },
+      {
+        "n": 2,
+        "text": "An agent gets a client ID and secret, shown once, for your agent platform."
+      },
+      {
+        "n": 3,
+        "text": "How much each agent was used, and how often it asked for something it may not do."
+      }
+    ]
+  },
+  "distributor/agents/new": {
+    "file": "distributor/agents/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an AI agent",
+    "callouts": []
+  },
+  "distributor/agents/numbers": {
+    "file": "distributor/agents/numbers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents: numbers",
+    "callouts": []
+  },
   "distributor/api-clients/list": {
     "file": "distributor/api-clients/list.png",
     "width": 1440,
@@ -32,6 +66,25 @@
     "width": 1440,
     "height": 900,
     "title": "Basket",
+    "callouts": []
+  },
+  "distributor/buying-cases/list": {
+    "file": "distributor/buying-cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Raise a payment, delivery, goods or account matter with a supplier."
+      }
+    ]
+  },
+  "distributor/buying-cases/new": {
+    "file": "distributor/buying-cases/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Open a case",
     "callouts": []
   },
   "distributor/buying-disputes/list": {
@@ -95,6 +148,49 @@
     "title": "Request a quote",
     "callouts": []
   },
+  "distributor/cases/detail": {
+    "file": "distributor/cases/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An overdue case",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Take it, or give it to a colleague who answers cases."
+      },
+      {
+        "n": 2,
+        "text": "The times it missed: your team was told once for each."
+      },
+      {
+        "n": 3,
+        "text": "Say what was done; the customer reads it."
+      }
+    ]
+  },
+  "distributor/cases/list": {
+    "file": "distributor/cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only the cases past your time to answer or to resolve."
+      },
+      {
+        "n": 2,
+        "text": "Who on your team has each case."
+      }
+    ]
+  },
+  "distributor/cases/settings": {
+    "file": "distributor/cases/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases: settings",
+    "callouts": []
+  },
   "distributor/catalogue/browse": {
     "file": "distributor/catalogue/browse.png",
     "width": 1440,
@@ -150,6 +246,76 @@
     "title": "A catalogue product",
     "callouts": []
   },
+  "distributor/collections/accounts": {
+    "file": "distributor/collections/accounts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: accounts",
+    "callouts": []
+  },
+  "distributor/collections/credit": {
+    "file": "distributor/collections/credit.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A payment to match",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Choose the order it pays; or send it back to the payer."
+      }
+    ]
+  },
+  "distributor/collections/credits": {
+    "file": "distributor/collections/credits.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The order each payment paid, found by the order number in its narration."
+      },
+      {
+        "n": 2,
+        "text": "Only the ones to match, to match or send back."
+      }
+    ]
+  },
+  "distributor/collections/reconciliation": {
+    "file": "distributor/collections/reconciliation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: reconciliation",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "What the bank’s statement and Neuros disagree on; open the day to see each one."
+      }
+    ]
+  },
+  "distributor/collections/settings": {
+    "file": "distributor/collections/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: settings",
+    "callouts": []
+  },
+  "distributor/customers/agent": {
+    "file": "distributor/customers/agent.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A reseller invited by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The numbers your agent answers this customer on."
+      },
+      {
+        "n": 2,
+        "text": "Another code, if the last ran out or was mistyped too often."
+      }
+    ]
+  },
   "distributor/customers/approve": {
     "file": "distributor/customers/approve.png",
     "width": 1440,
@@ -183,6 +349,18 @@
     "height": 900,
     "title": "A customer’s account",
     "callouts": []
+  },
+  "distributor/customers/invite": {
+    "file": "distributor/customers/invite.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invite a reseller by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The number they write to your agent from. A local number takes your country code."
+      }
+    ]
   },
   "distributor/customers/list": {
     "file": "distributor/customers/list.png",
@@ -283,6 +461,13 @@
     "title": "Disputes and returns: returns",
     "callouts": []
   },
+  "distributor/driver/run": {
+    "file": "distributor/driver/run.png",
+    "width": 420,
+    "height": 860,
+    "title": "The driver’s page",
+    "callouts": []
+  },
   "distributor/fulfilment/detail": {
     "file": "distributor/fulfilment/detail.png",
     "width": 1440,
@@ -307,6 +492,18 @@
       }
     ]
   },
+  "distributor/fulfilment/drivers": {
+    "file": "distributor/fulfilment/drivers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: drivers",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The people who deliver for you. They never sign in."
+      }
+    ]
+  },
   "distributor/fulfilment/list": {
     "file": "distributor/fulfilment/list.png",
     "width": 1440,
@@ -315,7 +512,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
+        "text": "Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs."
       },
       {
         "n": 2,
@@ -335,6 +532,80 @@
     "width": 1440,
     "height": 900,
     "title": "Fulfilment: returns",
+    "callouts": []
+  },
+  "distributor/fulfilment/run": {
+    "file": "distributor/fulfilment/run.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A run out today",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Where the customer’s code stands. You never see the code itself."
+      },
+      {
+        "n": 2,
+        "text": "A new link for the driver, shown once; the old one stops."
+      }
+    ]
+  },
+  "distributor/fulfilment/run-new": {
+    "file": "distributor/fulfilment/run-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plan a run",
+    "callouts": []
+  },
+  "distributor/fulfilment/runs": {
+    "file": "distributor/fulfilment/runs.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: delivery runs",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "One driver, one day, the stops in order."
+      },
+      {
+        "n": 2,
+        "text": "How many stops are done, as the driver records them."
+      }
+    ]
+  },
+  "distributor/imports/detail": {
+    "file": "distributor/imports/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "An import with rows to fix",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The rows that did not pass, as you wrote them, with what is wrong: fix and import again."
+      },
+      {
+        "n": 2,
+        "text": "Import the rows that passed. The rest are left out."
+      }
+    ]
+  },
+  "distributor/imports/list": {
+    "file": "distributor/imports/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Imports",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Offers, products or opening stock, from the template."
+      }
+    ]
+  },
+  "distributor/imports/new": {
+    "file": "distributor/imports/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Import from a file",
     "callouts": []
   },
   "distributor/inventory/adjustment-new": {
@@ -645,6 +916,72 @@
     "title": "Members",
     "callouts": []
   },
+  "distributor/messages/detail": {
+    "file": "distributor/messages/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A message",
+    "callouts": []
+  },
+  "distributor/messages/inbox": {
+    "file": "distributor/messages/inbox.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: inbox",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Each receipt or reply, kept once however often it arrived, and what it changed."
+      }
+    ]
+  },
+  "distributor/messages/list": {
+    "file": "distributor/messages/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Waiting, sent, delivered and read, from the provider’s receipts; or why it was not sent."
+      },
+      {
+        "n": 2,
+        "text": "Only the failed ones, to try them again."
+      }
+    ]
+  },
+  "distributor/messages/settings": {
+    "file": "distributor/messages/settings.png",
+    "width": 1440,
+    "height": 960,
+    "title": "Messages: settings",
+    "callouts": []
+  },
+  "distributor/messages/template-edit": {
+    "file": "distributor/messages/template-edit.png",
+    "width": 1440,
+    "height": 1324,
+    "title": "Your text for a message",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only these placeholders: Neuros fills them from the order."
+      }
+    ]
+  },
+  "distributor/messages/templates": {
+    "file": "distributor/messages/templates.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: texts",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your own text, once approved, goes out instead of Neuros’s."
+      }
+    ]
+  },
   "distributor/notifications/bell": {
     "file": "distributor/notifications/bell.png",
     "width": 1440,
@@ -676,7 +1013,7 @@
   "distributor/offers/detail": {
     "file": "distributor/offers/detail.png",
     "width": 1440,
-    "height": 900,
+    "height": 978,
     "title": "An offer",
     "callouts": []
   },
@@ -707,7 +1044,7 @@
   "distributor/offers/new": {
     "file": "distributor/offers/new.png",
     "width": 1440,
-    "height": 900,
+    "height": 978,
     "title": "New offer",
     "callouts": []
   },
@@ -859,6 +1196,22 @@
       }
     ]
   },
+  "distributor/pricing/promotion-detail": {
+    "file": "distributor/pricing/promotion-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A promotion",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Each order it went on and what it gave; a cancelled order gives its share back."
+      },
+      {
+        "n": 2,
+        "text": "To resellers who qualify and agreed to marketing, once each."
+      }
+    ]
+  },
   "distributor/pricing/promotion-new": {
     "file": "distributor/pricing/promotion-new.png",
     "width": 1440,
@@ -1003,6 +1356,33 @@
     "title": "Receive goods",
     "callouts": []
   },
+  "distributor/reports/inventory-valuation": {
+    "file": "distributor/reports/inventory-valuation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: inventory valuation",
+    "callouts": []
+  },
+  "distributor/reports/profit-and-loss": {
+    "file": "distributor/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
   "distributor/requisitions/detail": {
     "file": "distributor/requisitions/detail.png",
     "width": 1440,
@@ -1059,15 +1439,22 @@
   "distributor/settings/access": {
     "file": "distributor/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },
   "distributor/settings/billing": {
     "file": "distributor/settings/billing.png",
     "width": 1440,
-    "height": 1188,
+    "height": 1275,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "distributor/settings/billing-usage": {
+    "file": "distributor/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1804,
+    "title": "Billing: usage",
     "callouts": []
   },
   "distributor/settings/company": {
@@ -1115,7 +1502,7 @@
   "distributor/settings/notifications": {
     "file": "distributor/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -1219,6 +1606,45 @@
         "text": "How each supplier lets you pay."
       }
     ]
+  },
+  "distributor/webhooks/detail": {
+    "file": "distributor/webhooks/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A test receiver and what it received",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "A webhook.test delivery, signed like every other."
+      },
+      {
+        "n": 2,
+        "text": "The test receiver checked the signature with the endpoint’s secret."
+      }
+    ]
+  },
+  "distributor/webhooks/list": {
+    "file": "distributor/webhooks/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Webhooks",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Your receiver’s URL, or a test receiver inside Neuros."
+      },
+      {
+        "n": 2,
+        "text": "Paused with a reason: nothing is sent until it is resumed."
+      }
+    ]
+  },
+  "distributor/webhooks/new": {
+    "file": "distributor/webhooks/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add a webhook endpoint",
+    "callouts": []
   },
   "operator/applications/list": {
     "file": "operator/applications/list.png",
@@ -1369,6 +1795,36 @@
     "title": "Billing: reports",
     "callouts": []
   },
+  "operator/billing/usage": {
+    "file": "operator/billing/usage.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Billing: usage",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "This month so far, or one of the eleven before it."
+      },
+      {
+        "n": 2,
+        "text": "What each company’s usage comes to at its rates, the largest first."
+      }
+    ]
+  },
+  "operator/billing/usage-adjust": {
+    "file": "operator/billing/usage-adjust.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Adjust usage",
+    "callouts": []
+  },
+  "operator/billing/usage-company": {
+    "file": "operator/billing/usage-company.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A company’s usage",
+    "callouts": []
+  },
   "operator/catalogue/categories": {
     "file": "operator/catalogue/categories.png",
     "width": 1440,
@@ -1491,6 +1947,13 @@
       }
     ]
   },
+  "operator/partner-bank": {
+    "file": "operator/partner-bank.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Partner bank",
+    "callouts": []
+  },
   "operator/plans/add-on-new": {
     "file": "operator/plans/add-on-new.png",
     "width": 1440,
@@ -1527,6 +1990,13 @@
         "text": "Create a plan offered to everyone, or a custom one for one company."
       }
     ]
+  },
+  "operator/plans/usage-prices": {
+    "file": "operator/plans/usage-prices.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Usage prices",
+    "callouts": []
   },
   "operator/roles/detail": {
     "file": "operator/roles/detail.png",
@@ -1598,7 +2068,7 @@
   "operator/settings/notifications": {
     "file": "operator/settings/notifications.png",
     "width": 1440,
-    "height": 900,
+    "height": 1278,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -1675,6 +2145,13 @@
     "title": "New subscription",
     "callouts": []
   },
+  "operator/subscriptions/own-prices": {
+    "file": "operator/subscriptions/own-prices.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Own usage prices",
+    "callouts": []
+  },
   "operator/support/list": {
     "file": "operator/support/list.png",
     "width": 1440,
@@ -1733,7 +2210,7 @@
   "reseller/basket/list": {
     "file": "reseller/basket/list.png",
     "width": 1440,
-    "height": 900,
+    "height": 980,
     "title": "Basket",
     "callouts": [
       {
@@ -1749,6 +2226,37 @@
         "text": "Sends each order to its supplier on its own: one refusing never stops the others."
       }
     ]
+  },
+  "reseller/buying-cases/detail": {
+    "file": "reseller/buying-cases/detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A case answered by the supplier",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Answer the supplier; it goes back to them."
+      }
+    ]
+  },
+  "reseller/buying-cases/list": {
+    "file": "reseller/buying-cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Cases",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Raise a payment, delivery, goods or account matter with a supplier."
+      }
+    ]
+  },
+  "reseller/buying-cases/new": {
+    "file": "reseller/buying-cases/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Open a case",
+    "callouts": []
   },
   "reseller/buying-disputes/detail": {
     "file": "reseller/buying-disputes/detail.png",
@@ -1869,9 +2377,25 @@
   "reseller/buying-orders/new": {
     "file": "reseller/buying-orders/new.png",
     "width": 1440,
-    "height": 927,
+    "height": 1085,
     "title": "New order",
     "callouts": []
+  },
+  "reseller/buying-orders/offers": {
+    "file": "reseller/buying-orders/offers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Offers on your order",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Free goods an offer gave: a line at zero, delivered with the rest."
+      },
+      {
+        "n": 2,
+        "text": "Each offer in words, and what it saved you."
+      }
+    ]
   },
   "reseller/buying-orders/shipment": {
     "file": "reseller/buying-orders/shipment.png",
@@ -2145,6 +2669,26 @@
       }
     ]
   },
+  "reseller/reports/profit-and-loss": {
+    "file": "reseller/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
   "reseller/roles/detail": {
     "file": "reseller/roles/detail.png",
     "width": 1440,
@@ -2162,7 +2706,7 @@
   "reseller/settings/access": {
     "file": "reseller/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },
@@ -2171,6 +2715,13 @@
     "width": 1440,
     "height": 1187,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "reseller/settings/billing-usage": {
+    "file": "reseller/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1396,
+    "title": "Billing: usage",
     "callouts": []
   },
   "reseller/settings/company": {
@@ -2218,7 +2769,7 @@
   "reseller/settings/notifications": {
     "file": "reseller/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },
@@ -2298,6 +2849,27 @@
       }
     ]
   },
+  "supplier/agents/list": {
+    "file": "supplier/agents/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents",
+    "callouts": []
+  },
+  "supplier/agents/new": {
+    "file": "supplier/agents/new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Add an AI agent",
+    "callouts": []
+  },
+  "supplier/agents/numbers": {
+    "file": "supplier/agents/numbers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "AI agents: numbers",
+    "callouts": []
+  },
   "supplier/api-clients/list": {
     "file": "supplier/api-clients/list.png",
     "width": 1440,
@@ -2324,6 +2896,20 @@
     "width": 1440,
     "height": 900,
     "title": "Audit log",
+    "callouts": []
+  },
+  "supplier/cases/list": {
+    "file": "supplier/cases/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases",
+    "callouts": []
+  },
+  "supplier/cases/settings": {
+    "file": "supplier/cases/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Service cases: settings",
     "callouts": []
   },
   "supplier/catalogue/browse": {
@@ -2381,6 +2967,34 @@
     "title": "A catalogue product",
     "callouts": []
   },
+  "supplier/collections/accounts": {
+    "file": "supplier/collections/accounts.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: accounts",
+    "callouts": []
+  },
+  "supplier/collections/credits": {
+    "file": "supplier/collections/credits.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections",
+    "callouts": []
+  },
+  "supplier/collections/reconciliation": {
+    "file": "supplier/collections/reconciliation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: reconciliation",
+    "callouts": []
+  },
+  "supplier/collections/settings": {
+    "file": "supplier/collections/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Collections: settings",
+    "callouts": []
+  },
   "supplier/customers/approve": {
     "file": "supplier/customers/approve.png",
     "width": 1440,
@@ -2394,6 +3008,18 @@
     "height": 900,
     "title": "A customer’s account",
     "callouts": []
+  },
+  "supplier/customers/invite": {
+    "file": "supplier/customers/invite.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Invite a reseller by phone",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The number they write to your agent from. A local number takes your country code."
+      }
+    ]
   },
   "supplier/customers/list": {
     "file": "supplier/customers/list.png",
@@ -2446,6 +3072,13 @@
     "title": "Disputes and returns",
     "callouts": []
   },
+  "supplier/fulfilment/drivers": {
+    "file": "supplier/fulfilment/drivers.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: drivers",
+    "callouts": []
+  },
   "supplier/fulfilment/list": {
     "file": "supplier/fulfilment/list.png",
     "width": 1440,
@@ -2454,7 +3087,7 @@
     "callouts": [
       {
         "n": 1,
-        "text": "Your shipments, what to pick in each warehouse, and returns to receive."
+        "text": "Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs."
       },
       {
         "n": 2,
@@ -2474,6 +3107,20 @@
     "width": 1440,
     "height": 900,
     "title": "Fulfilment: returns",
+    "callouts": []
+  },
+  "supplier/fulfilment/run-new": {
+    "file": "supplier/fulfilment/run-new.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Plan a run",
+    "callouts": []
+  },
+  "supplier/fulfilment/runs": {
+    "file": "supplier/fulfilment/runs.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Fulfilment: delivery runs",
     "callouts": []
   },
   "supplier/inventory/adjustment-new": {
@@ -2720,6 +3367,39 @@
     "title": "Members",
     "callouts": []
   },
+  "supplier/messages/list": {
+    "file": "supplier/messages/list.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages",
+    "callouts": []
+  },
+  "supplier/messages/settings": {
+    "file": "supplier/messages/settings.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: settings",
+    "callouts": []
+  },
+  "supplier/messages/template-edit": {
+    "file": "supplier/messages/template-edit.png",
+    "width": 1440,
+    "height": 1324,
+    "title": "Your text for a message",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "Only these placeholders: Neuros fills them from the order."
+      }
+    ]
+  },
+  "supplier/messages/templates": {
+    "file": "supplier/messages/templates.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Messages: texts",
+    "callouts": []
+  },
   "supplier/notifications/bell": {
     "file": "supplier/notifications/bell.png",
     "width": 1440,
@@ -2857,6 +3537,13 @@
       }
     ]
   },
+  "supplier/pricing/promotion-detail": {
+    "file": "supplier/pricing/promotion-detail.png",
+    "width": 1440,
+    "height": 900,
+    "title": "A promotion",
+    "callouts": []
+  },
   "supplier/pricing/promotion-new": {
     "file": "supplier/pricing/promotion-new.png",
     "width": 1440,
@@ -2898,6 +3585,33 @@
     "title": "Quotes: requests received",
     "callouts": []
   },
+  "supplier/reports/inventory-valuation": {
+    "file": "supplier/reports/inventory-valuation.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: inventory valuation",
+    "callouts": []
+  },
+  "supplier/reports/profit-and-loss": {
+    "file": "supplier/reports/profit-and-loss.png",
+    "width": 1440,
+    "height": 900,
+    "title": "Reports: profit and loss",
+    "callouts": [
+      {
+        "n": 1,
+        "text": "The statements, and the operational reports your role runs."
+      },
+      {
+        "n": 2,
+        "text": "Side by side with the period before, or the same period last year."
+      },
+      {
+        "n": 3,
+        "text": "The same table as a CSV or a PDF."
+      }
+    ]
+  },
   "supplier/roles/detail": {
     "file": "supplier/roles/detail.png",
     "width": 1440,
@@ -2915,7 +3629,7 @@
   "supplier/settings/access": {
     "file": "supplier/settings/access.png",
     "width": 1440,
-    "height": 2376,
+    "height": 2454,
     "title": "Settings: role and access",
     "callouts": []
   },
@@ -2924,6 +3638,13 @@
     "width": 1440,
     "height": 1276,
     "title": "Settings: billing",
+    "callouts": []
+  },
+  "supplier/settings/billing-usage": {
+    "file": "supplier/settings/billing-usage.png",
+    "width": 1440,
+    "height": 1729,
+    "title": "Billing: usage",
     "callouts": []
   },
   "supplier/settings/company": {
@@ -2957,7 +3678,7 @@
   "supplier/settings/company-policies": {
     "file": "supplier/settings/company-policies.png",
     "width": 1440,
-    "height": 1110,
+    "height": 1206,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -2971,7 +3692,7 @@
   "supplier/settings/notifications": {
     "file": "supplier/settings/notifications.png",
     "width": 1440,
-    "height": 1274,
+    "height": 1413,
     "title": "Settings: notifications",
     "callouts": []
   },

@@ -1,0 +1,62 @@
+---
+title: The partner bank
+sidebar_position: 94.5
+description: How the partner bank reports payments, settled instructions and identity checks to Neuros, signed, stored once and processed in order.
+---
+
+The partner bank tells Neuros what happens in sellers’ virtual accounts: each payment in, each escrow instruction it settled, and each change to an account holder’s identity checks. This page is for whoever connects a bank to Neuros. A seller’s own systems read the results from the [Collections](./reference/380-collections.mdx) operations, and an app refreshes on their `bank_credit.*` [live updates](./90-live-updates.mdx).
+
+## Where the bank posts
+
+`POST $NEUROS_API/v1/inbound/bank`, where `$NEUROS_API` is <ApiBase />.
+
+Every request is signed with the bank webhook secret, in the same `Neuros-Signature` format as Neuros’s own [webhooks](./92-webhooks.mdx): `t=<unix seconds>,v1=<hex HMAC-SHA256 of "<t>.<raw body>">`. Neuros refuses a missing or wrong signature, or a timestamp more than 5 minutes away, with `401`. The secret is set on the server with the deployment. Until it is, every request gets `503 BANK_NOT_CONFIGURED`.
+
+A valid request is stored before anything else happens and answered `202` with `{ "received": true, "duplicate": false }`. The same event `id` sent again is not stored twice: the answer says `"duplicate": true`. A background job then processes stored events in order and retries failures, so the bank never waits for Neuros to finish.
+
+## Events
+
+Every body is JSON with an `id` (the bank’s event id, unique across its events) and a `type`.
+
+| `type` | Fields | What Neuros does |
+|---|---|---|
+| `credit.received` | `accountNumber`, `bankRef`, `amount` (`{ amount, currency }`), `narration`, `payerName`, `at` | Records the payment once per `bankRef`, then matches it to an order (see below) |
+| `instruction.settled` | `instructionId`, `status` (`confirmed` or `failed`), `providerRef` | Settles the escrow instruction (fund, release or refund) with that id, once |
+| `kyc.updated` | `accountNumber`, `kycStatus` (`pending`, `verified` or `failed`) | Updates the account holder’s identity checks |
+
+```json title="credit.received"
+{
+  "id": "evt-20261012-000184",
+  "type": "credit.received",
+  "at": "2026-10-12T09:41:07Z",
+  "accountNumber": "9204817365",
+  "bankRef": "NIP-000184",
+  "amount": { "amount": "294000.00", "currency": "NGN" },
+  "narration": "Payment SO-2026-000482",
+  "payerName": "Chidi Okafor"
+}
+```
+
+An account number or instruction id Neuros does not know is refused with `422 UNKNOWN_ACCOUNT`, and so is a body that does not fit its type (`422 INBOUND_INVALID`).
+
+## How a payment is matched
+
+1. **The order.** Neuros looks for the order number in the narration (any `XX-2026-000123` form). Failing that, it takes the customer’s only accepted, unpaid order of exactly that amount. Otherwise the credit waits for the seller as unmatched.
+2. **An escrow order** collects the payment. Short of the total, the reseller is told in chat what remains. Once covered, the escrow is funded: the bank already holds the money. Anything beyond the total is returned to the payer, keyed by an id Neuros saved first, so it goes back once.
+3. **Another order** gets a receipt for the payment.
+
+The same `bankRef` reported again, under any event id or on the statement, changes nothing.
+
+## Every day
+
+Neuros asks the bank for each seller’s statement for the day before and compares it with what it recorded. A credit only the statement shows is taken in as if the webhook had reported it. Anything else that differs is listed for the seller.
+
+## What Neuros asks of the bank
+
+Neuros calls the bank, never inside its own transactions, with keys it saved first:
+- to open a virtual account (keyed by the customer relationship);
+- to return a payment (keyed by the return id);
+- to fund, release with the platform fee, or refund an escrow (keyed by the instruction id);
+- for a day’s statement.
+
+A retry with the same key must return the first answer.

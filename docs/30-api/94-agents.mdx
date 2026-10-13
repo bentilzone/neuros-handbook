@@ -1,0 +1,155 @@
+---
+title: AI agents
+sidebar_position: 94
+description: Connect an agent platform to Neuros. Know who is writing, quote a cart, place the order and answer status, over REST or MCP.
+---
+
+An AI agent sells for one company, the seller, to that company’s resellers in a chat. The agent platform holds the conversation; Neuros answers every fact and takes every action. The agent never computes a price, a total or a status: each answer carries `say`, a sentence or two to read to the reseller as it is.
+
+## Before you start
+
+You need an **agent** created by the seller under **AI agents**. Its client ID and secret are shown once. An agent is an API client that can only call the agent tools ticked for it. It gets its token like any client:
+
+```bash
+export NEUROS_API="https://<your Neuros API address>"
+curl -s "$NEUROS_API/v1/oauth/token" \
+  -H "Content-Type: application/json" \
+  -d "{\"grant_type\":\"client_credentials\",\"client_id\":\"$AGENT_ID\",\"client_secret\":\"$AGENT_SECRET\"}"
+```
+
+Tokens last an hour; get a new one when it runs out. A person’s token is refused by every agent tool (`AGENT_ONLY`).
+
+## Who is writing
+
+Every tool acts for the reseller who is writing, named as `<channel>:<address>`: `whatsapp:+2348012345678`, `sms:+2348012345678` or `email:orders@shop.example`. Over REST it goes in the `X-Agent-Caller` header; over MCP it is the `caller` argument of every tool. A number without its country code takes the seller’s.
+
+Neuros finds the seller’s account with that caller and runs the tool as that reseller, inside that account only. A reseller who buys from two sellers is a different account on each seller’s agent, and neither agent sees the other’s business.
+
+## The tools
+
+| Tool | REST | Does |
+|---|---|---|
+| `resolve_caller` | `POST /v1/agent/v1/session/resolve` | `active`, `invited`, `suspended` or `unknown`, with the reseller’s name and payment ways. Call it when a conversation starts |
+| `accept_invite` | `POST /v1/agent/v1/invites/accept` | `{ "code": "482913" }`: the six-digit code from the seller’s invitation |
+| `search_products` | `GET /v1/agent/v1/products?q=` | The seller’s products this reseller may see, at its own price |
+| `quote_cart` | `POST /v1/agent/v1/carts/quote` | Prices the lines and holds the prices for 30 minutes; returns `quoteRef` |
+| `place_order` | `POST /v1/agent/v1/orders` | `{ "quoteRef": "…" }`. Takes an `Idempotency-Key` |
+| `get_order` | `GET /v1/agent/v1/orders/:ref` | Status, payment, lines and total, by order number |
+| `get_payment_instructions` | `GET /v1/agent/v1/orders/:ref/payment` | Amount due, the account and the reference |
+| `get_delivery` | `GET /v1/agent/v1/orders/:ref/delivery` | Shipments, dispatch and delivery |
+| `get_statement` | `GET /v1/agent/v1/statement` | What the reseller owes, what is overdue, credit left |
+| `open_case` | `POST /v1/agent/v1/cases` | Open a service case: payment, delivery, goods (items named as `get_order` lists them, in the ordered unit, with a `reason`), account or other. Comes back closed if the records already settle it |
+| `get_case` | `GET /v1/agent/v1/cases/:ref` | Where a case stands, with the seller’s latest answer |
+| `reply_case` | `POST /v1/agent/v1/cases/:ref/messages` | Pass the reseller’s words to the seller on an open case (`text`) |
+
+The [reference](./reference/390-agent-tools.mdx) has every field.
+
+## An order over REST
+
+```bash
+CALLER="whatsapp:+2348012345678"
+H=(-H "Authorization: Bearer $TOKEN" -H "X-Agent-Caller: $CALLER" -H "Content-Type: application/json")
+
+curl -s "${H[@]}" -X POST "$NEUROS_API/v1/agent/v1/session/resolve"
+curl -s "${H[@]}" "$NEUROS_API/v1/agent/v1/products?q=noodles%2070g"
+curl -s "${H[@]}" -X POST "$NEUROS_API/v1/agent/v1/carts/quote" \
+  -d '{"lines":[{"offerId":"<offerId from search>","quantity":"30"}]}'
+```
+
+```json
+{
+  "quoteRef": "SO-2026-00482",
+  "validUntil": "2026-10-12T10:30:00.000Z",
+  "total": { "amount": "294000.00", "currency": "NGN" },
+  "say": "30 Instant noodles 70g × ₦9,800.00 = ₦294,000.00. Total ₦294,000.00. These prices hold for 30 minutes. Shall I place the order?"
+}
+```
+
+When the reseller says yes:
+
+```bash
+curl -s "${H[@]}" -H "Idempotency-Key: chat-7731-msg-42" -X POST "$NEUROS_API/v1/agent/v1/orders" \
+  -d '{"quoteRef":"SO-2026-00482"}'
+```
+
+Use one key per “yes” in the conversation, for example the message id: a retry with the same key returns the first answer, so the reseller is never charged twice. Within 30 minutes the quoted prices stand. After that the order is refused with `409 QUOTE_EXPIRED`; quote the cart again and read the new total to the reseller.
+
+## Over MCP
+
+The same tools are an MCP server at `POST $NEUROS_API/v1/agent/mcp` (streamable HTTP; one JSON-RPC message per request, answered as JSON). Send the agent’s token as `Authorization: Bearer`. It answers `initialize`, `tools/list`, `tools/call` and `ping`. Each tool’s input schema is the REST input plus `caller`, and a tool’s result is its REST answer in `structuredContent` (and as text).
+
+```json
+{ "jsonrpc": "2.0", "id": 7, "method": "tools/call",
+  "params": { "name": "get_order", "arguments": { "caller": "whatsapp:+2348012345678", "ref": "SO-2026-00482" } } }
+```
+
+A refusal is a tool result with `isError: true` and `{ "error": { "code", "message" } }`, so the agent can read why. Placing a quote that is already placed answers with the order, so retries are safe over MCP too.
+
+## Errors an agent meets
+
+| Code | Means | Say |
+|---|---|---|
+| `CALLER_UNKNOWN` | Not one of the seller’s customers, or an invitation not yet accepted | Offer to have the seller invite them, or ask for the code |
+| `ACCOUNT_NOT_ACTIVE` | The account is suspended or ended | Ask them to contact the seller |
+| `TOOL_NOT_ALLOWED` | The seller has not ticked this tool for the agent | Hand over to the seller |
+| `INVITATION_CODE_WRONG`, `INVITATION_EXPIRED`, `INVITATION_LOCKED` | The code is wrong, more than 7 days old, or tried five times | Ask again, or ask the seller for a new code |
+| `QUOTE_EXPIRED` | The quote passed 30 minutes and prices changed | Quote again |
+| `RATE_LIMITED` | More than 600 calls a minute from this agent | Slow down |
+
+Other errors follow [Errors](./70-errors.mdx).
+
+## Messages to resellers
+
+When the seller chooses **Your agent platform sends** under **Messages → Settings**, Neuros posts each message for a reseller to the address the seller gave, and your platform sends it in its conversation with that reseller. Neuros decides the text, the reseller and the time. Your platform sends it.
+
+```http
+POST <your agent platform address>
+Content-Type: application/json
+Neuros-Event-Id: 66f1c0a2e4b0d1a2b3c4d5e6
+Neuros-Signature: t=1760263200,v1=5d41402abc4b2a76b9719d911017c592…
+```
+
+```json
+{
+  "id": "66f1c0a2e4b0d1a2b3c4d5e6",
+  "type": "message.send",
+  "occurredAt": "2026-10-12T10:00:00.000Z",
+  "message": {
+    "id": "66f1c0a2e4b0d1a2b3c4d5e6",
+    "channel": "whatsapp",
+    "to": "+2348012345678",
+    "from": "+2349010000001",
+    "templateKey": "order_received",
+    "category": "utility",
+    "text": "Eastline has your order SO-2026-00482 for ₦294,000.00. We will tell you when it is accepted.",
+    "variables": { "name": "Chidi & Sons Provisions", "seller": "Eastline", "orderNumber": "SO-2026-00482", "total": "₦294,000.00" },
+    "relationshipId": "66f1b9e0e4b0d1a2b3c4d5e1"
+  }
+}
+```
+
+- **Verify it.** `Neuros-Signature` is made with the seller’s **messaging secret**, exactly as a [webhook signature](./92-webhooks.mdx#verify-the-signature) is made with an endpoint’s secret. Refuse anything that does not verify.
+- **Send `text` as it is.** If your platform sends WhatsApp templates by name, `templateKey` and `variables` fill them. `category` is WhatsApp’s pricing category: `authentication` for the invitation code, `utility` for order news.
+- **Answer 2xx** once you have taken it, optionally with `{ "providerRef": "<your id for the message>" }`. Any other answer, or none within 10 seconds, is a failed try. Neuros tries five times over about an hour. `id` is the same on every try: send each message once.
+
+### Receipts and replies
+
+Post delivery receipts, and what resellers write, to the seller’s **inbox**: the address shown under **Messages → Settings → Connection** (`$NEUROS_API/v1/inbound/messaging/<inbox key>`). Sign each body with the messaging secret, in the same format:
+
+```bash
+BODY='{"id":"evt-0001","type":"message.status","messageId":"66f1c0a2e4b0d1a2b3c4d5e6","status":"delivered","at":"2026-10-12T10:00:04Z"}'
+T=$(date +%s)
+SIG=$(printf '%s.%s' "$T" "$BODY" | openssl dgst -sha256 -hmac "$MESSAGING_SECRET" -hex | sed 's/^.* //')
+curl -s "$INBOX_URL" -H "Content-Type: application/json" -H "Neuros-Signature: t=$T,v1=$SIG" -d "$BODY"
+```
+
+| `type` | Fields | What Neuros does |
+|---|---|---|
+| `message.status` | `messageId` (Neuros’s `id`) or `providerRef`; `status`: `sent`, `delivered`, `read` or `failed`; `error` when failed; `at` | Moves the message forward. A late `sent` never undoes `read` |
+| `message.inbound` | `channel`, `from` (the reseller’s number), `text`, `at` | `STOP` (or unsubscribe, cancel, end, quit) stops messages to that reseller; `START` (or resume, subscribe, unstop) turns them back on. Anything else is left for your agent |
+
+- `id` is your event id. A body with an `id` already received is answered `"duplicate": true` and changes nothing, so retry freely.
+- The answer is `202 { "received": true, "duplicate": false }` once the body is stored. Neuros acts on it within seconds.
+- The timestamp must be within 5 minutes. A wrong or stale signature is `401 SIGNATURE_INVALID`; an unknown inbox is `404`; a body that is not one of the shapes above is `422 INBOUND_INVALID`.
+
+The seller sees every message, receipt and reply under **Messages**. The [reference](./reference/index.mdx) lists the seller’s own messaging routes under *Messaging*.

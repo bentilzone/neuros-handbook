@@ -1,0 +1,54 @@
+---
+title: Collections and escrow
+sidebar_label: Collections and escrow
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['bank_account:manage', 'payment:read']} />
+
+A reseller who orders by chat pays the way they always pay: a transfer from their own bank. With [collections](../01-glossary/47-partner-bank.mdx#collections) on, that transfer lands in an account that is theirs alone with you. Neuros knows at once who paid and which order the payment is for. An escrow order is held by the [partner bank](../01-glossary/47-partner-bank.mdx#partner-bank), not by you and not by Neuros. The bank releases it a short while after delivery if nothing is wrong.
+
+## Set it up
+
+1. Under **Collections → Settings**, switch on **Collect through the partner bank**, and choose how escrow releases (after the dispute window, 24 hours by default, or when the buyer confirms).
+2. Approve customers as usual. Each one now gets its own [virtual account](../01-glossary/47-partner-bank.mdx#virtual-account). For a customer approved earlier, click **Open one** in its panel under **Customers**.
+3. Offer escrow to the customers who should pay that way, in their terms.
+
+See <PageLink who="distributor" page="collections">Collections</PageLink>.
+
+## An escrow order, end to end
+
+| Step | Who | What happens |
+|---|---|---|
+| Order | Reseller, by chat or in the app | Your AI agent gives the virtual account and the order number to use as the reference. In the app, the order shows the same |
+| Payment | Reseller | A transfer to their account. The bank tells Neuros about it at once |
+| Match | Neuros | The order number in the narration finds the order. Paid in full: the escrow is funded and the bank holds it. Short: the reseller is told in chat what remains. Too much: the excess goes back to them |
+| Delivery | You | Delivering the order in full starts the [dispute window](../01-glossary/47-partner-bank.mdx#dispute-window) |
+| Window | Reseller | They may dispute a line: only that line’s value stays held. Or they open a [case](../01-glossary/49-service-cases.mdx#case-hold) about a payment or the delivery: all of it waits until the case ends |
+| Release | Neuros and the bank | When the window passes, the bank pays you everything not held, less the [platform fee](../01-glossary/47-partner-bank.mdx#platform-fee) |
+
+Every step is idempotent. The same payment reported twice is one payment, and the same release asked twice is paid once.
+
+## Other orders
+
+A payment for an order paid by transfer or prepay gets a receipt, as if you had confirmed the transfer yourself. A shortfall is told to the reseller in the same way. An excess is kept as their advance, applied to their next invoice.
+
+## When Neuros cannot tell
+
+A payment with no order number, and no unpaid order of exactly that amount, waits under **Collections → Credits** as **To match**. Match it to an order, or send it back to the payer with a reason.
+
+## In your books
+
+| When | Debit | Credit |
+|---|---|---|
+| The escrow is funded | Escrow receivable | Customer advances, then the invoice |
+| The bank releases it | Bank (what you receive), Platform fees (the fee) | Escrow receivable |
+
+## Every day
+
+Each night Neuros compares the bank’s statement with what it recorded, and lists any difference under **Collections → Reconciliation**. A payment the bank’s webhook never reported is taken in from the statement and matched there.
+
+## For the buyer
+
+The buyer sees their virtual account on their supplier page and on each unpaid order. On an escrow order they also see when the money will be released. A buyer in the app can still dispute a delivered line within the window. See <PageLink who="reseller" page="buying-orders">Orders</PageLink>.
+
+Every change of settings, every match, return and release is in the [audit trail](../01-glossary/10-companies-and-people.mdx#audit-trail).

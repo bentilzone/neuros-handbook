@@ -28,3 +28,21 @@ A company without a live subscription can only sign in, see its own company deta
 
 ### Invoice, receipt and credit note
 The billing documents Neuros sends the company for its subscription, each with a PDF. A receipt records a payment against an invoice. A credit note reduces one.
+
+### Usage
+What a company used in a month, counted by meter: orders, active resellers, agent tool calls, messages by kind, escrow releases, order value and fees. Each order, message or release is counted once, when it happens. Neuros corrects usage only with an **adjustment**: a separate record with its reason.
+
+### Rate card
+What usage costs on a plan, in one currency. For each meter: an **allowance** included each month, then a price for each one over it, in steps if the price falls. It also sets the transaction fee and any monthly minimum. Neuros can give one company its own rate card.
+
+### Allowance
+How many of a meter a plan includes each month at no charge. The company is told at 80% and at 100%.
+
+### Transaction fee
+What Neuros charges on an accepted order not paid through escrow: a percent of the order plus a flat amount, between a minimum and a maximum. Escrow orders pay the bank's fee at release instead.
+
+### Usage statement and usage invoice
+At the end of each month, Neuros writes each company's statement: every meter with what was used, included and charged. If anything is owed, a usage invoice follows, taxed and paid like any other.
+
+### Books
+Neuros' own accounting, kept outside Neuros in Zoho Billing. Every invoice and payment is copied there; Neuros' invoice is the one that counts.

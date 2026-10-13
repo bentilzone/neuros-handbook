@@ -104,12 +104,18 @@ function changed(file: string, next: Buffer): 'new' | 'changed' | 'same' {
 }
 
 async function shoot(page: Page, s: Shot, manifest: Record<string, unknown>, report: string[]) {
+  if (s.viewport) await page.setViewportSize(s.viewport);
+  try { await shootAt(page, s, manifest, report); } finally { if (s.viewport) await page.setViewportSize(VIEWPORT); }
+}
+
+async function shootAt(page: Page, s: Shot, manifest: Record<string, unknown>, report: string[]) {
+  const size = s.viewport ?? VIEWPORT;
   await go(page, s.path);
   await settle(page);
   if (s.steps) await s.steps(page);
   await settle(page);
   // Park the pointer in the corner: no row hover or tooltip left from the last click.
-  await page.mouse.move(VIEWPORT.width - 2, VIEWPORT.height - 2);
+  await page.mouse.move(size.width - 2, size.height - 2);
   await page.waitForTimeout(150);
   // The seed runs at the real time, so clock times, "n minutes ago" and job durations differ on
   // every run (and the sign-in page greets by the hour). Pin them in the page, or each run reports every history panel as changed.
@@ -117,9 +123,17 @@ async function shoot(page: Page, s: Shot, manifest: Record<string, unknown>, rep
     const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
       const t = n.nodeValue ?? '';
-      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ ms\b/g, '12 ms').replace(/\bGood (afternoon|evening)\b/g, 'Good morning');
+      const next = t.replace(/\b([01]?\d|2[0-3]):[0-5]\d\b/g, '09:30').replace(/\b(\d+|an?) (second|minute|hour)s? ago\b/g, '5 minutes ago').replace(/\b\d+ (sec|min|hr)s? ago\b/g, '5 min ago').replace(/\b\d+ ms\b/g, '12 ms').replace(/\bGood (afternoon|evening)\b/g, 'Good morning')
+        // The stack's own API address and a messaging inbox's random key and secret ending (N-037): never a real host, never a run's key.
+        .replace(/https?:\/\/localhost:\d+\/v1\/inbound\/messaging\/[A-Za-z0-9_-]+/g, '$NEUROS_API/v1/inbound/messaging/<inbox key>').replace(/^…[A-Za-z0-9_-]{4}$/, '…k2Ab').replace(/\bFAKE-MSG-[0-9a-f]{8}\b/g, 'FAKE-MSG-0c4e21a7')
+        // A virtual account's number is derived from its relationship's id (N-038): one fixed demo number per shot.
+        .replace(/\b9\d{9}\b/g, '9204817365')
+        // A driver's link carries a fresh token each run (N-039): never a run's token, never the stack's host.
+        .replace(/https?:\/\/localhost:\d+\/driver#[A-Za-z0-9_-]+/g, 'https://<your Neuros address>/driver#<link token>');
       if (next !== t) n.nodeValue = next;
     }
+    // The buyer's delivery code is random per run (N-039).
+    document.querySelectorAll('[data-capture="delivery-code"]').forEach((e) => { e.textContent = '482913'; });
   });
   if (s.callouts?.length) await drawCallouts(page, s.callouts);
   const png = await page.screenshot({ fullPage: !!s.fullPage });

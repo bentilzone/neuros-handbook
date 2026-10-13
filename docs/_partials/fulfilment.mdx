@@ -2,7 +2,7 @@
 
 <PersonaBadge who={['supply', 'distribution']} permission="shipment:read" />
 
-Fulfilment is where accepted orders leave your warehouse. Each delivery is a [shipment](../01-glossary/30-selling-and-pricing.mdx#shipment): you pick it, pack it, dispatch it and prove it arrived. One order can go out in several shipments, from one warehouse each.
+Fulfilment is where accepted orders leave your warehouse. Each delivery is a [shipment](../01-glossary/30-selling-and-pricing.mdx#shipment): you pick it, pack it, dispatch it and prove it arrived. One order can go out in several shipments, from one warehouse each. Your own drivers’ days are planned here too, as delivery runs.
 
 <Shot id={`${props.who}/fulfilment/list`} />
 
@@ -53,6 +53,55 @@ The **Pick list** tab shows, for one warehouse, every shipment being picked: eac
 
 The delivery note PDF opens from the shipment's header. Every step needs `shipment:manage`; adding proof also needs `document:upload`.
 
+## Delivery runs
+
+<Shot id={`${props.who}/fulfilment/runs`} />
+
+When you deliver in your own vehicles, the **Delivery runs** tab plans each [driver’s](../01-glossary/48-deliveries.mdx#driver) day as a [delivery run](../01-glossary/48-deliveries.mdx#delivery-run). See [Delivery runs and the delivery code](../02-features/48-delivery-code.mdx) for the whole flow.
+
+**Plan a run** picks the driver, the day and the stops.
+
+<Shot id={`${props.who}/fulfilment/run-new`} />
+
+<FieldTable fields={[
+  { name: 'Driver', required: true, meaning: 'Who drives the run. Only active drivers are listed.', others: 'The customer’s message names them.' },
+  { name: 'Day', required: true, meaning: 'The day the run goes out, in your company’s time zone.', implications: 'It can only be sent out on that day, and the driver’s link and the codes expire when it ends.', rules: 'Today or later.' },
+  { name: 'Stops', required: true, meaning: 'The shipments the driver carries, ticked in the order the driver goes.', others: 'Each customer is sent a code when the run goes out.', implications: 'A shipment on a live run cannot go on another.', rules: 'Up to 100: packed shipments, or ones dispatched with your own delivery, not already on a run.' },
+  { name: 'Note for the run', meaning: 'Anything the driver or your team should know.', rules: 'Up to 500 characters.' },
+]} />
+
+{props.who === 'distributor' && <Shot id="distributor/fulfilment/run" />}
+
+Open a run to follow it. Each stop shows how it ended and where its [delivery code](../01-glossary/48-deliveries.mdx#delivery-code) stands. You never see the code itself.
+
+- **Send the run out**, on its day, dispatches every packed shipment on it, sends each customer a code and shows the [driver’s link](../01-glossary/48-deliveries.mdx#drivers-link). The link is shown only this once: copy it and send it to the driver by message. Asking twice sends it out once.
+- **New link** stops the driver’s link at once and shows a new one, for a lost link or one sent to the wrong person.
+- **New code** on a stop sends the customer a fresh code with three tries, for a [locked](../01-glossary/48-deliveries.mdx#locked-code) or expired one. A locked code also opens a delivery case under <PageLink who={props.who} page="cases">Service cases</PageLink>, which resolves once the delivery is made.
+- **Cancel run** stops a run that has not gone out, with a reason. Its shipments are free for another run.
+
+The run completes on its own when the driver has delivered, or not delivered, every stop. A stop not delivered puts its shipment back to *Packed*, with the driver’s reason.
+
+## Drivers
+
+<Shot id={`${props.who}/fulfilment/drivers`} />
+
+The **Drivers** tab lists who delivers for you. Drivers never sign in; each run reaches them by its link.
+
+<FieldTable fields={[
+  { name: 'Name', required: true, meaning: 'The driver’s name.', others: 'Customers see it in the message with their code.', rules: '2 to 100 characters.' },
+  { name: 'Phone', meaning: 'Where you send the run’s link.', others: 'Not shown to customers.', rules: 'Up to 40 characters.' },
+  { name: 'Vehicle', meaning: 'For example the van’s registration.' },
+  { name: 'Active', meaning: 'Whether the driver can be given new runs.', implications: 'An inactive driver keeps their past runs.' },
+]} />
+
+## The delivery code on a shipment
+
+A shipment on a run shows its code’s status: **Code sent**, **Code given**, **Code locked** or **Code expired**, with when it was sent and any wrong entries. **Send a new code** sends the customer a fresh one. If the code could not be messaged, the shipment says why.
+
+Once the driver records the stop, the shipment shows **At the door**: the driver, when, whether the code was given, the place, and any line handed over short, damaged or wrong. Each of those lines opened a dispute for its value only; see <PageLink who={props.who} page="disputes">Disputes and returns</PageLink>.
+
+Runs, drivers and codes need `shipment:read` to see and `shipment:manage` to change.
+
 ## Returns
 
 {props.who === 'distributor' && <Shot id="distributor/fulfilment/returns" />}
@@ -61,7 +110,7 @@ The **Returns** tab lists returns still open: authorised ones to receive when th
 
 ## Live
 
-A colleague packing or dispatching, and the customer confirming receipt, appear on their own.
+A colleague packing or dispatching, a driver recording a stop, and the customer confirming receipt, appear on their own.
 
 ## Common questions
 

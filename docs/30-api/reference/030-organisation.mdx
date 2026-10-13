@@ -8,7 +8,7 @@ description: "Your company profile, addresses, contacts, tax identifiers and ope
 
 Your company profile, addresses, contacts, tax identifiers and operating policies.
 
-This page lists the 8 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 9 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -16,6 +16,7 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 |---|---|---|
 | [GET `/v1/organization`](#my-active-organisation-profile-capabilities-and-settings) | My active organisation: profile, capabilities and settings | `org:read` |
 | [PATCH `/v1/organization`](#update-the-organisation-profile) | Update the organisation profile | `org:update` |
+| [PUT `/v1/organization/collection-account`](#set-the-account-your-resellers-pay-transfers-into) | Set the account your resellers pay transfers into | `bank_account:manage` |
 | [PATCH `/v1/organization/settings`](#change-operating-settings-acceptance-sod-valuation-finance-mode) | Change operating settings (acceptance, SoD, valuation, finance mode) | `org:settings` |
 | [GET `/v1/support-access`](#neuros-support-requests-for-your-company-and-past-access) | Neuros support requests for your company, and past access | `support:read` |
 | [GET `/v1/support-access/{id}`](#one-support-grant-on-your-company-who-when-and-what-they-opened) | One support grant on your company: who, when, and what they opened | `support:read` |
@@ -93,6 +94,15 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
+| `managed` | object | may be null |
+| `managed.byOrganizationId` | string | 24 characters, may be null |
+| `managed.phone` | string | may be null |
+| `managed.claimedAt` | string (date-time) | may be null |
+| `collectionAccount` | object | may be null |
+| `collectionAccount.bankName` | string | may be null |
+| `collectionAccount.accountName` | string | may be null |
+| `collectionAccount.accountNumber` | string | may be null |
+| `collectionAccount.sortCode` | string | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `__v` | number | may be null |
@@ -193,6 +203,109 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
+| `managed` | object | may be null |
+| `managed.byOrganizationId` | string | 24 characters, may be null |
+| `managed.phone` | string | may be null |
+| `managed.claimedAt` | string (date-time) | may be null |
+| `collectionAccount` | object | may be null |
+| `collectionAccount.bankName` | string | may be null |
+| `collectionAccount.accountName` | string | may be null |
+| `collectionAccount.accountNumber` | string | may be null |
+| `collectionAccount.sortCode` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
+
+
+### Set the account your resellers pay transfers into
+
+<span className="nh-method nh-method--put">PUT</span> `/v1/organization/collection-account`
+
+Your AI agent gives it to resellers with the order number as the reference. Changing it needs MFA.
+
+**Who can call it:** People and API clients · **Scope:** `bank_account:manage` · **Two-step verification:** the session must have signed in with it
+
+
+**Request body**
+
+| Field | Type | Notes |
+|---|---|---|
+| `bankName` * | string | at most 80 characters |
+| `accountName` * | string | at most 120 characters |
+| `accountNumber` * | string | 6–34 letters or digits |
+| `sortCode` | string | at most 20 characters, may be null |
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `legalName` | string | may be null |
+| `tradingName` | string | may be null |
+| `slug` | string | may be null |
+| `jurisdiction` | string | may be null |
+| `registrationNumber` | string | may be null |
+| `taxIds` | object[] |  |
+| `taxIds[].type` | string | may be null |
+| `taxIds[].value` | string | may be null |
+| `taxIds[].id` | string | 24 characters |
+| `addresses` | object[] |  |
+| `addresses[].label` | string | may be null |
+| `addresses[].line1` | string | may be null |
+| `addresses[].line2` | string | may be null |
+| `addresses[].city` | string | may be null |
+| `addresses[].state` | string | may be null |
+| `addresses[].postalCode` | string | may be null |
+| `addresses[].country` | string | may be null |
+| `addresses[].id` | string | 24 characters |
+| `contacts` | object[] |  |
+| `contacts[].name` | string | may be null |
+| `contacts[].role` | string | may be null |
+| `contacts[].email` | string | may be null |
+| `contacts[].phone` | string | may be null |
+| `contacts[].id` | string | 24 characters |
+| `website` | string | may be null |
+| `capabilities` | object | may be null |
+| `capabilities.supply` | boolean | may be null |
+| `capabilities.distribution` | boolean | may be null |
+| `capabilities.purchasing` | boolean | may be null |
+| `status` | `active` · `suspended` · `closed` | may be null |
+| `statusReason` | string | may be null |
+| `primaryAdminUserId` | string | 24 characters, may be null |
+| `billingContact` | object | may be null |
+| `billingContact.name` | string | may be null |
+| `billingContact.email` | string | may be null |
+| `billingContact.phone` | string | may be null |
+| `billingContact.purchaseOrderRef` | string | may be null |
+| `auditRetention` | object | may be null |
+| `auditRetention.changeDays` | number | may be null |
+| `auditRetention.accessDays` | number | may be null |
+| `functionalCurrency` | string (one of 155) | may be null |
+| `settings` | object | may be null |
+| `settings.orderAcceptance` | `manual` · `auto` | may be null |
+| `settings.sodEnabled` | boolean | may be null |
+| `settings.valuationMethod` | `fifo` · `weighted_average` | may be null |
+| `settings.roundingMode` | `half_up` · `half_even` | may be null |
+| `settings.financeMode` | `full` · `external` | may be null |
+| `settings.reservationTtlMinutes` | number | may be null |
+| `settings.defaultPaymentTermsDays` | number | may be null |
+| `settings.quoteValidityDays` | number | may be null |
+| `settings.shortfall` | `backorder` · `hold` · `reject` | may be null |
+| `settings.invoiceTiming` | `on_dispatch` · `on_acceptance` | may be null |
+| `settings.unpaidCancelDays` | number | may be null |
+| `settings.matchPriceTolerancePercent` | number | may be null |
+| `settings.matchQuantityTolerancePercent` | number | may be null |
+| `settings.timezone` | string (one of 418) | may be null |
+| `applicationId` | string | 24 characters, may be null |
+| `managed` | object | may be null |
+| `managed.byOrganizationId` | string | 24 characters, may be null |
+| `managed.phone` | string | may be null |
+| `managed.claimedAt` | string (date-time) | may be null |
+| `collectionAccount` | object | may be null |
+| `collectionAccount.bankName` | string | may be null |
+| `collectionAccount.accountName` | string | may be null |
+| `collectionAccount.accountNumber` | string | may be null |
+| `collectionAccount.sortCode` | string | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `__v` | number | may be null |
@@ -286,6 +399,15 @@ This page lists the 8 operations in this area, generated from the engine's OpenA
 | `settings.matchQuantityTolerancePercent` | number | may be null |
 | `settings.timezone` | string (one of 418) | may be null |
 | `applicationId` | string | 24 characters, may be null |
+| `managed` | object | may be null |
+| `managed.byOrganizationId` | string | 24 characters, may be null |
+| `managed.phone` | string | may be null |
+| `managed.claimedAt` | string (date-time) | may be null |
+| `collectionAccount` | object | may be null |
+| `collectionAccount.bankName` | string | may be null |
+| `collectionAccount.accountName` | string | may be null |
+| `collectionAccount.accountNumber` | string | may be null |
+| `collectionAccount.sortCode` | string | may be null |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `__v` | number | may be null |

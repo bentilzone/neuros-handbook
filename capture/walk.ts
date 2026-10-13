@@ -2,7 +2,7 @@
 // drawers and forms it opens. A persona keeps the sections its company can see (selling, buying,
 // stock) and names its own demo records; ids are `persona/page/state` either way.
 import type { Page } from 'playwright';
-import type { Persona } from './personas';
+import { VIEWPORT, type Persona } from './personas';
 import type { Scenario, Shot } from './scenario';
 
 export interface Walk {
@@ -15,6 +15,8 @@ export interface Walk {
   stock: boolean;
   /** Demo records the walk opens, from seed:trade. */
   priceList?: string;
+  /** A promotion the walk opens in Pricing → Promotions (K5b). */
+  promotion?: string;
   journalWaiting: string;
   /** A seller whose card in the marketplace shows a price worked out for this persona. */
   marketplaceSeller?: string;
@@ -24,6 +26,10 @@ export interface Walk {
   disputes?: 'selling' | 'buying';
   /** seed:trade gave this persona external suppliers, requisitions, purchase orders, a receipt with landed cost, supplier invoices and payments (P4). */
   externalSuppliers?: boolean;
+  /** seed:trade gave this persona a test receiver and a paused ERP endpoint, and two imports (P5). */
+  integrations?: boolean;
+  /** seed:trade gave this persona an AI agent on a WhatsApp number, a reseller who ordered by chat and one still invited (K1). */
+  agents?: boolean;
 }
 
 const click = (name: string | RegExp) => async (page: Page) => { await page.getByRole('button', { name }).first().click(); };
@@ -86,6 +92,14 @@ export function walk(w: Walk): Scenario[] {
     shot('pricing/contract-new', '/selling/pricing?tab=contracts', 'New contract price', { steps: click('New contract price') }),
     shot('pricing/promotions', '/selling/pricing?tab=promotions', 'Pricing: promotions'),
     shot('pricing/promotion-new', '/selling/pricing?tab=promotions', 'New promotion', { steps: click('New promotion'), fullPage: true }),
+    ...(w.promotion ? [shot('pricing/promotion-detail', '/selling/pricing?tab=promotions', 'A promotion', {
+      steps: async (p) => { await p.getByText(w.promotion!, { exact: true }).first().click(); },
+      fullPage: true,
+      callouts: !w.agents ? [] : [
+        { n: 1, target: { text: /^Orders \(/ }, text: 'Each order it went on and what it gave; a cancelled order gives its share back.', side: 'left' },
+        { n: 2, target: { role: 'button', name: 'Tell resellers' }, text: 'To resellers who qualify and agreed to marketing, once each.', side: 'left' },
+      ],
+    })] : []),
     shot('pricing/check', '/selling/pricing?tab=check', 'Pricing: price check'),
     shot('quotes/list', '/selling/quotes', 'Quotes', {
       callouts: [
@@ -132,6 +146,24 @@ export function walk(w: Walk): Scenario[] {
         callouts: [{ n: 1, target: { role: 'button', name: 'Authorise' }, text: 'Authorise it before anything travels; reject it with a reason.', side: 'left' }],
       }),
     ] : []),
+    shot('cases/list', '/selling/cases', 'Service cases', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Overdue$/ }, text: 'Only the cases past your time to answer or to resolve.', side: 'bottom' },
+        { n: 2, target: { text: 'Nobody yet', nth: 0 }, text: 'Who on your team has each case.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('cases/detail', '/selling/cases', 'An overdue case', {
+        steps: async (page) => { await page.getByRole('row').filter({ hasText: 'Statement for September' }).first().click(); },
+        fullPage: true,
+        callouts: [
+          { n: 1, target: { role: 'button', name: 'Take the case' }, text: 'Take it, or give it to a colleague who answers cases.', side: 'left' },
+          { n: 2, target: { text: 'No answer in time' }, text: 'The times it missed: your team was told once for each.', side: 'left' },
+          { n: 3, target: { role: 'button', name: 'Resolve' }, text: 'Say what was done; the customer reads it.', side: 'top' },
+        ],
+      }),
+    ] : []),
+    shot('cases/settings', '/selling/cases?tab=settings', 'Service cases: settings', { fullPage: true }),
     shot('customers/list', '/selling/customers', 'Customers', {
       callouts: [
         { n: 1, target: { text: /waiting for approval/i, nth: 0 }, text: 'Requests waiting for your answer.', side: 'bottom' },
@@ -142,6 +174,67 @@ export function walk(w: Walk): Scenario[] {
     }),
     shot('customers/approve', '/selling/customers', 'Approve a customer, with terms', { steps: click(/^Approve /), fullPage: true }),
     shot('customers/detail', '/selling/customers', 'A customer’s account', { steps: firstRow, fullPage: true }),
+    shot('customers/invite', '/selling/customers', 'Invite a reseller by phone', {
+      steps: click('Invite by phone'), fullPage: true,
+      callouts: [{ n: 1, target: { role: 'textbox', name: /Phone/ }, text: 'The number they write to your agent from. A local number takes your country code.', side: 'left' }],
+    }),
+    ...(w.agents ? [
+      shot('customers/agent', '/selling/customers?status=invited', 'A reseller invited by phone', {
+        steps: firstRow,
+        callouts: [
+          { n: 1, target: { text: 'Writes from', nth: 0 }, text: 'The numbers your agent answers this customer on.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New code' }, text: 'Another code, if the last ran out or was mistyped too often.', side: 'right' },
+        ],
+      }),
+    ] : []),
+    shot('agents/list', '/selling/agents', 'AI agents', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: 'Where resellers pay' }, text: 'The account your agent gives for transfers, with the order number as the reference.', side: 'right' },
+        { n: 2, target: { role: 'button', name: 'Add an agent' }, text: 'An agent gets a client ID and secret, shown once, for your agent platform.', side: 'left' },
+        { n: 3, target: { text: /^Calls, 30 days$/ }, text: 'How much each agent was used, and how often it asked for something it may not do.', side: 'bottom' },
+      ],
+    } : {}),
+    shot('agents/new', '/selling/agents', 'Add an AI agent', { steps: click('Add an agent'), fullPage: true }),
+    shot('agents/numbers', '/selling/agents?tab=numbers', 'AI agents: numbers'),
+    shot('messages/list', '/selling/messages', 'Messages', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Status$/ }, text: 'Waiting, sent, delivered and read, from the provider’s receipts; or why it was not sent.', side: 'bottom' },
+        { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Only the failed ones, to try them again.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('messages/detail', '/selling/messages', 'A message', { steps: firstRow, fullPage: true }),
+    ] : []),
+    shot('messages/templates', '/selling/messages?tab=templates', 'Messages: texts', w.agents ? {
+      callouts: [{ n: 1, target: { text: /^Your text$/ }, text: 'Your own text, once approved, goes out instead of Neuros’s.', side: 'bottom' }],
+    } : {}),
+    shot('messages/template-edit', '/selling/messages?tab=templates', 'Your text for a message', {
+      steps: async (p) => { await p.getByRole('button', { name: 'Edit Order received' }).click(); }, fullPage: true,
+      callouts: [{ n: 1, target: { text: /^\{\{orderNumber\}\}$/, nth: 0 }, text: 'Only these placeholders: Neuros fills them from the order.', side: 'bottom' }],
+    }),
+    shot('messages/settings', '/selling/messages?tab=settings', 'Messages: settings', { fullPage: true }),
+    ...(w.agents ? [
+      shot('messages/inbox', '/selling/messages?tab=inbox', 'Messages: inbox', {
+        callouts: [{ n: 1, target: { text: /^What Neuros did$/ }, text: 'Each receipt or reply, kept once however often it arrived, and what it changed.', side: 'bottom' }],
+      }),
+    ] : []),
+    shot('collections/credits', '/selling/collections', 'Collections', w.agents ? {
+      callouts: [
+        { n: 1, target: { text: /^Order$/ }, text: 'The order each payment paid, found by the order number in its narration.', side: 'bottom' },
+        { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Only the ones to match, to match or send back.', side: 'bottom' },
+      ],
+    } : {}),
+    ...(w.agents ? [
+      shot('collections/credit', '/selling/collections?status=unmatched', 'A payment to match', {
+        steps: firstRow, fullPage: true,
+        callouts: [{ n: 1, target: { role: 'button', name: 'Match to an order' }, text: 'Choose the order it pays; or send it back to the payer.', side: 'left' }],
+      }),
+    ] : []),
+    shot('collections/accounts', '/selling/collections?tab=accounts', 'Collections: accounts'),
+    shot('collections/reconciliation', '/selling/collections?tab=reconciliation', 'Collections: reconciliation', w.agents ? {
+      callouts: [{ n: 1, target: { text: /^Differences$/, nth: 0 }, text: 'What the bank’s statement and Neuros disagree on; open the day to see each one.', side: 'bottom' }],
+    } : {}),
+    shot('collections/settings', '/selling/collections?tab=settings', 'Collections: settings', { fullPage: true }),
   ];
 
   const buy: Scenario[] = [
@@ -187,6 +280,15 @@ export function walk(w: Walk): Scenario[] {
     ...(w.disputes === 'buying' ? [shot('buying-disputes/detail', '/buying/disputes', 'A dispute you raised', {
       steps: firstRow, fullPage: true,
       callouts: [{ n: 1, target: { role: 'button', name: 'Add a photo or document' }, text: 'Photos, documents or a short video; the seller can open each one.', side: 'left' }],
+    })] : []),
+    shot('buying-cases/list', '/buying/cases', 'Cases', {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Open a case' }, text: 'Raise a payment, delivery, goods or account matter with a supplier.', side: 'left' }],
+    }),
+    shot('buying-cases/new', '/buying/cases', 'Open a case', { steps: click('Open a case'), fullPage: true }),
+    ...(w.disputes === 'buying' ? [shot('buying-cases/detail', '/buying/cases', 'A case answered by the supplier', {
+      steps: async (page) => { await page.getByRole('row').filter({ hasText: 'When does the order arrive?' }).first().click(); },
+      fullPage: true,
+      callouts: [{ n: 1, target: { role: 'textbox', name: 'Message' }, text: 'Answer the supplier; it goes back to them.', side: 'top' }],
     })] : []),
     shot('buying-invoices/list', '/buying/invoices', 'Invoices', {
       callouts: [{ n: 1, target: { text: /^Due$/ }, text: 'When each invoice is due; overdue ones show in red.', side: 'bottom' }],
@@ -290,12 +392,47 @@ export function walk(w: Walk): Scenario[] {
     shot('inventory/valuation', '/inventory?tab=valuation', 'Inventory: valuation'),
     shot('fulfilment/list', '/fulfilment', 'Fulfilment', {
       callouts: [
-        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, what to pick in each warehouse, and returns to receive.', side: 'right' },
+        { n: 1, target: { css: '[class*="SegmentedControl-root"]' }, text: 'Your shipments, what to pick in each warehouse, returns to receive, and your own drivers’ runs.', side: 'right' },
         { n: 2, target: { role: 'textbox', name: 'Status' }, text: 'Picking, packed, on its way, delivered or cancelled.', side: 'bottom' },
       ],
     }),
     shot('fulfilment/pick', '/fulfilment?tab=pick', 'Fulfilment: pick list'),
     shot('fulfilment/returns', '/fulfilment?tab=returns', 'Fulfilment: returns'),
+    shot('fulfilment/runs', '/fulfilment?tab=runs', 'Fulfilment: delivery runs', w.agents ? {
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Plan a run' }, text: 'One driver, one day, the stops in order.', side: 'left' },
+        { n: 2, target: { text: /^Stops$/ }, text: 'How many stops are done, as the driver records them.', side: 'bottom' },
+      ],
+    } : {}),
+    shot('fulfilment/run-new', '/fulfilment?tab=runs', 'Plan a run', { steps: click('Plan a run') }),
+    ...(w.agents ? [
+      shot('fulfilment/run', '/fulfilment?tab=runs', 'A run out today', {
+        steps: firstRow, fullPage: true,
+        callouts: [
+          { n: 1, target: { text: 'Code sent' }, text: 'Where the customer’s code stands. You never see the code itself.', side: 'left' },
+          { n: 2, target: { role: 'button', name: 'New link' }, text: 'A new link for the driver, shown once; the old one stops.', side: 'top' },
+        ],
+      }),
+    ] : []),
+    shot('fulfilment/drivers', '/fulfilment?tab=drivers', 'Fulfilment: drivers', w.agents ? {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Add a driver' }, text: 'The people who deliver for you. They never sign in.', side: 'left' }],
+    } : {}),
+    ...(w.agents ? [
+      // The driver's phone page: a new link from the run's panel, opened as the driver would.
+      shot('driver/run', '/fulfilment?tab=runs', 'The driver’s page', {
+        viewport: { width: 420, height: 860 },
+        steps: async (page) => {
+          // The run's panel at desktop size; the driver's page at the phone's.
+          await page.setViewportSize(VIEWPORT);
+          await firstRow(page);
+          await page.getByRole('button', { name: 'New link' }).click();
+          const link = (await page.getByText(/\/driver#[A-Za-z0-9_-]+/).first().innerText()).trim();
+          await page.setViewportSize({ width: 420, height: 860 });
+          await page.goto(new URL(`/driver#${link.split('#')[1]}`, page.url()).href);
+          await page.getByText('Keep this link to yourself').waitFor();
+        },
+      }),
+    ] : []),
   ];
 
   const ledger: Scenario[] = [
@@ -315,6 +452,43 @@ export function walk(w: Walk): Scenario[] {
     shot('ledger/trial-balance', '/ledger?tab=trial-balance', 'Ledger: trial balance'),
     shot('ledger/periods', '/ledger?tab=periods', 'Ledger: periods'),
     shot('ledger/posting-rules', '/ledger?tab=posting-rules', 'Ledger: posting rules'),
+    shot('reports/profit-and-loss', '/reports?report=profit_and_loss', 'Reports: profit and loss', {
+      fullPage: true,
+      callouts: [
+        { n: 1, target: { role: 'textbox', name: 'Report' }, text: 'The statements, and the operational reports your role runs.', side: 'bottom' },
+        { n: 2, target: { role: 'textbox', name: 'Compare with' }, text: 'Side by side with the period before, or the same period last year.', side: 'bottom' },
+        { n: 3, target: { role: 'button', name: 'PDF' }, text: 'The same table as a CSV or a PDF.', side: 'bottom' },
+      ],
+    }),
+    ...(w.stock ? [shot('reports/inventory-valuation', '/reports?report=inventory_valuation', 'Reports: inventory valuation', { fullPage: true })] : []),
+  ];
+
+  const integrations: Scenario[] = [
+    shot('webhooks/list', '/integrations/webhooks', 'Webhooks', {
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Add endpoint' }, text: 'Your receiver’s URL, or a test receiver inside Neuros.', side: 'left' },
+        { n: 2, target: { text: 'Paused', nth: 0 }, text: 'Paused with a reason: nothing is sent until it is resumed.', side: 'left' },
+      ],
+    }),
+    shot('webhooks/new', '/integrations/webhooks', 'Add a webhook endpoint', { steps: click('Add endpoint') }),
+    shot('webhooks/detail', '/integrations/webhooks', 'A test receiver and what it received', {
+      steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'Test receiver' }).first().click(); }, fullPage: true,
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Send a test event' }, text: 'A webhook.test delivery, signed like every other.', side: 'left' },
+        { n: 2, target: { text: /^Verified$/, nth: 0 }, text: 'The test receiver checked the signature with the endpoint’s secret.', side: 'left' },
+      ],
+    }),
+    shot('imports/list', '/integrations/imports', 'Imports', {
+      callouts: [{ n: 1, target: { role: 'button', name: 'Import from a file' }, text: 'Offers, products or opening stock, from the template.', side: 'left' }],
+    }),
+    shot('imports/new', '/integrations/imports', 'Import from a file', { steps: click('Import from a file'), fullPage: true }),
+    shot('imports/detail', '/integrations/imports', 'An import with rows to fix', {
+      steps: async (p: Page) => { await p.getByRole('row').filter({ hasText: 'october-price-list.csv' }).first().click(); }, fullPage: true,
+      callouts: [
+        { n: 1, target: { role: 'button', name: 'Problems file' }, text: 'The rows that did not pass, as you wrote them, with what is wrong: fix and import again.', side: 'bottom' },
+        { n: 2, target: { role: 'button', name: /^Import \d/ }, text: 'Import the rows that passed. The rest are left out.', side: 'left' },
+      ],
+    }),
   ];
 
   const system: Scenario[] = [
@@ -351,8 +525,9 @@ export function walk(w: Walk): Scenario[] {
     shot('settings/company-capabilities', '/settings?tab=company', 'My company: capabilities', { steps: tab(/Capabilities/) }),
     shot('settings/company-log', '/settings?tab=company', 'My company: change log', { steps: tab(/Change log/) }),
     shot('settings/billing', '/settings?tab=billing', 'Settings: billing', { fullPage: true }),
+    shot('settings/billing-usage', '/settings?tab=billing', 'Billing: usage', { steps: tab('Usage'), fullPage: true }),
     shot('settings/support', '/settings?tab=support', 'Settings: support access'),
   ];
 
-  return [...main, ...(w.sell ? contribute : []), ...product, ...(w.sell ? sell : []), ...(w.buy ? buy : []), ...(w.stock ? stock : []), ...ledger, ...system, ...settings];
+  return [...main, ...(w.sell ? contribute : []), ...product, ...(w.sell ? sell : []), ...(w.buy ? buy : []), ...(w.stock ? stock : []), ...ledger, ...(w.integrations ? integrations : []), ...system, ...settings];
 }

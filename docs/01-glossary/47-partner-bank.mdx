@@ -1,0 +1,28 @@
+---
+title: Collections and the partner bank
+sidebar_label: Collections and the partner bank
+---
+
+### Partner bank
+The regulated bank that holds the money behind Neuros’s escrow and opens customers’ virtual accounts. Neuros never holds money. It tells the bank what to do (open an account, release, refund, return a payment), hears from it about every payment, and checks its own records against the bank’s statement every day. The operator chooses the partner.
+
+### Collections
+A seller’s choice to be paid through the partner bank: each customer pays into its own [virtual account](#virtual-account), and Neuros matches each payment to an order. Set under **Collections → Settings**.
+
+### Virtual account
+A bank account at the partner bank opened for one customer of one seller, in the customer’s name with that seller. The customer pays it by ordinary transfer, with the order number as the reference. Only that customer’s payments to that seller arrive there, so Neuros always knows who paid.
+
+### Identity checks
+The bank’s checks on who holds a virtual account (often called KYC): pending, verified or failed. They are the bank’s; Neuros shows what the bank reports.
+
+### Bank credit
+One payment into a virtual account, as the bank reports it. Neuros records each one once, by the bank’s reference, however often the bank reports it. It then matches the credit to an order: **matched**, **short**, **more than due**, **to match** (no order found, for the seller to match by hand) or **returned** (sent back to the payer).
+
+### Dispute window
+How long after delivery a buyer has to raise a dispute before an escrow paid into a virtual account releases to the seller. 24 hours unless the seller sets another, from 1 hour to a week. A dispute raised in the window holds only its value; the rest releases when the window ends.
+
+### Platform fee
+What the platform takes from each escrow release, as a percent of the amount released, with an optional minimum and maximum, set by the operator per currency. The bank pays the seller the release less the fee; the seller’s books record the fee under **Platform fees**.
+
+### Bank reconciliation
+The daily comparison of the bank’s statement for a seller’s virtual accounts with what Neuros recorded. A payment only the statement shows is taken in and matched; anything else that differs is listed for the seller to take up with the bank.

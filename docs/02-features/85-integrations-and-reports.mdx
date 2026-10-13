@@ -1,0 +1,35 @@
+---
+title: Integrations, dashboards and reports
+sidebar_label: Integrations and reports
+---
+
+<PersonaBadge who={['everyone']} permission={['webhook:manage', 'import:run', 'report:financial', 'report:operational']} />
+
+Three ways Neuros connects to the rest of your company: your systems hear about changes as they happen, your existing records come in from a file, and everyone sees where things stand.
+
+## Webhooks: your systems hear what happened
+
+1. An administrator adds an **endpoint** under **System → Webhooks**: your receiver’s URL and the events it wants, or a test receiver inside Neuros to try first. The **signing secret** is shown once.
+2. When one of those events happens (an order accepted, an invoice issued, stock moved), Neuros sends a delivery: an HTTPS POST naming the event and its record, signed with the secret.
+3. Your receiver checks the signature, notes the event id so it acts once, answers 2xx quickly, and reads the record through the [API](../30-api/index.mdx) with its API client.
+4. If it does not answer, Neuros retries for about 15 hours, then gives up. Every attempt is visible, and any delivery can be sent again.
+
+Events about another company’s side of a trade reach you only when they concern you, as in the app. Webhooks need the Webhooks add-on. See <PageLink who="distributor" page="webhooks">Webhooks</PageLink> and the [receiver guide](../30-api/92-webhooks.mdx).
+
+## Imports: bring your records in
+
+1. Under **System → Imports**, choose offers, products or opening stock and download the template.
+2. Upload the filled-in file. Neuros checks every row against the same rules as the form, and lists what is wrong with each.
+3. Confirm. The valid rows go in in the background as the person who confirmed, each row whole or not at all. The rest come back as a problems file to fix and import again.
+
+Opening stock posts to your books like a receipt, against [opening balance equity](../01-glossary/70-ledger.mdx#opening-balance-equity) instead of goods received not invoiced. Imports need Bulk import in your plan. See <PageLink who="distributor" page="imports">Imports</PageLink>.
+
+## The dashboard
+
+The first page shows cards for what your company does and your role allows: what waits for your approval, then selling, buying and stock. Each card opens the page it counts, and the dashboard updates live. See <PageLink who="distributor" page="dashboard">Dashboard</PageLink>.
+
+## Reports and the year-end
+
+**Reports** has the statements (profit and loss, balance sheet, cash flow), the receivables and payables ageings, gross margin, and operational reports on stock, sales and suppliers, each as one table you can download as a CSV or a PDF. Finance roles run all of them; purchasing, sales and warehouse roles run the operational ones.
+
+At the end of a financial year, once its months are closed, finance **closes the year** from the ledger’s Periods tab: income and expenses move into retained earnings, and the year is locked. See <PageLink who="distributor" page="reports">Reports</PageLink> and <PageLink who="distributor" page="ledger" hash="close-the-year">close the year</PageLink>.

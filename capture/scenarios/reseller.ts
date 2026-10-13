@@ -96,6 +96,22 @@ const escrow: Scenario = {
   ],
 };
 
+// From seed:trade: an order Ikeja Hardware placed that took three of Lagos Industrial's promotions (K5b).
+const offers: Scenario = {
+  id: 'reseller/buying-orders/offers',
+  persona: 'reseller',
+  path: '/buying/orders',
+  title: 'Offers on your order',
+  steps: async (page: Page) => {
+    await page.getByRole('row').filter({ hasText: 'IH-PO-2026-130' }).first().click();
+    await page.getByText('Offers applied').scrollIntoViewIfNeeded();
+  },
+  callouts: [
+    { n: 1, target: { text: /^Free$/, nth: 0 }, text: 'Free goods an offer gave: a line at zero, delivered with the rest.', side: 'right' },
+    { n: 2, target: { text: 'Offers applied' }, text: 'Each offer in words, and what it saved you.', side: 'left' },
+  ],
+};
+
 export default [...walk({
   persona: 'reseller',
   company: 'Ikeja Hardware Resellers',
@@ -106,4 +122,4 @@ export default [...walk({
   marketplaceSeller: 'Lagos Industrial Supplies Ltd',
   basketFilled: true,
   disputes: 'buying',
-}), quotation, order, shipment, invoice, edit, escrow];
+}), quotation, order, shipment, invoice, edit, escrow, offers];

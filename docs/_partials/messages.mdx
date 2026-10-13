@@ -1,0 +1,82 @@
+{/* Shared by every guide that has this page: <Messages who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="message:read" />
+
+**Messages** are what Neuros sends to your resellers’ chat: the code from an invitation by phone, and news of their orders, from received to delivered. They go from your own WhatsApp number or SMS sender, either through Neuros’s messaging provider or through your agent platform, which sends them in the conversation it already holds. See [Messages to resellers](../02-features/46-messages-to-resellers.mdx) for the whole flow.
+
+Messages go only to customers your AI agent knows, that is, customers with the numbers they write from (see <PageLink who={props.who} page="agents">AI agents</PageLink>). While messaging is **off**, nothing is sent: you pass invitation codes on yourself.
+
+<Shot id={`${props.who}/messages/list`} />
+
+## Sent
+
+Every message, newest first: who it went to and on which number, which message it was, and how it fared.
+
+| Status | Means |
+|---|---|
+| Waiting | Queued. Neuros sends it within seconds, or after quiet hours, or after a failed try |
+| Sent | Your provider or agent platform took it |
+| Delivered | It reached the reseller’s phone |
+| Read | The reseller opened it (WhatsApp only, when they share read receipts) |
+| Failed | Five tries failed. The reason is shown; **Try again** starts again |
+| Not sent | Neuros did not send it, and says why: the reseller opted out, messaging was switched off, or you have no active number on that channel |
+
+Open a message to see its full text, the numbers it went from and to, when it was sent, delivered and read, and each try. A message with an invitation code never shows the code here: it shows dots.
+
+{props.who === 'distributor' && <Shot id={`${props.who}/messages/detail`} />}
+
+## Texts
+
+Each message has Neuros’s text. You can write your own for any of them.
+
+<Shot id={`${props.who}/messages/templates`} />
+
+| Message | Sent when | Category |
+|---|---|---|
+| Invitation code | You invite a reseller by phone, or give them a new code | Code |
+| Order received | They place an order, by chat or otherwise | Update |
+| Order accepted | You accept it | Update |
+| Order rejected | You reject it, with your reason | Update |
+| Payment received | You confirm their payment | Update |
+| On its way | The delivery is dispatched | Update |
+| Delivered | The delivery is recorded as delivered | Update |
+| Invoice issued | You invoice them | Update |
+| Case update | You write on a case they opened | Update |
+| Case resolved | You, or Neuros from the records, resolve a case they opened | Update |
+| An offer | You choose **Tell resellers** on a promotion (Pricing → Promotions) | Marketing |
+
+The category is the one WhatsApp prices messages by.
+
+<Shot id={`${props.who}/messages/template-edit`} />
+
+<FieldTable fields={[
+  { name: 'Text', required: true, meaning: 'What the reseller reads. Placeholders in double braces are filled from the order, invoice or invitation.', others: 'The reseller reads it in WhatsApp or SMS.', implications: 'When Neuros sends directly, your text goes to the provider for approval (WhatsApp approves every business message); Neuros’s text goes out until it is approved. Through your agent platform it is used from the next message.', rules: '10 to 1,000 characters. Only the placeholders listed for that message; the invitation must include {{code}}.' },
+]} />
+
+**Back to Neuros’s text** deletes yours.
+
+## Settings
+
+<Shot id={`${props.who}/messages/settings`} />
+
+<FieldTable fields={[
+  { name: 'How messages go out', required: true, meaning: 'Off; Neuros sends (through Neuros’s messaging provider, from your numbers); or your agent platform sends (Neuros posts each message to it).', implications: 'Switching it on the first time shows your messaging secret once. Switching it off stops messages still waiting: they show as not sent.' },
+  { name: 'Agent platform address', required: true, meaning: 'Where your agent platform takes messages from Neuros.', rules: 'Only when your agent platform sends. https, on the internet.' },
+  { name: 'Quiet from, Quiet until', meaning: 'Local hours in which order updates wait, for example 21:00 to 07:00.', implications: 'An update queued in quiet hours goes when they end. An invitation code goes at any hour, because the reseller is waiting for it.', rules: 'Both or neither. Your company’s timezone.' },
+  { name: 'Order updates sent to the reseller’s chat', meaning: 'Which order messages go out.', implications: 'An update not ticked is not queued at all. The invitation code always goes while messaging is on.' },
+]} />
+
+When messaging is on, the **Connection** card shows **your inbox**, the address your provider or agent platform posts delivery receipts and replies to, and the end of your messaging secret. **Rotate secret** needs two-step verification; the old secret stops at once, so change it in your agent platform at the same time.
+
+## Inbox
+
+Every receipt and reply that reached your inbox, and what Neuros did with it. Each is kept once, however often it is sent. A receipt moves a message forward (sent, delivered, read), never back. A reseller who writes **STOP** gets no more messages; **START** turns them back on. Anything else they write is for your agent to answer, and is left alone here.
+
+{props.who === 'distributor' && <Shot id={`${props.who}/messages/inbox`} />}
+
+## A reseller’s consent
+
+On <PageLink who={props.who} page="customers">Customers</PageLink>, a customer your agent knows has two switches under **Your agent**:
+
+- **Messages to their chat**: off stops every message to them, the invitation code included. It also shows when the reseller turned it off or on themselves.
+- **Marketing**: whether they agreed to marketing messages. Only then do they get your promotions when you choose **Tell resellers**, and never more than one marketing message from you a week.

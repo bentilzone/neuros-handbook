@@ -1,0 +1,78 @@
+---
+title: Promotions
+sidebar_label: Promotions
+---
+
+<PersonaBadge who={['supply', 'distribution', 'purchasing']} permission={['pricelist:manage']} />
+
+A [promotion](../01-glossary/30-selling-and-pricing.mdx#promotion) is how you run the offers your sales team used to work out by hand. It can be:
+- 5% off once an order reaches ₦1,000,000;
+- a free fitting for every 24 breakers;
+- 4% off cable and breakers bought together;
+- something for your Gold customers only, or for customers who have not ordered in two months.
+
+Neuros applies it on every order, through the app and your AI agent alike. Each promotion is written out in a sentence, so customers can read it, and it never gives more than the budget you set.
+
+## Kinds
+
+| Kind | What it does | Where it shows |
+|---|---|---|
+| Percent off, amount off, fixed price | Changes the unit price of the offers it covers | In each line's unit price |
+| [Volume discount](../01-glossary/30-selling-and-pricing.mdx#volume-discount) | A bigger percent off the more of an offer is on one line: 5% from 10, 8% from 50 | In the line's unit price |
+| [Order discount](../01-glossary/30-selling-and-pricing.mdx#order-discount) | A percent or an amount off the whole order once it reaches a value | Spread over the lines, before tax, as each line's discount |
+| [Buy X, get Y free](../01-glossary/30-selling-and-pricing.mdx#free-goods) | Free goods for every so many bought, up to a number per order | A free line on the order, at zero |
+| [Bundle](../01-glossary/30-selling-and-pricing.mdx#bundle) | A percent off offers bought together, at least so many of each | Spread over those lines, as their discount |
+
+The first three kinds change one line, as promotions always have. The last three look at the whole order. None of them touch a contract price or a quoted price: those are agreed already.
+
+When several apply, Neuros takes them in this order:
+1. The best line promotion, plus any marked **Stacks with others**.
+2. Bundles.
+3. The best order discount, plus any that stack.
+4. Free goods.
+
+## Who gets it
+
+Besides **every buyer** or **approved customers only**, a promotion can name conditions. A customer must meet all of them:
+- your **tier** for the customer (for example Gold), or your **delivery zone**, as set on the customer's profile;
+- **named customers**;
+- **first order only**: a customer who has never placed an order with you;
+- **quiet for at least** some days: no order placed in that time.
+
+## The budget
+
+Set any of these caps, or none:
+
+| Cap | Counts |
+|---|---|
+| Orders in all | Orders placed with the promotion |
+| Per customer | Orders one customer placed with it |
+| Per day | Orders placed with it on one of your days |
+| Discount given, at most | What it took off, with free goods at the price the customer would have paid |
+
+The caps are firm:
+- An order counts when it is **placed**. The count is kept in the promotion's [redemption](../01-glossary/30-selling-and-pricing.mdx#redemption) list.
+- If the cap is reached between pricing a cart and placing it, the order is priced again without the promotion and comes back for the customer to check. This applies even to an AI agent's 30-minute quote.
+- A rejected or cancelled order gives its share back.
+- When a cap is reached, the promotion stops applying, and the people who manage your pricing are told once.
+
+## Customers read it in words
+
+- Every promotion carries its terms as a sentence: "Buy 24 of Breaker 32A, get 1 of Pipe fitting free".
+- An order lists **Offers applied**, each with what it saved.
+- A draft that is close to an order discount says how much more it needs: "Add ₦443,200 more for: 3% off your order when it reaches ₦1,000,000".
+- Your AI agent reads the same out when it quotes a cart.
+
+## Tell resellers
+
+**Tell resellers**, in a promotion's panel, sends the offer to your resellers' chat as a marketing message. It reaches only resellers who:
+- qualify for the promotion;
+- order through your AI agent;
+- agreed to marketing.
+
+Each reseller gets it once per promotion, and none gets more than one marketing message from you a week. Quiet hours and consent apply as for every [message to resellers](./46-messages-to-resellers.mdx).
+
+## In the guides
+
+- Sellers: Pricing → Promotions in the <PageLink who="distributor" page="pricing">distributor</PageLink> and <PageLink who="supplier" page="pricing">supplier</PageLink> guides.
+- Buyers: Orders in the <PageLink who="reseller" page="buying-orders">reseller guide</PageLink>.

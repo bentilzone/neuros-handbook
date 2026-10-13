@@ -15,34 +15,44 @@ Neuros' own platform operations are not listed: no company can call them.
 |---|---|---|
 | [Auth](./010-auth.mdx) | Signing in as a person, choosing a company, two-step verification and sessions. | 21 |
 | [API clients](./020-api-clients.mdx) | Client credentials, scopes, secret rotation and the token endpoint. | 5 |
-| [Organisation](./030-organisation.mdx) | Your company profile, addresses, contacts, tax identifiers and operating policies. | 8 |
+| [Organisation](./030-organisation.mdx) | Your company profile, addresses, contacts, tax identifiers and operating policies. | 9 |
 | [Members](./040-members.mdx) | People in your company, invitations, roles and limits. | 9 |
 | [Roles](./050-roles.mdx) | Roles and the permission catalogue. | 5 |
 | [Onboarding](./060-onboarding.mdx) | Registering a company and its application to Neuros. | 7 |
-| [Billing](./070-billing.mdx) | Your plan, usage, invoices and payments to Neuros. | 9 |
+| [Billing](./070-billing.mdx) | Your plan, usage, invoices and payments to Neuros. | 11 |
 | [Reference data](./080-reference-data.mdx) | Countries, currencies and other shared lists. | 3 |
 | [FX rates](./090-fx-rates.mdx) | Exchange rates your company records and approves. | 6 |
 | [Tax](./100-tax.mdx) | Tax codes, rates and exemptions. | 9 |
 | [Catalogue](./110-catalogue.mdx) | The shared product catalogue: browse, contribute and propose categories. | 11 |
-| [Selling](./120-selling.mdx) | Offers, price lists, contract prices, promotions and the price check. | 21 |
-| [Relationships](./130-relationships.mdx) | Accounts between sellers and buyers, and their terms. | 19 |
+| [Selling](./120-selling.mdx) | Offers, price lists, contract prices, promotions and the price check. | 24 |
+| [Relationships](./130-relationships.mdx) | Accounts between sellers and buyers, and their terms. | 22 |
 | [Quotations](./140-quotations.mdx) | Requests for quotation and quotations: ask, price, send, revise, accept. | 13 |
 | [Orders](./150-orders.mdx) | Orders between a buyer and one seller: draft, submit, approve, accept, allocate, amend, cancel. | 15 |
 | [Basket](./160-basket.mdx) | The buyer's open drafts, one per seller, checked out together; each order goes on its own. | 4 |
 | [Fulfilment](./170-fulfilment.mdx) | Shipments of accepted orders: pick list, pack, dispatch, delivery proof, deliver, fail, cancel, receipt. | 13 |
-| [Receivables](./180-receivables.mdx) | Sales invoices, payments received, credit notes and ageing; the buyer's purchase invoices. | 16 |
-| [Payments](./190-payments.mdx) | Paying for orders: payment notices and confirmation, and escrow funding, release and refund. | 8 |
-| [Disputes](./200-disputes.mdx) | Disputing part of a delivered order: evidence, messages, escalation, and the seller's decision. | 9 |
-| [Returns](./210-returns.mdx) | Returning goods: request, authorise, receive into quarantine, inspect and credit. | 8 |
-| [Suppliers](./220-suppliers.mdx) | Your suppliers outside Neuros, and where each is paid. | 5 |
-| [Requisitions](./230-requisitions.mdx) | Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it. | 10 |
-| [Purchase orders](./240-purchase-orders.mdx) | Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed. | 9 |
-| [Goods receipts](./250-goods-receipts.mdx) | Receiving against purchase orders and orders on Neuros: exceptions, substitutes, posting into stock, voiding. | 8 |
-| [Landed costs](./260-landed-costs.mdx) | Freight, duty and other charges spread over receipts, capitalised or expensed. | 6 |
-| [Supplier invoices](./270-supplier-invoices.mdx) | Supplier invoices typed in or taken in from Neuros, three-way matched and approved. | 7 |
-| [Supplier payments](./280-supplier-payments.mdx) | Payments to suppliers, scheduled or recorded, advances, and payables ageing. | 8 |
-| [Notifications](./290-notifications.mdx) | Your own notifications in a company: list, unread counts, mark read. | 10 |
-| [Marketplace](./300-marketplace.mdx) | Searching offers and pricing them for your company. | 3 |
-| [Inventory](./310-inventory.mdx) | Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation. | 37 |
-| [Ledger](./320-ledger.mdx) | Accounts, posting rules, periods, journals and the trial balance. | 21 |
-| [Audit](./330-audit.mdx) | The audit trail of changes and API requests. | 2 |
+| [Deliveries](./180-deliveries.mdx) | Your own drivers and their delivery runs: plan, send out (the delivery codes and the driver’s link), new link, cancel, and a new code for a shipment. | 10 |
+| [Driver](./190-driver.mdx) | The driver’s page, public with the run’s link token in X-Driver-Token: the run and its stops, a photo, delivered with the customer’s code, not delivered. | 4 |
+| [Receivables](./200-receivables.mdx) | Sales invoices, payments received, credit notes and ageing; the buyer's purchase invoices. | 16 |
+| [Payments](./210-payments.mdx) | Paying for orders: payment notices and confirmation, and escrow funding, release and refund. | 8 |
+| [Cases](./220-cases.mdx) | Service cases between a customer and a seller: open (a goods case raises a dispute), messages, assignment, resolution, and the seller’s times. | 9 |
+| [Disputes](./230-disputes.mdx) | Disputing part of a delivered order: evidence, messages, escalation, and the seller's decision. | 9 |
+| [Returns](./240-returns.mdx) | Returning goods: request, authorise, receive into quarantine, inspect and credit. | 8 |
+| [Suppliers](./250-suppliers.mdx) | Your suppliers outside Neuros, and where each is paid. | 5 |
+| [Requisitions](./260-requisitions.mdx) | Requests to buy: approval within purchase limits, then orders on Neuros and purchase orders outside it. | 10 |
+| [Purchase orders](./270-purchase-orders.mdx) | Orders to suppliers outside Neuros: approval over the limit, sent by email with a PDF, confirmed. | 9 |
+| [Goods receipts](./280-goods-receipts.mdx) | Receiving against purchase orders and orders on Neuros: exceptions, substitutes, posting into stock, voiding. | 8 |
+| [Landed costs](./290-landed-costs.mdx) | Freight, duty and other charges spread over receipts, capitalised or expensed. | 6 |
+| [Supplier invoices](./300-supplier-invoices.mdx) | Supplier invoices typed in or taken in from Neuros, three-way matched and approved. | 7 |
+| [Supplier payments](./310-supplier-payments.mdx) | Payments to suppliers, scheduled or recorded, advances, and payables ageing. | 8 |
+| [Webhooks](./320-webhooks.mdx) | Endpoints that receive signed, id-only deliveries of events; deliveries, retries, replay, secret rotation and the test receiver. | 11 |
+| [Imports](./330-imports.mdx) | CSV imports of offers, products and opening stock: templates, signed upload, validation, rows, confirm. | 10 |
+| [Reports](./340-reports.mdx) | The dashboard, financial and operational reports as JSON, CSV or PDF, and the year-end close. | 3 |
+| [Notifications](./350-notifications.mdx) | Your own notifications in a company: list, unread counts, mark read. | 10 |
+| [Agents](./360-agents.mdx) | Your AI agents, the numbers they answer on, and their secrets. | 9 |
+| [Messaging](./370-messaging.mdx) | Messages to resellers’ chat: settings and the messaging secret, texts, sent messages, consent, and the inbox for receipts and replies. | 12 |
+| [Collections](./380-collections.mdx) | The partner bank: collection settings, customers’ virtual accounts, the credits the bank reports and how they matched, returns, daily reconciliation, and the bank’s webhook. | 12 |
+| [Agent tools](./390-agent-tools.mdx) | What an AI agent calls for a reseller: who is writing, products, cart quote, order, payment, delivery and statement, over REST or MCP. | 13 |
+| [Marketplace](./400-marketplace.mdx) | Searching offers and pricing them for your company. | 3 |
+| [Inventory](./410-inventory.mdx) | Warehouses, stock, receipts, adjustments, transfers, counts, reorder and valuation. | 37 |
+| [Ledger](./420-ledger.mdx) | Accounts, posting rules, periods, journals and the trial balance. | 22 |
+| [Audit](./430-audit.mdx) | The audit trail of changes and API requests. | 2 |

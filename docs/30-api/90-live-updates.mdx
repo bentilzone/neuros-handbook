@@ -40,7 +40,13 @@ Some event types:
 | `offer.created`, `offer.updated`, `offer.published`, `offer.withdrawn` | Your offers change |
 | `marketplace.listing_changed` | An offer anyone can see changed in the marketplace |
 | `price_list.changed`, `contract_price.changed`, `promotion.changed` | Your pricing changes |
-| `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes |
+| `promotion.redeemed`, `promotion.budget_exhausted` | An order placed with one of your promotions; a promotion reached a cap |
+| `relationship.invited`, `relationship.requested`, `relationship.approved`, `relationship.updated` | An account with a customer or supplier changes; `invited` when you invite a reseller by phone or issue a new code |
+| `agent.caller_unrecognised` | Someone not among your customers wrote to one of your AI agents (your company only) |
+| `message.sent`, `message.delivered`, `message.failed` | A message to one of your resellers was sent, reached their phone, or failed (your company only) |
+| `bank_credit.received`, `bank_credit.updated`, `fee.charged`, `bank_reconciliation.completed` | A customer paid into their virtual account, a credit was matched or returned, a release paid the platform fee, a day was reconciled (your company only) |
+| `virtual_account.opened` | A customer’s virtual account was opened (both companies) |
+| `driver.updated`, `delivery_run.updated`, `delivery_run.started`, `delivery_run.completed`, `shipment.code_locked` | A driver or a delivery run changed, a run went out or finished, a delivery code locked after three wrong entries (your company only) |
 | `stock.changed` | Stock moved |
 | `stock_adjustment.changed`, `stock_transfer.changed`, `stock_count.changed` | An inventory document changes |
 | `quote_request.*`, `quotation.sent`, `quotation.accepted`, `quotation.declined`, `quotation.expired` | A request for quotation or a quotation changes |
@@ -50,11 +56,13 @@ Some event types:
 | `sales_invoice.issued`, `sales_invoice.paid`, `sales_invoice.credited`, `sales_invoice.voided` | An invoice is issued or settled |
 | `payment.notified`, `payment.confirmed`, `payment.rejected`, `escrow.funded`, `escrow.released`, `escrow.refunded` | A payment or escrow moves |
 | `dispute.raised`, `dispute.updated`, `dispute.message`, `dispute.escalated`, `dispute.resolved`, `dispute.withdrawn` | A dispute is raised, answered, escalated or ends |
+| `case.opened`, `case.updated`, `case.message`, `case.assigned`, `case.resolved`, `case.withdrawn`, `case.sla_breached` | A service case is opened, written on, given to someone, resolved or withdrawn, or misses one of the seller’s times (`sla_breached`: the seller only) |
 | `return.requested`, `return.authorised`, `return.rejected`, `return.received`, `return.inspected`, `return.closed` | A return moves |
 | `requisition.updated`, `requisition.submitted`, `requisition.approved`, `requisition.rejected`, `requisition.ordered` | A requisition changes, waits for approval, is decided or ordered (your company only) |
 | `purchase_order.updated`, `purchase_order.issued` | A purchase order to an external supplier changes or is sent (your company only) |
 | `goods_receipt.updated`, `goods_receipt.substitute`, `goods_receipt.posted`, `goods_receipt.voided`, `landed_cost.updated` | A goods receipt or landed cost changes, waits for a substitute to be accepted, is posted or voided (your company only) |
 | `supplier_invoice.updated`, `supplier_invoice.exception`, `supplier_invoice.approved`, `supplier_payment.scheduled`, `supplier_payment.paid`, `supplier_payment.updated` | A supplier invoice or payment changes, does not match, is approved, scheduled or paid (your company only) |
+| `import.updated`, `import.finished` | An import is checked, confirmed, makes progress or finishes (your company only) |
 
 Trading events go to both companies once the other side can see the record; a draft's go to its owner only.
 

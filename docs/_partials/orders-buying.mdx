@@ -30,7 +30,18 @@ A draft is your basket with one supplier; drafts with several suppliers can be s
 
 {props.who === 'reseller' && <Shot id="reseller/buying-orders/edit" />}
 
-The draft is yours alone until you **Submit** it. Submitting checks again that your account is open, that the offers are still on sale, and their prices. If a price changed, the draft shows the new price and asks you to submit again, so you never buy at a price you did not see.
+### Offers on your order
+
+Your supplier's promotions apply as the draft is priced:
+- line offers in each unit price;
+- an order discount spread over the lines, shown under each line's amount;
+- free goods as a line marked **Free**, at zero.
+
+**Offers applied** lists each one in words, with what it saves. When a draft is close to an order discount, it says how much more you need to add to get it. A free line is the offer's: you cannot edit it. It comes back, or goes, when the draft is priced again.
+
+{props.who === 'reseller' && <Shot id="reseller/buying-orders/offers" />}
+
+The draft is yours alone until you **Submit** it. Submitting checks again that your account is open, that the offers are still on sale, and their prices and offers. If a price changed, or an offer ran out of budget meanwhile, the draft shows the new total and asks you to submit again, so you never buy at a price you did not see. A promotion counts against its budget only once you submit; if your order is rejected or cancelled, its share goes back.
 
 ## Approval above your limit
 
@@ -54,6 +65,8 @@ Once the supplier ships, the order lists its **shipments**. Open one for what wa
 
 **Confirm receipt** when the goods arrive. The supplier is told; if they had not yet marked it delivered, your confirmation does. A failed delivery shows the supplier's reason until it goes out again.
 
+When the supplier delivers in its own vehicles, you get a six-digit [delivery code](../01-glossary/48-deliveries.mdx#delivery-code) the morning the driver sets out, in your chat or by text, and on the shipment here. Give it to the driver when the goods are in front of you, and only then: it confirms you received what the driver records. If something is short or damaged, tell the driver before you give the code; that part becomes your dispute, and only its value stays held. After three wrong codes it locks and the supplier sends a new one. See [Delivery runs and the delivery code](../02-features/48-delivery-code.mdx).
+
 Ordering needs `order:create`; approving needs `order:approve`; changes need `order:amend`; cancelling needs `order:cancel`.
 
 ## Paying
@@ -64,7 +77,8 @@ How you pay is the order's **payment mode**:
 
 - **Bank transfer or prepay:** pay the supplier by transfer, then **I have paid** with the bank reference and the slip. It counts once the supplier confirms the money arrived; if they say it did not, their reason is shown. A prepay order is only reserved and shipped once paid, and one left unpaid too long is cancelled.
 - **Credit:** pay each invoice by its due date. What you pay comes back to your available credit.
-- **Escrow:** **Pay into escrow** sends the money to the escrow partner, who holds it. The supplier ships once the partner confirms it. **Release to the seller** when you are satisfied; delivery alone never releases it. A dispute holds it.
+- **Escrow:** **Pay into escrow** sends the money to the escrow partner, who holds it. The supplier ships once the partner confirms it. **Release to the seller** when you are satisfied; delivery alone never releases it. A dispute holds what it names; an open case on the order holds all of it until the case ends.
+- **Paying into your account:** when the supplier collects through its partner bank, an unpaid order shows your own account with them: transfer to it with the order number as the reference, and the payment is matched to the order as soon as the bank reports it. On escrow, the order then shows when the money will be released: a set number of hours after delivery, unless you dispute in time.
 
 <FieldTable fields={[
   { name: 'Amount paid', required: true, meaning: 'What you transferred for this order.', others: 'The supplier sees it waiting for their confirmation.', rules: 'In the order’s currency.' },

@@ -1,0 +1,42 @@
+---
+title: Selling through AI agents
+sidebar_label: Selling through AI agents
+---
+
+<PersonaBadge who={['supply', 'distribution']} permission={['agent:manage', 'relationship:manage']} />
+
+Your resellers order the way they already talk to you, in a chat on WhatsApp, by SMS or by email, with an [AI agent](../01-glossary/45-ai-agents.mdx#ai-agent) that answers for you day and night. The agent runs on the agent platform you choose and holds the conversation. Neuros stays your system of record: every price, promotion, total, payment instruction and status the agent gives comes from Neuros, and every order it places is an ordinary order in Neuros.
+
+## Set it up
+
+1. Under **AI agents**, set **Where resellers pay**: the account your agent gives for transfers.
+2. On the **Numbers** tab, add the WhatsApp number, SMS sender or email address your agent answers on.
+3. **Add an agent**, tick what it may do and the numbers it answers on. Copy the client ID and secret, shown once, into your agent platform.
+4. Connect the platform to Neuros over REST or MCP. The [API guide for agents](../30-api/94-agents.mdx) shows how.
+
+See <PageLink who="distributor" page="agents">AI agents</PageLink>.
+
+## Bring resellers on
+
+Only you bring a reseller on. On <PageLink who="distributor" page="customers">Customers</PageLink>:
+
+- **Invite by phone** for a shop that has never used Neuros. Give its name, number and terms. Neuros shows a six-digit code once and, when [messages](./46-messages-to-resellers.mdx) are on, sends it to the reseller’s chat; otherwise send it yourself. When they send it to your agent, the account is approved. The reseller never signs in; a second seller who invites the same number trades with the same reseller account, and neither seller sees the other’s business.
+- **Your agent → Edit** on an existing customer’s account lets them order by chat too, from the numbers you list.
+
+## One order, start to finish
+
+1. The reseller writes: “I need 30 cartons of noodles 70g.” The agent asks Neuros **who is writing** and greets them by name, or tells a stranger politely that they are not a customer yet. You can see that a stranger wrote.
+2. The agent **finds the products** in your range from how the reseller describes them, at that reseller’s own price.
+3. It **quotes the cart**: each line with the reseller’s price list, contract prices and promotions, tax, and the total, read out as Neuros wrote it. The prices hold for 30 minutes.
+4. The reseller says yes and the agent **places the order**. Within the 30 minutes the quoted prices stand, even if you change a price meanwhile; after that the cart is priced again and the agent reads out the new total. A retried request never places a second order.
+5. The order arrives on your <PageLink who="distributor" page="orders">Orders</PageLink>, marked **By chat**, and follows your usual rules: acceptance, credit, stock, invoicing. With [messages](./46-messages-to-resellers.mdx) on, the reseller hears in their chat that you have it, and again when you accept it, take their payment and deliver.
+6. When the reseller asks how to pay, the agent gives the amount, your account and the order number as the reference. It can also say where the order is, whether it has left, and what the reseller owes you.
+
+## What the agent can and cannot see
+
+- Only your side of the trade: your products, your prices for that reseller, your orders and invoices with them. Nothing the reseller buys from anyone else.
+- Only the tools you ticked. A refused call is counted, so you see an agent asking for more than it may.
+- It acts for one reseller at a time, the one whose number is writing.
+
+Every order, invitation and change the agent makes is in the [audit trail](../01-glossary/10-companies-and-people.mdx#audit-trail), naming the agent and your company.
+

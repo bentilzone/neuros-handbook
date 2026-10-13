@@ -10,6 +10,7 @@ Customers are the buyers who hold an account with you: the requests waiting for 
 
 | Status | What it means | What you can do |
 |---|---|---|
+| Invited | You invited a reseller by phone; they have not sent your agent the code yet | New code, End account |
 | Waiting for approval | A buyer asked for an account | Approve, with terms, or Decline |
 | Approved | They trade with you on their terms | Edit terms, Suspend, End account |
 | Suspended | New orders are blocked; open orders, invoices and history are untouched | Reinstate, End account |
@@ -45,9 +46,40 @@ The same form sets the terms when you approve, when you open an account yourself
 
 **Open an account** starts an approved account for a buyer who has not asked yet. Pick the **buyer** from the companies on Neuros that buy, then set their terms as above.
 
+## Invite by phone
+
+**Invite by phone** brings on a reseller who orders through your [AI agent](../01-glossary/45-ai-agents.mdx) and never signs in, such as a shop that orders on WhatsApp today. The number becomes a reseller account on Neuros with no users. A reseller you invite who also buys from another seller on Neuros is the same account there; each seller sees only its own business with them.
+
+<Shot id={`${props.who}/customers/invite`} />
+
+<FieldTable fields={[
+  { name: 'Business name', required: true, meaning: 'The reseller’s trading name.', others: 'Your agent greets them by it, and your team sees it on their orders.' },
+  { name: 'Phone', required: true, meaning: 'The number they write to your agent from.', implications: 'Your agent answers only customers whose numbers it knows; a stranger is told politely and you can invite them.', rules: 'With its country code, or a local number in your country. A number can belong to one of your customers only.' },
+  { name: 'Channels', meaning: 'Whether that number writes on WhatsApp, by SMS, or both.', rules: 'Both unless you untick one.' },
+  { name: 'Tier, Zone, Your code', meaning: 'Your own grouping of the reseller, its delivery zone and its code in your books or ERP.', others: 'Only your company sees them.' },
+  { name: 'Terms', meaning: 'The same terms as for any account (see Terms above).', implications: 'They apply as soon as the reseller accepts.' },
+]} />
+
+Neuros then shows a **six-digit code**, once. When <PageLink who={props.who} page="messages">messages</PageLink> are on, Neuros also sends it to the reseller’s chat, and says so; otherwise send it yourself. They send it to your agent, which accepts the invitation and the account turns **Approved**. The code lasts 7 days and allows five tries. **New code** on the account issues another; the old one stops working.
+
+## Your agent and a customer
+
+Every account that is invited, approved or suspended has a **Your agent** section: the numbers the customer writes from, their tier and zone, and your code for them. **Edit** changes them, including for a customer who also uses Neuros in the app, so they can order by chat too. See <PageLink who={props.who} page="agents">AI agents</PageLink>.
+
+For a customer with numbers, **Messages to their chat** and **Marketing** say whether Neuros may message them, and **Messages sent** lists what it did. See <PageLink who={props.who} page="messages">Messages</PageLink>.
+
+{props.who === 'distributor' && <Shot id="distributor/customers/agent" />}
+
+<FieldTable fields={[
+  { name: 'Numbers and addresses', meaning: 'The WhatsApp numbers, SMS numbers and email addresses this customer writes to your agent from.', implications: 'Your agent acts for this customer only when they write from one of these. Removing one stops your agent answering it.', rules: 'Up to 10. A number or address can belong to one of your customers only.' },
+  { name: 'Tier, Zone, Your code', meaning: 'Your grouping, delivery zone and code for this customer.', others: 'Only your company sees them.' },
+]} />
+
 ## A customer's account
 
 Click a row for the account: its status, terms, contract prices, private notes and history. **Edit** changes the terms; the change applies to their next order.
+
+When you collect through the partner bank, **Pays into** shows the customer’s own virtual account: the bank, the account number and name, and the bank’s identity checks. A customer approved before collection was on has **Open one** instead. See <PageLink who={props.who} page="collections">Collections</PageLink>.
 
 <Shot id={`${props.who}/customers/detail`} />
 

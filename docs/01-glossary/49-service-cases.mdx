@@ -1,0 +1,22 @@
+---
+title: Service cases
+sidebar_label: Service cases
+---
+
+### Service case
+Something a customer raises with a seller: a **payment** not showing, a **delivery** late or missed, **goods** not right, their **account**, or anything **other**. A case is shared by the two companies. The customer opens it in the app or through the seller's [AI agent](./45-ai-agents.mdx#ai-agent). Neuros opens one itself when a [delivery code locks](./48-deliveries.mdx#locked-code). It is **to answer** while with the seller, **waiting on the customer** after the seller writes, and ends **resolved** or **withdrawn**.
+
+### Goods case
+A case about goods short, damaged or wrong. Opening it raises a [dispute](./30-selling-and-pricing.mdx#dispute) on the lines named, so only their value is held. The case ends when the dispute is decided or withdrawn.
+
+### Case hold
+While a payment, delivery or other case on an escrow order is open, the whole escrow waits. Nothing is released to the seller, not by the buyer and not when the [dispute window](./47-partner-bank.mdx#dispute-window) passes. Ending the case lifts the hold.
+
+### Case times
+The seller's two clocks for each case: hours to a first answer and hours to resolve, set per type. A case past either is **overdue**, and the seller's people who answer cases are told once for each. The customer does not see them.
+
+### Assignee
+The person on the seller's team who has a case. Only someone who can answer cases. The customer does not see who it is.
+
+### Resolved from the records
+A case Neuros ends itself because its records settle it: a payment case once the order is paid or its escrow funded, a delivery case once delivered, a goods case once its dispute ends. The customer reads why. A seller can turn this off for payment and delivery cases.

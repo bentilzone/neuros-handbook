@@ -8,7 +8,7 @@ description: "Your plan, usage, invoices and payments to Neuros."
 
 Your plan, usage, invoices and payments to Neuros.
 
-This page lists the 9 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 11 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -23,6 +23,8 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | [GET `/v1/billing/payments/{id}/pdf`](#a-receipt-for-one-of-your-payments-as-a-pdf) | A receipt for one of your payments, as a PDF | `billing:read` |
 | [GET `/v1/billing/plans`](#plans-and-add-ons-on-offer-to-you) | Plans and add-ons on offer to you | `billing:read` |
 | [POST `/v1/billing/subscribe`](#choose-a-plan-give-the-billing-details-invoices-need-then-subscribe) | Choose a plan: give the billing details invoices need, then subscribe | `billing:manage` |
+| [GET `/v1/billing/usage`](#what-you-have-used-this-month-against-your-allowances-and-what-it-comes-to-so-far) | What you have used this month, against your allowances, and what it comes to so far | `billing:read` |
+| [GET `/v1/billing/usage/statements`](#your-past-months-usage-statements-newest-first) | Your past months’ usage statements, newest first | `billing:read` |
 
 ## Details
 
@@ -46,6 +48,7 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | `subscription.currency` | string | may be null |
 | `subscription.price` | object | may be null |
 | `subscription.customPrice` | object | may be null |
+| `subscription.rateCardOverride` | object | may be null |
 | `subscription.addOns` | object[] |  |
 | `subscription.entitlementsSnapshot` | object | may be null |
 | `subscription.status` | `trialing` · `active` · `past_due` · `lapsed` · `cancelled` · `ended` | may be null |
@@ -104,7 +107,7 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | `recentInvoices[].number` | string | may be null |
 | `recentInvoices[].organizationId` | string | 24 characters, may be null |
 | `recentInvoices[].subscriptionId` | string | 24 characters, may be null |
-| `recentInvoices[].kind` | `subscription` · `prorata` · `manual` | may be null |
+| `recentInvoices[].kind` | `subscription` · `prorata` · `manual` · `usage` | may be null |
 | `recentInvoices[].status` | `open` · `partially_paid` · `paid` · `void` | may be null |
 | `recentInvoices[].currency` | string | may be null |
 | `recentInvoices[].issueDate` | string (date-time) | may be null |
@@ -125,6 +128,7 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | `recentInvoices[].reminders` | object[] |  |
 | `recentInvoices[].paidAt` | string (date-time) | may be null |
 | `recentInvoices[].voidedAt` | string (date-time) | may be null |
+| `recentInvoices[].books` | object | may be null |
 | `recentInvoices[].history` | object[] |  |
 | `recentInvoices[].createdAt` | string (date-time) | may be null |
 | `recentInvoices[].updatedAt` | string (date-time) | may be null |
@@ -180,7 +184,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `number` | string | may be null |
 | `organizationId` | string | 24 characters, may be null |
 | `subscriptionId` | string | 24 characters, may be null |
-| `kind` | `subscription` · `prorata` · `manual` | may be null |
+| `kind` | `subscription` · `prorata` · `manual` · `usage` | may be null |
 | `status` | `open` · `partially_paid` · `paid` · `void` | may be null |
 | `currency` | string | may be null |
 | `issueDate` | string (date-time) | may be null |
@@ -188,7 +192,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `periodStart` | string (date-time) | may be null |
 | `periodEnd` | string (date-time) | may be null |
 | `lines` | object[] |  |
-| `lines[].kind` | `package` · `add_on` · `prorata` · `discount` · `manual` | may be null |
+| `lines[].kind` | `package` · `add_on` · `prorata` · `discount` · `manual` · `usage` · `minimum` | may be null |
 | `lines[].description` | string | may be null |
 | `lines[].quantity` | number | may be null |
 | `lines[].unitPrice` | object | may be null |
@@ -255,6 +259,15 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `reminders[].id` | string | 24 characters |
 | `paidAt` | string (date-time) | may be null |
 | `voidedAt` | string (date-time) | may be null |
+| `books` | object | may be null |
+| `books.provider` | `zoho_billing` | may be null |
+| `books.status` | `pending` · `synced` · `failed` | may be null |
+| `books.externalId` | string | may be null |
+| `books.error` | string | may be null |
+| `books.attempts` | number | may be null |
+| `books.nextAttemptAt` | string (date-time) | may be null |
+| `books.syncedAt` | string (date-time) | may be null |
+| `books.id` | string | 24 characters |
 | `history` | object[] |  |
 | `history[].at` | string (date-time) | may be null |
 | `history[].actorId` | string | may be null |
@@ -293,7 +306,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invoice.number` | string | may be null |
 | `invoice.organizationId` | string | 24 characters, may be null |
 | `invoice.subscriptionId` | string | 24 characters, may be null |
-| `invoice.kind` | `subscription` · `prorata` · `manual` | may be null |
+| `invoice.kind` | `subscription` · `prorata` · `manual` · `usage` | may be null |
 | `invoice.status` | `open` · `partially_paid` · `paid` · `void` | may be null |
 | `invoice.currency` | string | may be null |
 | `invoice.issueDate` | string (date-time) | may be null |
@@ -314,6 +327,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `invoice.reminders` | object[] |  |
 | `invoice.paidAt` | string (date-time) | may be null |
 | `invoice.voidedAt` | string (date-time) | may be null |
+| `invoice.books` | object | may be null |
 | `invoice.history` | object[] |  |
 | `invoice.createdAt` | string (date-time) | may be null |
 | `invoice.updatedAt` | string (date-time) | may be null |
@@ -389,6 +403,16 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `unallocated.id` | string | 24 characters |
 | `status` | `recorded` · `void` | may be null |
 | `recordedBy` | string | may be null |
+| `externalRef` | string | may be null |
+| `books` | object | may be null |
+| `books.provider` | `zoho_billing` | may be null |
+| `books.status` | `pending` · `synced` · `failed` | may be null |
+| `books.externalId` | string | may be null |
+| `books.error` | string | may be null |
+| `books.attempts` | number | may be null |
+| `books.nextAttemptAt` | string (date-time) | may be null |
+| `books.syncedAt` | string (date-time) | may be null |
+| `books.id` | string | 24 characters |
 | `createdAt` | string (date-time) | may be null |
 | `updatedAt` | string (date-time) | may be null |
 | `__v` | number | may be null |
@@ -427,6 +451,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `plans[].prices` | object[] |  |
 | `plans[].trialDays` | number | may be null |
 | `plans[].entitlements` | object | may be null |
+| `plans[].rateCards` | object[] |  |
 | `plans[].requiresCapabilities` | object[] |  |
 | `plans[].visibility` | `public` · `custom` | may be null |
 | `plans[].organizationId` | string | 24 characters, may be null |
@@ -512,6 +537,12 @@ A company without a plan can do nothing else. One trial per company; a company t
 | `customPrice.amount` | string | may be null |
 | `customPrice.currency` | string (one of 155) | may be null |
 | `customPrice.id` | string | 24 characters |
+| `rateCardOverride` | object | may be null |
+| `rateCardOverride.currency` | string | may be null |
+| `rateCardOverride.meters` | object[] |  |
+| `rateCardOverride.transactionFee` | object | may be null |
+| `rateCardOverride.minimumCharge` | string | may be null |
+| `rateCardOverride.id` | string | 24 characters |
 | `addOns` | object[] |  |
 | `addOns[].addOnId` | string | 24 characters, may be null |
 | `addOns[].code` | string | may be null |
@@ -561,4 +592,82 @@ A company without a plan can do nothing else. One trial per company; a company t
 | `__v` | number | may be null |
 | `id` | string | 24 characters |
 | `organizationName` | string | may be null |
+
+
+### What you have used this month, against your allowances, and what it comes to so far
+
+<span className="nh-method nh-method--get">GET</span> `/v1/billing/usage`
+
+Rated now from what is recorded; the month’s statement and usage invoice are written once it has ended.
+
+**Who can call it:** People and API clients · **Scope:** `billing:read`
+
+
+**Response** `200`
+
+| Field | Type | Notes |
+|---|---|---|
+| `period` * | string |  |
+| `currency` * | string |  |
+| `rateCardSource` * | `override` · `package` · `none` |  |
+| `lines` * | object[] |  |
+| `lines[].meter` * | `orders` · `active_resellers` · `agent_tool_calls` · `messages_utility` · `messages_marketing` · `messages_authentication` · `escrow_releases` · `gmv` · `transaction_fees` · `platform_fees` |  |
+| `lines[].used` * | string |  |
+| `lines[].currency` * | string | may be null |
+| `lines[].included` * | number |  |
+| `lines[].billed` * | string |  |
+| `lines[].charge` * | object |  |
+| `lines[].note` * | string | may be null |
+| `minimumTopUp` * | object | may be null |
+| `minimumTopUp.amount` * | string |  |
+| `minimumTopUp.currency` * | string | 3 characters |
+| `total` * | object |  |
+| `total.amount` * | string |  |
+| `total.currency` * | string | 3 characters |
+| `allowances` * | object[] |  |
+| `allowances[].meter` * | `orders` · `active_resellers` · `agent_tool_calls` · `messages_utility` · `messages_marketing` · `messages_authentication` · `escrow_releases` |  |
+| `allowances[].included` * | number |  |
+
+
+### Your past months’ usage statements, newest first
+
+<span className="nh-method nh-method--get">GET</span> `/v1/billing/usage/statements`
+
+**Who can call it:** People and API clients · **Scope:** `billing:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `page` | query | integer | ≥ 1, default `1` |
+| `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
+
+**Response** `200`
+
+A page: `data` holds the items below, `meta` the page, limit, total and total pages.
+
+| Field | Type | Notes |
+|---|---|---|
+| `organizationId` | string | 24 characters, may be null |
+| `subscriptionId` | string | 24 characters, may be null |
+| `period` | string | may be null |
+| `periodStart` | string (date-time) | may be null |
+| `periodEnd` | string (date-time) | may be null |
+| `currency` | string | may be null |
+| `rateCardSource` | `override` · `package` · `none` | may be null |
+| `lines` | object[] |  |
+| `lines[].meter` | `orders` · `active_resellers` · `agent_tool_calls` · `messages_utility` · `messages_marketing` · `messages_authentication` · `escrow_releases` · `gmv` · `transaction_fees` · `platform_fees` | may be null |
+| `lines[].used` | string | may be null |
+| `lines[].currency` | string | may be null |
+| `lines[].included` | number | may be null |
+| `lines[].billed` | string | may be null |
+| `lines[].charge` | string | may be null |
+| `lines[].note` | string | may be null |
+| `lines[].id` | string | 24 characters |
+| `minimumTopUp` | string | may be null |
+| `total` | string | may be null |
+| `invoiceId` | string | 24 characters, may be null |
+| `invoiceNumber` | string | may be null |
+| `createdAt` | string (date-time) | may be null |
+| `updatedAt` | string (date-time) | may be null |
+| `__v` | number | may be null |
+| `id` | string | 24 characters |
 

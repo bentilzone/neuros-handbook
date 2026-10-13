@@ -123,6 +123,26 @@ From one warehouse: everything reserved there and not already being shipped, or 
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -165,6 +185,8 @@ From one warehouse: everything reserved there and not already being shipped, or 
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Shipments you send (selling) or receive (buying)
@@ -223,6 +245,26 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -265,6 +307,8 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### One shipment
@@ -319,6 +363,26 @@ The buyer sees what was sent and how, never the warehouse or the seller’s note
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -361,6 +425,8 @@ The buyer sees what was sent and how, never the warehouse or the seller’s note
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Seller: cancel a shipment that has not left
@@ -421,6 +487,26 @@ Its stock stays reserved for the order.
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -463,6 +549,8 @@ Its stock stays reserved for the order.
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Buyer: confirm the goods arrived
@@ -523,6 +611,26 @@ Marks a dispatched shipment delivered, or confirms one the seller delivered.
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -565,6 +673,8 @@ Marks a dispatched shipment delivered, or confirms one the seller delivered.
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Seller: record the delivery
@@ -625,6 +735,26 @@ Needs at least one delivery proof.
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -667,6 +797,8 @@ Needs at least one delivery proof.
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Seller: dispatch the shipment
@@ -729,6 +861,26 @@ The first dispatch takes its stock out of inventory at cost and posts it (Dr cos
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -771,6 +923,8 @@ The first dispatch takes its stock out of inventory at cost and posts it (Dr cos
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Seller: the delivery failed
@@ -831,6 +985,26 @@ Back to packed, with the attempt and reason kept. Dispatch it again when it goes
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -873,6 +1047,8 @@ Back to packed, with the attempt and reason kept. Dispatch it again when it goes
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### Seller: confirm what was packed
@@ -936,6 +1112,26 @@ Lower a quantity if less went in (0 leaves the line out). A serialised product n
 | `failures[].reason` | string | may be null |
 | `failures[].by` | string | may be null |
 | `failures[].id` | string | 24 characters |
+| `runId` | string | 24 characters, may be null |
+| `deliveryCode` | object | may be null |
+| `deliveryCode.runId` | string | 24 characters, may be null |
+| `deliveryCode.issuedAt` | string (date-time) | may be null |
+| `deliveryCode.expiresAt` | string (date-time) | may be null |
+| `deliveryCode.attempts` | number | may be null |
+| `deliveryCode.lockedAt` | string (date-time) | may be null |
+| `deliveryCode.verifiedAt` | string (date-time) | may be null |
+| `deliveryCode.notSent` | string | may be null |
+| `deliveryCode.id` | string | 24 characters |
+| `doorProof` | object | may be null |
+| `doorProof.driverId` | string | 24 characters, may be null |
+| `doorProof.driverName` | string | may be null |
+| `doorProof.at` | string (date-time) | may be null |
+| `doorProof.codeVerified` | boolean | may be null |
+| `doorProof.location` | object | may be null |
+| `doorProof.lines` | object[] |  |
+| `doorProof.note` | string | may be null |
+| `doorProof.disputeIds` | object[] |  |
+| `doorProof.id` | string | 24 characters |
 | `receivedAt` | string (date-time) | may be null |
 | `receivedNote` | string | may be null |
 | `sellerNotes` | string | may be null |
@@ -978,6 +1174,8 @@ Lower a quantity if less went in (0 leaves the line out). A serialised product n
 | `warehouse.id` * | string |  |
 | `warehouse.code` * | string |  |
 | `warehouse.name` * | string |  |
+| `deliveryCodeStatus` * | `none` · `active` · `verified` · `locked` · `expired` | Where the delivery code stands, for a shipment on a run |
+| `deliveryCodeValue` * | string | The code itself: only for the buyer, only while it can be used. may be null |
 
 
 ### The delivery note as a PDF

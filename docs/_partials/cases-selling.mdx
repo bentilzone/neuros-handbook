@@ -1,0 +1,60 @@
+{/* Shared by the selling guides: <CasesSelling who="supplier|distributor" />. Shots are the persona's own. */}
+
+<PersonaBadge who={['supply', 'distribution']} permission="case:read" />
+
+Service cases is your inbox for whatever a customer raises with you: a payment not showing, a late delivery, goods that are not right, a question about their account. Customers open cases in the app, or in chat through your [AI agent](../01-glossary/45-ai-agents.mdx#ai-agent). Neuros opens one itself when a [delivery code locks](../01-glossary/48-deliveries.mdx#locked-code) at the door. See [service case](../01-glossary/49-service-cases.mdx#service-case) and [Service cases](../02-features/49-service-cases.mdx).
+
+<Shot id={`${props.who}/cases/list`} />
+
+The list shows open cases unless you choose a state. **Overdue** shows the cases past one of your times. **Mine** shows the cases given to you. A lock means the case holds the order's escrow.
+
+| Status | What it means |
+|---|---|
+| To answer | With you |
+| Waiting on the customer | You wrote to them; it comes back when they answer |
+| Resolved | Ended by you, by Neuros from its records, or with its dispute |
+| Withdrawn | The customer withdrew it |
+
+## Work a case
+
+{props.who === 'distributor' && <Shot id="distributor/cases/detail" />}
+
+A case shows what it is about, the order and delivery it names, how it was opened, who has it, your two times, and the messages.
+
+- **Write** to the customer. Your first message stops the clock for a first answer, and puts the case to *Waiting on the customer*. A customer who orders by chat gets your message in their chat too.
+- **Take it** gives the case to you. Someone who can see your company's people can give it to a colleague who answers cases, or back to nobody. Whoever gets it is told.
+- **Resolve** ends it, saying what was done. The customer reads it, in their chat too when they order by chat.
+
+A **goods** case was opened with a [dispute](../01-glossary/30-selling-and-pricing.mdx#dispute) on its lines. Decide the dispute under <PageLink who={props.who} page="disputes">Disputes and returns</PageLink>. The case resolves with it, so it has no **Resolve** of its own.
+
+<FieldTable fields={[
+  { name: 'Message', meaning: 'What you tell the customer.', others: 'They read it in the app, and in their chat when they order by chat.', implications: 'Your first message is your first answer.', rules: 'Up to 4,000 characters.' },
+  { name: 'With', meaning: 'Who on your team has the case.', others: 'The customer does not see it.', rules: 'Someone who can answer cases.' },
+  { name: 'What was done', required: true, meaning: 'How you resolved it.', others: 'The customer reads it.', implications: 'Ends the case, and its hold on the order’s escrow.' },
+]} />
+
+## Escrow while a case is open
+
+A payment, delivery or other case on an escrow order holds the whole escrow until the case ends. Nothing is released to you meanwhile: not by the buyer, and not when the [dispute window](../01-glossary/47-partner-bank.mdx#dispute-window) passes. When it ends, anything the buyer already released goes to you at once. A goods case's dispute holds only its lines' value.
+
+## Resolved from the records
+
+Neuros resolves a **payment** case once the order is paid in full or its escrow is funded, and a **delivery** case once the delivery is made. It tells the customer why. Turn this off under **Settings**.
+
+## Your times
+
+<Shot id={`${props.who}/cases/settings`} />
+
+**Settings** holds, for each type, the hours you take to give a first answer and to resolve. A case past either time shows as overdue, and the people who answer cases are told once for each.
+
+<FieldTable fields={[
+  { name: 'Hours to answer', meaning: 'From opening to your first message.', implications: 'Past it, the case is overdue and your team is told.', rules: '1 to 720. Neuros’s default is 4 for payment and delivery, 24 for the others.' },
+  { name: 'Hours to resolve', meaning: 'From opening to the end.', implications: 'Past it, the case is overdue and your team is told.', rules: '1 to 720, and not less than the hours to answer. Neuros’s default is 24 for payment and delivery, 72 for the others.' },
+  { name: 'Resolve from the records', meaning: 'Whether Neuros ends payment and delivery cases once its records settle them.', others: 'The customer reads why.' },
+]} />
+
+New times apply to cases opened from then on. Seeing cases needs `case:read`; answering, assigning, resolving and the settings need `case:respond`.
+
+## Live
+
+A customer's new case or answer, a colleague's reply and a case resolved from the records appear on their own.

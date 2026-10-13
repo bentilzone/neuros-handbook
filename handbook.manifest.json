@@ -24,6 +24,11 @@
       "00-start/20-signing-in.mdx",
       "02-features/20-people-and-access.mdx"
     ],
+    "/driver": [
+      "00-start/30-for-drivers.mdx",
+      "02-features/48-delivery-code.mdx",
+      "30-api/94-driver-api.mdx"
+    ],
     "/": [
       "10-supplier/10-dashboard.mdx",
       "11-distributor/10-dashboard.mdx",
@@ -55,9 +60,32 @@
       "10-supplier/59-disputes.mdx",
       "11-distributor/59-disputes.mdx"
     ],
+    "/selling/cases": [
+      "10-supplier/59-cases.mdx",
+      "11-distributor/59-cases.mdx",
+      "02-features/49-service-cases.mdx"
+    ],
     "/selling/customers": [
       "10-supplier/50-customers.mdx",
       "11-distributor/50-customers.mdx"
+    ],
+    "/selling/agents": [
+      "10-supplier/52-agents.mdx",
+      "11-distributor/52-agents.mdx",
+      "02-features/45-selling-through-agents.mdx",
+      "30-api/94-agents.mdx"
+    ],
+    "/selling/messages": [
+      "10-supplier/53-messages.mdx",
+      "11-distributor/53-messages.mdx",
+      "02-features/46-messages-to-resellers.mdx",
+      "30-api/94-agents.mdx"
+    ],
+    "/selling/collections": [
+      "10-supplier/54-collections.mdx",
+      "11-distributor/54-collections.mdx",
+      "02-features/47-collections-and-escrow.mdx",
+      "30-api/94-partner-bank.mdx"
     ],
     "/marketplace": [
       "11-distributor/60-marketplace.mdx",
@@ -91,6 +119,11 @@
       "11-distributor/79-buying-disputes.mdx",
       "12-reseller/79-buying-disputes.mdx"
     ],
+    "/buying/cases": [
+      "11-distributor/79-buying-cases.mdx",
+      "12-reseller/79-buying-cases.mdx",
+      "02-features/49-service-cases.mdx"
+    ],
     "/suppliers": [
       "11-distributor/70-suppliers.mdx",
       "12-reseller/70-suppliers.mdx"
@@ -103,6 +136,12 @@
       "10-supplier/90-ledger.mdx",
       "11-distributor/90-ledger.mdx",
       "12-reseller/90-ledger.mdx"
+    ],
+    "/reports": [
+      "10-supplier/92-reports.mdx",
+      "11-distributor/92-reports.mdx",
+      "12-reseller/92-reports.mdx",
+      "02-features/85-integrations-and-reports.mdx"
     ],
     "/organization": [
       "10-supplier/140-settings.mdx",
@@ -123,6 +162,18 @@
       "10-supplier/120-api-clients.mdx",
       "11-distributor/120-api-clients.mdx",
       "12-reseller/120-api-clients.mdx"
+    ],
+    "/integrations/webhooks": [
+      "10-supplier/122-webhooks.mdx",
+      "11-distributor/122-webhooks.mdx",
+      "12-reseller/122-webhooks.mdx",
+      "02-features/85-integrations-and-reports.mdx"
+    ],
+    "/integrations/imports": [
+      "10-supplier/124-imports.mdx",
+      "11-distributor/124-imports.mdx",
+      "12-reseller/124-imports.mdx",
+      "02-features/85-integrations-and-reports.mdx"
     ],
     "/audit": [
       "10-supplier/130-audit-log.mdx",
@@ -145,7 +196,8 @@
       "20-operator/50-support-access.mdx"
     ],
     "/platform/billing": [
-      "20-operator/60-billing.mdx"
+      "20-operator/60-billing.mdx",
+      "30-api/94-books.mdx"
     ],
     "/platform/subscriptions": [
       "20-operator/70-subscriptions.mdx"
@@ -155,6 +207,9 @@
     ],
     "/platform/billing-settings": [
       "20-operator/90-billing-settings.mdx"
+    ],
+    "/platform/partner-bank": [
+      "20-operator/95-partner-bank.mdx"
     ],
     "/platform/schedulers": [
       "20-operator/100-schedulers.mdx"
@@ -182,7 +237,9 @@
     ],
     "/fulfilment": [
       "10-supplier/85-fulfilment.mdx",
-      "11-distributor/85-fulfilment.mdx"
+      "11-distributor/85-fulfilment.mdx",
+      "02-features/48-delivery-code.mdx",
+      "30-api/94-driver-api.mdx"
     ],
     "/selling/invoices": [
       "10-supplier/58-invoices.mdx",
