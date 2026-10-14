@@ -126,6 +126,7 @@ object
 | `access.state` * | `none` · `lapsed` · `ok` |  |
 | `access.status` * | `trialing` · `active` · `past_due` · `lapsed` · `cancelled` · `ended` | may be null |
 | `access.canSubscribe` * | boolean |  |
+| `access.features` * | array of `api_access` · `bulk_import` · `webhooks` · `advanced_reports` · `priority_support` | The plan’s features with its add-ons (e.g. `webhooks`, `bulk_import`): screens for any other are hidden |
 | `supportSession` | object |  |
 | `supportSession.grantId` * | string |  |
 | `supportSession.organizationId` * | string |  |
@@ -179,6 +180,7 @@ Email is the sign-in identity and is not changed here.
 | `access.state` * | `none` · `lapsed` · `ok` |  |
 | `access.status` * | `trialing` · `active` · `past_due` · `lapsed` · `cancelled` · `ended` | may be null |
 | `access.canSubscribe` * | boolean |  |
+| `access.features` * | array of `api_access` · `bulk_import` · `webhooks` · `advanced_reports` · `priority_support` | The plan’s features with its add-ons (e.g. `webhooks`, `bulk_import`): screens for any other are hidden |
 | `supportSession` | object |  |
 | `supportSession.grantId` * | string |  |
 | `supportSession.organizationId` * | string |  |
