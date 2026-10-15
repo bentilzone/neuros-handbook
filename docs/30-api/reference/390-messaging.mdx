@@ -233,6 +233,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `__v` | number | may be null |
 | `id` | string | 24 characters |
 | `buyerName` * | string |  |
+| `simulatedText` * | string | Outside production only: the whole text the simulated provider sent, codes included, so you can try a flow on your own machine. Kept in the engine’s memory until it restarts; always null in production and with a real provider. may be null |
 
 
 ### Try a failed message again
@@ -284,6 +285,7 @@ A page: `data` holds the items below, `meta` the page, limit, total and total pa
 | `__v` | number | may be null |
 | `id` | string | 24 characters |
 | `buyerName` * | string |  |
+| `simulatedText` * | string | Outside production only: the whole text the simulated provider sent, codes included, so you can try a flow on your own machine. Kept in the engine’s memory until it restarts; always null in production and with a real provider. may be null |
 
 
 ### Receipts and replies your inbox received, and what Neuros did with each

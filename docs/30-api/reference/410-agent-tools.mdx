@@ -357,6 +357,7 @@ Each shipment of the order, oldest first. Every tool names who is writing in the
 | `shipments[].dispatchedAt` * | string (date-time) | may be null |
 | `shipments[].deliveredAt` * | string (date-time) | may be null |
 | `shipments[].codeActive` * | boolean | A delivery code was sent and the driver will ask for it |
+| `shipments[].driver` * | object | Who is bringing it, while the shipment is out on one of the seller’s delivery runs. The delivery code itself is never returned: only the reseller’s chat gets it. may be null |
 | `say` * | string | Read this to the reseller as it is |
 
 
