@@ -16,6 +16,7 @@ const sidebars: SidebarsConfig = {
   overview: [
     { type: 'doc', id: 'start/index', label: 'Start here' },
     { type: 'doc', id: 'start/signing-in', label: 'Signing in' },
+    { type: 'doc', id: 'start/finding-your-way', label: 'Finding your way' },
     section('Glossary', '01-glossary'),
     section('Features end to end', '02-features'),
   ],

@@ -7,7 +7,7 @@ title: Start here
 
 Neuros is where distributors, suppliers and resellers trade with each other and keep the records that trade creates. That means the catalogue, offers and prices, the accounts companies hold with each other, stock in each warehouse, and the books that follow from all of it.
 
-New here? [Signing in](./20-signing-in.mdx) covers creating an account, two-step verification and choosing your company.
+New here? [Signing in](./20-signing-in.mdx) covers creating an account, two-step verification and choosing your company. [Finding your way](./25-finding-your-way.mdx) shows how to reach any page, tab or report with search (⌘K or Ctrl+K).
 
 Delivering for a company on Neuros? [For drivers](./30-for-drivers.mdx) explains the link you were sent.
 
