@@ -806,7 +806,7 @@
   "distributor/ledger/journal-detail": {
     "file": "distributor/ledger/journal-detail.png",
     "width": 1440,
-    "height": 1967,
+    "height": 2066,
     "title": "A journal waiting for approval",
     "callouts": []
   },
@@ -961,7 +961,7 @@
   "distributor/messages/template-edit": {
     "file": "distributor/messages/template-edit.png",
     "width": 1440,
-    "height": 1324,
+    "height": 1373,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -1534,7 +1534,7 @@
   "distributor/settings/company-policies": {
     "file": "distributor/settings/company-policies.png",
     "width": 1440,
-    "height": 1206,
+    "height": 1244,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -2829,7 +2829,7 @@
   "reseller/settings/company-policies": {
     "file": "reseller/settings/company-policies.png",
     "width": 1440,
-    "height": 1206,
+    "height": 1244,
     "title": "My company: operating policies",
     "callouts": []
   },
@@ -3458,7 +3458,7 @@
   "supplier/messages/template-edit": {
     "file": "supplier/messages/template-edit.png",
     "width": 1440,
-    "height": 1324,
+    "height": 1373,
     "title": "Your text for a message",
     "callouts": [
       {
@@ -3752,7 +3752,7 @@
   "supplier/settings/company-policies": {
     "file": "supplier/settings/company-policies.png",
     "width": 1440,
-    "height": 1206,
+    "height": 1244,
     "title": "My company: operating policies",
     "callouts": []
   },
