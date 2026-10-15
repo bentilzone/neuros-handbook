@@ -55,6 +55,22 @@ The **Numbers** tab lists your WhatsApp numbers, SMS senders and email addresses
 
 <Shot id={`${props.who}/agents/numbers`} />
 
+## Unknown numbers
+
+When a number that is not one of your customers writes to your agent, the agent answers politely, takes no order and keeps nothing from the conversation. The **Unknown numbers** tab lists those numbers from the last 30 days, the newest first, so you can follow up with the ones you want to sell to.
+
+| Column | What it means |
+|---|---|
+| Number | The number or address that wrote, and the channel (WhatsApp, SMS or email) |
+| Times | How many times your agents turned it away in the 30 days |
+| Last wrote | When it last wrote, and when it first did if it wrote more than once |
+| Agent | The agent it wrote to |
+| Now | **Invite** if it is still a stranger, or the customer it now belongs to and the state of their account (for example **Invited** until they send the code) |
+
+**Invite** opens <PageLink who={props.who} page="customers">Invite by phone</PageLink> with the number filled in: add the business name and their terms, and send them the code. It needs the customers permission. An email address cannot be invited by phone; add it to a customer’s account under **Your agent → Edit** instead.
+
+The **AI agents** report on <PageLink who={props.who} page="reports">Reports</PageLink> counts the same messages as **Unrecognised callers**.
+
 ## Resellers for your agent
 
 Your agent answers customers whose numbers it knows. On <PageLink who={props.who} page="customers">Customers</PageLink>:
