@@ -8,7 +8,7 @@ description: "Your AI agents, the numbers they answer on, and their secrets."
 
 Your AI agents, the numbers they answer on, and their secrets.
 
-This page lists the 9 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
+This page lists the 10 operations in this area, generated from the engine's OpenAPI document. Paths are relative to the API base URL. Fields marked * are required.
 
 ## Operations
 
@@ -20,6 +20,7 @@ This page lists the 9 operations in this area, generated from the engine's OpenA
 | [PATCH `/v1/agents/{id}`](#rename-an-agent-or-change-its-tools-and-numbers) | Rename an agent, or change its tools and numbers | `agent:manage` |
 | [POST `/v1/agents/{id}/revoke`](#switch-the-agent-off-for-good) | Switch the agent off for good | `agent:manage` |
 | [POST `/v1/agents/{id}/rotate`](#a-new-secret-for-the-agent--the-old-one-stops-working-at-once) | A new secret for the agent — the old one stops working at once | `agent:manage` |
+| [GET `/v1/agents/unknown-callers`](#numbers-your-agents-turned-away-because-they-are-not-your-customers-yet-newest-first) | Numbers your agents turned away because they are not your customers yet, newest first | `agent:read` |
 | [GET `/v1/channel-endpoints`](#your-whatsapp-numbers-sms-senders-and-email-addresses-for-agents) | Your WhatsApp numbers, SMS senders and email addresses for agents | `agent:read` |
 | [POST `/v1/channel-endpoints`](#register-a-whatsapp-number-sms-sender-or-email-address-your-agent-answers-on) | Register a WhatsApp number, SMS sender or email address your agent answers on | `agent:manage` |
 | [PATCH `/v1/channel-endpoints/{id}`](#rename-or-disable-a-channel-endpoint) | Rename or disable a channel endpoint | `agent:manage` |
@@ -278,6 +279,41 @@ The agent platform exchanges the client id and secret for a token (POST /oauth/t
 | `agent.endpoints` * | object[] |  |
 | `agent.usage30d` * | object |  |
 | `clientSecret` * | string |  |
+
+
+### Numbers your agents turned away because they are not your customers yet, newest first
+
+<span className="nh-method nh-method--get">GET</span> `/v1/agents/unknown-callers`
+
+One row per number in the last `days` days (default 30), with how often and when it wrote and through which agent. `customer` is set once you have invited it.
+
+**Who can call it:** People and API clients · **Scope:** `agent:read`
+
+| Parameter | In | Type | Notes |
+|---|---|---|---|
+| `page` | query | integer | ≥ 1, default `1` |
+| `limit` | query | integer | ≥ 1, ≤ 100, default `25` |
+| `days` | query | integer | ≥ 1, ≤ 365, default `30` |
+
+**Response** `200`
+
+A page: `data` holds the items below, `meta` the page, limit, total and total pages.
+
+| Field | Type | Notes |
+|---|---|---|
+| `caller` * | string | &lt;channel&gt;:&lt;address&gt;, as the agent named it |
+| `channel` * | `whatsapp` · `sms` · `email` |  |
+| `address` * | string |  |
+| `attempts` * | integer | How many times it was turned away in the period. ≥ 1 |
+| `firstAt` * | string (date-time) |  |
+| `lastAt` * | string (date-time) |  |
+| `agent` * | object |  |
+| `agent.id` * | string |  |
+| `agent.name` * | string | may be null |
+| `customer` * | object | Set once you have invited the number (or added it to a customer). may be null |
+| `customer.relationshipId` * | string |  |
+| `customer.name` * | string | may be null |
+| `customer.status` * | `invited` · `requested` · `approved` · `rejected` · `suspended` · `revoked` |  |
 
 
 ### Your WhatsApp numbers, SMS senders and email addresses for agents
