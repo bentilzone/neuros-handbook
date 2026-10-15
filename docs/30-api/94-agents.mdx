@@ -36,7 +36,7 @@ Neuros finds the seller’s account with that caller and runs the tool as that r
 | `place_order` | `POST /v1/agent/v1/orders` | `{ "quoteRef": "…" }`. Takes an `Idempotency-Key` |
 | `get_order` | `GET /v1/agent/v1/orders/:ref` | Status, payment, lines and total, by order number |
 | `get_payment_instructions` | `GET /v1/agent/v1/orders/:ref/payment` | Amount due, the account and the reference |
-| `get_delivery` | `GET /v1/agent/v1/orders/:ref/delivery` | Shipments, dispatch and delivery |
+| `get_delivery` | `GET /v1/agent/v1/orders/:ref/delivery` | Shipments, dispatch and delivery; the driver’s name, phone and vehicle while a run is out. Never the delivery code: only the reseller’s chat gets it |
 | `get_statement` | `GET /v1/agent/v1/statement` | What the reseller owes, what is overdue, credit left |
 | `open_case` | `POST /v1/agent/v1/cases` | Open a service case: payment, delivery, goods (items named as `get_order` lists them, in the ordered unit, with a `reason`), account or other. Comes back closed if the records already settle it |
 | `get_case` | `GET /v1/agent/v1/cases/:ref` | Where a case stands, with the seller’s latest answer |
