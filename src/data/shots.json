@@ -1974,7 +1974,7 @@
   "operator/companies/summary": {
     "file": "operator/companies/summary.png",
     "width": 1440,
-    "height": 900,
+    "height": 1003,
     "title": "A company at a glance",
     "callouts": []
   },
